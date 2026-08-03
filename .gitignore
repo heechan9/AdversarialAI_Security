@@ -11,7 +11,9 @@ __pycache__/
 .ipynb_checkpoints/
 
 # Data & models (managed separately — see docs/REPRODUCIBILITY.md)
-data/
-datasets/
-models/*.h5
-models/*.keras
+# NOTE: anchored to repo root (leading /) so this does NOT match
+# src/adversarial_ai/data/, which is a real Python package, not a data dir.
+/data/
+/datasets/
+/models/*.h5
+/models/*.keras
