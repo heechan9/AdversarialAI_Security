@@ -1,0 +1,50 @@
+# Experiment configuration — values marked "proposed" are not yet confirmed
+# against actual code. See docs/EXPERIMENT_CONTRACT.md for definitions.
+
+dataset:
+  num_classes: 10
+  classes_file: configs/classes.json
+  test_set_size: 781          # confirmed (existing classification_report.txt)
+  train_val_split: "unconfirmed"  # TODO: confirm from actual training code
+  seed: "proposed"            # TODO: confirm actual seed used, or fix one now
+
+models:
+  cnn_baseline:
+    file: models/cnn_baseline.h5   # not tracked in git — see REPRODUCIBILITY.md
+    input_shape: [128, 128, 3]
+    normalization: "rescale=1./255"   # per handoff_spec.json
+    existing_test_accuracy: 0.6453265  # confirmed
+  mobilenet:
+    stage1_file: models/mobilenet_stage1.h5
+    finetuned_file: models/mobilenet_finetuned.h5
+    input_shape: [224, 224, 3]
+    normalization: "unconfirmed"  # TODO: confirm rescale vs preprocess_input
+    existing_test_accuracy: null   # NOT YET MEASURED — do not fill in a guess
+
+attacks:
+  input_range: [0, 1]   # applies to CNN; MobileNet range still unconfirmed
+  fgsm:
+    epsilon: "proposed"   # e.g. [0.01, 0.03, 0.05] — confirm before running
+    steps: 1
+  bim:
+    epsilon: "proposed"
+    alpha: "proposed"
+    steps: "proposed"
+  pgd:
+    epsilon: "proposed"
+    alpha: "proposed"
+    steps: "proposed"
+    random_start: true
+  jsma:
+    scope: "targeted white-box, L0"
+    max_perturbed_pixel_ratio: "proposed"
+
+metrics:
+  - clean_accuracy
+  - robust_accuracy
+  - accuracy_drop
+  - macro_precision
+  - macro_recall
+  - macro_f1
+  - untargeted_asr   # denominator = clean-correct samples (proposed, unconfirmed)
+  - targeted_asr
