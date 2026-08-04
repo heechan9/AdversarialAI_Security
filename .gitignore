@@ -1,0 +1,19 @@
+# Environment / secrets
+.env
+.env.*
+!.env.example
+*.key
+secrets/
+
+# Python
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+
+# Data & models (managed separately — see docs/REPRODUCIBILITY.md)
+# NOTE: anchored to repo root (leading /) so this does NOT match
+# src/adversarial_ai/data/, which is a real Python package, not a data dir.
+/data/
+/datasets/
+/models/*.h5
+/models/*.keras
