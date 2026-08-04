@@ -1,0 +1,17 @@
+# Core (confirmed via first mentor meeting: TensorFlow/Keras track)
+tensorflow>=2.16
+numpy
+pandas
+scikit-learn
+matplotlib
+
+# Config / env / testing
+pyyaml
+jsonschema
+python-dotenv
+pytest
+
+# NOTE: Multimodal provider SDKs (openai / anthropic / google-genai) are
+# intentionally NOT listed yet. Provider is only a "conditional
+# recommendation" in docs/API_SELECTION.md — add the SDK for the selected
+# provider once the team confirms it.
