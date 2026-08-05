@@ -26,14 +26,16 @@ CNN·MobileNet 기반 선박 10클래스 인식 모델에 적대적 공격(FGSM�
 | 테스트 표본 | 781장 |
 
 ## 현재 확인된 결과 (사실 — 이것만 기록)
-- CNN Baseline Test Accuracy: **0.6453265**
+- CNN Baseline Test Accuracy: **0.6453264951705933** (2026-08-05 재현)
+- MobileNetV2 Finetuned Test Accuracy: **0.7848911881446838** (2026-08-05 최초 clean 평가)
+- 상세 결과와 증거 수준: [`docs/CLEAN_BASELINE_RESULTS.md`](docs/CLEAN_BASELINE_RESULTS.md)
 
 ## 아직 확인되지 않은 사항 (계획/미확인 — 수치를 만들지 않음)
-- MobileNet Clean Accuracy
 - 어떤 공격에 대한 ASR·Robust Accuracy
 - 방어기법 효과
 - 시뮬레이션 충돌률
 - Train/Val 정확한 분할 비율, random seed
+- MobileNet 학습 당시 실제 전처리(평가와 handoff 명세는 `rescale=1./255`, 학습 코드 미확보)
 - 멀티모달 API 실제 호출 결과 (아직 유료 호출 자체를 하지 않음)
 
 ## 로컬 설치 예정 방법
@@ -68,8 +70,9 @@ notebooks/   탐색용 노트북 (추후 추가)
 - 아직 어떤 provider도 실제로 선택되지 않았으며, 유료 API 호출도 하지 않은 상태다
 
 ## 현재 진행 상태
-- ✅ CNN Baseline 학습·평가 완료
-- ◐ MobileNet 평가 — 진행 예정 (수치 없음)
+- ✅ CNN Baseline clean 평가 재현 완료
+- ✅ MobileNetV2 Finetuned clean 평가 완료
+- ◐ Versioned outputs — 코드 완료, 모델·데이터 보유 환경에서 manifest·CSV·Confusion Matrix 재생성 필요
 - ○ 공격 구현(FGSM/BIM/PGD/JSMA) — 계획 단계
 - ○ 멀티모달 API PoC — API 후보 비교만 완료([`docs/API_SELECTION.md`](docs/API_SELECTION.md)), 실제 호출 전
 - ○ Safety Simulation — 계획 단계

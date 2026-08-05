@@ -6,23 +6,32 @@ dataset:
   classes_file: configs/classes.json
   test_set_size: 781          # confirmed (existing classification_report.txt)
   train_val_split: "unconfirmed"  # TODO: confirm from actual training code
-  seed: "proposed"            # TODO: confirm actual seed used, or fix one now
+  seed: "not_applicable_clean_eval"  # shuffle=False; training seed remains unconfirmed
+
+environment:
+  python: "3.11.15"
+  tensorflow: "2.21.0"
+  keras: "3.15.1"
+  conda_environment: "adversarial_ai"
+  reproduced_on: "2026-08-05"
 
 models:
   cnn_baseline:
     file: models/cnn_baseline.h5   # not tracked in git — see REPRODUCIBILITY.md
     input_shape: [128, 128, 3]
     normalization: "rescale=1./255"   # per handoff_spec.json
-    existing_test_accuracy: 0.6453265  # confirmed
+    existing_test_accuracy: 0.6453264951705933
+    reproduced_test_loss: 4.026247978210449
   mobilenet:
     stage1_file: models/mobilenet_stage1.h5
     finetuned_file: models/mobilenet_finetuned.h5
     input_shape: [224, 224, 3]
-    normalization: "unconfirmed"  # TODO: confirm rescale vs preprocess_input
-    existing_test_accuracy: null   # NOT YET MEASURED — do not fill in a guess
+    normalization: "rescale=1./255"  # evaluation pipeline; training-code confirmation pending
+    existing_test_accuracy: 0.7848911881446838
+    reproduced_test_loss: 1.1212257146835327
 
 attacks:
-  input_range: [0, 1]   # applies to CNN; MobileNet range still unconfirmed
+  input_range: [0, 1]   # fixed evaluation/attack threat-model range for both models
   fgsm:
     epsilon: "proposed"   # e.g. [0.01, 0.03, 0.05] — confirm before running
     steps: 1

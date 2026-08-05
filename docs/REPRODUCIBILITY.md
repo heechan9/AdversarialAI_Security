@@ -36,8 +36,27 @@ Git에 올리지 않고도 "이 실험이 어떤 파일 버전으로 수행됐�
 sha256sum models/*.h5 > docs/CHECKSUMS.txt
 ```
 
+저장소의 manifest 생성기를 사용하면 테스트 이미지 781장과 평가 모델의 상대경로·SHA-256을 JSON으로 기록할 수 있다.
+
+```bash
+PYTHONPATH=src python -m adversarial_ai.data.manifest
+```
+
+이 명령은 `configs/test_manifest.json`을 만든다. 데이터와 모델 바이너리는 포함하지 않으며, 정확히 781장이 아니면 실패한다.
+
+## Clean baseline 재현
+
+확인된 실행환경은 Python 3.11.15, TensorFlow 2.21.0, Keras 3.15.1, Conda 환경 `adversarial_ai`이다.
+
+```bash
+PYTHONPATH=src python -m adversarial_ai.evaluation.evaluate_cnn_baseline
+PYTHONPATH=src python -m adversarial_ai.evaluation.evaluate_mobilenet
+```
+
+각 실행은 `results/clean/`에 표본별 예측 CSV, classification report JSON·CSV, summary JSON, metadata JSON, confusion matrix CSV·PNG를 저장한다. 모델과 데이터가 없는 환경에서는 결과 파일을 생성하지 않는다.
+
 ## 아직 확인되지 않은 것 (재현성 관점)
 - Train/Val/Test 정확한 분할 비율과 분할 코드
 - Random seed 값
-- TensorFlow/Keras 정확한 버전 (프레임워크 종류는 확정: TensorFlow/Keras — 첫 멘토회의 녹취 및 `.h5` 포맷으로 교차 확인됨)
-- MobileNet 입력 정규화 방식(rescale vs `preprocess_input`)
+- MobileNet 학습 코드의 실제 입력 정규화 방식. 평가와 handoff 명세는 `rescale=1./255`로 일치하지만 학습 코드 직접 확인은 아직이다.
+- Train/Val/Test 사이 중복 이미지 여부. 현재 로컬에는 test만 있어 split 간 해시 비교를 수행하지 못했다.

@@ -4,7 +4,9 @@
 
 ## 공통 조건
 - 동일 테스트셋(781장), 동일 클래스 순서(`configs/classes.json`), 동일 seed 사용
-- 입력 값 범위: [0, 1] — MobileNet도 동일 전제인지는 **unconfirmed** (rescale vs `preprocess_input` 확인 필요)
+- 평가 및 공격 입력 값 범위: **[0, 1]**. CNN과 MobileNet 모두 2026-08-05 clean 재현에서 `rescale=1./255`를 사용했다.
+- `configs/handoff_spec.json`도 두 모델을 구분하지 않고 `0-1 (rescale=1./255)`로 명세한다. 이는 동일 전처리를 의도했다는 강한 정황이지만, MobileNet **학습 코드 자체는 아직 확인되지 않았으므로 학습 당시 전처리의 직접 증거는 아니다.**
+- 두 모델에는 동일한 정규화 픽셀 공간의 L∞ ε를 적용할 수 있다. 단, 입력 해상도(CNN 128×128, MobileNet 224×224)가 다르다는 비교 한계를 결과에 함께 기록한다.
 
 ## 공격 대상 구분
 | 대상 | 공격 유형 |
@@ -33,5 +35,5 @@
 ## 아직 확정되지 않은 것 (proposed 상태)
 - ASR 분모 정의 최종 확정
 - epsilon / step size / iteration 수치
-- MobileNet 입력 값 범위 및 전처리 방식
-- random seed 값
+- MobileNet 학습 당시 실제 전처리 방식(학습 코드 미확보)
+- 학습 random seed 값(clean 평가는 `shuffle=False`로 고정)
