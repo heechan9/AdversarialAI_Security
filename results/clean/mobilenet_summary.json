@@ -1,0 +1,9 @@
+{
+  "model": "mobilenet",
+  "test_samples": 781,
+  "test_loss": 1.1212257146835327,
+  "test_accuracy": 0.7848911881446838,
+  "correct_predictions": 613,
+  "macro_f1": 0.7905834485262442,
+  "weighted_f1": 0.7792522609624049
+}

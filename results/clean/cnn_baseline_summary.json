@@ -1,0 +1,9 @@
+{
+  "model": "cnn_baseline",
+  "test_samples": 781,
+  "test_loss": 4.026247978210449,
+  "test_accuracy": 0.6453264951705933,
+  "correct_predictions": 504,
+  "macro_f1": 0.661057169301309,
+  "weighted_f1": 0.6492015854499328
+}
