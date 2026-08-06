@@ -72,7 +72,7 @@ notebooks/   탐색용 노트북 (추후 추가)
 ## 현재 진행 상태
 - ✅ CNN Baseline clean 평가 재현 완료
 - ✅ MobileNetV2 Finetuned clean 평가 완료
-- ◐ Versioned outputs — 코드 완료, 모델·데이터 보유 환경에서 manifest·CSV·Confusion Matrix 재생성 필요
+- ✅ Versioned outputs — test manifest, 표본별 CSV, report, metadata, Confusion Matrix 생성·검증 완료
 - ○ 공격 구현(FGSM/BIM/PGD/JSMA) — 계획 단계
 - ○ 멀티모달 API PoC — API 후보 비교만 완료([`docs/API_SELECTION.md`](docs/API_SELECTION.md)), 실제 호출 전
 - ○ Safety Simulation — 계획 단계
