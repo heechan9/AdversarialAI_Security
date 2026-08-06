@@ -78,7 +78,10 @@ def build_prediction_frame(
 
 
 def save_confusion_matrix(
-    matrix: np.ndarray, class_names: Sequence[str], output_path: Path
+    matrix: np.ndarray,
+    class_names: Sequence[str],
+    output_path: Path,
+    title: str = "Clean baseline confusion matrix",
 ) -> None:
     figure, axis = plt.subplots(figsize=(11, 9))
     image = axis.imshow(matrix, interpolation="nearest", cmap="Blues")
@@ -90,7 +93,7 @@ def save_confusion_matrix(
         yticklabels=class_names,
         xlabel="Predicted label",
         ylabel="True label",
-        title="Clean baseline confusion matrix",
+        title=title,
     )
     plt.setp(axis.get_xticklabels(), rotation=45, ha="right")
     threshold = matrix.max() / 2 if matrix.size else 0

@@ -55,6 +55,15 @@ PYTHONPATH=src python -m adversarial_ai.evaluation.evaluate_mobilenet
 
 각 실행은 `results/clean/`에 표본별 예측 CSV, classification report JSON·CSV, summary JSON, metadata JSON, confusion matrix CSV·PNG를 저장한다. 모델과 데이터가 없는 환경에서는 결과 파일을 생성하지 않는다.
 
+## FGSM 실행(멘토 ε 확인 후)
+
+```bash
+PYTHONPATH=src python -m adversarial_ai.evaluation.evaluate_fgsm_cnn
+PYTHONPATH=src python -m adversarial_ai.evaluation.evaluate_fgsm_mobilenet
+```
+
+기본 후보는 `0, 0.01, 0.03, 0.05`이며 `--epsilons`로 명시적으로 변경할 수 있다. 결과는 `results/attacks/`에 모델별 요약 CSV, ε별 표본 CSV·report JSON·confusion matrix CSV/PNG, 성공·실패 예시 이미지와 metadata JSON으로 저장한다.
+
 ## 아직 확인되지 않은 것 (재현성 관점)
 - Train/Val/Test 정확한 분할 비율과 분할 코드
 - Random seed 값

@@ -73,6 +73,7 @@ notebooks/   탐색용 노트북 (추후 추가)
 - ✅ CNN Baseline clean 평가 재현 완료
 - ✅ MobileNetV2 Finetuned clean 평가 완료
 - ✅ Versioned outputs — test manifest, 표본별 CSV, report, metadata, Confusion Matrix 생성·검증 완료
-- ○ 공격 구현(FGSM/BIM/PGD/JSMA) — 계획 단계
+- ◐ FGSM — 구현·테스트 준비, 실제 모델 전체 ε 스윕 대기
+- ○ BIM/PGD/JSMA — 계획 단계
 - ○ 멀티모달 API PoC — API 후보 비교만 완료([`docs/API_SELECTION.md`](docs/API_SELECTION.md)), 실제 호출 전
 - ○ Safety Simulation — 계획 단계
