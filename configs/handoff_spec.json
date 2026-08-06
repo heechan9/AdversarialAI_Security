@@ -1,0 +1,27 @@
+{
+  "model_files": {
+    "cnn_baseline": "models/cnn_baseline.h5",
+    "mobilenet_finetuned": "models/mobilenet_finetuned.h5"
+  },
+  "input_spec": {
+    "cnn_input_shape": [128, 128, 3],
+    "mobilenet_input_shape": [224, 224, 3],
+    "normalization": "0-1 (rescale=1./255)",
+    "class_indices": {
+      "Aircraft Carrier": 0,
+      "Bulkers": 1,
+      "Car Carrier": 2,
+      "Container Ship": 3,
+      "Cruise": 4,
+      "DDG": 5,
+      "Recreational": 6,
+      "Sailboat": 7,
+      "Submarine": 8,
+      "Tug": 9
+    }
+  },
+  "baseline_performance": {
+    "test_accuracy": 0.6453264951705933,
+    "test_loss": 4.026344299316406
+  }
+}

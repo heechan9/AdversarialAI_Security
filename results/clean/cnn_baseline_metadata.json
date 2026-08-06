@@ -1,0 +1,27 @@
+{
+  "executed_at_utc": "2026-08-05T06:06:39.449181+00:00",
+  "python": "3.11.15",
+  "tensorflow": "2.21.0",
+  "keras": "3.15.1",
+  "model_path": "models/cnn_baseline.h5",
+  "model_sha256": "cb256b1a5d6f605d355334e4e8667257a2bfbd29e08836cc4114869bd7068701",
+  "data_path": "data/test",
+  "input_size": [
+    128,
+    128,
+    3
+  ],
+  "normalization": "rescale=1./255",
+  "class_mapping": {
+    "Aircraft Carrier": 0,
+    "Bulkers": 1,
+    "Car Carrier": 2,
+    "Container Ship": 3,
+    "Cruise": 4,
+    "DDG": 5,
+    "Recreational": 6,
+    "Sailboat": 7,
+    "Submarine": 8,
+    "Tug": 9
+  }
+}

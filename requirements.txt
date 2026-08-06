@@ -1,5 +1,6 @@
 # Core (confirmed via first mentor meeting: TensorFlow/Keras track)
-tensorflow>=2.16
+tensorflow==2.21.0
+keras==3.15.1
 numpy
 pandas
 scikit-learn
