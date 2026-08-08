@@ -31,7 +31,7 @@ CNN·MobileNet 기반 선박 10클래스 인식 모델에 적대적 공격(FGSM�
 - 상세 결과와 증거 수준: [`docs/CLEAN_BASELINE_RESULTS.md`](docs/CLEAN_BASELINE_RESULTS.md)
 
 ## 아직 확인되지 않은 사항 (계획/미확인 — 수치를 만들지 않음)
-- 어떤 공격에 대한 ASR·Robust Accuracy
+- 멘토 승인 후 확정할 공식 FGSM ASR·Robust Accuracy (현재 값은 provisional)
 - 방어기법 효과
 - 시뮬레이션 충돌률
 - Train/Val 정확한 분할 비율, random seed
@@ -73,7 +73,8 @@ notebooks/   탐색용 노트북 (추후 추가)
 - ✅ CNN Baseline clean 평가 재현 완료
 - ✅ MobileNetV2 Finetuned clean 평가 완료
 - ✅ Versioned outputs — test manifest, 표본별 CSV, report, metadata, Confusion Matrix 생성·검증 완료
-- ◐ FGSM — 구현·테스트 준비, 실제 모델 전체 ε 스윕 대기
+- ✅ FGSM — 구현·테스트 완료, CNN·MobileNet 781장 provisional ε 스윕 완료 ([예비 결과](docs/FGSM_PROVISIONAL_RESULTS.md))
+- ◐ FGSM 공식 결과 — 멘토 ε 범위 승인 후 별도 경로에 재실행 예정
 - ○ BIM/PGD/JSMA — 계획 단계
 - ○ 멀티모달 API PoC — API 후보 비교만 완료([`docs/API_SELECTION.md`](docs/API_SELECTION.md)), 실제 호출 전
 - ○ Safety Simulation — 계획 단계
