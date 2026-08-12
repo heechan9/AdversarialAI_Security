@@ -16,3 +16,6 @@ pytest
 # intentionally NOT listed yet. Provider is only a "conditional
 # recommendation" in docs/API_SELECTION.md — add the SDK for the selected
 # provider once the team confirms it.
+
+openai==3.0.0
+Pillow==12.3.0
