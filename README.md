@@ -77,12 +77,12 @@ notebooks/   탐색용 노트북 (추후 추가)
 - ○ 멀티모달 API PoC — API 후보 비교만 완료([`docs/API_SELECTION.md`](docs/API_SELECTION.md)), 실제 호출 전
 - ○ Safety Simulation — 계획 단계
 
-## 업로드 공공 운항데이터 반영 (v0.5)
+## 업로드 공공 운항데이터 반영 (v1.0)
 
-이 채팅방에 업로드된 실제 CSV 두 개를 원본 그대로 반입하고 SHA-256·스키마·레코드 수를 검증합니다.
+이 채팅방에 업로드된 울산항만공사 국가중점 오픈API 샘플 CSV 두 개를 원본 그대로 반입하고 SHA-256·스키마·레코드 수를 검증합니다.
 
-- `관제기반_선박운항정보.csv`: 522건
-- `선박위치정보.csv`: 528건
+- [`관제기반_선박운항정보.csv`](https://www.upa.or.kr/opendata/publicDataDetail.do?id=15156628): 522건
+- [`선박위치정보.csv`](https://www.upa.or.kr/opendata/publicDataDetail.do?id=15156631): 528건
 - 두 파일의 `callsgn` 교집합: **0건** — 선박 단위 결합 금지
 - 용도: 공공 운항정보 품질검증 및 향후 VLM/LLM·Safety Simulation 입력 설계
 - 제외: 이미지 정답 라벨, CNN/MobileNet 학습, Clean/FGSM 성능 근거

@@ -1,15 +1,27 @@
 {
-  "version": "0.5",
+  "version": "1.0",
   "datasets": [
     {
       "path": "data/public/관제기반_선박운항정보.csv",
       "records": 522,
-      "sha256": "213c6cf3b475d7395e25acd51b9cca78fa939166f91de57b2ee2976fb580f172"
+      "sha256": "213c6cf3b475d7395e25acd51b9cca78fa939166f91de57b2ee2976fb580f172",
+      "provider": "울산항만공사",
+      "official_dataset": "울산항만공사_항만 내 선박 운항정보",
+      "official_data_id": "15156628",
+      "source_url": "https://www.upa.or.kr/opendata/publicDataDetail.do?id=15156628",
+      "acquisition": "OpenAPI sample CSV",
+      "update_cycle": "daily"
     },
     {
       "path": "data/public/선박위치정보.csv",
       "records": 528,
-      "sha256": "21c51de49951ac92b2b6d5ffe034e9cdfeb947a0bbcf615e25fbaee6b76d784e"
+      "sha256": "21c51de49951ac92b2b6d5ffe034e9cdfeb947a0bbcf615e25fbaee6b76d784e",
+      "provider": "울산항만공사",
+      "official_dataset": "울산항만공사_항내 선박위치정보",
+      "official_data_id": "15156631",
+      "source_url": "https://www.upa.or.kr/opendata/publicDataDetail.do?id=15156631",
+      "acquisition": "OpenAPI sample CSV",
+      "update_cycle": "daily"
     }
   ],
   "join": {
