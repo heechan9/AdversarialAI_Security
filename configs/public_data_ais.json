@@ -1,0 +1,30 @@
+{
+  "schema_version": "1.0",
+  "status": "adapter_implemented_data_not_committed",
+  "source": {
+    "provider": "해양수산부",
+    "dataset_name": "해양수산부_선박 AIS 동적정보_20220101",
+    "data_go_kr_id": "15129186",
+    "url": "https://www.data.go.kr/data/15129186/fileData.do",
+    "registered_at": "2024-06-26",
+    "modified_at": "2025-06-23",
+    "license": "이용허락범위 제한 없음"
+  },
+  "official_columns": [
+    "MMSI",
+    "수신시간",
+    "경도",
+    "위도",
+    "SOG",
+    "COG",
+    "HEDING"
+  ],
+  "coordinate_scale_divisor": 60000,
+  "intended_role": "navigation_context_only",
+  "exclusions": [
+    "image_class_label",
+    "clean_or_adversarial_ground_truth",
+    "current_model_training_input",
+    "current_attack_performance_evidence"
+  ]
+}

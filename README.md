@@ -76,3 +76,17 @@ notebooks/   탐색용 노트북 (추후 추가)
 - ○ 공격 구현(FGSM/BIM/PGD/JSMA) — 계획 단계
 - ○ 멀티모달 API PoC — API 후보 비교만 완료([`docs/API_SELECTION.md`](docs/API_SELECTION.md)), 실제 호출 전
 - ○ Safety Simulation — 계획 단계
+
+## 공공 AIS 운항정보 연계
+
+해양수산부 `선박 AIS 동적정보`(공공데이터포털 15129186)의 공식 스키마를
+운항 안전 맥락으로 변환하는 로더와 검증 테스트를 제공합니다. AIS 항목은 이미지의
+정답 라벨이 아니라 VLM·LLM 이상상황 판단과 Safety Simulation에서 사용할 **별도
+운항 맥락 후보**입니다.
+
+- 공식 항목: MMSI(비식별 처리), 수신시간, 경도, 위도, SOG, COG, HEDING
+- 현재 완료: 스키마 검증, 좌표 /60,000 변환, 범위 검사, JSON-safe 맥락 변환, 단위테스트
+- 아직 미완료: 실제 CSV 사본 반입·해시 고정, 이미지 표본과 시간/공간 결합, 위험도 임계값
+- 주의: 현재 Clean/FGSM 결과는 AIS를 사용한 성능 결과가 아닙니다.
+
+출처와 적용 경계는 [`docs/PUBLIC_DATA_AIS.md`](docs/PUBLIC_DATA_AIS.md)를 참조하세요.
