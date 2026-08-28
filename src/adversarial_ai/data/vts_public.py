@@ -88,9 +88,26 @@ def validate_uploaded_vts_data(
     voyage_callsigns = {row["callsgn"] for row in voyages if row["callsgn"]}
     position_callsigns = {row["callsgn"] for row in positions if row["callsgn"]}
 
+    longitudes = [float(row["lot"]) for row in positions if not _is_missing(row["lot"])]
+    latitudes = [float(row["lat"]) for row in positions if not _is_missing(row["lat"])]
+
     return {
         "voyage_records": len(voyages),
         "position_records": len(positions),
+        "voyage_missing_cells": sum(
+            _is_missing(value) for row in voyages for value in row.values()
+        ),
+        "position_missing_cells": sum(
+            _is_missing(value) for row in positions for value in row.values()
+        ),
+        "voyage_unique_callsigns": len(
+            {row["callsgn"] for row in voyages if not _is_missing(row["callsgn"])}
+        ),
+        "position_unique_callsigns": len(
+            {row["callsgn"] for row in positions if not _is_missing(row["callsgn"])}
+        ),
+        "longitude_range": [min(longitudes), max(longitudes)],
+        "latitude_range": [min(latitudes), max(latitudes)],
         "voyage_event_counts": dict(Counter(row["ioprtVtsNm"] for row in voyages)),
         "navigation_status_counts": dict(Counter(row["nvgtStts"] for row in positions)),
         "callsign_intersection_count": len(voyage_callsigns & position_callsigns),

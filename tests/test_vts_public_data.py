@@ -19,6 +19,12 @@ def test_uploaded_vts_assets_are_exact_and_separate() -> None:
     assert summary["position_records"] == 528
     assert summary["callsign_intersection_count"] == 0
     assert summary["join_allowed"] is False
+    assert summary["voyage_missing_cells"] == 3
+    assert summary["position_missing_cells"] == 1565
+    assert summary["voyage_unique_callsigns"] == 1
+    assert summary["position_unique_callsigns"] == 357
+    assert summary["longitude_range"] == [129.20666667, 129.78417833]
+    assert summary["latitude_range"] == [35.17913833, 35.85421667]
     assert summary["voyage_event_counts"] == {
         "입항": 115, "출항": 115, "이안": 81, "양묘": 65,
         "접안": 65, "이선": 61, "투묘": 20,

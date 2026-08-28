@@ -1,0 +1,35 @@
+{
+  "contract_version": "1.0",
+  "validated_on": "2026-08-28",
+  "voyage_records": 522,
+  "position_records": 528,
+  "voyage_missing_cells": 3,
+  "position_missing_cells": 1565,
+  "voyage_unique_callsigns": 1,
+  "position_unique_callsigns": 357,
+  "longitude_range": [129.20666667, 129.78417833],
+  "latitude_range": [35.17913833, 35.85421667],
+  "callsign_intersection_count": 0,
+  "join_allowed": false,
+  "voyage_event_counts": {
+    "입항": 115,
+    "출항": 115,
+    "이안": 81,
+    "양묘": 65,
+    "접안": 65,
+    "이선": 61,
+    "투묘": 20
+  },
+  "navigation_status_counts": {
+    "항해(동력)": 207,
+    "": 203,
+    "정박(계류)": 56,
+    "정박(앵커링)": 34,
+    "항해(비동력)": 17,
+    "낚시": 3,
+    "기동 제한": 3,
+    "조종 불가": 2,
+    "흘수에 의한 제한": 2,
+    "측방 예인": 1
+  }
+}
