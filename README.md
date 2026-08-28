@@ -77,16 +77,14 @@ notebooks/   탐색용 노트북 (추후 추가)
 - ○ 멀티모달 API PoC — API 후보 비교만 완료([`docs/API_SELECTION.md`](docs/API_SELECTION.md)), 실제 호출 전
 - ○ Safety Simulation — 계획 단계
 
-## 공공 AIS 운항정보 연계
+## 업로드 공공 운항데이터 반영 (v0.5)
 
-해양수산부 `선박 AIS 동적정보`(공공데이터포털 15129186)의 공식 스키마를
-운항 안전 맥락으로 변환하는 로더와 검증 테스트를 제공합니다. AIS 항목은 이미지의
-정답 라벨이 아니라 VLM·LLM 이상상황 판단과 Safety Simulation에서 사용할 **별도
-운항 맥락 후보**입니다.
+이 채팅방에 업로드된 실제 CSV 두 개를 원본 그대로 반입하고 SHA-256·스키마·레코드 수를 검증합니다.
 
-- 공식 항목: MMSI(비식별 처리), 수신시간, 경도, 위도, SOG, COG, HEDING
-- 현재 완료: 스키마 검증, 좌표 /60,000 변환, 범위 검사, JSON-safe 맥락 변환, 단위테스트
-- 아직 미완료: 실제 CSV 사본 반입·해시 고정, 이미지 표본과 시간/공간 결합, 위험도 임계값
-- 주의: 현재 Clean/FGSM 결과는 AIS를 사용한 성능 결과가 아닙니다.
+- `관제기반_선박운항정보.csv`: 522건
+- `선박위치정보.csv`: 528건
+- 두 파일의 `callsgn` 교집합: **0건** — 선박 단위 결합 금지
+- 용도: 공공 운항정보 품질검증 및 향후 VLM/LLM·Safety Simulation 입력 설계
+- 제외: 이미지 정답 라벨, CNN/MobileNet 학습, Clean/FGSM 성능 근거
 
-출처와 적용 경계는 [`docs/PUBLIC_DATA_AIS.md`](docs/PUBLIC_DATA_AIS.md)를 참조하세요.
+상세 계약과 해시는 [`docs/PUBLIC_DATA_VTS.md`](docs/PUBLIC_DATA_VTS.md)를 참조하세요.

@@ -1,0 +1,31 @@
+{
+  "version": "0.5",
+  "datasets": [
+    {
+      "path": "data/public/관제기반_선박운항정보.csv",
+      "records": 522,
+      "sha256": "213c6cf3b475d7395e25acd51b9cca78fa939166f91de57b2ee2976fb580f172"
+    },
+    {
+      "path": "data/public/선박위치정보.csv",
+      "records": 528,
+      "sha256": "21c51de49951ac92b2b6d5ffe034e9cdfeb947a0bbcf615e25fbaee6b76d784e"
+    }
+  ],
+  "join": {
+    "key_examined": "callsgn",
+    "intersection_count": 0,
+    "allowed": false,
+    "reason": "The uploaded extracts describe disjoint callsign sets."
+  },
+  "allowed_role": [
+    "descriptive public-data quality validation",
+    "future VLM/LLM maritime context design",
+    "future safety-simulation input design"
+  ],
+  "excluded_role": [
+    "image ground-truth labels",
+    "CNN or MobileNet training data",
+    "evidence for Clean or FGSM performance"
+  ]
+}
