@@ -41,7 +41,7 @@ def _normalize_relative_path(value: Any, context: str) -> str:
     path = PurePosixPath(normalized)
     if (
         "\x00" in normalized
-        or re.match(r"^[A-Za-z]:/", normalized)
+        or re.match(r"^[A-Za-z]:", normalized)
         or path.is_absolute()
         or path.drive
         or any(part in {"", ".", ".."} for part in path.parts)
@@ -51,15 +51,25 @@ def _normalize_relative_path(value: Any, context: str) -> str:
 
 
 def _resolve_dataset_file(data_dir: Path, relative_path: str) -> Path:
-    root = data_dir.resolve()
-    candidate = (root / PurePosixPath(relative_path)).resolve()
+    root = data_dir.absolute()
+    if root.is_symlink():
+        raise ValueError(f"Dataset path must not contain symlinks: {relative_path!r}")
+
+    candidate = root
+    for part in PurePosixPath(relative_path).parts:
+        candidate = candidate / part
+        if candidate.is_symlink():
+            raise ValueError(f"Dataset path must not contain symlinks: {relative_path!r}")
+
+    resolved_root = root.resolve()
+    resolved_candidate = candidate.resolve()
     try:
-        candidate.relative_to(root)
+        resolved_candidate.relative_to(resolved_root)
     except ValueError as exc:
         raise ValueError(f"Dataset path escapes the dataset root: {relative_path!r}") from exc
-    if not candidate.is_file():
-        raise ValueError(f"Dataset file is missing: {relative_path!r}")
-    return candidate
+    if not resolved_candidate.is_file():
+        raise ValueError(f"Dataset path is not a regular file: {relative_path!r}")
+    return resolved_candidate
 
 
 def validate_reproducibility_manifest(

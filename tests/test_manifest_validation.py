@@ -70,7 +70,18 @@ def test_rejects_dataset_content_tampering(manifest_case):
 def test_rejects_missing_dataset_file(manifest_case):
     data_dir, filenames, model, _, write = manifest_case
     (data_dir / filenames[10]).unlink()
-    with pytest.raises(ValueError, match="Dataset file is missing"):
+    with pytest.raises(ValueError, match="not a regular file"):
+        validate_reproducibility_manifest(
+            manifest_path=write(), model_path=model, dataset_filenames=filenames, data_dir=data_dir
+        )
+
+
+def test_rejects_dataset_directory_instead_of_regular_file(manifest_case):
+    data_dir, filenames, model, _, write = manifest_case
+    path = data_dir / filenames[10]
+    path.unlink()
+    path.mkdir()
+    with pytest.raises(ValueError, match="not a regular file"):
         validate_reproducibility_manifest(
             manifest_path=write(), model_path=model, dataset_filenames=filenames, data_dir=data_dir
         )
@@ -120,6 +131,42 @@ def test_rejects_path_traversal(manifest_case, unsafe_path):
     manifest["test_files"][0]["relative_path"] = unsafe_path
     filenames[0] = unsafe_path
     with pytest.raises(ValueError, match="must not be absolute or escape"):
+        validate_reproducibility_manifest(
+            manifest_path=write(), model_path=model, dataset_filenames=filenames, data_dir=data_dir
+        )
+
+
+@pytest.mark.parametrize("unsafe_path", ["C:ship.jpg", "d:relative/path.jpg", "Z:another.jpg"])
+def test_rejects_windows_drive_relative_path(manifest_case, unsafe_path):
+    data_dir, filenames, model, manifest, write = manifest_case
+    manifest["test_files"][0]["relative_path"] = unsafe_path
+    filenames[0] = unsafe_path
+    with pytest.raises(ValueError, match="must not be absolute or escape"):
+        validate_reproducibility_manifest(
+            manifest_path=write(), model_path=model, dataset_filenames=filenames, data_dir=data_dir
+        )
+
+
+def test_rejects_symlinked_dataset_file(manifest_case):
+    data_dir, filenames, model, _, write = manifest_case
+    original = data_dir / filenames[0]
+    target = data_dir / "real-image.jpg"
+    target.write_bytes(original.read_bytes())
+    original.unlink()
+    original.symlink_to(target)
+    with pytest.raises(ValueError, match="must not contain symlinks"):
+        validate_reproducibility_manifest(
+            manifest_path=write(), model_path=model, dataset_filenames=filenames, data_dir=data_dir
+        )
+
+
+def test_rejects_symlinked_class_directory(manifest_case):
+    data_dir, filenames, model, _, write = manifest_case
+    original_class = data_dir / "Class0"
+    moved_class = data_dir / "Class0-real"
+    original_class.rename(moved_class)
+    original_class.symlink_to(moved_class, target_is_directory=True)
+    with pytest.raises(ValueError, match="must not contain symlinks"):
         validate_reproducibility_manifest(
             manifest_path=write(), model_path=model, dataset_filenames=filenames, data_dir=data_dir
         )
