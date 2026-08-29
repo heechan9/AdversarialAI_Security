@@ -11,6 +11,17 @@ def _sha(value: bytes) -> str:
     return hashlib.sha256(value).hexdigest()
 
 
+def _symlink_or_skip(
+    link: Path, target: Path, *, target_is_directory: bool = False
+) -> None:
+    try:
+        link.symlink_to(target, target_is_directory=target_is_directory)
+    except OSError as exc:
+        if getattr(exc, "winerror", None) == 1314:
+            pytest.skip("Windows symlink creation privilege is unavailable")
+        raise
+
+
 @pytest.fixture()
 def manifest_case(tmp_path: Path):
     data_dir = tmp_path / "test"
@@ -153,7 +164,7 @@ def test_rejects_symlinked_dataset_file(manifest_case):
     target = data_dir / "real-image.jpg"
     target.write_bytes(original.read_bytes())
     original.unlink()
-    original.symlink_to(target)
+    _symlink_or_skip(original, target)
     with pytest.raises(ValueError, match="must not contain symlinks"):
         validate_reproducibility_manifest(
             manifest_path=write(), model_path=model, dataset_filenames=filenames, data_dir=data_dir
@@ -165,7 +176,7 @@ def test_rejects_symlinked_class_directory(manifest_case):
     original_class = data_dir / "Class0"
     moved_class = data_dir / "Class0-real"
     original_class.rename(moved_class)
-    original_class.symlink_to(moved_class, target_is_directory=True)
+    _symlink_or_skip(original_class, moved_class, target_is_directory=True)
     with pytest.raises(ValueError, match="must not contain symlinks"):
         validate_reproducibility_manifest(
             manifest_path=write(), model_path=model, dataset_filenames=filenames, data_dir=data_dir
