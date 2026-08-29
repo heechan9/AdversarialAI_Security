@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import argparse
-import hashlib
 import importlib.metadata
 import json
 import platform
@@ -20,6 +19,8 @@ import numpy as np
 import pandas as pd
 from sklearn.metrics import classification_report, confusion_matrix
 
+from adversarial_ai.evaluation.integrity import sha256_file
+
 
 @dataclass(frozen=True)
 class EvaluationSpec:
@@ -27,13 +28,6 @@ class EvaluationSpec:
     model_path: Path
     image_size: tuple[int, int]
 
-
-def sha256_file(path: Path, chunk_size: int = 1024 * 1024) -> str:
-    digest = hashlib.sha256()
-    with path.open("rb") as handle:
-        for chunk in iter(lambda: handle.read(chunk_size), b""):
-            digest.update(chunk)
-    return digest.hexdigest()
 
 
 def load_expected_classes(path: Path) -> list[str]:

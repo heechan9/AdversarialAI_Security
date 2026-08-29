@@ -23,9 +23,9 @@ from adversarial_ai.evaluation.clean_baseline import (
     load_expected_classes,
     package_version,
     save_confusion_matrix,
-    sha256_file,
     validate_class_mapping,
 )
+from adversarial_ai.evaluation.integrity import validate_reproducibility_manifest
 
 
 def compute_untargeted_asr(
@@ -37,25 +37,6 @@ def compute_untargeted_asr(
     successes = int((clean_correct & (adversarial_pred != y_true)).sum())
     return (successes / denominator if denominator else 0.0, successes, denominator)
 
-
-def validate_reproducibility_manifest(
-    manifest_path: Path, model_path: Path, dataset_filenames: Sequence[str]
-) -> str:
-    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
-    if manifest.get("test_samples") != 781:
-        raise ValueError("Manifest must contain exactly 781 test samples")
-    expected_files = [item["relative_path"] for item in manifest.get("test_files", [])]
-    normalized_actual = [Path(value).as_posix() for value in dataset_filenames]
-    if expected_files != normalized_actual:
-        raise ValueError("Dataset file order differs from configs/test_manifest.json")
-    model_key = model_path.as_posix()
-    model_records = {item["path"]: item["sha256"] for item in manifest.get("models", [])}
-    if model_key not in model_records:
-        raise ValueError(f"Model {model_key!r} is absent from the manifest")
-    actual_hash = sha256_file(model_path)
-    if model_records[model_key] != actual_hash:
-        raise ValueError("Model SHA-256 differs from configs/test_manifest.json")
-    return actual_hash
 
 
 def _probabilities(outputs: Any, from_logits: bool) -> np.ndarray:
@@ -180,7 +161,10 @@ def evaluate_fgsm(
     if test_generator.samples != 781:
         raise ValueError(f"Expected 781 test images, found {test_generator.samples}")
     model_sha256 = validate_reproducibility_manifest(
-        manifest_path, spec.model_path, test_generator.filenames
+        manifest_path=manifest_path,
+        model_path=spec.model_path,
+        dataset_filenames=test_generator.filenames,
+        data_dir=data_dir,
     )
 
     model = tf.keras.models.load_model(spec.model_path)

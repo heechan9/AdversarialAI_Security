@@ -6,7 +6,7 @@ import argparse
 import json
 from pathlib import Path
 
-from adversarial_ai.evaluation.clean_baseline import sha256_file
+from adversarial_ai.evaluation.integrity import sha256_file
 
 
 IMAGE_SUFFIXES = {".jpg", ".jpeg", ".png", ".webp", ".bmp"}

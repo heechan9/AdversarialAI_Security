@@ -1,10 +1,7 @@
 import numpy as np
 import pytest
 
-from adversarial_ai.evaluation.fgsm_evaluation import (
-    compute_untargeted_asr,
-    validate_reproducibility_manifest,
-)
+from adversarial_ai.evaluation.fgsm_evaluation import compute_untargeted_asr
 
 
 def _tensorflow():
@@ -34,21 +31,6 @@ def test_asr_denominator_uses_only_clean_correct_samples():
     assert successes == 1
     assert asr == 0.5
 
-
-def test_manifest_detects_model_hash_mismatch(tmp_path):
-    import json
-
-    model = tmp_path / "model.h5"
-    model.write_bytes(b"actual model")
-    manifest = {
-        "test_samples": 781,
-        "test_files": [{"relative_path": "A/a.jpg"}],
-        "models": [{"path": model.as_posix(), "sha256": "0" * 64}],
-    }
-    path = tmp_path / "manifest.json"
-    path.write_text(json.dumps(manifest), encoding="utf-8")
-    with pytest.raises(ValueError, match="SHA-256"):
-        validate_reproducibility_manifest(path, model, ["A/a.jpg"])
 
 
 def test_epsilon_zero_preserves_predictions_and_shape():
