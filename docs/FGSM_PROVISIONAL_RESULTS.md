@@ -55,10 +55,10 @@
 
 ## Artifact inventory verification
 
-- `results/attacks/provisional/samples/`에 CNN·MobileNetV2의 ε=0.01/0.03/0.05 success·failure 샘플 총 24개가 생성됐다.
+- 로컬 실행에서는 CNN·MobileNetV2의 ε=0.01/0.03/0.05 success·failure 샘플이 생성됐지만, 저장소에는 검토용 최소 증거로 ε=0.03의 모델별 success·failure 대표 이미지 4개만 추적한다.
 - ε=0은 공격 성공·실패 시각화 대상에서 제외됐다.
 - 파일명은 `{model}_eps_{epsilon}_{success|failure}_{index}.png` 규칙을 따른다.
-- 파일 존재와 명명 규칙만 확인했으며 이미지 내용에 대한 시각적 검토는 아직 완료되지 않았다.
+- 저장소 추적본 4개의 파일 존재와 명명 규칙만 확인했으며 이미지 내용에 대한 시각적 검토는 아직 완료되지 않았다.
 - CNN metadata: 실행시각 `2026-08-07T17:22:06Z`, input size `[128,128,3]`, 모델 SHA-256은 manifest와 일치한다.
 - MobileNetV2 metadata: 실행시각 `2026-08-08T12:43:23Z`, input size `[224,224,3]`, 모델 SHA-256은 manifest와 일치한다.
 - 두 metadata 모두 `untargeted FGSM, exactly one step`, `clean-correct samples only`, `from_logits=false`를 기록한다.
@@ -76,3 +76,5 @@
 2. 로컬 raw CSV·JSON·confusion matrix·metadata 중 버전 관리 대상 선별
 3. 멘토 ε 범위 승인 후 공식 결과 경로에 재실행
 4. 필요 시 별도 사전등록 후 보조 ε 실험 수행
+
+공식 재실행 전에는 `results/attacks/` 루트에 수치 산출물을 두지 않고, 예비 결과는 `results/attacks/provisional/`에만 유지한다.
