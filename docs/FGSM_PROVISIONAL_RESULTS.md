@@ -55,6 +55,7 @@
 
 ## Artifact inventory verification
 
+- Bundle SHA-256와 보존 ref는 `results/attacks/provisional/PROVENANCE.json`에 기록한다. 이 기록은 결과를 공식화하지 않으며, 멘토 ε 승인 후 공식 재실행이 필요하다.
 - 로컬 실행에서는 CNN·MobileNetV2의 ε=0.01/0.03/0.05 success·failure 샘플이 생성됐지만, 저장소에는 검토용 최소 증거로 ε=0.03의 모델별 success·failure 대표 이미지 4개만 추적한다.
 - ε=0은 공격 성공·실패 시각화 대상에서 제외됐다.
 - 파일명은 `{model}_eps_{epsilon}_{success|failure}_{index}.png` 규칙을 따른다.
