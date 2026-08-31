@@ -1,7 +1,7 @@
 {
   "audit_version": 1,
   "status": "PASSED",
-  "timestamp_utc": "2026-08-31T08:38:00.964088+00:00",
+  "timestamp_utc": "2026-08-31T11:03:45.887008+00:00",
   "source_commit_sha": "0e390c8ac04b1dd4e2e7452844820a64f97bc3fa",
   "verified_scopes": [
     "configs/test_manifest.json (781 samples, structure & SHA-256 formats)",

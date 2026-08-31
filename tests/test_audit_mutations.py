@@ -90,9 +90,9 @@ def test_mutation_tampered_eps_zero_violation(repo_copy: Path) -> None:
 
 def test_mutation_manifest_missing_sample(repo_copy: Path) -> None:
     manifest_p = repo_copy / "configs" / "test_manifest.json"
-    data = json.loads(manifest_p.read_text())
+    data = json.loads(manifest_p.read_text(encoding="utf-8"))
     data["test_files"].pop()  # 780 instead of 781
-    manifest_p.write_text(json.dumps(data))
+    manifest_p.write_text(json.dumps(data), encoding="utf-8")
 
     with pytest.raises(AuditError) as exc_info:
         audit_manifest(manifest_p)
@@ -101,9 +101,9 @@ def test_mutation_manifest_missing_sample(repo_copy: Path) -> None:
 
 def test_mutation_manifest_reordered_or_duplicate(repo_copy: Path) -> None:
     manifest_p = repo_copy / "configs" / "test_manifest.json"
-    data = json.loads(manifest_p.read_text())
+    data = json.loads(manifest_p.read_text(encoding="utf-8"))
     data["test_files"][0] = data["test_files"][1]  # Create duplicate
-    manifest_p.write_text(json.dumps(data))
+    manifest_p.write_text(json.dumps(data), encoding="utf-8")
 
     with pytest.raises(AuditError) as exc_info:
         audit_manifest(manifest_p)
@@ -112,9 +112,9 @@ def test_mutation_manifest_reordered_or_duplicate(repo_copy: Path) -> None:
 
 def test_mutation_model_sha_mismatch(repo_copy: Path) -> None:
     meta_p = repo_copy / "results" / "clean" / "cnn_baseline_metadata.json"
-    meta = json.loads(meta_p.read_text())
+    meta = json.loads(meta_p.read_text(encoding="utf-8"))
     meta["model_sha256"] = "a" * 64
-    meta_p.write_text(json.dumps(meta))
+    meta_p.write_text(json.dumps(meta), encoding="utf-8")
 
     manifest_models = {
         "models/cnn_baseline.h5": "cb256b1a5d6f605d355334e4e8667257a2bfbd29e08836cc4114869bd7068701"
@@ -126,8 +126,8 @@ def test_mutation_model_sha_mismatch(repo_copy: Path) -> None:
 
 def test_mutation_doc_claim_mismatch(repo_copy: Path) -> None:
     readme_p = repo_copy / "README.md"
-    content = readme_p.read_text().replace("0.6453264951705933", "0.999999")
-    readme_p.write_text(content)
+    content = readme_p.read_text(encoding="utf-8").replace("0.6453264951705933", "0.999999")
+    readme_p.write_text(content, encoding="utf-8")
 
     with pytest.raises(AuditError) as exc_info:
         audit_cross_documents(repo_root=repo_copy)
