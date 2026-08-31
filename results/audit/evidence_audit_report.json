@@ -1,0 +1,90 @@
+{
+  "audit_version": 1,
+  "status": "PASSED",
+  "timestamp_utc": "2026-08-31T07:51:26.004706+00:00",
+  "source_commit_sha": "0e390c8ac04b1dd4e2e7452844820a64f97bc3fa",
+  "verified_scopes": [
+    "configs/test_manifest.json (781 samples, structure & SHA-256 formats)",
+    "Model SHA-256 metadata consistency across manifest and evaluation metadata",
+    "CNN clean baseline results (recalculated 504/781 correct, accuracy 0.645326)",
+    "MobileNetV2 clean baseline results (recalculated 613/781 correct, accuracy 0.784891)",
+    "CNN provisional FGSM results (eps sweep 0.0, 0.01, 0.03, 0.05, denominator 504)",
+    "MobileNetV2 provisional FGSM results (eps sweep 0.0, 0.01, 0.03, 0.05, denominator 613)",
+    "Attack contracts (L_infinity <= epsilon + 1e-6, epsilon=0 invariants)",
+    "Cross-document consistency (README, EXPERIMENT_CONTRACT, results docs, PROVENANCE.json)"
+  ],
+  "unverified_scopes": [
+    "Image dataset files (raw images absent on clean checkout)",
+    "Model binary files on disk (.h5 files absent on clean checkout)"
+  ],
+  "summary": {
+    "clean_baseline": {
+      "cnn_correct": 504,
+      "cnn_accuracy": 0.645326504481434,
+      "mobilenet_correct": 613,
+      "mobilenet_accuracy": 0.7848911651728553
+    },
+    "fgsm_provisional": {
+      "cnn_epsilons": {
+        "0.0": {
+          "robust_accuracy": 0.645326504481434,
+          "attack_successes": 0,
+          "asr_denominator": 504,
+          "untargeted_asr": 0.0,
+          "max_linf": 0.0
+        },
+        "0.01": {
+          "robust_accuracy": 0.41613316261203587,
+          "attack_successes": 179,
+          "asr_denominator": 504,
+          "untargeted_asr": 0.3551587301587302,
+          "max_linf": 0.010000005
+        },
+        "0.03": {
+          "robust_accuracy": 0.24327784891165172,
+          "attack_successes": 314,
+          "asr_denominator": 504,
+          "untargeted_asr": 0.623015873015873,
+          "max_linf": 0.030000001
+        },
+        "0.05": {
+          "robust_accuracy": 0.2023047375160051,
+          "attack_successes": 347,
+          "asr_denominator": 504,
+          "untargeted_asr": 0.6884920634920635,
+          "max_linf": 0.050000012
+        }
+      },
+      "mobilenet_epsilons": {
+        "0.0": {
+          "robust_accuracy": 0.7848911651728553,
+          "attack_successes": 0,
+          "asr_denominator": 613,
+          "untargeted_asr": 0.0,
+          "max_linf": 0.0
+        },
+        "0.01": {
+          "robust_accuracy": 0.12419974391805377,
+          "attack_successes": 516,
+          "asr_denominator": 613,
+          "untargeted_asr": 0.8417618270799347,
+          "max_linf": 0.010000005
+        },
+        "0.03": {
+          "robust_accuracy": 0.13188220230473752,
+          "attack_successes": 510,
+          "asr_denominator": 613,
+          "untargeted_asr": 0.831973898858075,
+          "max_linf": 0.030000001
+        },
+        "0.05": {
+          "robust_accuracy": 0.1613316261203585,
+          "attack_successes": 487,
+          "asr_denominator": 613,
+          "untargeted_asr": 0.7944535073409462,
+          "max_linf": 0.050000012
+        }
+      }
+    }
+  }
+}
