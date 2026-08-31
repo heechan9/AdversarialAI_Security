@@ -36,7 +36,6 @@ CNN·MobileNet 기반 선박 10클래스 인식 모델에 적대적 공격(FGSM�
 - 시뮬레이션 충돌률
 - Train/Val 정확한 분할 비율, random seed
 - MobileNet 학습 당시 실제 전처리(평가와 handoff 명세는 `rescale=1./255`, 학습 코드 미확보)
-- 멀티모달 API 실제 호출 결과 (아직 유료 호출 자체를 하지 않음)
 
 ## 로컬 설치 예정 방법
 ```bash
@@ -44,7 +43,6 @@ git clone <this-repo>
 cd AdversarialAI_Security
 python -m venv venv && source venv/bin/activate   # 또는 Anaconda 가상환경
 pip install -r requirements.txt
-cp .env.example .env   # 실제 키는 로컬에만 채우고 절대 커밋하지 않음
 ```
 모델·데이터 배치 방법은 [`docs/REPRODUCIBILITY.md`](docs/REPRODUCIBILITY.md) 참조.
 
@@ -52,7 +50,7 @@ cp .env.example .env   # 실제 키는 로컬에만 채우고 절대 커밋하�
 ```
 configs/     실험·API PoC 설정 (YAML/JSON)
 docs/        프로젝트 범위·실험계약·API 선정·재현성 문서
-src/adversarial_ai/   data/models/attacks/evaluation/multimodal/simulation 패키지 골격
+src/adversarial_ai/   data/models/attacks/evaluation 패키지
 scripts/     실행 스크립트 (추후 추가)
 tests/       스키마 검증 등 테스트
 results/     clean/attacks/multimodal/simulation 결과 (실제 수치는 실험 후 채움)
@@ -63,11 +61,6 @@ notebooks/   탐색용 노트북 (추후 추가)
 - `.h5` 모델과 데이터셋은 Git에 커밋하지 않는다 (`docs/REPRODUCIBILITY.md`)
 - 모든 실험은 동일 테스트셋·클래스 순서·seed를 사용한다 (`docs/EXPERIMENT_CONTRACT.md`)
 - 확정 전 파라미터는 "proposed"로 표시하고, 확정되면 문서와 config를 함께 갱신한다
-
-## API Key 보안 원칙
-- API Key는 코드·노트북·문서·GitHub에 절대 커밋하지 않는다
-- `.env`에만 보관하고 `.env`는 `.gitignore`로 제외된다 (`.env.example`만 커밋)
-- 아직 어떤 provider도 실제로 선택되지 않았으며, 유료 API 호출도 하지 않은 상태다
 
 ## 현재 진행 상태
 - ✅ CNN Baseline clean 평가 재현 완료
