@@ -13,7 +13,7 @@
 - 입력 범위: `[0,1]`, `L∞` 제한, `[0,1]` clipping
 - ε 후보: `0, 0.01, 0.03, 0.05`
 - ASR 분모: clean-correct 표본만 사용(CNN 504장, MobileNetV2 613장)
-- 테스트: `tests/test_fgsm.py` 6 passed
+- 전체 테스트: Linux 34 passed; Windows 일반 사용자 환경 32 passed, 2 skipped (symlink 생성 권한 제한에 따른 정상 skip)
 
 ## 전체 결과
 
