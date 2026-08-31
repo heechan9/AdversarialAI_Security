@@ -12,7 +12,5 @@ jsonschema
 python-dotenv
 pytest
 
-# NOTE: Multimodal provider SDKs (openai / anthropic / google-genai) are
-# intentionally NOT listed yet. Provider is only a "conditional
-# recommendation" in docs/API_SELECTION.md — add the SDK for the selected
-# provider once the team confirms it.
+# NOTE: Multimodal provider SDKs are outside this FGSM baseline and remain
+# intentionally unlisted until a separate VLM/LLM workstream is approved.
