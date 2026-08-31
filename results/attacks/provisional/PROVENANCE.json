@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "status": "provisional",
+  "artifact_scope": "results/attacks/provisional",
+  "bundle": {
+    "filename": "fgsm-evaluation.bundle",
+    "sha256": "aa4c29039abdb7491607f99c66fd816f4f15fd5923bddd23def0b2dc96ecdf47",
+    "tracked_in_git": false,
+    "refs": {
+      "refs/heads/main": "2f5cef4bd6182ab571944994eebb88f215c91d33",
+      "refs/heads/agent/fgsm-evaluation": "c5915f4fb7c8048f2a9c5cef384db7f1a14d8199"
+    }
+  },
+  "evaluation_code_snapshot": "c5915f4fb7c8048f2a9c5cef384db7f1a14d8199",
+  "validation": {
+    "commit": "0b21a3a676619a0a1aa82ca65c4f0f497092ef0f",
+    "platform": "Windows general-user environment",
+    "result": "28 passed, 2 skipped",
+    "skipped_reason": "Windows symlink creation privilege unavailable (WinError 1314)"
+  },
+  "limitations": [
+    "The bundle digest and refs identify the preserved local source snapshot; the bundle itself is not committed to this repository.",
+    "The FGSM artifacts remain provisional until the mentor approves the epsilon range and the official full-set evaluation is rerun.",
+    "This provenance record does not convert provisional metrics into official results."
+  ]
+}

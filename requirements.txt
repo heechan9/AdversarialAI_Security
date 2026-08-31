@@ -1,0 +1,14 @@
+# Core (confirmed via first mentor meeting: TensorFlow/Keras track)
+tensorflow==2.21.0
+keras==3.15.1
+numpy
+pandas
+scikit-learn
+matplotlib
+
+# Config / testing
+pyyaml
+pytest
+
+# NOTE: Multimodal provider SDKs are outside this FGSM baseline and remain
+# intentionally unlisted until a separate VLM/LLM workstream is approved.
