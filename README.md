@@ -76,5 +76,5 @@ notebooks/   탐색용 노트북 (추후 추가)
 - ✅ FGSM — 구현·테스트 완료, CNN·MobileNet 781장 provisional ε 스윕 완료 ([예비 결과](docs/FGSM_PROVISIONAL_RESULTS.md))
 - ◐ FGSM 공식 결과 — 멘토 ε 범위 승인 후 별도 경로에 재실행 예정
 - ○ BIM/PGD/JSMA — 계획 단계
-- ○ 멀티모달 API PoC — API 후보 비교만 완료([`docs/API_SELECTION.md`](docs/API_SELECTION.md)), 실제 호출 전
+- ○ 멀티모달 API PoC — 이 PR 범위 밖이며 별도 브랜치에서 검토 예정
 - ○ Safety Simulation — 계획 단계
