@@ -6,10 +6,8 @@ pandas
 scikit-learn
 matplotlib
 
-# Config / env / testing
+# Config / testing
 pyyaml
-jsonschema
-python-dotenv
 pytest
 
 # NOTE: Multimodal provider SDKs are outside this FGSM baseline and remain
