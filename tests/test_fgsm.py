@@ -44,6 +44,7 @@ def test_epsilon_zero_preserves_predictions_and_shape():
     adversarial = generate_fgsm(model, images, labels, 0.0)
     adversarial_predictions = model(adversarial, training=False)
     np.testing.assert_array_equal(adversarial.numpy(), images.numpy())
+    assert np.max(np.abs(adversarial.numpy() - images.numpy())) == 0.0
     np.testing.assert_array_equal(
         tf.argmax(clean_predictions, axis=1).numpy(),
         tf.argmax(adversarial_predictions, axis=1).numpy(),
