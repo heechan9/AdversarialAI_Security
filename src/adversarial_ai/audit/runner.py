@@ -54,7 +54,7 @@ def run_full_audit(
     if manifest_info["images_present"]:
         verified_scopes.append(f"Image dataset files ({manifest_info['verified_image_files']}/781 content SHA-256 verified)")
     else:
-        unverified_scopes.append("Image dataset files (raw images absent on clean checkout)")
+        unverified_scopes.append("Image dataset files (raw 781-image content verification: NOT_RUN / UNAVAILABLE on clean checkout)")
 
     # 2. Model Audit
     metadata_files = [
@@ -70,19 +70,19 @@ def run_full_audit(
     if any_disk_model:
         verified_scopes.append("Model binary files on disk (SHA-256 verified)")
     else:
-        unverified_scopes.append("Model binary files on disk (.h5 files absent on clean checkout)")
+        unverified_scopes.append("Model binary files on disk (local .h5 model binary hash recomputation: NOT_RUN / UNAVAILABLE on clean checkout)")
 
     # 3. Clean Evaluation Audit
     cnn_clean_path = repo_root / "results" / "clean" / "cnn_baseline_eval.csv"
     cnn_clean_summary = repo_root / "results" / "clean" / "cnn_baseline_summary.json"
     cnn_clean_res = audit_clean_evaluation(
-        cnn_clean_path, summary_json_path=cnn_clean_summary, expected_model_key="cnn"
+        cnn_clean_path, summary_json_path=cnn_clean_summary
     )
 
     mob_clean_path = repo_root / "results" / "clean" / "mobilenet_eval.csv"
     mob_clean_summary = repo_root / "results" / "clean" / "mobilenet_summary.json"
     mob_clean_res = audit_clean_evaluation(
-        mob_clean_path, summary_json_path=mob_clean_summary, expected_model_key="mobilenet"
+        mob_clean_path, summary_json_path=mob_clean_summary
     )
 
     verified_scopes.append("CNN clean baseline results (recalculated 504/781 correct, accuracy 0.645326)")

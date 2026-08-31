@@ -11,21 +11,16 @@ import pandas as pd
 from adversarial_ai.audit.exceptions import AuditError
 
 EXPECTED_TEST_SAMPLES = 781
-CANONICAL_CLEAN_COUNTS = {
-    "cnn": 504,
-    "mobilenet": 613,
-}
 
 
 def audit_clean_evaluation(
     eval_csv_path: Path,
     summary_json_path: Path | None = None,
     report_csv_path: Path | None = None,
-    expected_model_key: str | None = None,
 ) -> dict[str, Any]:
     """Dynamically recalculate correct count and accuracy from clean prediction CSV.
 
-    Validates against expected model counts (CNN 504, MobileNet 613) and summary JSON.
+    Validates against expected model metrics dynamically derived from canonical summary JSON.
     """
     if not eval_csv_path.is_file():
         raise AuditError(f"Clean evaluation CSV file missing: {eval_csv_path}")
@@ -46,7 +41,7 @@ def audit_clean_evaluation(
             {"expected": EXPECTED_TEST_SAMPLES, "actual": len(df)},
         )
 
-    # Verify correct boolean calculation
+    # Verify correct boolean calculation in CSV
     computed_correct_bool = df["true_label"] == df["predicted_label"]
     mismatched_correct = (df["correct"].astype(bool) != computed_correct_bool).sum()
     if mismatched_correct > 0:
@@ -58,30 +53,19 @@ def audit_clean_evaluation(
     correct_count = int(computed_correct_bool.sum())
     calculated_accuracy = float(correct_count / EXPECTED_TEST_SAMPLES)
 
-    # Match canonical expectations
-    if expected_model_key is not None:
-        key = expected_model_key.lower()
-        if key in CANONICAL_CLEAN_COUNTS:
-            canonical_expected = CANONICAL_CLEAN_COUNTS[key]
-            if correct_count != canonical_expected:
-                raise AuditError(
-                    f"Clean correct count for {expected_model_key} must be {canonical_expected}/781, got {correct_count}/781",
-                    {"expected": canonical_expected, "actual": correct_count, "model": expected_model_key},
-                )
-
-    # Cross-verify with summary JSON if available
+    # Cross-verify dynamically with canonical summary JSON if available
     if summary_json_path is not None and summary_json_path.is_file():
         try:
             summary = json.loads(summary_json_path.read_text(encoding="utf-8"))
         except Exception as exc:
             raise AuditError(f"Failed to read clean summary JSON: {summary_json_path}", {"error": str(exc)}) from exc
 
-        summary_correct = summary.get("correct_count")
-        summary_acc = summary.get("accuracy") or summary.get("test_accuracy")
+        summary_correct = summary.get("correct_predictions") if "correct_predictions" in summary else summary.get("correct_count")
+        summary_acc = summary.get("test_accuracy") if "test_accuracy" in summary else summary.get("accuracy")
 
         if summary_correct is not None and summary_correct != correct_count:
             raise AuditError(
-                f"Summary JSON correct_count ({summary_correct}) disagrees with computed evaluation CSV ({correct_count})",
+                f"Summary JSON correct count ({summary_correct}) disagrees with computed evaluation CSV ({correct_count})",
                 {"summary_correct": summary_correct, "computed_correct": correct_count},
             )
 

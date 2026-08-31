@@ -33,18 +33,20 @@ def repo_copy(tmp_path: Path) -> Path:
 
 def test_mutation_tampered_clean_csv(repo_copy: Path) -> None:
     eval_csv = repo_copy / "results" / "clean" / "cnn_baseline_eval.csv"
+    summary_json = repo_copy / "results" / "clean" / "cnn_baseline_summary.json"
     df = pd.read_csv(eval_csv)
     # Tamper with predicted label of a row without updating 'correct' column
     df.loc[1, "predicted_label"] = "Tug"  # Row 1 was predicted as Aircraft Carrier (correct=True)
     df.to_csv(eval_csv, index=False)
 
     with pytest.raises(AuditError) as exc_info:
-        audit_clean_evaluation(eval_csv, expected_model_key="cnn")
+        audit_clean_evaluation(eval_csv, summary_json_path=summary_json)
     assert "correct" in str(exc_info.value).lower() or "disagrees" in str(exc_info.value).lower()
 
 
 def test_mutation_tampered_clean_accuracy_count(repo_copy: Path) -> None:
     eval_csv = repo_copy / "results" / "clean" / "cnn_baseline_eval.csv"
+    summary_json = repo_copy / "results" / "clean" / "cnn_baseline_summary.json"
     df = pd.read_csv(eval_csv)
     # Invert predictions and correct values for first 10 rows
     df.loc[:9, "predicted_label"] = df.loc[:9, "true_label"]
@@ -52,8 +54,8 @@ def test_mutation_tampered_clean_accuracy_count(repo_copy: Path) -> None:
     df.to_csv(eval_csv, index=False)
 
     with pytest.raises(AuditError) as exc_info:
-        audit_clean_evaluation(eval_csv, expected_model_key="cnn")
-    assert "must be 504" in str(exc_info.value) or "disagrees" in str(exc_info.value)
+        audit_clean_evaluation(eval_csv, summary_json_path=summary_json)
+    assert "disagrees" in str(exc_info.value).lower()
 
 
 def test_mutation_tampered_fgsm_asr_denominator(repo_copy: Path) -> None:

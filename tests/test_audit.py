@@ -23,7 +23,6 @@ def test_audit_clean_evaluation_canonical() -> None:
     cnn_res = audit_clean_evaluation(
         Path("results/clean/cnn_baseline_eval.csv"),
         summary_json_path=Path("results/clean/cnn_baseline_summary.json"),
-        expected_model_key="cnn",
     )
     assert cnn_res["correct_count"] == 504
     assert abs(cnn_res["accuracy"] - 0.645326504481434) < 1e-6
@@ -31,7 +30,6 @@ def test_audit_clean_evaluation_canonical() -> None:
     mob_res = audit_clean_evaluation(
         Path("results/clean/mobilenet_eval.csv"),
         summary_json_path=Path("results/clean/mobilenet_summary.json"),
-        expected_model_key="mobilenet",
     )
     assert mob_res["correct_count"] == 613
     assert abs(mob_res["accuracy"] - 0.7848911651728553) < 1e-6
