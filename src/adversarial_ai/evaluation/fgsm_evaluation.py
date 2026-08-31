@@ -261,8 +261,12 @@ def evaluate_fgsm(
 
     if 0.0 in epsilons:
         zero = next(item for item in summaries if item["epsilon"] == 0.0)
-        if zero["accuracy_drop"] != 0.0 or zero["untargeted_asr"] != 0.0:
-            raise RuntimeError("epsilon=0 did not reproduce the clean predictions")
+        if (
+            zero["accuracy_drop"] != 0.0
+            or zero["untargeted_asr"] != 0.0
+            or zero["linf_max"] != 0.0
+        ):
+            raise RuntimeError("epsilon=0 did not reproduce the clean predictions and input")
     if any(not np.array_equal(before, after.numpy()) for before, after in zip(weights_before, model.weights)):
         raise RuntimeError("FGSM evaluation unexpectedly changed model weights")
     pd.DataFrame(summaries).to_csv(output_dir / f"fgsm_{spec.name}.csv", index=False)
