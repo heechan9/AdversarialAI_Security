@@ -4,8 +4,11 @@ from __future__ import annotations
 
 from pathlib import Path
 
+import pytest
+
 from adversarial_ai.audit.clean import audit_clean_evaluation
 from adversarial_ai.audit.cross_doc import audit_cross_documents
+from adversarial_ai.audit.exceptions import AuditError
 from adversarial_ai.audit.fgsm import audit_fgsm_results
 from adversarial_ai.audit.manifest_models import audit_manifest, audit_models
 from adversarial_ai.audit.runner import run_full_audit
@@ -50,11 +53,19 @@ def test_audit_fgsm_canonical() -> None:
 
 
 def test_audit_cross_doc_canonical() -> None:
+    cnn_clean = audit_clean_evaluation(
+        Path("results/clean/cnn_baseline_eval.csv"),
+        summary_json_path=Path("results/clean/cnn_baseline_summary.json"),
+    )
+    mobilenet_clean = audit_clean_evaluation(
+        Path("results/clean/mobilenet_eval.csv"),
+        summary_json_path=Path("results/clean/mobilenet_summary.json"),
+    )
     res = audit_cross_documents(
         repo_root=Path("."),
         clean_metrics={
-            "cnn": {"correct_count": 504},
-            "mobilenet": {"correct_count": 613},
+            "cnn": cnn_clean,
+            "mobilenet": mobilenet_clean,
         },
     )
     assert res["provenance_verified"] is True
@@ -66,3 +77,28 @@ def test_run_full_audit_canonical(tmp_path: Path) -> None:
     res = run_full_audit(repo_root=Path("."), output_report_path=out_report)
     assert res["status"] == "PASSED"
     assert out_report.is_file()
+
+
+def test_cross_doc_uses_supplied_evidence_values(tmp_path: Path) -> None:
+    (tmp_path / "docs").mkdir()
+    (tmp_path / "README.md").write_text(
+        "CNN 0.500000 MobileNet 전처리 0.750000", encoding="utf-8"
+    )
+    (tmp_path / "docs" / "FGSM_PROVISIONAL_RESULTS.md").write_text(
+        "Provisional 0.500000 10 0.750000 15", encoding="utf-8"
+    )
+
+    clean_metrics = {
+        "cnn": {"correct_count": 10, "accuracy": 0.5},
+        "mobilenet": {"correct_count": 15, "accuracy": 0.75},
+    }
+    fgsm_metrics = {
+        "cnn": {0.01: {"asr_denominator": 10}},
+        "mobilenet": {0.01: {"asr_denominator": 15}},
+    }
+    result = audit_cross_documents(tmp_path, clean_metrics, fgsm_metrics)
+    assert result["readme_claims_verified"] is True
+
+    fgsm_metrics["cnn"][0.01]["asr_denominator"] = 9
+    with pytest.raises(AuditError, match="denominator disagrees"):
+        audit_cross_documents(tmp_path, clean_metrics, fgsm_metrics)
