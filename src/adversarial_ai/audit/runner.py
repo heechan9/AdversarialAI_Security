@@ -85,8 +85,16 @@ def run_full_audit(
         mob_clean_path, summary_json_path=mob_clean_summary
     )
 
-    verified_scopes.append("CNN clean baseline results (recalculated 504/781 correct, accuracy 0.645326)")
-    verified_scopes.append("MobileNetV2 clean baseline results (recalculated 613/781 correct, accuracy 0.784891)")
+    verified_scopes.append(
+        "CNN clean baseline results "
+        f"(recalculated {cnn_clean_res['correct_count']}/{cnn_clean_res['total_samples']} correct, "
+        f"accuracy {cnn_clean_res['accuracy']:.6f})"
+    )
+    verified_scopes.append(
+        "MobileNetV2 clean baseline results "
+        f"(recalculated {mob_clean_res['correct_count']}/{mob_clean_res['total_samples']} correct, "
+        f"accuracy {mob_clean_res['accuracy']:.6f})"
+    )
 
     # 4. FGSM Provisional Audit
     prov_dir = repo_root / "results" / "attacks" / "provisional"
@@ -97,8 +105,16 @@ def run_full_audit(
         prov_dir, "mobilenet", mob_clean_res["correct_count"], mob_clean_res["clean_correct_mask"]
     )
 
-    verified_scopes.append("CNN provisional FGSM results (eps sweep 0.0, 0.01, 0.03, 0.05, denominator 504)")
-    verified_scopes.append("MobileNetV2 provisional FGSM results (eps sweep 0.0, 0.01, 0.03, 0.05, denominator 613)")
+    cnn_epsilons = ", ".join(str(eps) for eps in sorted(cnn_fgsm_res))
+    mob_epsilons = ", ".join(str(eps) for eps in sorted(mob_fgsm_res))
+    verified_scopes.append(
+        "CNN provisional FGSM results "
+        f"(eps sweep {cnn_epsilons}, denominator {cnn_clean_res['correct_count']})"
+    )
+    verified_scopes.append(
+        "MobileNetV2 provisional FGSM results "
+        f"(eps sweep {mob_epsilons}, denominator {mob_clean_res['correct_count']})"
+    )
     verified_scopes.append("Attack contracts (L_infinity <= epsilon + 1e-6, epsilon=0 invariants)")
 
     # 5. Cross-Document & Provenance Audit
@@ -107,6 +123,10 @@ def run_full_audit(
         clean_metrics={
             "cnn": cnn_clean_res,
             "mobilenet": mob_clean_res,
+        },
+        fgsm_metrics={
+            "cnn": cnn_fgsm_res,
+            "mobilenet": mob_fgsm_res,
         },
     )
     verified_scopes.append("Cross-document consistency (README, EXPERIMENT_CONTRACT, results docs, PROVENANCE.json)")

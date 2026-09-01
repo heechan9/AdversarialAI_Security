@@ -3,10 +3,20 @@
 from __future__ import annotations
 
 import json
+import re
 from pathlib import Path
 from typing import Any
 
+from adversarial_ai.audit.clean import audit_clean_evaluation
 from adversarial_ai.audit.exceptions import AuditError
+
+
+def _contains_numeric_close(text: str, expected: float, tolerance: float = 1e-6) -> bool:
+    """Return whether text contains a decimal value numerically close to expected."""
+    for token in re.findall(r"(?<![\w.])-?\d+\.\d+(?![\w.])", text):
+        if abs(float(token) - expected) <= tolerance:
+            return True
+    return False
 
 
 def audit_cross_documents(
@@ -16,6 +26,18 @@ def audit_cross_documents(
 ) -> dict[str, Any]:
     """Cross-verify consistency across README, docs, metadata, CSVs, JSONs, and PROVENANCE.json."""
     checked_files: list[str] = []
+
+    if clean_metrics is None:
+        clean_metrics = {
+            "cnn": audit_clean_evaluation(
+                repo_root / "results" / "clean" / "cnn_baseline_eval.csv",
+                summary_json_path=repo_root / "results" / "clean" / "cnn_baseline_summary.json",
+            ),
+            "mobilenet": audit_clean_evaluation(
+                repo_root / "results" / "clean" / "mobilenet_eval.csv",
+                summary_json_path=repo_root / "results" / "clean" / "mobilenet_summary.json",
+            ),
+        }
 
     # 1. Check PROVENANCE.json if present
     prov_path = repo_root / "results" / "attacks" / "provisional" / "PROVENANCE.json"
@@ -40,13 +62,16 @@ def audit_cross_documents(
         checked_files.append(str(readme_path))
         readme_text = readme_path.read_text(encoding="utf-8")
 
-        # Verify CNN baseline accuracy claim in README
-        if "0.6453264951705933" not in readme_text:
-            raise AuditError("README.md does not contain canonical CNN accuracy claim '0.6453264951705933'")
-
-        # Verify MobileNet finetuned accuracy claim in README
-        if "0.7848911881446838" not in readme_text:
-            raise AuditError("README.md does not contain canonical MobileNet accuracy claim '0.7848911881446838'")
+        if clean_metrics:
+            for model_name, metrics in clean_metrics.items():
+                accuracy = metrics.get("accuracy")
+                if not isinstance(accuracy, (int, float)):
+                    raise AuditError(f"Missing computed clean accuracy for {model_name}")
+                if not _contains_numeric_close(readme_text, float(accuracy)):
+                    raise AuditError(
+                        f"README.md does not contain the computed {model_name} accuracy",
+                        {"computed_accuracy": accuracy},
+                    )
 
         # Verify MobileNet preprocessing limitation disclosure
         limitation_keywords = [
@@ -62,13 +87,14 @@ def audit_cross_documents(
         checked_files.append(str(fgsm_doc_path))
         fgsm_doc = fgsm_doc_path.read_text(encoding="utf-8")
 
-        expected_tokens = [
-            "0.645327",
-            "0.784891",
-            "504",
-            "613",
-            "Provisional",
-        ]
+        expected_tokens = ["Provisional"]
+        for metrics in clean_metrics.values():
+            expected_tokens.append(str(metrics["correct_count"]))
+            if not _contains_numeric_close(fgsm_doc, float(metrics["accuracy"])):
+                raise AuditError(
+                    "docs/FGSM_PROVISIONAL_RESULTS.md is missing a computed clean accuracy",
+                    {"computed_accuracy": metrics["accuracy"]},
+                )
         for token in expected_tokens:
             if token not in fgsm_doc:
                 raise AuditError(
@@ -76,17 +102,21 @@ def audit_cross_documents(
                 )
 
     # 4. Cross-check passed clean_metrics if provided
-    if clean_metrics:
-        cnn_clean = clean_metrics.get("cnn", {})
-        if cnn_clean.get("correct_count") != 504:
-            raise AuditError(
-                f"Cross-doc check failed: CNN clean correct count {cnn_clean.get('correct_count')} != 504"
-            )
-        mob_clean = clean_metrics.get("mobilenet", {})
-        if mob_clean.get("correct_count") != 613:
-            raise AuditError(
-                f"Cross-doc check failed: MobileNet clean correct count {mob_clean.get('correct_count')} != 613"
-            )
+    if clean_metrics and fgsm_metrics:
+        for model_name, clean_result in clean_metrics.items():
+            expected_denominator = clean_result.get("correct_count")
+            model_fgsm = fgsm_metrics.get(model_name, {})
+            for epsilon, result in model_fgsm.items():
+                actual_denominator = result.get("asr_denominator")
+                if actual_denominator != expected_denominator:
+                    raise AuditError(
+                        f"Cross-doc check failed for {model_name} eps={epsilon}: "
+                        "FGSM denominator disagrees with computed clean-correct count",
+                        {
+                            "clean_correct_count": expected_denominator,
+                            "fgsm_denominator": actual_denominator,
+                        },
+                    )
 
     return {
         "checked_files": checked_files,
