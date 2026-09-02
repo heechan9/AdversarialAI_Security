@@ -1,5 +1,9 @@
 # 자율운항선박 VLM·LLM 기반 AI 보안 프레임워크 구현
 
+![적대적 AI 프로젝트 비전 이미지](docs/assets/adversarial-ai-project-vision.png)
+
+> **Concept / Target Vision:** 자율운항선박 AI 보안의 목표 운영상을 표현한 비전 이미지입니다. 현재 저장소는 선박 이미지 분류 모델의 Clean Baseline 재현과 FGSM 기반 연구용 검증을 중심으로 하며, 이미지에 표현된 실시간 위협탐지·공격방어·모니터링은 구현 또는 실증 완료 기능이 아닙니다.
+
 2026 스마트해운물류 × ICT 멘토링
 
 ## 프로젝트 소개
