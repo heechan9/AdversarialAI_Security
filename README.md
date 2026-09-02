@@ -36,8 +36,8 @@ flowchart LR
 
 | 모델 | Clean correct | Clean accuracy |
 |---|---:|---:|
-| CNN | 504 / 781 | 0.645327 |
-| MobileNetV2 | 613 / 781 | 0.784891 |
+| CNN | 504 / 781 | 0.6453264951705933 |
+| MobileNetV2 | 613 / 781 | 0.7848911881446838 |
 
 > FGSM 결과는 현재 **provisional**입니다. 공식 epsilon 범위 승인 후 별도 공식 결과 경로에서 재실행합니다.
 
