@@ -18,6 +18,8 @@ CNN·MobileNet 기반 선박 10클래스 인식 모델에 적대적 공격(FGSM�
 3. **Safety Simulation** — 인식 오류 → 항로판단 영향을 보는 연구용 안전영향 시뮬레이터
 
 자세한 범위·Decision Gate는 [`docs/PROJECT_SCOPE.md`](docs/PROJECT_SCOPE.md), 공격·평가 정의는 [`docs/EXPERIMENT_CONTRACT.md`](docs/EXPERIMENT_CONTRACT.md) 참조.
+실험실 공격 성능과 실제 보안위험 감소를 구분하는 단계적 검증·선택적 라벨·집단별 감사 기준은
+[`docs/CAUSAL_SECURITY_VALIDATION.md`](docs/CAUSAL_SECURITY_VALIDATION.md)를 참조합니다.
 
 ## 확보된 기술자산 (사실)
 | 자산 | 내용 |
