@@ -1,10 +1,20 @@
+<div align="center">
+
 # 자율운항선박 이미지 분류 모델 적대적 AI 검증
 
-![Clean-FGSM-Evidence Audit 연구 흐름](docs/assets/adversarial-ai-evidence-pipeline-hero.svg)
+### Clean → FGSM → Evidence Audit 기반 해양 AI 보안 연구
 
-> 선박 이미지 분류 모델의 정상 인식, FGSM 교란, 연구근거 감사를 하나의 재현 가능한 흐름으로 검증합니다. 위 이미지는 연구 개념을 표현한 것이며 실시간 선박 제어·운영 시스템의 구현 화면이 아닙니다.
+<img src="docs/assets/adversarial-ai-project-vision.png" alt="자율운항선박 적대적 AI 검증 프로젝트 비전" width="900">
+
+<br>
 
 2026 스마트해운물류 × ICT 멘토링
+
+선박 이미지 분류 모델의 정상 인식, FGSM 교란, 연구근거 감사를 하나의 재현 가능한 흐름으로 검증합니다.
+
+</div>
+
+---
 
 ## 한눈에 보는 현재 상태
 
@@ -18,6 +28,14 @@
 | VLM/LLM·안전영향 시뮬레이터 | ⚪ 목표 범위 | 현재 실증 완료 기능이 아님 |
 
 ## 검증 흐름
+
+<div align="center">
+
+<img src="docs/assets/adversarial-ai-evidence-pipeline-hero.svg" alt="Clean baseline부터 FGSM 공격과 근거감사까지 이어지는 검증 파이프라인" width="1000">
+
+</div>
+
+> 위 이미지는 연구 개념을 표현한 것이며 실시간 선박 제어·운영 시스템의 구현 화면이 아닙니다.
 
 ```mermaid
 flowchart LR
