@@ -43,6 +43,16 @@ flowchart LR
 
 상세 근거: [`docs/CLEAN_BASELINE_RESULTS.md`](docs/CLEAN_BASELINE_RESULTS.md) · [`docs/FGSM_PROVISIONAL_RESULTS.md`](docs/FGSM_PROVISIONAL_RESULTS.md)
 
+## 프로젝트에서 증명한 역량
+
+| 문제와 판단 | 수행 내용 | 확인 가능한 근거 | 실무 연결 |
+|---|---|---|---|
+| 공격 전 기준 성능이 고정되지 않으면 취약성 비교가 흔들린다고 판단 | 동일한 781장 manifest로 CNN·MobileNetV2 Clean 성능을 재현 | Clean 정본 결과, 데이터·모델 SHA-256 | AI 모델 검증·실험 재현성 |
+| 공격 성공률만으로는 구현 오류를 놓칠 수 있음 | clipping·섭동 한계·epsilon 0·Clean-correct 분모를 계약과 테스트로 고정 | FGSM 계약, 단위·변이 테스트 | 적대적 테스트·보안 품질보증 |
+| 예비 결과가 공식 주장으로 섞이는 위험을 통제 | provisional/official 경계와 논문 Claim 감사를 자동화 | canonical CSV·JSON, Claim 감사 7/7 | 연구근거 관리·감사 가능한 문서화 |
+
+> **역할 경계:** 최희찬은 통합 범위와 공식 결과 전환 기준을 정하고 Windows에서 전체 데이터·모델 재현 검증을 수행했습니다. Codex와 다른 기여자의 구현 범위는 [기여 기록](CONTRIBUTIONS.md)에 각각 명시합니다.
+
 ## 연구 질문
 
 > 선박 이미지 분류 모델은 입력 교란에 얼마나 취약하며, 모델 구조에 따라 Clean 성능·공격 성공률·강건성 저하가 어떻게 달라지는가?
