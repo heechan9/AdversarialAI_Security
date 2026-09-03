@@ -4,7 +4,7 @@
 
 ### Clean → FGSM → Evidence Audit 기반 해양 AI 보안 연구
 
-<img src="docs/assets/adversarial-ai-industrial-security-hero.png" alt="산업형 스마트항만과 자율운항선박 AI 보안 프로젝트 비전" width="900">
+<img src="docs/assets/adversarial-ai-industrial-security-hero.jpg" alt="산업형 스마트항만과 자율운항선박 AI 보안 프로젝트 비전" width="900">
 
 <br>
 
