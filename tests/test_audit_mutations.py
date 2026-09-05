@@ -15,7 +15,7 @@ from adversarial_ai.audit.cross_doc import audit_cross_documents
 from adversarial_ai.audit.exceptions import AuditError
 from adversarial_ai.audit.fgsm import audit_fgsm_results
 from adversarial_ai.audit.manifest_models import audit_manifest, audit_models
-from adversarial_ai.audit.runner import run_full_audit
+from adversarial_ai.audit.runner import get_git_commit_sha, run_full_audit
 from adversarial_ai.audit.visual_review import audit_visual_reviews, derive_candidate_rows
 
 
@@ -468,3 +468,199 @@ def test_mutation_visual_review_canonical_fields(
             repo_copy / "results" / "clean" / "mobilenet_eval.csv",
         )
     assert column in str(exc_info.value)
+
+
+def test_security_clean_rejects_truthy_string_boolean(repo_copy: Path) -> None:
+    eval_csv = repo_copy / "results" / "clean" / "cnn_baseline_eval.csv"
+    frame = pd.read_csv(eval_csv)
+    frame["correct"] = frame["correct"].astype(object)
+    frame.loc[0, "correct"] = "definitely"
+    frame.to_csv(eval_csv, index=False)
+
+    with pytest.raises(AuditError, match="explicit True or False"):
+        audit_clean_evaluation(eval_csv)
+
+
+def test_security_clean_requires_requested_summary(repo_copy: Path) -> None:
+    eval_csv = repo_copy / "results" / "clean" / "cnn_baseline_eval.csv"
+    missing_summary = repo_copy / "results" / "clean" / "missing_summary.json"
+
+    with pytest.raises(AuditError, match="summary JSON file missing"):
+        audit_clean_evaluation(eval_csv, summary_json_path=missing_summary)
+
+
+def test_security_clean_rows_are_bound_to_manifest(repo_copy: Path) -> None:
+    manifest = audit_manifest(repo_copy / "configs" / "test_manifest.json")
+    eval_csv = repo_copy / "results" / "clean" / "cnn_baseline_eval.csv"
+    frame = pd.read_csv(eval_csv)
+    frame.iloc[[0, 1]] = frame.iloc[[1, 0]].to_numpy()
+    frame.to_csv(eval_csv, index=False)
+
+    with pytest.raises(AuditError, match="path order disagrees"):
+        audit_clean_evaluation(
+            eval_csv,
+            expected_relative_paths=manifest["relative_paths"],
+            expected_true_labels=manifest["true_labels"],
+        )
+
+
+def test_security_fgsm_rejects_truthy_string_boolean(repo_copy: Path) -> None:
+    provisional = repo_copy / "results" / "attacks" / "provisional"
+    sample_csv = provisional / "fgsm_cnn_eps_0_samples.csv"
+    frame = pd.read_csv(sample_csv)
+    frame["clean_correct"] = frame["clean_correct"].astype(object)
+    frame.loc[0, "clean_correct"] = "definitely"
+    frame.to_csv(sample_csv, index=False)
+
+    with pytest.raises(AuditError, match="explicit True or False"):
+        audit_fgsm_results(provisional, "cnn", clean_correct_count=504)
+
+
+@pytest.mark.parametrize("invalid_linf", [-0.01, float("nan"), float("inf")])
+def test_security_fgsm_rejects_invalid_linf(
+    repo_copy: Path, invalid_linf: float
+) -> None:
+    provisional = repo_copy / "results" / "attacks" / "provisional"
+    sample_csv = provisional / "fgsm_cnn_eps_0.01_samples.csv"
+    frame = pd.read_csv(sample_csv)
+    frame.loc[0, "linf"] = invalid_linf
+    frame.to_csv(sample_csv, index=False)
+
+    with pytest.raises(AuditError, match="finite|>="):
+        audit_fgsm_results(provisional, "cnn", clean_correct_count=504)
+
+
+def test_security_fgsm_rejects_epsilon_filename_mismatch(repo_copy: Path) -> None:
+    provisional = repo_copy / "results" / "attacks" / "provisional"
+    sample_csv = provisional / "fgsm_cnn_eps_0.01_samples.csv"
+    frame = pd.read_csv(sample_csv)
+    frame.loc[0, "epsilon"] = 0.0
+    frame.to_csv(sample_csv, index=False)
+
+    with pytest.raises(AuditError, match="epsilon column disagrees"):
+        audit_fgsm_results(provisional, "cnn", clean_correct_count=504)
+
+
+def test_security_fgsm_rejects_reordered_canonical_rows(repo_copy: Path) -> None:
+    clean = audit_clean_evaluation(
+        repo_copy / "results" / "clean" / "cnn_baseline_eval.csv"
+    )
+    provisional = repo_copy / "results" / "attacks" / "provisional"
+    sample_csv = provisional / "fgsm_cnn_eps_0_samples.csv"
+    frame = pd.read_csv(sample_csv)
+    frame.iloc[[0, 1]] = frame.iloc[[1, 0]].to_numpy()
+    frame.to_csv(sample_csv, index=False)
+
+    with pytest.raises(AuditError, match="path order disagrees"):
+        audit_fgsm_results(
+            provisional,
+            "cnn",
+            clean_correct_count=clean["correct_count"],
+            clean_correct_mask=clean["clean_correct_mask"],
+            clean_relative_paths=clean["relative_paths"],
+            clean_true_labels=clean["true_labels"],
+            clean_predicted_labels=clean["predicted_labels"],
+        )
+
+
+def test_security_fgsm_requires_report_json(repo_copy: Path) -> None:
+    provisional = repo_copy / "results" / "attacks" / "provisional"
+    (provisional / "fgsm_cnn_eps_0_report.json").unlink()
+
+    with pytest.raises(AuditError, match="report JSON missing"):
+        audit_fgsm_results(provisional, "cnn", clean_correct_count=504)
+
+
+def test_security_fgsm_rejects_tampered_report_metric(repo_copy: Path) -> None:
+    provisional = repo_copy / "results" / "attacks" / "provisional"
+    report_path = provisional / "fgsm_cnn_eps_0_report.json"
+    report = json.loads(report_path.read_text(encoding="utf-8"))
+    report["Aircraft Carrier"]["precision"] = 0.0
+    report_path.write_text(json.dumps(report), encoding="utf-8")
+
+    with pytest.raises(AuditError, match="report.*disagrees"):
+        audit_fgsm_results(provisional, "cnn", clean_correct_count=504)
+
+
+def test_security_fgsm_rejects_tampered_confusion_matrix(repo_copy: Path) -> None:
+    provisional = repo_copy / "results" / "attacks" / "provisional"
+    matrix_path = provisional / "fgsm_cnn_eps_0_confusion_matrix.csv"
+    matrix = pd.read_csv(matrix_path, header=None)
+    matrix.iloc[0, 0] += 1
+    matrix.to_csv(matrix_path, index=False, header=False)
+
+    with pytest.raises(AuditError, match="confusion matrix disagrees"):
+        audit_fgsm_results(provisional, "cnn", clean_correct_count=504)
+
+
+def test_security_fgsm_rejects_tampered_model_summary(repo_copy: Path) -> None:
+    provisional = repo_copy / "results" / "attacks" / "provisional"
+    summary_path = provisional / "fgsm_cnn.csv"
+    summary = pd.read_csv(summary_path)
+    summary.loc[0, "robust_accuracy"] = 0.0
+    summary.to_csv(summary_path, index=False)
+
+    with pytest.raises(AuditError, match="summary.robust_accuracy disagrees"):
+        audit_fgsm_results(provisional, "cnn", clean_correct_count=504)
+
+
+def test_security_manifest_rejects_traversal_path(repo_copy: Path) -> None:
+    manifest_path = repo_copy / "configs" / "test_manifest.json"
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    manifest["test_files"][0]["relative_path"] = "../outside.jpg"
+    manifest_path.write_text(json.dumps(manifest), encoding="utf-8")
+
+    with pytest.raises(AuditError, match="escape its evidence root"):
+        audit_manifest(manifest_path)
+
+
+def test_security_manifest_existing_data_dir_must_be_complete(
+    repo_copy: Path,
+) -> None:
+    data_dir = repo_copy / "data" / "test"
+    data_dir.mkdir(parents=True)
+
+    with pytest.raises(AuditError, match="image file is missing"):
+        audit_manifest(repo_copy / "configs" / "test_manifest.json", data_dir=data_dir)
+
+
+def test_security_models_require_all_metadata(repo_copy: Path) -> None:
+    manifest = audit_manifest(repo_copy / "configs" / "test_manifest.json")
+    metadata_files = [
+        repo_copy / "results" / "clean" / "cnn_baseline_metadata.json",
+        repo_copy / "results" / "clean" / "mobilenet_metadata.json",
+        repo_copy / "results" / "attacks" / "provisional" / "fgsm_cnn_metadata.json",
+        repo_copy
+        / "results"
+        / "attacks"
+        / "provisional"
+        / "fgsm_mobilenet_metadata.json",
+    ]
+    metadata_files[0].unlink()
+
+    with pytest.raises(AuditError, match="metadata file missing"):
+        audit_models(manifest["manifest_models"], metadata_files, repo_root=repo_copy)
+
+
+def test_security_cross_doc_requires_provenance(repo_copy: Path) -> None:
+    (
+        repo_copy
+        / "results"
+        / "attacks"
+        / "provisional"
+        / "PROVENANCE.json"
+    ).unlink()
+
+    with pytest.raises(AuditError, match="PROVENANCE.json is missing"):
+        audit_cross_documents(repo_root=repo_copy)
+
+
+def test_security_git_sha_resolution_fails_closed(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    def fail_git(*args: object, **kwargs: object) -> object:
+        raise OSError("git unavailable")
+
+    monkeypatch.setattr("adversarial_ai.audit.runner.subprocess.run", fail_git)
+    with pytest.raises(AuditError, match="Unable to resolve"):
+        get_git_commit_sha(Path("."))

@@ -9,6 +9,7 @@ from pathlib import Path, PurePosixPath
 from typing import Any
 
 from adversarial_ai.audit.exceptions import AuditError
+from adversarial_ai.audit.validation import normalize_relative_path
 
 EXPECTED_TEST_SAMPLES = 781
 _SHA256_RE = re.compile(r"^[0-9a-f]{64}$")
@@ -21,6 +22,22 @@ def sha256_file(path: Path, chunk_size: int = 1024 * 1024) -> str:
         for chunk in iter(lambda: handle.read(chunk_size), b""):
             digest.update(chunk)
     return digest.hexdigest()
+
+
+def _path_under_root(root: Path, relative_path: str) -> Path:
+    """Resolve a path under root without following symlinked path components."""
+    if root.is_symlink():
+        raise AuditError(f"Evidence root must not be a symlink: {root}")
+    candidate = root
+    for part in PurePosixPath(relative_path).parts:
+        candidate = candidate / part
+        if candidate.is_symlink():
+            raise AuditError(f"Evidence path must not contain symlinks: {relative_path!r}")
+    try:
+        candidate.resolve(strict=False).relative_to(root.resolve())
+    except ValueError as exc:
+        raise AuditError(f"Evidence path escapes its root: {relative_path!r}") from exc
+    return candidate
 
 
 def audit_manifest(manifest_path: Path, data_dir: Path | None = None) -> dict[str, Any]:
@@ -78,7 +95,9 @@ def audit_manifest(manifest_path: Path, data_dir: Path | None = None) -> dict[st
         if not isinstance(sha256_val, str) or not _SHA256_RE.fullmatch(sha256_val):
             raise AuditError(f"test_files[{idx}].sha256 must be a lowercase 64-char hex SHA-256 digest")
 
-        normalized_path = PurePosixPath(rel_path.replace("\\", "/")).as_posix()
+        normalized_path = normalize_relative_path(
+            rel_path, f"test_files[{idx}].relative_path"
+        )
         if normalized_path in seen_paths:
             raise AuditError(f"Duplicate relative_path in manifest: {normalized_path!r}")
         seen_paths.add(normalized_path)
@@ -93,15 +112,16 @@ def audit_manifest(manifest_path: Path, data_dir: Path | None = None) -> dict[st
 
         # Content verification if data_dir provided and image file exists
         if data_dir is not None:
-            image_file = data_dir / normalized_path
-            if image_file.is_file():
-                actual_sha = sha256_file(image_file)
-                if actual_sha != sha256_val:
-                    raise AuditError(
-                        f"Image content SHA-256 mismatch for {normalized_path!r}",
-                        {"expected": sha256_val, "actual": actual_sha},
-                    )
-                verified_images += 1
+            image_file = _path_under_root(data_dir, normalized_path)
+            if not image_file.is_file():
+                raise AuditError(f"Manifest image file is missing: {normalized_path!r}")
+            actual_sha = sha256_file(image_file)
+            if actual_sha != sha256_val:
+                raise AuditError(
+                    f"Image content SHA-256 mismatch for {normalized_path!r}",
+                    {"expected": sha256_val, "actual": actual_sha},
+                )
+            verified_images += 1
 
     models = manifest.get("models")
     if not isinstance(models, list) or not models:
@@ -114,15 +134,27 @@ def audit_manifest(manifest_path: Path, data_dir: Path | None = None) -> dict[st
         missing = {"path", "sha256"} - model_rec.keys()
         if missing:
             raise AuditError(f"models[{idx}] missing fields: {sorted(missing)}")
-        m_path = PurePosixPath(model_rec["path"].replace("\\", "/")).as_posix()
+        m_path = normalize_relative_path(model_rec["path"], f"models[{idx}].path")
         m_sha = model_rec["sha256"]
         if not isinstance(m_sha, str) or not _SHA256_RE.fullmatch(m_sha):
             raise AuditError(f"models[{idx}].sha256 must be a lowercase 64-char hex SHA-256 digest")
+        if m_path in manifest_models:
+            raise AuditError(f"Duplicate model path in manifest: {m_path!r}")
         manifest_models[m_path] = m_sha
+
+    if data_dir is not None and verified_images != EXPECTED_TEST_SAMPLES:
+        raise AuditError(
+            f"Dataset verification must cover all {EXPECTED_TEST_SAMPLES} manifest images"
+        )
 
     return {
         "manifest_path": str(manifest_path),
         "test_samples": test_samples,
+        "relative_paths": [
+            normalize_relative_path(record["relative_path"], "manifest.relative_path")
+            for record in test_files
+        ],
+        "true_labels": [record["label"] for record in test_files],
         "verified_image_files": verified_images,
         "images_present": verified_images > 0,
         "manifest_models": manifest_models,
@@ -139,7 +171,7 @@ def audit_models(
 
     for metadata_file in metadata_files:
         if not metadata_file.is_file():
-            continue
+            raise AuditError(f"Required model metadata file missing: {metadata_file}")
         try:
             meta = json.loads(metadata_file.read_text(encoding="utf-8"))
         except Exception as exc:
@@ -149,9 +181,15 @@ def audit_models(
         model_sha = meta.get("model_sha256")
 
         if not model_path or not model_sha:
-            continue
+            raise AuditError(
+                f"Required model_path/model_sha256 missing from metadata: {metadata_file}"
+            )
+        if not isinstance(model_sha, str) or not _SHA256_RE.fullmatch(model_sha):
+            raise AuditError(f"Invalid model SHA-256 in metadata: {metadata_file}")
 
-        normalized_path = PurePosixPath(model_path.replace("\\", "/")).as_posix()
+        normalized_path = normalize_relative_path(
+            model_path, f"metadata model_path in {metadata_file}"
+        )
 
         if normalized_path not in manifest_models:
             raise AuditError(
@@ -166,7 +204,7 @@ def audit_models(
                 {"metadata_file": str(metadata_file), "metadata_sha": model_sha, "manifest_sha": expected_sha},
             )
 
-        disk_file = repo_root / normalized_path
+        disk_file = _path_under_root(repo_root, normalized_path)
         disk_present = disk_file.is_file()
         if disk_present:
             actual_sha = sha256_file(disk_file)
@@ -182,5 +220,11 @@ def audit_models(
             "disk_file_present": disk_present,
             "disk_sha256_verified": disk_present,
         }
+
+    missing_metadata = set(manifest_models) - set(audited_models)
+    if missing_metadata:
+        raise AuditError(
+            f"Manifest models lack verified metadata: {sorted(missing_metadata)}"
+        )
 
     return audited_models

@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import datetime
 import json
+import re
 import subprocess
 from pathlib import Path
 from typing import Any
@@ -25,10 +26,14 @@ def get_git_commit_sha(repo_root: Path = Path(".")) -> str:
             capture_output=True,
             text=True,
             check=True,
+            timeout=5,
         )
-        return res.stdout.strip()
-    except Exception:
-        return "unknown"
+    except (OSError, subprocess.SubprocessError) as exc:
+        raise AuditError("Unable to resolve the audited Git commit SHA") from exc
+    commit_sha = res.stdout.strip()
+    if not re.fullmatch(r"[0-9a-f]{40,64}", commit_sha):
+        raise AuditError(f"Git returned an invalid commit SHA: {commit_sha!r}")
+    return commit_sha
 
 
 def run_full_audit(
@@ -77,13 +82,19 @@ def run_full_audit(
     cnn_clean_path = repo_root / "results" / "clean" / "cnn_baseline_eval.csv"
     cnn_clean_summary = repo_root / "results" / "clean" / "cnn_baseline_summary.json"
     cnn_clean_res = audit_clean_evaluation(
-        cnn_clean_path, summary_json_path=cnn_clean_summary
+        cnn_clean_path,
+        summary_json_path=cnn_clean_summary,
+        expected_relative_paths=manifest_info["relative_paths"],
+        expected_true_labels=manifest_info["true_labels"],
     )
 
     mob_clean_path = repo_root / "results" / "clean" / "mobilenet_eval.csv"
     mob_clean_summary = repo_root / "results" / "clean" / "mobilenet_summary.json"
     mob_clean_res = audit_clean_evaluation(
-        mob_clean_path, summary_json_path=mob_clean_summary
+        mob_clean_path,
+        summary_json_path=mob_clean_summary,
+        expected_relative_paths=manifest_info["relative_paths"],
+        expected_true_labels=manifest_info["true_labels"],
     )
 
     verified_scopes.append(
@@ -100,10 +111,22 @@ def run_full_audit(
     # 4. FGSM Provisional Audit
     prov_dir = repo_root / "results" / "attacks" / "provisional"
     cnn_fgsm_res = audit_fgsm_results(
-        prov_dir, "cnn", cnn_clean_res["correct_count"], cnn_clean_res["clean_correct_mask"]
+        prov_dir,
+        "cnn",
+        cnn_clean_res["correct_count"],
+        cnn_clean_res["clean_correct_mask"],
+        cnn_clean_res["relative_paths"],
+        cnn_clean_res["true_labels"],
+        cnn_clean_res["predicted_labels"],
     )
     mob_fgsm_res = audit_fgsm_results(
-        prov_dir, "mobilenet", mob_clean_res["correct_count"], mob_clean_res["clean_correct_mask"]
+        prov_dir,
+        "mobilenet",
+        mob_clean_res["correct_count"],
+        mob_clean_res["clean_correct_mask"],
+        mob_clean_res["relative_paths"],
+        mob_clean_res["true_labels"],
+        mob_clean_res["predicted_labels"],
     )
 
     cnn_epsilons = ", ".join(str(eps) for eps in sorted(cnn_fgsm_res))
