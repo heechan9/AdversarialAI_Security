@@ -127,6 +127,8 @@ def audit_paper_claims(repo_root: Path = Path(".")) -> list[PaperClaim]:
             / "results"
             / "clean"
             / "cnn_baseline_summary.json",
+            expected_relative_paths=manifest["relative_paths"],
+            expected_true_labels=manifest["true_labels"],
         ),
         "mobilenet": audit_clean_evaluation(
             repo_root / "results" / "clean" / "mobilenet_eval.csv",
@@ -134,6 +136,8 @@ def audit_paper_claims(repo_root: Path = Path(".")) -> list[PaperClaim]:
             / "results"
             / "clean"
             / "mobilenet_summary.json",
+            expected_relative_paths=manifest["relative_paths"],
+            expected_true_labels=manifest["true_labels"],
         ),
     }
 
@@ -144,6 +148,9 @@ def audit_paper_claims(repo_root: Path = Path(".")) -> list[PaperClaim]:
             model,
             clean_result["correct_count"],
             clean_result["clean_correct_mask"],
+            clean_result["relative_paths"],
+            clean_result["true_labels"],
+            clean_result["predicted_labels"],
         )
         for model, clean_result in clean.items()
     }
