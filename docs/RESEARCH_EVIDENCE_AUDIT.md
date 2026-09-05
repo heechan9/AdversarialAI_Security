@@ -46,6 +46,12 @@ Exit Codes:
    - Cross-verifies claims across `README.md`, `docs/EXPERIMENT_CONTRACT.md`, `docs/CLEAN_BASELINE_RESULTS.md`, `docs/FGSM_PROVISIONAL_RESULTS.md`, and `results/attacks/provisional/PROVENANCE.json`.
    - Confirms MobileNet preprocessing limitation disclosure is preserved.
 
+6. **Strict Visual Review Evidence Audit**:
+   - Dynamically derives candidate images where both CNN and MobileNetV2 predict the same misclassified class with unrounded confidence >= 0.70.
+   - Validates split review files (`review_taehee_visual_strict_final.csv`, `review_jaehyuk_visual_strict_final.csv`) and combined file (`63_images_strict_visual_audit.csv`).
+   - Verifies exact ordered Korean schema, required UTF-8 BOM, evidence-manifest SHA-256 values, ISO review dates, one consistent strict-review criterion, non-repeated unique visual notes, split disjointness, union equality, and record agreement with canonical Clean baseline evaluations.
+   - Compares displayed confidence values with the canonical unrounded predicted-class confidence after the explicitly declared three-decimal rounding step; it does not use a broad tolerance. See `docs/VISUAL_REVIEW_AUDIT.md`.
+
 ## Verified vs. Unverified Scopes on Clean Checkout
 
 When executed on a clean git checkout (where raw image dataset and `.h5` model binaries are intentionally omitted from git tracking per reproducibility policy):

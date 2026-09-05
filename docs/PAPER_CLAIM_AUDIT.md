@@ -31,6 +31,7 @@ exit code 1을 반환한다.
 | CLAIM-005 | 모든 모델·ε의 L∞ 상한 | FGSM 표본 CSV |
 | CLAIM-006 | 논문용 FGSM 비교표의 수치 일치 | 표본 CSV·report JSON·comparison summary |
 | CLAIM-007 | README·결과문서·provenance 일치 | 관련 문서와 `PROVENANCE.json` |
+| CLAIM-008 | 엄격한 시각 검토 근거·SHA·canonical 일치 | `results/audit/evidence/*.csv`, `manifest.json` |
 
 ## 상태 경계
 

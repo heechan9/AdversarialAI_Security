@@ -13,6 +13,7 @@ from adversarial_ai.audit.cross_doc import audit_cross_documents
 from adversarial_ai.audit.exceptions import AuditError
 from adversarial_ai.audit.fgsm import audit_fgsm_results
 from adversarial_ai.audit.manifest_models import audit_manifest, audit_models
+from adversarial_ai.audit.visual_review import audit_visual_reviews
 
 
 def get_git_commit_sha(repo_root: Path = Path(".")) -> str:
@@ -131,6 +132,18 @@ def run_full_audit(
     )
     verified_scopes.append("Cross-document consistency (README, EXPERIMENT_CONTRACT, results docs, PROVENANCE.json)")
 
+    # 6. Visual Review Evidence Audit
+    evidence_dir = repo_root / "results" / "audit" / "evidence"
+    visual_res = audit_visual_reviews(
+        evidence_dir=evidence_dir,
+        clean_cnn_csv=cnn_clean_path,
+        clean_mobilenet_csv=mob_clean_path,
+    )
+    verified_scopes.append(
+        "Strict visual-review evidence audit "
+        f"({visual_res['total_candidates']} candidate samples dynamically verified across Taehee/Jaehyuk split files and combined file)"
+    )
+
     report_data = {
         "audit_version": 1,
         "status": "PASSED",
@@ -148,6 +161,16 @@ def run_full_audit(
             "fgsm_provisional": {
                 "cnn_epsilons": {str(k): v for k, v in cnn_fgsm_res.items()},
                 "mobilenet_epsilons": {str(k): v for k, v in mob_fgsm_res.items()},
+            },
+            "visual_review": {
+                "total_candidates": visual_res["total_candidates"],
+                "split_counts": visual_res["split_counts"],
+                "reviewer_counts": visual_res["reviewer_counts"],
+                "judgment_counts": visual_res["judgment_counts"],
+                "class_distribution": visual_res["class_distribution"],
+                "special_case_rows": visual_res["special_case_rows"],
+                "candidate_rule": visual_res["candidate_rule"],
+                "evidence_sha256": visual_res["evidence_sha256"],
             },
         },
     }

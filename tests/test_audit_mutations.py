@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import csv
 import json
 import shutil
 from pathlib import Path
@@ -15,6 +16,7 @@ from adversarial_ai.audit.exceptions import AuditError
 from adversarial_ai.audit.fgsm import audit_fgsm_results
 from adversarial_ai.audit.manifest_models import audit_manifest, audit_models
 from adversarial_ai.audit.runner import run_full_audit
+from adversarial_ai.audit.visual_review import audit_visual_reviews, derive_candidate_rows
 
 
 @pytest.fixture
@@ -142,4 +144,327 @@ def test_run_full_audit_tampered_fails(repo_copy: Path) -> None:
     df.to_csv(sample_csv, index=False)
 
     with pytest.raises(AuditError):
-        run_full_audit(repo_root=repo_copy)
+        run_full_audit(repo_root=repo_copy, output_report_path=repo_copy / "report.json")
+
+
+def test_mutation_visual_review_missing_path(repo_copy: Path) -> None:
+    ev_dir = repo_copy / "results" / "audit" / "evidence"
+    cnn_csv = repo_copy / "results" / "clean" / "cnn_baseline_eval.csv"
+    mob_csv = repo_copy / "results" / "clean" / "mobilenet_eval.csv"
+
+    comb_file = ev_dir / "63_images_strict_visual_audit.csv"
+    df = pd.read_csv(comb_file, encoding="utf-8-sig")
+    df = df.iloc[:-1]  # Drop 1 path
+    df.to_csv(comb_file, index=False, encoding="utf-8-sig")
+
+    with pytest.raises(AuditError) as exc_info:
+        audit_visual_reviews(ev_dir, cnn_csv, mob_csv)
+    assert "discrepancy" in str(exc_info.value).lower() or "does not match" in str(exc_info.value).lower()
+
+
+def test_mutation_visual_review_split_combined_drift(repo_copy: Path) -> None:
+    ev_dir = repo_copy / "results" / "audit" / "evidence"
+    cnn_csv = repo_copy / "results" / "clean" / "cnn_baseline_eval.csv"
+    mob_csv = repo_copy / "results" / "clean" / "mobilenet_eval.csv"
+
+    taehee_file = ev_dir / "review_taehee_visual_strict_final.csv"
+    df = pd.read_csv(taehee_file, encoding="utf-8-sig")
+    df.loc[0, "current_label"] = "Tug"
+    df.to_csv(taehee_file, index=False, encoding="utf-8-sig")
+
+    with pytest.raises(AuditError) as exc_info:
+        audit_visual_reviews(ev_dir, cnn_csv, mob_csv)
+    assert "drift" in str(exc_info.value).lower()
+
+
+def test_mutation_visual_review_generic_repeated_notes(repo_copy: Path) -> None:
+    ev_dir = repo_copy / "results" / "audit" / "evidence"
+    cnn_csv = repo_copy / "results" / "clean" / "cnn_baseline_eval.csv"
+    mob_csv = repo_copy / "results" / "clean" / "mobilenet_eval.csv"
+
+    comb_file = ev_dir / "63_images_strict_visual_audit.csv"
+    df = pd.read_csv(comb_file, encoding="utf-8-sig")
+    df.loc[1, "비고"] = df.loc[0, "비고"]  # Duplicate note
+    df.to_csv(comb_file, index=False, encoding="utf-8-sig")
+
+    with pytest.raises(AuditError) as exc_info:
+        audit_visual_reviews(ev_dir, cnn_csv, mob_csv)
+    assert "duplicate" in str(exc_info.value).lower() or "generic" in str(exc_info.value).lower()
+
+
+def test_mutation_visual_review_blank_criteria(repo_copy: Path) -> None:
+    ev_dir = repo_copy / "results" / "audit" / "evidence"
+    cnn_csv = repo_copy / "results" / "clean" / "cnn_baseline_eval.csv"
+    mob_csv = repo_copy / "results" / "clean" / "mobilenet_eval.csv"
+
+    comb_file = ev_dir / "63_images_strict_visual_audit.csv"
+    df = pd.read_csv(comb_file, encoding="utf-8-sig")
+    df.loc[0, "엄격검증_기준"] = "   "
+    df.to_csv(comb_file, index=False, encoding="utf-8-sig")
+
+    with pytest.raises(AuditError) as exc_info:
+        audit_visual_reviews(ev_dir, cnn_csv, mob_csv)
+    assert "blank" in str(exc_info.value).lower() or "엄격검증_기준" in str(exc_info.value)
+
+
+def test_mutation_visual_review_altered_confidence(repo_copy: Path) -> None:
+    ev_dir = repo_copy / "results" / "audit" / "evidence"
+    cnn_csv = repo_copy / "results" / "clean" / "cnn_baseline_eval.csv"
+    mob_csv = repo_copy / "results" / "clean" / "mobilenet_eval.csv"
+
+    comb_file = ev_dir / "63_images_strict_visual_audit.csv"
+    split_file = ev_dir / "review_jaehyuk_visual_strict_final.csv"
+    for f in (comb_file, split_file):
+        df = pd.read_csv(f, encoding="utf-8-sig")
+        if "DDG/DDG_1045.jpeg" in df["file_path"].values:
+            df.loc[df["file_path"] == "DDG/DDG_1045.jpeg", "cnn_confidence"] = 0.123
+            df.to_csv(f, index=False, encoding="utf-8-sig")
+
+    with pytest.raises(AuditError) as exc_info:
+        audit_visual_reviews(ev_dir, cnn_csv, mob_csv)
+    assert "confidence" in str(exc_info.value).lower()
+
+
+def test_mutation_visual_review_invalid_judgment(repo_copy: Path) -> None:
+    ev_dir = repo_copy / "results" / "audit" / "evidence"
+    cnn_csv = repo_copy / "results" / "clean" / "cnn_baseline_eval.csv"
+    mob_csv = repo_copy / "results" / "clean" / "mobilenet_eval.csv"
+
+    comb_file = ev_dir / "63_images_strict_visual_audit.csv"
+    split_file = ev_dir / "review_jaehyuk_visual_strict_final.csv"
+    for f in (comb_file, split_file):
+        df = pd.read_csv(f, encoding="utf-8-sig")
+        if "DDG/DDG_1045.jpeg" in df["file_path"].values:
+            df.loc[df["file_path"] == "DDG/DDG_1045.jpeg", "판정"] = "INVALID_JUDGMENT"
+            df.to_csv(f, index=False, encoding="utf-8-sig")
+
+    with pytest.raises(AuditError) as exc_info:
+        audit_visual_reviews(ev_dir, cnn_csv, mob_csv)
+    assert "judgment" in str(exc_info.value).lower()
+
+
+def test_mutation_visual_review_wrong_reviewer(repo_copy: Path) -> None:
+    ev_dir = repo_copy / "results" / "audit" / "evidence"
+    cnn_csv = repo_copy / "results" / "clean" / "cnn_baseline_eval.csv"
+    mob_csv = repo_copy / "results" / "clean" / "mobilenet_eval.csv"
+
+    taehee_file = ev_dir / "review_taehee_visual_strict_final.csv"
+    comb_file = ev_dir / "63_images_strict_visual_audit.csv"
+    df_t = pd.read_csv(taehee_file, encoding="utf-8-sig")
+    df_t.loc[0, "검토자"] = "WrongReviewer"
+    df_t.to_csv(taehee_file, index=False, encoding="utf-8-sig")
+
+    df_c = pd.read_csv(comb_file, encoding="utf-8-sig")
+    df_c.loc[df_c["file_path"] == df_t.loc[0, "file_path"], "검토자"] = "WrongReviewer"
+    df_c.to_csv(comb_file, index=False, encoding="utf-8-sig")
+
+    with pytest.raises(AuditError) as exc_info:
+        audit_visual_reviews(ev_dir, cnn_csv, mob_csv)
+    assert "reviewer" in str(exc_info.value).lower()
+
+
+def test_mutation_visual_review_changed_threshold(repo_copy: Path) -> None:
+    ev_dir = repo_copy / "results" / "audit" / "evidence"
+    cnn_csv = repo_copy / "results" / "clean" / "cnn_baseline_eval.csv"
+    mob_csv = repo_copy / "results" / "clean" / "mobilenet_eval.csv"
+
+    with pytest.raises(AuditError) as exc_info:
+        audit_visual_reviews(ev_dir, cnn_csv, mob_csv, confidence_threshold=0.80)
+    assert "threshold" in str(exc_info.value).lower()
+
+
+def test_mutation_visual_review_missing_bom(repo_copy: Path) -> None:
+    ev_dir = repo_copy / "results" / "audit" / "evidence"
+    taehee_file = ev_dir / "review_taehee_visual_strict_final.csv"
+    raw = taehee_file.read_bytes()
+    assert raw.startswith(b"\xef\xbb\xbf")
+    taehee_file.write_bytes(raw[3:])
+
+    with pytest.raises(AuditError) as exc_info:
+        audit_visual_reviews(
+            ev_dir,
+            repo_copy / "results" / "clean" / "cnn_baseline_eval.csv",
+            repo_copy / "results" / "clean" / "mobilenet_eval.csv",
+        )
+    assert "bom" in str(exc_info.value).lower()
+
+
+def test_mutation_visual_review_extra_schema_column(repo_copy: Path) -> None:
+    ev_dir = repo_copy / "results" / "audit" / "evidence"
+    taehee_file = ev_dir / "review_taehee_visual_strict_final.csv"
+    frame = pd.read_csv(taehee_file, encoding="utf-8-sig")
+    frame["unexpected_extra"] = "x"
+    frame.to_csv(taehee_file, index=False, encoding="utf-8-sig")
+
+    with pytest.raises(AuditError) as exc_info:
+        audit_visual_reviews(
+            ev_dir,
+            repo_copy / "results" / "clean" / "cnn_baseline_eval.csv",
+            repo_copy / "results" / "clean" / "mobilenet_eval.csv",
+        )
+    assert "schema" in str(exc_info.value).lower()
+
+
+@pytest.mark.parametrize("review_date", ["", "2026/09/05", "2026-02-30"])
+def test_mutation_visual_review_invalid_review_date(
+    repo_copy: Path, review_date: str
+) -> None:
+    ev_dir = repo_copy / "results" / "audit" / "evidence"
+    taehee_file = ev_dir / "review_taehee_visual_strict_final.csv"
+    frame = pd.read_csv(taehee_file, encoding="utf-8-sig", dtype=str)
+    frame.loc[0, "검토일"] = review_date
+    frame.to_csv(taehee_file, index=False, encoding="utf-8-sig")
+
+    with pytest.raises(AuditError) as exc_info:
+        audit_visual_reviews(
+            ev_dir,
+            repo_copy / "results" / "clean" / "cnn_baseline_eval.csv",
+            repo_copy / "results" / "clean" / "mobilenet_eval.csv",
+        )
+    assert "검토일" in str(exc_info.value) or "date" in str(exc_info.value).lower()
+
+
+def test_mutation_visual_review_blank_note(repo_copy: Path) -> None:
+    ev_dir = repo_copy / "results" / "audit" / "evidence"
+    jaehyuk_file = ev_dir / "review_jaehyuk_visual_strict_final.csv"
+    frame = pd.read_csv(jaehyuk_file, encoding="utf-8-sig", dtype=str)
+    frame.loc[0, "비고"] = " "
+    frame.to_csv(jaehyuk_file, index=False, encoding="utf-8-sig")
+
+    with pytest.raises(AuditError) as exc_info:
+        audit_visual_reviews(
+            ev_dir,
+            repo_copy / "results" / "clean" / "cnn_baseline_eval.csv",
+            repo_copy / "results" / "clean" / "mobilenet_eval.csv",
+        )
+    assert "비고" in str(exc_info.value) or "empty" in str(exc_info.value).lower()
+
+
+def test_mutation_visual_review_altered_nonblank_criteria(repo_copy: Path) -> None:
+    ev_dir = repo_copy / "results" / "audit" / "evidence"
+    combined_file = ev_dir / "63_images_strict_visual_audit.csv"
+    frame = pd.read_csv(combined_file, encoding="utf-8-sig", dtype=str)
+    frame.loc[0, "엄격검증_기준"] = "임의로 바꾼 기준"
+    frame.to_csv(combined_file, index=False, encoding="utf-8-sig")
+
+    with pytest.raises(AuditError) as exc_info:
+        audit_visual_reviews(
+            ev_dir,
+            repo_copy / "results" / "clean" / "cnn_baseline_eval.csv",
+            repo_copy / "results" / "clean" / "mobilenet_eval.csv",
+        )
+    assert "엄격검증_기준" in str(exc_info.value)
+
+
+def test_mutation_visual_review_consistent_criteria_tamper_hits_hash(
+    repo_copy: Path,
+) -> None:
+    ev_dir = repo_copy / "results" / "audit" / "evidence"
+    combined_file = ev_dir / "63_images_strict_visual_audit.csv"
+    frame = pd.read_csv(combined_file, encoding="utf-8-sig", dtype=str)
+    frame["엄격검증_기준"] = "모든 행에 동일하게 바꾼 임의 기준"
+    frame.to_csv(combined_file, index=False, encoding="utf-8-sig")
+
+    with pytest.raises(AuditError) as exc_info:
+        audit_visual_reviews(
+            ev_dir,
+            repo_copy / "results" / "clean" / "cnn_baseline_eval.csv",
+            repo_copy / "results" / "clean" / "mobilenet_eval.csv",
+        )
+    assert "sha-256" in str(exc_info.value).lower()
+
+
+def _mutate_split_and_combined(
+    evidence_dir: Path, file_path: str, column: str, value: object
+) -> None:
+    for name in (
+        "review_taehee_visual_strict_final.csv",
+        "review_jaehyuk_visual_strict_final.csv",
+        "63_images_strict_visual_audit.csv",
+    ):
+        path = evidence_dir / name
+        with path.open(encoding="utf-8-sig", newline="") as handle:
+            reader = csv.DictReader(handle)
+            fieldnames = reader.fieldnames
+            rows = list(reader)
+        changed = False
+        for row in rows:
+            if row["file_path"] == file_path:
+                row[column] = str(value)
+                changed = True
+        if changed:
+            assert fieldnames is not None
+            with path.open("w", encoding="utf-8-sig", newline="") as handle:
+                writer = csv.DictWriter(handle, fieldnames=fieldnames)
+                writer.writeheader()
+                writer.writerows(rows)
+
+
+def test_mutation_visual_review_confidence_rounding_boundary(repo_copy: Path) -> None:
+    ev_dir = repo_copy / "results" / "audit" / "evidence"
+    cnn_csv = repo_copy / "results" / "clean" / "cnn_baseline_eval.csv"
+    mob_csv = repo_copy / "results" / "clean" / "mobilenet_eval.csv"
+    candidates = derive_candidate_rows(cnn_csv, mob_csv)
+    file_path, candidate = next(
+        (path, row)
+        for path, row in candidates.items()
+        if row["cnn_confidence_raw"] < 0.95
+    )
+    altered = candidate["cnn_confidence_raw"] + 0.004
+    _mutate_split_and_combined(ev_dir, file_path, "cnn_confidence", altered)
+
+    with pytest.raises(AuditError) as exc_info:
+        audit_visual_reviews(ev_dir, cnn_csv, mob_csv)
+    assert "rounded" in str(exc_info.value).lower()
+
+
+def test_mutation_visual_review_duplicate_path(repo_copy: Path) -> None:
+    ev_dir = repo_copy / "results" / "audit" / "evidence"
+    combined_file = ev_dir / "63_images_strict_visual_audit.csv"
+    frame = pd.read_csv(combined_file, encoding="utf-8-sig", dtype=str)
+    frame.loc[1, "file_path"] = frame.loc[0, "file_path"]
+    frame.to_csv(combined_file, index=False, encoding="utf-8-sig")
+
+    with pytest.raises(AuditError) as exc_info:
+        audit_visual_reviews(
+            ev_dir,
+            repo_copy / "results" / "clean" / "cnn_baseline_eval.csv",
+            repo_copy / "results" / "clean" / "mobilenet_eval.csv",
+        )
+    assert "duplicate" in str(exc_info.value).lower()
+
+
+def test_mutation_visual_review_extra_candidate_path(repo_copy: Path) -> None:
+    ev_dir = repo_copy / "results" / "audit" / "evidence"
+    combined_file = ev_dir / "63_images_strict_visual_audit.csv"
+    combined = pd.read_csv(combined_file, encoding="utf-8-sig", dtype=str)
+    original_path = combined.loc[0, "file_path"]
+    fake_path = "DDG/not-a-canonical-candidate.jpeg"
+    _mutate_split_and_combined(ev_dir, original_path, "file_path", fake_path)
+
+    with pytest.raises(AuditError) as exc_info:
+        audit_visual_reviews(
+            ev_dir,
+            repo_copy / "results" / "clean" / "cnn_baseline_eval.csv",
+            repo_copy / "results" / "clean" / "mobilenet_eval.csv",
+        )
+    assert "discrepancy" in str(exc_info.value).lower()
+
+
+@pytest.mark.parametrize("column", ["current_label", "cnn_prediction", "mnv2_prediction"])
+def test_mutation_visual_review_canonical_fields(
+    repo_copy: Path, column: str
+) -> None:
+    ev_dir = repo_copy / "results" / "audit" / "evidence"
+    combined_file = ev_dir / "63_images_strict_visual_audit.csv"
+    combined = pd.read_csv(combined_file, encoding="utf-8-sig", dtype=str)
+    file_path = combined.loc[0, "file_path"]
+    _mutate_split_and_combined(ev_dir, file_path, column, "TAMPERED")
+
+    with pytest.raises(AuditError) as exc_info:
+        audit_visual_reviews(
+            ev_dir,
+            repo_copy / "results" / "clean" / "cnn_baseline_eval.csv",
+            repo_copy / "results" / "clean" / "mobilenet_eval.csv",
+        )
+    assert column in str(exc_info.value)

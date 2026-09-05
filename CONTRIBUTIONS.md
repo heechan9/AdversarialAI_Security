@@ -37,3 +37,30 @@
   - Selected the integration scope and preserved the provisional/official decision boundary.
   - Ran Windows validation with the full 781-image dataset and both local `.h5` model binaries.
   - Confirmed `47 passed, 2 skipped`, research evidence audit PASS, and paper Claim audit 7/7 PASS.
+
+## PR #17: Strict Visual-Review Audit Extension
+
+- **Pull Request**: [#17 - feat(audit): implement strict visual-review evidence audit extension](https://github.com/heechan9/AdversarialAI_Security/pull/17)
+
+### Contribution Breakdown
+
+- **Google Jules**:
+  - Implemented the strict visual-review evidence audit extension (`src/adversarial_ai/audit/visual_review.py`).
+  - Integrated visual-review verification into the audit runner (`runner.py`) and paper claim audit (`paper_claims.py`, `CLAIM-008`).
+  - Added unit tests (`tests/test_visual_review_audit.py`) and mutation tests (`tests/test_audit_mutations.py`).
+  - Authored visual review audit documentation (`docs/VISUAL_REVIEW_AUDIT.md`).
+
+- **Codex**:
+  - Independently reviewed PR #17 and reproduced audit-bypass cases involving BOM removal, review dates, schema drift, strict-criterion changes, and overly broad confidence tolerance.
+  - Hardened the audit with exact schema/BOM/date validation, canonical three-decimal confidence comparison, evidence SHA-256 verification, and expanded mutation tests.
+  - Preserved the supplied CSV bytes through an explicit Git text-normalization rule and removed unsupported fixed test-count reporting.
+
+- **김태희**:
+  - Performed assigned partitioned visual review for 31 candidate images (`review_taehee_visual_strict_final.csv`).
+
+- **이재혁**:
+  - Performed assigned partitioned visual review for 32 candidate images (`review_jaehyuk_visual_strict_final.csv`).
+
+- **최희찬 (heechan9)**:
+  - Defined the audit extension scope and supplied the authoritative evidence CSV artifacts.
+  - Authorized conservative code review and repository integration after all automated checks pass.

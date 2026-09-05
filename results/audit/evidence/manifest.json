@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "candidate_rule": {
+    "confidence_threshold": 0.7,
+    "confidence_rounding_decimals": 3
+  },
+  "files": {
+    "review_taehee_visual_strict_final.csv": {
+      "sha256": "2befc3a51f25568249892b9a56286957aafa96fbb601f74a1a09c99be729a87a"
+    },
+    "review_jaehyuk_visual_strict_final.csv": {
+      "sha256": "22fe30ffbe38857052110900fed6c96c986f15d1b3a58684a9c2559fe51b82f9"
+    },
+    "63_images_strict_visual_audit.csv": {
+      "sha256": "a51b6b3f03b093717f1e3ad08549eebd5a376c880f0cc2ef6dd5e92065bf051b"
+    }
+  }
+}

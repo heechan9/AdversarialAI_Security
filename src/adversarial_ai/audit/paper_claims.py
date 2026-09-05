@@ -13,6 +13,7 @@ from adversarial_ai.audit.cross_doc import audit_cross_documents
 from adversarial_ai.audit.exceptions import AuditError
 from adversarial_ai.audit.fgsm import EXPECTED_EPSILONS, audit_fgsm_results
 from adversarial_ai.audit.manifest_models import audit_manifest
+from adversarial_ai.audit.visual_review import audit_visual_reviews
 
 
 @dataclass(frozen=True)
@@ -152,6 +153,13 @@ def audit_paper_claims(repo_root: Path = Path(".")) -> list[PaperClaim]:
     )
     cross_doc = audit_cross_documents(repo_root, clean, fgsm)
 
+    evidence_dir = repo_root / "results" / "audit" / "evidence"
+    visual = audit_visual_reviews(
+        evidence_dir=evidence_dir,
+        clean_cnn_csv=repo_root / "results" / "clean" / "cnn_baseline_eval.csv",
+        clean_mobilenet_csv=repo_root / "results" / "clean" / "mobilenet_eval.csv",
+    )
+
     zero_control = all(
         result[0.0]["attack_successes"] == 0
         and result[0.0]["untargeted_asr"] == 0.0
@@ -227,5 +235,12 @@ def audit_paper_claims(repo_root: Path = Path(".")) -> list[PaperClaim]:
             "passed",
             "README, experiment/result docs, and PROVENANCE.json",
             f"{len(cross_doc['checked_files'])} files checked",
+        ),
+        PaperClaim(
+            "CLAIM-008",
+            "strict_visual_review_evidence",
+            "passed",
+            "results/audit/evidence/*.csv + manifest.json",
+            f"{visual['total_candidates']} candidate samples verified across Taehee ({visual['split_counts']['taehee']}) and Jaehyuk ({visual['split_counts']['jaehyuk']}) splits",
         ),
     ]

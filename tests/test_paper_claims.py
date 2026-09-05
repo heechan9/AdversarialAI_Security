@@ -25,7 +25,7 @@ def test_paper_claim_audit_derives_all_claims_from_canonical_evidence() -> None:
     claims = audit_paper_claims(Path("."))
     claim_ids = [claim.claim_id for claim in claims]
 
-    assert claim_ids == [f"CLAIM-{number:03d}" for number in range(1, 8)]
+    assert claim_ids == [f"CLAIM-{number:03d}" for number in range(1, 9)]
     assert all(claim.status == "passed" for claim in claims)
     assert "504/781" in claims[1].actual
     assert "613/781" in claims[1].actual
