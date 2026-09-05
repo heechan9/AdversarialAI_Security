@@ -11,9 +11,9 @@
 ![Python](https://img.shields.io/badge/Python-3.11-3776AB?logo=python&logoColor=white)
 ![TensorFlow](https://img.shields.io/badge/TensorFlow-2.21-FF6F00?logo=tensorflow&logoColor=white)
 ![Keras](https://img.shields.io/badge/Keras-3.15-D00000?logo=keras&logoColor=white)
-![Tests](https://img.shields.io/badge/tests-47_passed_%7C_2_skipped-2EA44F)
+![Tests](https://img.shields.io/badge/tests-pytest_verified-2EA44F)
 ![Evidence Audit](https://img.shields.io/badge/evidence_audit-PASS-2EA44F)
-![Paper Claims](https://img.shields.io/badge/paper_claims-7%2F7_PASS-2EA44F)
+![Paper Claims](https://img.shields.io/badge/paper_claims-8%2F8_PASS-2EA44F)
 ![Data](https://img.shields.io/badge/test_images-781-0054A6)
 
 선박 사진을 인식하는 AI가 미세한 입력 교란에도 안전한지 확인하고,  
@@ -61,8 +61,8 @@
 | Clean baseline | ✅ 검증 완료 | CNN·MobileNetV2, 테스트 이미지 781장 |
 | FGSM 구현 | ✅ 검증 완료 | 공격 방향·입력 clipping·$L_\infty$ 상한·epsilon 0 대조군 |
 | FGSM 성능 수치 | 🟡 예비 결과 | $\epsilon=0, 0.01, 0.03, 0.05$ |
-| 연구근거 감사 | ✅ 검증 완료 | manifest·모델 해시·CSV·JSON·문서 일관성 |
-| 논문 Claim 감사 | ✅ 7/7 통과 | 정본 근거에서 논문용 주장을 동적으로 재계산 |
+| 연구근거 감사 | ✅ 검증 완료 | manifest·모델 해시·CSV·JSON·문서 일관성·시각 검토 감사 |
+| 논문 Claim 감사 | ✅ 8/8 통과 | 정본 근거에서 논문용 주장을 동적으로 재계산 |
 | BIM·PGD·JSMA·방어 | ⚪ 향후 연구 | 아직 구현·검증하지 않음 |
 | VLM/LLM·안전영향 시뮬레이터 | ⚪ 목표 범위 | 현재 완료 기능이나 성능 근거가 아님 |
 
@@ -121,7 +121,7 @@ flowchart LR
 |---|---|---|---|
 | 높은 Clean 정확도만으로 AI 안전성을 판단할 수 없다고 정의 | 두 모델에 동일한 FGSM 평가계약과 epsilon sweep 적용 | 표본별 CSV·요약 JSON·모델별 보고서 | AI 모델 강건성 평가 |
 | ASR 계산 방식에 따라 결과가 과장될 수 있음을 통제 | Clean-correct 표본만 분모로 사용하고 epsilon 0 대조군 적용 | 실험 계약·단위 테스트·변조 테스트 | 공정한 KPI 설계·품질보증 |
-| 논문 수치와 원자료가 따로 변할 위험을 관리 | manifest·모델 SHA-256·CSV·JSON·문서를 동적으로 교차 검증 | Evidence Audit PASS·Paper Claims 7/7 | 데이터 거버넌스·감사 가능성 |
+| 논문 수치와 원자료가 따로 변할 위험을 관리 | manifest·모델 SHA-256·CSV·JSON·문서를 동적으로 교차 검증 | Evidence Audit PASS·Paper Claims 8/8 | 데이터 거버넌스·감사 가능성 |
 | 구현 범위와 향후 목표가 섞이지 않도록 구분 | FGSM 예비 결과와 BIM·PGD·VLM/LLM 계획을 명시적으로 분리 | 프로젝트 범위·결과 문서·주장 경계 | 책임 있는 기술 커뮤니케이션 |
 
 > **최희찬의 역할:** 연구 범위와 감사 요구사항을 정의하고, Windows 환경에서 원본 이미지 781장과 로컬 모델 바이너리를 사용해 무결성·재현성·테스트를 검증했으며, 결과 리뷰와 저장소 통합을 담당했습니다. 구현·검증의 세부 출처는 [기여 기록](CONTRIBUTIONS.md)에 구분합니다.
@@ -189,7 +189,8 @@ python scripts\audit_paper_claims.py
 | [FGSM 예비 결과](docs/FGSM_PROVISIONAL_RESULTS.md) | epsilon별 결과와 해석 제한 |
 | [재현성 안내](docs/REPRODUCIBILITY.md) | 데이터·모델 배치와 실행 방법 |
 | [연구근거 감사](docs/RESEARCH_EVIDENCE_AUDIT.md) | 감사 범위·상태·CLI |
-| [논문 Claim 감사](docs/PAPER_CLAIM_AUDIT.md) | 7개 Claim과 canonical 근거 |
+| [논문 Claim 감사](docs/PAPER_CLAIM_AUDIT.md) | 8개 Claim과 canonical 근거 |
+| [시각 검토 감사](docs/VISUAL_REVIEW_AUDIT.md) | 동적 후보 추출과 시각 검토 근거 검증 |
 | [인과적 안전성 검증](docs/CAUSAL_SECURITY_VALIDATION.md) | 분류 취약성과 실제 운항 영향의 구분 |
 | [직무 연계](docs/ROLE_ALIGNMENT.md) | 구현 증거·직무 연결·주장 한계 |
 | [기여 기록](CONTRIBUTIONS.md) | 사람·AI 협업 역할과 검증 원칙 |
