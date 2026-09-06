@@ -32,9 +32,10 @@ python --version
 python -c "import tensorflow as tf; print(tf.__version__)"
 python scripts\audit_research_evidence.py
 python scripts\audit_paper_claims.py
+python scripts\capture_official_fgsm_context.py
 ```
 
-`git status --short`에서 사용자의 기존 untracked 파일은 삭제하거나 추가하지 않는다. 데이터 781장과 로컬 `.h5` 모델의 SHA-256 검증이 통과하지 않으면 실행을 중단한다.
+`git status --short`에서 사용자의 기존 untracked 파일은 삭제하거나 추가하지 않는다. 데이터 781장과 로컬 `.h5` 모델의 SHA-256 검증이 통과하지 않으면 실행을 중단한다. 환경 기록기는 보호된 연구 입력에 tracked 변경이 있거나 `official_candidate`가 비어 있지 않으면 fail-closed로 중단하며, 실행 commit·Python·TensorFlow·Keras·플랫폼을 후보 디렉터리에 고정한다.
 
 ## 3. 격리된 후보 실행
 
@@ -43,9 +44,10 @@ python scripts\audit_paper_claims.py
 ```bat
 python -m adversarial_ai.evaluation.evaluate_fgsm_cnn --output results\attacks\official_candidate --epsilons 0 0.01 0.03 0.05
 python -m adversarial_ai.evaluation.evaluate_fgsm_mobilenet --output results\attacks\official_candidate --epsilons 0 0.01 0.03 0.05
+python scripts\audit_official_fgsm_candidate.py
 ```
 
-두 명령 중 하나라도 실패하면 부분 산출물을 공식 결과로 사용하지 않는다. 실패 원인과 실행 로그를 보존한 뒤 전체 sweep을 처음부터 다시 실행한다.
+두 모델 실행 또는 후보 감사 중 하나라도 실패하면 부분 산출물을 공식 결과로 사용하지 않는다. 실패 원인과 실행 로그를 보존한 뒤 빈 후보 디렉터리에서 환경 기록부터 전체 sweep을 다시 실행한다.
 
 ## 4. 공식 승격 전 검증
 
@@ -60,7 +62,7 @@ python -m adversarial_ai.evaluation.evaluate_fgsm_mobilenet --output results\att
 7. 전체 pytest, Research Evidence Audit, Paper Claim Audit이 통과한다.
 8. 변경 diff에 모델·가중치·전처리·manifest·기존 provisional 결과가 포함되지 않는다.
 
-현재 감사기는 Git에 보존된 provisional 증거를 검사한다. `official_candidate`를 공식 canonical 결과로 연결하는 감사 확장은 결과와 함께 별도 검토해야 한다. 그 감사가 준비되기 전에는 후보 결과를 논문 수치로 사용하지 않는다.
+공식 후보 감사기는 파일 인벤토리, 실행 commit·환경, manifest·모델 해시, canonical Clean 행 결합, 네 epsilon, 표본별 공격 성공·L∞, 요약·classification report·confusion matrix를 동적으로 재계산한다. 감사 통과는 후보의 내부 일관성을 의미하며 자동 승격이나 논문 수치 교체를 의미하지 않는다.
 
 ## 5. 병합 경계
 

@@ -92,6 +92,9 @@
   - Updated the mentor-review paper draft to v1.0 from canonical evidence and
     documented the decision boundary between the proposed paper scope and
     unverified future work.
+  - Added fail-closed official-candidate context capture and evidence auditing,
+    including mutation tests, without changing the FGSM implementation or any
+    canonical result artifact.
 
 - **최희찬 (heechan9)**:
   - Recorded that the mentor delegated the detailed condition decision to the

@@ -107,9 +107,9 @@ escape는 fail-closed로 처리한다.
 
 로컬 Windows 검증에서는 실제 이미지 781장의 SHA-256과 매니페스트가 전부
 일치했고 CNN 및 MobileNetV2 모델 바이너리 해시도 메타데이터와
-일치하였다. 최신 clean-checkout 독립 검증에서는 전체 pytest 86개가
-통과하고 4개가 skip되었으며 Research Evidence Audit과 Paper Claim Audit
-8/8이 통과했다. 다만 clean checkout에는 원본 이미지와 .h5 파일이
+일치하였다. 최신 clean-checkout 독립 검증에서는 전체 pytest suite와
+Research Evidence Audit, Paper Claim Audit 8/8이 통과했다. 다만 clean
+checkout에는 원본 이미지와 .h5 파일이
 없으므로 이 환경의 PASS는 저장된 근거의 내부 일관성을 뜻하며 모델 추론의
 독립 재실행을 뜻하지 않는다.
 

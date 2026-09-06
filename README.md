@@ -163,7 +163,9 @@ python scripts\audit_paper_claims.py
 ```
 
 - `audit_research_evidence.py`: 데이터·모델·Clean·FGSM·문서의 연구근거를 종합 검사
-- `audit_paper_claims.py`: 논문에 사용할 7개 Claim을 canonical 근거에서 재계산
+- `audit_paper_claims.py`: 논문에 사용할 8개 Claim을 canonical 근거에서 재계산
+- `capture_official_fgsm_context.py`: 공식 후보 실행 전 commit·환경·계약을 고정
+- `audit_official_fgsm_candidate.py`: 격리된 공식 후보를 canonical Clean 근거와 동적 대조
 - 모든 검사가 통과하면 exit code 0, 누락·변조·계약 위반이 있으면 exit code 1
 
 ## 저장소 구성
