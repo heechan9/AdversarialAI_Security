@@ -39,67 +39,69 @@ def audit_cross_documents(
             ),
         }
 
-    # 1. Check PROVENANCE.json if present
+    # 1. Check required PROVENANCE.json
     prov_path = repo_root / "results" / "attacks" / "provisional" / "PROVENANCE.json"
-    if prov_path.is_file():
-        checked_files.append(str(prov_path))
-        try:
-            prov = json.loads(prov_path.read_text(encoding="utf-8"))
-        except Exception as exc:
-            raise AuditError(f"Failed to read PROVENANCE.json: {prov_path}", {"error": str(exc)}) from exc
+    if not prov_path.is_file():
+        raise AuditError(f"Required PROVENANCE.json is missing: {prov_path}")
+    checked_files.append(str(prov_path))
+    try:
+        prov = json.loads(prov_path.read_text(encoding="utf-8"))
+    except Exception as exc:
+        raise AuditError(
+            f"Failed to read PROVENANCE.json: {prov_path}", {"error": str(exc)}
+        ) from exc
 
-        if prov.get("status") != "provisional":
-            raise AuditError(
-                f"PROVENANCE.json status must be 'provisional', got {prov.get('status')!r}"
-            )
-        bundle = prov.get("bundle")
-        if not isinstance(bundle, dict) or not bundle.get("sha256"):
-            raise AuditError("PROVENANCE.json bundle sha256 is missing or invalid")
+    if not isinstance(prov, dict) or prov.get("status") != "provisional":
+        status = prov.get("status") if isinstance(prov, dict) else None
+        raise AuditError(f"PROVENANCE.json status must be 'provisional', got {status!r}")
+    bundle = prov.get("bundle")
+    bundle_sha = bundle.get("sha256") if isinstance(bundle, dict) else None
+    if not isinstance(bundle_sha, str) or not re.fullmatch(r"[0-9a-f]{64}", bundle_sha):
+        raise AuditError("PROVENANCE.json bundle sha256 is missing or invalid")
 
-    # 2. Check README disclosures
+    # 2. Check required README disclosures
     readme_path = repo_root / "README.md"
-    if readme_path.is_file():
-        checked_files.append(str(readme_path))
-        readme_text = readme_path.read_text(encoding="utf-8")
+    if not readme_path.is_file():
+        raise AuditError(f"Required README.md is missing: {readme_path}")
+    checked_files.append(str(readme_path))
+    readme_text = readme_path.read_text(encoding="utf-8")
 
-        if clean_metrics:
-            for model_name, metrics in clean_metrics.items():
-                accuracy = metrics.get("accuracy")
-                if not isinstance(accuracy, (int, float)):
-                    raise AuditError(f"Missing computed clean accuracy for {model_name}")
-                if not _contains_numeric_close(readme_text, float(accuracy)):
-                    raise AuditError(
-                        f"README.md does not contain the computed {model_name} accuracy",
-                        {"computed_accuracy": accuracy},
-                    )
+    if clean_metrics:
+        for model_name, metrics in clean_metrics.items():
+            accuracy = metrics.get("accuracy")
+            if not isinstance(accuracy, (int, float)):
+                raise AuditError(f"Missing computed clean accuracy for {model_name}")
+            if not _contains_numeric_close(readme_text, float(accuracy)):
+                raise AuditError(
+                    f"README.md does not contain the computed {model_name} accuracy",
+                    {"computed_accuracy": accuracy},
+                )
 
-        # Verify MobileNet preprocessing limitation disclosure
-        limitation_keywords = [
-            "MobileNet",
-            "전처리",
-        ]
-        if not all(kw in readme_text for kw in limitation_keywords):
-            raise AuditError("README.md is missing required MobileNet preprocessing limitation disclosure")
+    limitation_keywords = ["MobileNet", "전처리"]
+    if not all(kw in readme_text for kw in limitation_keywords):
+        raise AuditError("README.md is missing required MobileNet preprocessing limitation disclosure")
 
-    # 3. Check docs/FGSM_PROVISIONAL_RESULTS.md claims
+    # 3. Check required docs/FGSM_PROVISIONAL_RESULTS.md claims
     fgsm_doc_path = repo_root / "docs" / "FGSM_PROVISIONAL_RESULTS.md"
-    if fgsm_doc_path.is_file():
-        checked_files.append(str(fgsm_doc_path))
-        fgsm_doc = fgsm_doc_path.read_text(encoding="utf-8")
+    if not fgsm_doc_path.is_file():
+        raise AuditError(f"Required FGSM results document is missing: {fgsm_doc_path}")
+    checked_files.append(str(fgsm_doc_path))
+    fgsm_doc = fgsm_doc_path.read_text(encoding="utf-8")
 
-        expected_tokens = ["Provisional"]
-        for metrics in clean_metrics.values():
-            expected_tokens.append(str(metrics["correct_count"]))
-            if not _contains_numeric_close(fgsm_doc, float(metrics["accuracy"])):
-                raise AuditError(
-                    "docs/FGSM_PROVISIONAL_RESULTS.md is missing a computed clean accuracy",
-                    {"computed_accuracy": metrics["accuracy"]},
-                )
-        for token in expected_tokens:
-            if token not in fgsm_doc:
-                raise AuditError(
-                    f"docs/FGSM_PROVISIONAL_RESULTS.md is missing expected claim or metric token: {token!r}"
-                )
+    expected_tokens = ["Provisional"]
+    for metrics in clean_metrics.values():
+        expected_tokens.append(str(metrics["correct_count"]))
+        if not _contains_numeric_close(fgsm_doc, float(metrics["accuracy"])):
+            raise AuditError(
+                "docs/FGSM_PROVISIONAL_RESULTS.md is missing a computed clean accuracy",
+                {"computed_accuracy": metrics["accuracy"]},
+            )
+    for token in expected_tokens:
+        if token not in fgsm_doc:
+            raise AuditError(
+                "docs/FGSM_PROVISIONAL_RESULTS.md is missing expected claim or metric "
+                f"token: {token!r}"
+            )
 
     # 4. Cross-check passed clean_metrics if provided
     if clean_metrics and fgsm_metrics:
@@ -120,7 +122,7 @@ def audit_cross_documents(
 
     return {
         "checked_files": checked_files,
-        "provenance_verified": prov_path.is_file(),
-        "readme_claims_verified": readme_path.is_file(),
-        "fgsm_doc_claims_verified": fgsm_doc_path.is_file(),
+        "provenance_verified": True,
+        "readme_claims_verified": True,
+        "fgsm_doc_claims_verified": True,
     }

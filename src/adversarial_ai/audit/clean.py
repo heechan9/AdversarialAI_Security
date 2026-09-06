@@ -9,6 +9,11 @@ from typing import Any
 import pandas as pd
 
 from adversarial_ai.audit.exceptions import AuditError
+from adversarial_ai.audit.validation import (
+    normalize_relative_path,
+    parse_strict_booleans,
+    require_nonempty_strings,
+)
 
 EXPECTED_TEST_SAMPLES = 781
 
@@ -17,6 +22,8 @@ def audit_clean_evaluation(
     eval_csv_path: Path,
     summary_json_path: Path | None = None,
     report_csv_path: Path | None = None,
+    expected_relative_paths: list[str] | None = None,
+    expected_true_labels: list[str] | None = None,
 ) -> dict[str, Any]:
     """Dynamically recalculate correct count and accuracy from clean prediction CSV.
 
@@ -41,9 +48,31 @@ def audit_clean_evaluation(
             {"expected": EXPECTED_TEST_SAMPLES, "actual": len(df)},
         )
 
+    relative_paths = [
+        normalize_relative_path(value, f"clean.relative_path[{index}]")
+        for index, value in enumerate(df["relative_path"].tolist())
+    ]
+    if len(relative_paths) != len(set(relative_paths)):
+        raise AuditError("Clean evaluation CSV contains duplicate relative paths")
+    true_labels = require_nonempty_strings(df["true_label"].tolist(), "clean.true_label")
+    predicted_labels = require_nonempty_strings(
+        df["predicted_label"].tolist(), "clean.predicted_label"
+    )
+    if (expected_relative_paths is None) != (expected_true_labels is None):
+        raise AuditError("Clean canonical validation requires both paths and true labels")
+    if expected_relative_paths is not None:
+        if relative_paths != expected_relative_paths:
+            raise AuditError("Clean evaluation path order disagrees with the manifest")
+        if true_labels != expected_true_labels:
+            raise AuditError("Clean evaluation true labels disagree with the manifest")
+
     # Verify correct boolean calculation in CSV
     computed_correct_bool = df["true_label"] == df["predicted_label"]
-    mismatched_correct = (df["correct"].astype(bool) != computed_correct_bool).sum()
+    declared_correct = parse_strict_booleans(df["correct"].tolist(), "clean.correct")
+    mismatched_correct = sum(
+        declared != computed
+        for declared, computed in zip(declared_correct, computed_correct_bool.tolist())
+    )
     if mismatched_correct > 0:
         raise AuditError(
             f"Clean evaluation CSV contains {mismatched_correct} rows where 'correct' column disagrees with true_label == predicted_label",
@@ -54,7 +83,9 @@ def audit_clean_evaluation(
     calculated_accuracy = float(correct_count / EXPECTED_TEST_SAMPLES)
 
     # Cross-verify dynamically with canonical summary JSON if available
-    if summary_json_path is not None and summary_json_path.is_file():
+    if summary_json_path is not None:
+        if not summary_json_path.is_file():
+            raise AuditError(f"Clean summary JSON file missing: {summary_json_path}")
         try:
             summary = json.loads(summary_json_path.read_text(encoding="utf-8"))
         except Exception as exc:
@@ -81,4 +112,7 @@ def audit_clean_evaluation(
         "correct_count": correct_count,
         "accuracy": calculated_accuracy,
         "clean_correct_mask": computed_correct_bool.tolist(),
+        "relative_paths": relative_paths,
+        "true_labels": true_labels,
+        "predicted_labels": predicted_labels,
     }

@@ -64,3 +64,20 @@
 - **최희찬 (heechan9)**:
   - Defined the audit extension scope and supplied the authoritative evidence CSV artifacts.
   - Authorized conservative code review and repository integration after all automated checks pass.
+
+## Codex Security Audit
+
+- **Codex**:
+  - Independently reviewed the evidence-audit implementation for path handling,
+    malformed CSV/JSON input, unsafe execution and deserialization, secret
+    exposure, dependency and GitHub Actions risk, audit bypasses, and fail-open
+    behavior.
+  - Implemented fail-closed path, boolean, numeric, provenance, Git identity,
+    canonical FGSM-row, classification-report, confusion-matrix, and summary
+    validation.
+  - Added mutation tests for the reproduced bypass cases and documented the
+    remaining supply-chain and environment limitations.
+
+- **최희찬 (heechan9)**:
+  - Authorized the independent security-audit scope and requested review through
+    a separate Draft pull request before integration.

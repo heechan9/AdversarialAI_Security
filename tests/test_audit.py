@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import json
 from pathlib import Path
 
 import pytest
@@ -81,6 +82,17 @@ def test_run_full_audit_canonical(tmp_path: Path) -> None:
 
 def test_cross_doc_uses_supplied_evidence_values(tmp_path: Path) -> None:
     (tmp_path / "docs").mkdir()
+    provenance_dir = tmp_path / "results" / "attacks" / "provisional"
+    provenance_dir.mkdir(parents=True)
+    (provenance_dir / "PROVENANCE.json").write_text(
+        json.dumps(
+            {
+                "status": "provisional",
+                "bundle": {"sha256": "0" * 64},
+            }
+        ),
+        encoding="utf-8",
+    )
     (tmp_path / "README.md").write_text(
         "CNN 0.500000 MobileNet 전처리 0.750000", encoding="utf-8"
     )
