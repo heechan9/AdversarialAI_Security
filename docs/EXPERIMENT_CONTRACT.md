@@ -1,6 +1,6 @@
 # Experiment Contract
 
-모든 실험은 아래 계약을 따른다. 값이 "proposed"로 표시된 항목은 팀 확정 전까지 제안값이며, 확정되면 이 문서와 `configs/experiment.yaml`을 함께 갱신한다.
+모든 실험은 아래 계약을 따른다. FGSM epsilon 범위는 2026-09-06 팀 결정으로 확정했다. 그 밖에 "proposed"로 표시된 항목은 별도 확정 전까지 제안값이다.
 
 ## 공통 조건
 - 동일 테스트셋(781장), 동일 클래스 순서(`configs/classes.json`), 동일 seed 사용
@@ -32,8 +32,14 @@
 | Untargeted ASR | Clean 상태에서 정분류된 표본만을 분모로, 공격 후 오분류로 전환된 비율. CNN 분모 504장, MobileNet 분모 613장 |
 | Targeted ASR | **(proposed)** Clean 정분류 표본 중 공격 후 지정 목표 클래스로 전환된 비율 — Untargeted와 혼용 금지 |
 
+## FGSM 확정 조건
+
+- 공식 epsilon sweep: `0, 0.01, 0.03, 0.05`
+- 확정 근거: 멘토가 세부 조건을 팀 자율 결정에 맡긴 뒤, 프로젝트 책임자가 2026-09-06 기존 사전등록 후보를 유지하기로 결정
+- 이 결정은 공격 계약만 확정한다. 기존 `results/attacks/provisional/` 산출물을 공식 결과로 승격하지 않는다.
+- 공식 결과는 동일 계약의 로컬 재실행, 전체 감사, 결과 고정 및 병합 승인을 모두 통과한 뒤에만 확정한다.
+
 ## 아직 확정되지 않은 것 (proposed 상태)
-- FGSM ε 최종값(1차 후보 `0, 0.01, 0.03, 0.05`; 멘토 확인 대기)
 - BIM/PGD step size와 iteration 수치
 - MobileNet 학습 당시 실제 전처리 방식(학습 코드 미확보)
 - 학습 random seed 값(clean 평가는 `shuffle=False`로 고정)
@@ -44,5 +50,5 @@
 - 입력과 출력 범위 `[0,1]`, perturbation norm `L∞`, 각 표본에서 `L∞ ≤ ε`
 - `ε=0`은 clean prediction 일치 여부를 검증하는 대조조건
 - Robust Accuracy와 Macro F1은 전체 781장, Untargeted ASR은 clean-correct 표본만 사용
-- CNN·MobileNet 모두 같은 ε 후보를 유지하며, 1차 결과를 본 뒤 기존 결과를 삭제하거나 유리한 값만 선택하지 않는다
+- CNN·MobileNet 모두 확정된 동일 ε 집합을 사용하며, 결과를 본 뒤 기존 결과를 삭제하거나 유리한 값만 선택하지 않는다
 - 모델별 입력 해상도 차이(128×128 대 224×224)는 비교 한계로 기록한다
