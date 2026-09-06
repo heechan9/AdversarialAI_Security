@@ -89,6 +89,9 @@
     execution contract without promoting or modifying provisional results.
   - Authored the isolated Windows execution and promotion-gate runbook and
     aligned the reproducibility and README boundaries.
+  - Updated the mentor-review paper draft to v1.0 from canonical evidence and
+    documented the decision boundary between the proposed paper scope and
+    unverified future work.
 
 - **최희찬 (heechan9)**:
   - Recorded that the mentor delegated the detailed condition decision to the

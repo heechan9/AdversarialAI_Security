@@ -188,6 +188,8 @@ python scripts\audit_paper_claims.py
 | [Clean 결과](docs/CLEAN_BASELINE_RESULTS.md) | 모델별 기준 성능과 클래스별 한계 |
 | [FGSM 예비 결과](docs/FGSM_PROVISIONAL_RESULTS.md) | epsilon별 결과와 해석 제한 |
 | [FGSM 공식 실행 런북](docs/FGSM_OFFICIAL_RUNBOOK.md) | 확정 계약·Windows 실행·승격 차단 조건 |
+| [논문 멘토 검토 초안 v1.0](docs/PAPER_DRAFT_MENTOR_REVIEW_V1.0.md) | 검증 근거를 반영한 논문 초안과 주장 경계 |
+| [논문 범위 검토 요청](docs/MENTOR_SCOPE_REVIEW_REQUEST.md) | 멘토 확인이 필요한 본문·후속연구 범위 |
 | [재현성 안내](docs/REPRODUCIBILITY.md) | 데이터·모델 배치와 실행 방법 |
 | [연구근거 감사](docs/RESEARCH_EVIDENCE_AUDIT.md) | 감사 범위·상태·CLI |
 | [논문 Claim 감사](docs/PAPER_CLAIM_AUDIT.md) | 8개 Claim과 canonical 근거 |
