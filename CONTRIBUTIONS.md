@@ -81,3 +81,15 @@
 - **최희찬 (heechan9)**:
   - Authorized the independent security-audit scope and requested review through
     a separate Draft pull request before integration.
+
+## Official FGSM Execution Preparation
+
+- **Codex**:
+  - Converted the previously proposed FGSM epsilon sweep into a team-confirmed
+    execution contract without promoting or modifying provisional results.
+  - Authored the isolated Windows execution and promotion-gate runbook and
+    aligned the reproducibility and README boundaries.
+
+- **최희찬 (heechan9)**:
+  - Recorded that the mentor delegated the detailed condition decision to the
+    team and authorized preparation through Draft PR review, excluding merge.

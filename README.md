@@ -37,7 +37,7 @@
 - 가장 기본적인 1단계 공격인 FGSM을 구현하고 교란 크기가 약속된 범위를 넘지 않는지 검사했습니다.
 - 공격 성공률은 원래 정답을 맞힌 사진만 대상으로 계산해 수치가 과장되지 않도록 했습니다.
 - CSV·JSON·manifest·모델 해시·문서의 수치가 서로 맞는지 독립 감사 도구로 다시 확인합니다.
-- 현재 FGSM 수치는 멘토의 epsilon 범위 승인 전 **예비 결과(provisional)**이며 공식 결과로 확정하지 않았습니다.
+- FGSM epsilon 범위는 `0, 0.01, 0.03, 0.05`로 팀 확정했습니다. 현재 수치는 동일 계약의 공식 재실행 전 **예비 결과(provisional)**이며 아직 공식 결과로 확정하지 않았습니다.
 
 ## 한눈에 보는 검증 방식
 
@@ -187,6 +187,7 @@ python scripts\audit_paper_claims.py
 | [실험 계약](docs/EXPERIMENT_CONTRACT.md) | 입력·FGSM·지표·재현 기준 |
 | [Clean 결과](docs/CLEAN_BASELINE_RESULTS.md) | 모델별 기준 성능과 클래스별 한계 |
 | [FGSM 예비 결과](docs/FGSM_PROVISIONAL_RESULTS.md) | epsilon별 결과와 해석 제한 |
+| [FGSM 공식 실행 런북](docs/FGSM_OFFICIAL_RUNBOOK.md) | 확정 계약·Windows 실행·승격 차단 조건 |
 | [재현성 안내](docs/REPRODUCIBILITY.md) | 데이터·모델 배치와 실행 방법 |
 | [연구근거 감사](docs/RESEARCH_EVIDENCE_AUDIT.md) | 감사 범위·상태·CLI |
 | [논문 Claim 감사](docs/PAPER_CLAIM_AUDIT.md) | 8개 Claim과 canonical 근거 |

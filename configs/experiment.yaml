@@ -1,5 +1,6 @@
-# Experiment configuration — values marked "proposed" are not yet confirmed
-# against actual code. See docs/EXPERIMENT_CONTRACT.md for definitions.
+# Experiment configuration. FGSM epsilon values were confirmed by team decision
+# on 2026-09-06. Other values marked "proposed" remain unconfirmed.
+# See docs/EXPERIMENT_CONTRACT.md for definitions and decision boundaries.
 
 dataset:
   num_classes: 10
@@ -33,7 +34,7 @@ models:
 attacks:
   input_range: [0, 1]   # fixed evaluation/attack threat-model range for both models
   fgsm:
-    epsilon_candidates: [0.0, 0.01, 0.03, 0.05]  # proposed; mentor confirmation pending
+    epsilon_values: [0.0, 0.01, 0.03, 0.05]  # confirmed team contract, 2026-09-06
     steps: 1
     targeted: false
     loss: categorical_crossentropy

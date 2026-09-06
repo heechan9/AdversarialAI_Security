@@ -55,14 +55,14 @@ PYTHONPATH=src python -m adversarial_ai.evaluation.evaluate_mobilenet
 
 각 실행은 `results/clean/`에 표본별 예측 CSV, classification report JSON·CSV, summary JSON, metadata JSON, confusion matrix CSV·PNG를 저장한다. 모델과 데이터가 없는 환경에서는 결과 파일을 생성하지 않는다.
 
-## FGSM 실행(멘토 ε 확인 후)
+## FGSM 공식 후보 실행
 
 ```bash
-PYTHONPATH=src python -m adversarial_ai.evaluation.evaluate_fgsm_cnn
-PYTHONPATH=src python -m adversarial_ai.evaluation.evaluate_fgsm_mobilenet
+PYTHONPATH=src python -m adversarial_ai.evaluation.evaluate_fgsm_cnn --output results/attacks/official_candidate --epsilons 0 0.01 0.03 0.05
+PYTHONPATH=src python -m adversarial_ai.evaluation.evaluate_fgsm_mobilenet --output results/attacks/official_candidate --epsilons 0 0.01 0.03 0.05
 ```
 
-기본 후보는 `0, 0.01, 0.03, 0.05`이며 `--epsilons`로 명시적으로 변경할 수 있다. 결과는 `results/attacks/`에 모델별 요약 CSV, ε별 표본 CSV·report JSON·confusion matrix CSV/PNG, 성공·실패 예시 이미지와 metadata JSON으로 저장한다.
+확정 epsilon은 `0, 0.01, 0.03, 0.05`다. 공식 후보 실행에서는 기본값에 의존하지 않고 명령행에 네 값을 모두 명시한다. 결과는 검토 전용 `results/attacks/official_candidate/`에 생성하며 기존 `results/attacks/provisional/`을 삭제하거나 덮어쓰지 않는다. 산출물 구성과 공식 승격 조건은 `docs/FGSM_OFFICIAL_RUNBOOK.md`를 따른다.
 
 ## 아직 확인되지 않은 것 (재현성 관점)
 - Train/Val/Test 정확한 분할 비율과 분할 코드
