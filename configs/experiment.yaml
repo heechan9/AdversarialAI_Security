@@ -34,7 +34,7 @@ models:
 attacks:
   input_range: [0, 1]   # fixed evaluation/attack threat-model range for both models
   fgsm:
-    epsilon_values: [0.0, 0.01, 0.03, 0.05]  # confirmed team contract, 2026-09-06
+    epsilon_candidates: [0.0, 0.01, 0.03, 0.05]  # confirmed team contract, 2026-09-06
     steps: 1
     targeted: false
     loss: categorical_crossentropy
