@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import shutil
 from pathlib import Path
 
 from adversarial_ai.audit.official_readiness import check_official_fgsm_readiness
@@ -15,8 +16,16 @@ def _contract(tmp_path: Path) -> tuple[Path, dict]:
     return path, data
 
 
-def test_pending_contract_is_deliberately_not_ready() -> None:
-    result = check_official_fgsm_readiness(Path("."), Path("configs/fgsm_official_contract.json"))
+def test_pending_contract_is_deliberately_not_ready(tmp_path: Path) -> None:
+    # Exercise missing binaries in an isolated checkout, not the user's dataset.
+    shutil.copytree(Path("configs"), tmp_path / "configs")
+    metadata_dir = tmp_path / "results" / "clean"
+    metadata_dir.mkdir(parents=True)
+    for name in ("cnn_baseline_metadata.json", "mobilenet_metadata.json"):
+        shutil.copy2(Path("results") / "clean" / name, metadata_dir / name)
+    result = check_official_fgsm_readiness(
+        tmp_path, tmp_path / "configs" / "fgsm_official_contract.json"
+    )
     assert result["ready"] is False
     assert "mentor approval is pending" in result["blockers"]
     assert any("local model is missing" in blocker for blocker in result["blockers"])
