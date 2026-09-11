@@ -38,6 +38,38 @@ def compute_untargeted_asr(
     return (successes / denominator if denominator else 0.0, successes, denominator)
 
 
+def compute_classwise_untargeted_asr(
+    y_true: np.ndarray,
+    clean_pred: np.ndarray,
+    adversarial_pred: np.ndarray,
+    class_names: list[str],
+) -> dict[str, dict[str, int | float | None]]:
+    """Return per-class ASR with clean-correct samples as each denominator.
+
+    A class with no clean-correct samples has an undefined ASR (``None``),
+    rather than a misleading zero.
+    """
+    y_true = np.asarray(y_true)
+    clean_pred = np.asarray(clean_pred)
+    adversarial_pred = np.asarray(adversarial_pred)
+    if not (y_true.shape == clean_pred.shape == adversarial_pred.shape):
+        raise ValueError("ASR inputs must have identical shapes")
+
+    clean_correct = clean_pred == y_true
+    attack_success = clean_correct & (adversarial_pred != y_true)
+    result: dict[str, dict[str, int | float | None]] = {}
+    for class_index, class_name in enumerate(class_names):
+        class_mask = y_true == class_index
+        denominator = int((class_mask & clean_correct).sum())
+        successes = int((class_mask & attack_success).sum())
+        result[class_name] = {
+            "clean_correct_denominator": denominator,
+            "attack_successes": successes,
+            "untargeted_asr": successes / denominator if denominator else None,
+        }
+    return result
+
+
 
 def _probabilities(outputs: Any, from_logits: bool) -> np.ndarray:
     import tensorflow as tf
