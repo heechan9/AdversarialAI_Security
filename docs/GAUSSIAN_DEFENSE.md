@@ -44,8 +44,8 @@ attacked_defended_scores = defended(x_adv)
 두 모델, 기존 기록된 ε=0/0.01/0.03/0.05만 후속 평가한다. 테스트셋으로
 커널을 고르거나 튜닝하지 않는다. 새 결과는 별도 experimental 위치에만
 저장하고 원본·가중치 전후 hash 및 전체 테스트/두 감사를 확인한다.
-이 PR은 전체 데이터 실행기·결과를 추가하지 않는다. 먼저 이 작은 구성요소를
-검증하고, 실제 데이터 평가 연결은 별도 단계로 진행한다.
+전체 데이터 실행기는 `adversarial_ai.evaluation.defense_evaluation`이다. 실제 연구 결과는
+아직 생성하지 않았다. 아래 CLI로 기존 모델/이미지가 있는 PC에서 실행한다.
 
 FGSM 한 단계만 통과해도 일반적 방어 성공을 주장할 수 없다. 반복 공격 등
 더 강한 방어 인지 공격 평가가 필요하며 선박 운항/충돌 방지를 검증하지 않는다.
@@ -55,3 +55,36 @@ FGSM 한 단계만 통과해도 일반적 방어 성공을 주장할 수 없다.
 - TensorFlow depthwise convolution: https://www.tensorflow.org/api_docs/python/tf/nn/depthwise_conv2d
 - TensorFlow reflect padding: https://www.tensorflow.org/api_docs/python/tf/pad
 - Athalye et al., gradient masking 경고: https://arxiv.org/abs/1802.00420
+
+## 전체 데이터 실행 (Windows Anaconda Prompt)
+
+별도 소스 worktree를 사용해 기존 작업 브랜치를 바꾸지 않는다. 다음 경로가 이미
+존재하면 덮어쓰지 말고 상태를 확인한다. 모듈은 현재 작업 디렉터리에서
+`models/`, `data/test/`, `configs/`, `results/clean/`을 읽는다.
+
+```bat
+conda activate adversarial_ai
+cd /d "%USERPROFILE%\AdversarialAI_Security"
+git fetch origin codex/gaussian-defense
+git worktree add --detach "%USERPROFILE%\adversarial-defense-code-01" origin/codex/gaussian-defense
+set "PYTHONPATH=%USERPROFILE%\adversarial-defense-code-01\src"
+python -m pytest "%USERPROFILE%\adversarial-defense-code-01\tests\test_gaussian_defense.py" "%USERPROFILE%\adversarial-defense-code-01\tests\test_defense_evaluation.py" -q -rs
+python -m adversarial_ai.evaluation.defense_evaluation --output "%USERPROFILE%\adversarial-defense-run-01"
+```
+
+테스트가 실패하면 실험 명령을 실행하지 않는다. CNN 128×128 / MobileNetV2
+224×224, 기존 rescale/리사이즈/배치32/shuffle=False를 재사용한다. 두 모델 및
+모든 이미지 SHA-256을 실행 전후 확인하고 canonical clean 예측과 다르면 중단한다.
+전체 실험은 CPU에서 시간이 걸리며 배치마다 진행 상황을 출력한다.
+
+산출물은 8개 sample CSV, 클래스별/전체 `summary.json`, `contract.json`,
+`SHA256.json`, 성공 시에만 `COMPLETE.json`이다. 실패 시 `FAILED.json`이 남고
+완료로 취급하지 않는다. 기존 출력 디렉터리를 덮어쓰지 않는다. 원본 공격 배열은
+저장하지 않으므로 clipping/L∞는 실행 중 검사 기록이며 사후 독립 픽셀 검증은 아니다.
+방어 유무의 모델 간 비교는 각 조건/모델의 분모를 함께 확인한다. 이 실행기의
+공통 정답 집합은 한 모델 안에서 방어 전후 교집합이며 CNN/MobileNetV2 사이의
+교집합 분석은 별도 후처리다.
+
+이 실행기는 기존 Research/Paper 감사를 자동 실행하거나 논문 수치를 갱신하지
+않는다. 새 방어 산출물은 별도 검토하고 두 기존 감사도 후속 통합 전에 실행한다.
+테스트 종료 후 만들어진 실험 폴더를 공유하면 수치를 독립 재계산할 수 있다.
