@@ -1,7 +1,10 @@
 import numpy as np
 import pytest
 
-from adversarial_ai.evaluation.fgsm_evaluation import compute_untargeted_asr
+from adversarial_ai.evaluation.fgsm_evaluation import (
+    compute_classwise_untargeted_asr,
+    compute_untargeted_asr,
+)
 
 
 def _tensorflow():
@@ -30,6 +33,39 @@ def test_asr_denominator_uses_only_clean_correct_samples():
     assert denominator == 2
     assert successes == 1
     assert asr == 0.5
+
+
+def test_classwise_asr_excludes_preexisting_errors_and_preserves_counts():
+    y_true = np.array([0, 0, 0, 1, 1, 2])
+    clean_pred = np.array([0, 0, 1, 1, 0, 1])
+    adversarial_pred = np.array([1, 0, 2, 0, 1, 2])
+
+    result = compute_classwise_untargeted_asr(
+        y_true, clean_pred, adversarial_pred, ["A", "B", "C"]
+    )
+
+    assert result["A"] == {
+        "clean_correct_denominator": 2,
+        "attack_successes": 1,
+        "untargeted_asr": 0.5,
+    }
+    assert result["B"] == {
+        "clean_correct_denominator": 1,
+        "attack_successes": 1,
+        "untargeted_asr": 1.0,
+    }
+    assert result["C"] == {
+        "clean_correct_denominator": 0,
+        "attack_successes": 0,
+        "untargeted_asr": None,
+    }
+
+
+def test_classwise_asr_rejects_shape_mismatch():
+    with pytest.raises(ValueError, match="identical shapes"):
+        compute_classwise_untargeted_asr(
+            np.array([0, 1]), np.array([0]), np.array([1, 0]), ["A", "B"]
+        )
 
 
 

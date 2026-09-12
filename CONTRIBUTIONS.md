@@ -87,3 +87,25 @@
 - Codex: implemented differentiable preprocessing and defense-aware FGSM evaluation, tests, and independently recalculated uploaded sample evidence and summaries.
 - 최희찬 (heechan9): ran component tests and the full two-model evaluation on the local Windows PC and supplied the original result ZIP.
 - No team or mentor approval of official adoption is implied.
+
+## 검토용 통합 브랜치 (2026-09-12, 미병합)
+
+- **이현수 (HyeonSuuuuu)**: PR #20의 독립 Clean 재계산 하네스, 관련 문서·mutation
+  tests와 당시 실행 보고서. 원본 커밋 `3622891`, `b1a9b18`의 저자·메시지를 유지했다.
+  해당 커밋에 기록된 Claude 사용은 작성자가 남긴 보조 도구 사용 기록이며,
+  이 문서는 Claude를 별도 GitHub 계정 Contributor나 논문 저자로 인증하지 않는다.
+- **Codex <codex@openai.com>**: PR #20의 독립 검토, 파서/출력 보완 및 회귀 테스트,
+  PR #21/#22/#23 통합, PR #19의 후보 감사·실행 문맥 기록 코드 재사용과 계약 연결,
+  클래스별 감사 결과 재사용, 통합 검증·문서 정리. 새 로컬 통합·보완 커밋의 저자를 Codex로 기록했다.
+- **최희찬 (heechan9)**: 검토·통합 작업 요청과 병합 전 중단 범위 결정.
+  이 작업은 새로운 로컬 모델 추론이나 실기기 검증 기여를 추가로 주장하지 않는다.
+
+기존 기여 기록과 커밋 저자는 변경하지 않았다. 이 통합안은 Draft 검토 대상이며,
+원본 PR의 실제 병합 여부나 공식 FGSM 결과 확정을 의미하지 않는다.
+
+게시 경로 참고: 이 환경의 터미널에는 GitHub push 인증이 없어 GitHub 연결 도구로
+동일한 검증 tree를 게시한다. 해당 도구는 author 필드 지정을 제공하지 않으므로
+원격 통합 커밋은 인증된 heechan9 계정으로 생성되고, 실제 보완 구현자인 Codex는
+커밋의 `Co-authored-by: Codex <codex@openai.com>`와 이 문서로 구분한다.
+이는 heechan9가 보완 코드를 독립 구현했다는 뜻이 아니다. 현수 및 기존 PR의 원본
+커밋들은 원격 통합 커밋의 부모 이력으로 보존한다.

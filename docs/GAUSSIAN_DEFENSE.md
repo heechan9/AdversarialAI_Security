@@ -88,3 +88,11 @@ python -m adversarial_ai.evaluation.defense_evaluation --output "%USERPROFILE%\a
 이 실행기는 기존 Research/Paper 감사를 자동 실행하거나 논문 수치를 갱신하지
 않는다. 새 방어 산출물은 별도 검토하고 두 기존 감사도 후속 통합 전에 실행한다.
 테스트 종료 후 만들어진 실험 폴더를 공유하면 수치를 독립 재계산할 수 있다.
+
+## 독립 결과 재검증
+
+`python scripts/audit_gaussian_defense.py`는 TensorFlow/평가기 코드를 실행하지 않고
+원본 ZIP과 보존 파일, 해시, canonical 예측, 전체/클래스별 요약을 독립 재계산한다.
+변조 테스트는 해시를 재작성한 경우의 잘못된 분모/클래스 집계/ε=0도 포함한다.
+
+논문 문안: [v2.5 반영용 보충안](PAPER_DEFENSE_SUPPLEMENT_v2_5.md).
