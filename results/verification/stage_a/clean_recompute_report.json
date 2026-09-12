@@ -1,0 +1,235 @@
+{
+  "stage": "A",
+  "scope": "clean probability columns, classification report, confusion matrix",
+  "generated_at_utc": "2026-09-12T08:51:57Z",
+  "verified_commit": "3622891286decd85dfda2138735acd994e34a306",
+  "imports_repository_code": false,
+  "third_party_dependencies": [],
+  "classes": [
+    "Aircraft Carrier",
+    "Bulkers",
+    "Car Carrier",
+    "Container Ship",
+    "Cruise",
+    "DDG",
+    "Recreational",
+    "Sailboat",
+    "Submarine",
+    "Tug"
+  ],
+  "declared_models": [
+    "cnn_baseline",
+    "mobilenet"
+  ],
+  "tolerances": {
+    "probability_row_sum": 1e-05,
+    "probability_range": 1e-06,
+    "report_metric": 1e-09,
+    "float32_summary": 1e-06
+  },
+  "models": [
+    {
+      "model": "cnn_baseline",
+      "row_count": 781,
+      "inputs": {
+        "eval_csv": "results/clean/cnn_baseline_eval.csv",
+        "report_json": "results/clean/cnn_baseline_report.json",
+        "report_csv": "results/clean/cnn_baseline_report.csv",
+        "confusion_matrix_csv": "results/clean/cnn_baseline_confusion_matrix.csv",
+        "summary_json": "results/clean/cnn_baseline_summary.json"
+      },
+      "checks": [
+        {
+          "name": "clean.probabilities.finite",
+          "status": "PASS",
+          "detail": "All 781 rows carry finite probabilities",
+          "evidence": {}
+        },
+        {
+          "name": "clean.probabilities.range",
+          "status": "PASS",
+          "detail": "All probabilities lie within [0, 1] (+/- 1e-06)",
+          "evidence": {}
+        },
+        {
+          "name": "clean.probabilities.row_sum",
+          "status": "PASS",
+          "detail": "All 781 probability rows sum to 1 (worst |sum - 1| = 1.559e-07, tolerance 1e-05)",
+          "evidence": {
+            "worst_abs_error": 1.558602231721551e-07
+          }
+        },
+        {
+          "name": "clean.probabilities.argmax_unique",
+          "status": "PASS",
+          "detail": "Every row has a single strict argmax",
+          "evidence": {}
+        },
+        {
+          "name": "clean.probabilities.argmax_matches_predicted_index",
+          "status": "PASS",
+          "detail": "Probability argmax agrees with predicted_index on all 781 rows",
+          "evidence": {}
+        },
+        {
+          "name": "clean.predicted_index_matches_predicted_label",
+          "status": "PASS",
+          "detail": "predicted_index and predicted_label agree with the class map on all rows",
+          "evidence": {}
+        },
+        {
+          "name": "clean.true_index_matches_true_label",
+          "status": "PASS",
+          "detail": "true_index and true_label agree with the class map on all rows",
+          "evidence": {}
+        },
+        {
+          "name": "clean.confusion_matrix.shape",
+          "status": "PASS",
+          "detail": "Committed confusion matrix is 10x10 as recomputed",
+          "evidence": {}
+        },
+        {
+          "name": "clean.confusion_matrix.cells",
+          "status": "PASS",
+          "detail": "All 100 confusion matrix cells match the independent recomputation",
+          "evidence": {}
+        },
+        {
+          "name": "clean.report_json.keys",
+          "status": "PASS",
+          "detail": "Committed report JSON carries exactly the 13 recomputed sections",
+          "evidence": {}
+        },
+        {
+          "name": "clean.report_json.values",
+          "status": "PASS",
+          "detail": "Every committed report JSON value matches the independent recomputation (tolerance 1e-09)",
+          "evidence": {}
+        },
+        {
+          "name": "clean.report_csv.sections",
+          "status": "PASS",
+          "detail": "Committed report CSV carries exactly the 13 recomputed sections",
+          "evidence": {}
+        },
+        {
+          "name": "clean.report_csv.values",
+          "status": "PASS",
+          "detail": "Every committed report CSV value matches the independent recomputation (tolerance 1e-09)",
+          "evidence": {}
+        },
+        {
+          "name": "clean.summary_json.headline_metrics",
+          "status": "PASS",
+          "detail": "All 5 summary JSON headline metrics match the independent recomputation",
+          "evidence": {}
+        }
+      ],
+      "failed_checks": 0,
+      "status": "PASS"
+    },
+    {
+      "model": "mobilenet",
+      "row_count": 781,
+      "inputs": {
+        "eval_csv": "results/clean/mobilenet_eval.csv",
+        "report_json": "results/clean/mobilenet_report.json",
+        "report_csv": "results/clean/mobilenet_report.csv",
+        "confusion_matrix_csv": "results/clean/mobilenet_confusion_matrix.csv",
+        "summary_json": "results/clean/mobilenet_summary.json"
+      },
+      "checks": [
+        {
+          "name": "clean.probabilities.finite",
+          "status": "PASS",
+          "detail": "All 781 rows carry finite probabilities",
+          "evidence": {}
+        },
+        {
+          "name": "clean.probabilities.range",
+          "status": "PASS",
+          "detail": "All probabilities lie within [0, 1] (+/- 1e-06)",
+          "evidence": {}
+        },
+        {
+          "name": "clean.probabilities.row_sum",
+          "status": "PASS",
+          "detail": "All 781 probability rows sum to 1 (worst |sum - 1| = 2.209e-07, tolerance 1e-05)",
+          "evidence": {
+            "worst_abs_error": 2.2093138252188282e-07
+          }
+        },
+        {
+          "name": "clean.probabilities.argmax_unique",
+          "status": "PASS",
+          "detail": "Every row has a single strict argmax",
+          "evidence": {}
+        },
+        {
+          "name": "clean.probabilities.argmax_matches_predicted_index",
+          "status": "PASS",
+          "detail": "Probability argmax agrees with predicted_index on all 781 rows",
+          "evidence": {}
+        },
+        {
+          "name": "clean.predicted_index_matches_predicted_label",
+          "status": "PASS",
+          "detail": "predicted_index and predicted_label agree with the class map on all rows",
+          "evidence": {}
+        },
+        {
+          "name": "clean.true_index_matches_true_label",
+          "status": "PASS",
+          "detail": "true_index and true_label agree with the class map on all rows",
+          "evidence": {}
+        },
+        {
+          "name": "clean.confusion_matrix.shape",
+          "status": "PASS",
+          "detail": "Committed confusion matrix is 10x10 as recomputed",
+          "evidence": {}
+        },
+        {
+          "name": "clean.confusion_matrix.cells",
+          "status": "PASS",
+          "detail": "All 100 confusion matrix cells match the independent recomputation",
+          "evidence": {}
+        },
+        {
+          "name": "clean.report_json.keys",
+          "status": "PASS",
+          "detail": "Committed report JSON carries exactly the 13 recomputed sections",
+          "evidence": {}
+        },
+        {
+          "name": "clean.report_json.values",
+          "status": "PASS",
+          "detail": "Every committed report JSON value matches the independent recomputation (tolerance 1e-09)",
+          "evidence": {}
+        },
+        {
+          "name": "clean.report_csv.sections",
+          "status": "PASS",
+          "detail": "Committed report CSV carries exactly the 13 recomputed sections",
+          "evidence": {}
+        },
+        {
+          "name": "clean.report_csv.values",
+          "status": "PASS",
+          "detail": "Every committed report CSV value matches the independent recomputation (tolerance 1e-09)",
+          "evidence": {}
+        },
+        {
+          "name": "clean.summary_json.headline_metrics",
+          "status": "PASS",
+          "detail": "All 5 summary JSON headline metrics match the independent recomputation",
+          "evidence": {}
+        }
+      ],
+      "failed_checks": 0,
+      "status": "PASS"
+    }
+  ],
+  "status": "PASS"
+}
