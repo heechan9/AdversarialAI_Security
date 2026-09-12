@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "status": "pending_team_confirmation",
+  "approval": {
+    "approved_by": null,
+    "approved_at": null
+  },
+  "source_git_commit": null,
+  "experiment": {
+    "attack": "fgsm",
+    "objective": "untargeted",
+    "labels": "true",
+    "steps": 1,
+    "input_range": [
+      0,
+      1
+    ],
+    "clip_range": [
+      0,
+      1
+    ],
+    "norm": "linf",
+    "linf_tolerance": 1e-06,
+    "asr_denominator": "clean_correct",
+    "epsilons": null
+  },
+  "outputs": {
+    "root": "results/attacks/official_candidate",
+    "run_id": null
+  }
+}

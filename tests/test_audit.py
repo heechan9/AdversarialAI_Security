@@ -46,11 +46,31 @@ def test_audit_fgsm_canonical() -> None:
     assert cnn_fgsm[0.0]["untargeted_asr"] == 0.0
     assert cnn_fgsm[0.01]["attack_successes"] == 179
     assert cnn_fgsm[0.01]["asr_denominator"] == 504
+    for epsilon_result in cnn_fgsm.values():
+        class_asr = epsilon_result["class_asr"]
+        assert sum(
+            item["clean_correct_denominator"] for item in class_asr.values()
+        ) == 504
+        assert sum(item["attack_successes"] for item in class_asr.values()) == (
+            epsilon_result["attack_successes"]
+        )
+    assert all(
+        item["attack_successes"] == 0 and item["untargeted_asr"] == 0.0
+        for item in cnn_fgsm[0.0]["class_asr"].values()
+    )
 
     mob_fgsm = audit_fgsm_results(prov_dir, "mobilenet", clean_correct_count=613)
     assert mob_fgsm[0.0]["attack_successes"] == 0
     assert mob_fgsm[0.01]["attack_successes"] == 516
     assert mob_fgsm[0.01]["asr_denominator"] == 613
+    for epsilon_result in mob_fgsm.values():
+        class_asr = epsilon_result["class_asr"]
+        assert sum(
+            item["clean_correct_denominator"] for item in class_asr.values()
+        ) == 613
+        assert sum(item["attack_successes"] for item in class_asr.values()) == (
+            epsilon_result["attack_successes"]
+        )
 
 
 def test_audit_cross_doc_canonical() -> None:

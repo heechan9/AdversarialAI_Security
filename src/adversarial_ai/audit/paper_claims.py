@@ -13,6 +13,7 @@ from adversarial_ai.audit.cross_doc import audit_cross_documents
 from adversarial_ai.audit.exceptions import AuditError
 from adversarial_ai.audit.fgsm import EXPECTED_EPSILONS, audit_fgsm_results
 from adversarial_ai.audit.manifest_models import audit_manifest
+from adversarial_ai.audit.paper_snapshot import audit_paper_snapshot
 from adversarial_ai.audit.visual_review import audit_visual_reviews
 
 
@@ -166,6 +167,7 @@ def audit_paper_claims(repo_root: Path = Path(".")) -> list[PaperClaim]:
         clean_cnn_csv=repo_root / "results" / "clean" / "cnn_baseline_eval.csv",
         clean_mobilenet_csv=repo_root / "results" / "clean" / "mobilenet_eval.csv",
     )
+    paper_snapshot = audit_paper_snapshot(repo_root, clean, fgsm, visual)
 
     zero_control = all(
         result[0.0]["attack_successes"] == 0
@@ -249,5 +251,12 @@ def audit_paper_claims(repo_root: Path = Path(".")) -> list[PaperClaim]:
             "passed",
             "results/audit/evidence/*.csv + manifest.json",
             f"{visual['total_candidates']} candidate samples verified across Taehee ({visual['split_counts']['taehee']}) and Jaehyuk ({visual['split_counts']['jaehyuk']}) splits",
+        ),
+        PaperClaim(
+            "CLAIM-009",
+            "ack2026_v1_5_snapshot_consistency",
+            "passed",
+            "configs/paper_claims/ack2026_v1_5.json + canonical evidence",
+            f"{paper_snapshot['fgsm_rows']} aggregate and {paper_snapshot['classwise_rows']} classwise FGSM rows verified",
         ),
     ]

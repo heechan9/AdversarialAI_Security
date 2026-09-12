@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "document_id": "ACK2026-paper-draft-v1.5",
+  "document_status": "draft",
+  "claims": {
+    "test_samples": 781,
+    "clean": {
+      "cnn": {"correct": 504, "total": 781, "accuracy_6dp": 0.645327},
+      "mobilenet": {"correct": 613, "total": 781, "accuracy_6dp": 0.784891}
+    },
+    "fgsm": [
+      {"model": "cnn", "epsilon": 0.01, "robust_accuracy_percent_2dp": 41.61, "accuracy_drop_percent_2dp": 22.92, "asr_percent_2dp": 35.52, "successes": 179, "denominator": 504},
+      {"model": "cnn", "epsilon": 0.03, "robust_accuracy_percent_2dp": 24.33, "accuracy_drop_percent_2dp": 40.20, "asr_percent_2dp": 62.30, "successes": 314, "denominator": 504},
+      {"model": "cnn", "epsilon": 0.05, "robust_accuracy_percent_2dp": 20.23, "accuracy_drop_percent_2dp": 44.30, "asr_percent_2dp": 68.85, "successes": 347, "denominator": 504},
+      {"model": "mobilenet", "epsilon": 0.01, "robust_accuracy_percent_2dp": 12.42, "accuracy_drop_percent_2dp": 66.07, "asr_percent_2dp": 84.18, "successes": 516, "denominator": 613},
+      {"model": "mobilenet", "epsilon": 0.03, "robust_accuracy_percent_2dp": 13.19, "accuracy_drop_percent_2dp": 65.30, "asr_percent_2dp": 83.20, "successes": 510, "denominator": 613},
+      {"model": "mobilenet", "epsilon": 0.05, "robust_accuracy_percent_2dp": 16.13, "accuracy_drop_percent_2dp": 62.36, "asr_percent_2dp": 79.45, "successes": 487, "denominator": 613}
+    ],
+    "classwise_fgsm": [
+      {"model": "cnn", "epsilon": 0.03, "class": "DDG", "successes": 38, "denominator": 38},
+      {"model": "cnn", "epsilon": 0.03, "class": "Sailboat", "successes": 9, "denominator": 9},
+      {"model": "mobilenet", "epsilon": 0.03, "class": "DDG", "successes": 51, "denominator": 51},
+      {"model": "mobilenet", "epsilon": 0.03, "class": "Sailboat", "successes": 23, "denominator": 23}
+    ],
+    "visual_review": {
+      "total": 63,
+      "split_counts": {"김태희": 31, "이재혁": 32},
+      "judgment_counts": {"라벨 정확": 55, "라벨 오류 의심": 4, "판단 보류": 4}
+    },
+    "boundaries": {
+      "fgsm_status": "provisional",
+      "mass_or_cyber_physical_validation_claimed": false,
+      "visual_review_used_as_model_performance_evidence": false,
+      "review_design": "disjoint_split_not_double_review"
+    }
+  }
+}
