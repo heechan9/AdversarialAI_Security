@@ -81,3 +81,9 @@
 - **최희찬 (heechan9)**:
   - Authorized the independent security-audit scope and requested review through
     a separate Draft pull request before integration.
+
+## Experimental Gaussian defense (PR #25)
+
+- Codex: implemented differentiable preprocessing and defense-aware FGSM evaluation, tests, and independently recalculated uploaded sample evidence and summaries.
+- 최희찬 (heechan9): ran component tests and the full two-model evaluation on the local Windows PC and supplied the original result ZIP.
+- No team or mentor approval of official adoption is implied.

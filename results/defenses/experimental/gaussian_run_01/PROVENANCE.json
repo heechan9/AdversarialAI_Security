@@ -1,0 +1,17 @@
+{
+  "status": "experimental",
+  "promoted": false,
+  "original_bundle_sha256": "dc12787a7ff8a2696ea3b8e182b7e19f7ca6fc812c4a6739cb7f7f1895257df6",
+  "source_commit": "26324bea8ffdeb3c7b1d100229c49003ec99a587",
+  "supplied_by": "heechan9",
+  "implementation": "Codex",
+  "execution": "User Windows PC; Python 3.11.15, TensorFlow 2.21.0, Keras 3.15.1",
+  "independent_review": "Codex independently recalculated 6248 rows, 8 aggregate and 80 class summaries; matched 10 internal hashes and completion hash links",
+  "limitations": [
+    "No original adversarial arrays or H5 files supplied for independent inference/pixel checks",
+    "Model binary hashes matched manifest records; actual before/after preservation is reported by PC execution",
+    "Source file hashes compared with LF/Windows CRLF equivalence; original bytes preserved",
+    "Single-step FGSM evaluation, no general robustness or navigation security claim"
+  ],
+  "windows_component_tests": "User log: 28 passed, 2 warnings; not a full Windows suite"
+}

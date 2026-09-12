@@ -1,6 +1,7 @@
 # 작은 전처리 방어: experimental v1.0
 
-상태: 구현 후보. 실제 781장/CNN/MobileNetV2 방어 효과 미검증. 공식 채택 아님.
+상태: 사용자 Windows PC에서 첫 781장 실험 완료, 업로드 기록 독립 재계산 일치. 공식 채택 아님.
+결과와 한계: [실험 기록](../results/defenses/experimental/gaussian_run_01/README.md).
 
 ## 고정 계약
 
@@ -44,8 +45,7 @@ attacked_defended_scores = defended(x_adv)
 두 모델, 기존 기록된 ε=0/0.01/0.03/0.05만 후속 평가한다. 테스트셋으로
 커널을 고르거나 튜닝하지 않는다. 새 결과는 별도 experimental 위치에만
 저장하고 원본·가중치 전후 hash 및 전체 테스트/두 감사를 확인한다.
-전체 데이터 실행기는 `adversarial_ai.evaluation.defense_evaluation`이다. 실제 연구 결과는
-아직 생성하지 않았다. 아래 CLI로 기존 모델/이미지가 있는 PC에서 실행한다.
+전체 데이터 실행기는 `adversarial_ai.evaluation.defense_evaluation`이다. 첫 실제 연구 결과는 별도 experimental 경로에 보존했다. 아래 CLI로 기존 모델/이미지가 있는 PC에서 실행한다.
 
 FGSM 한 단계만 통과해도 일반적 방어 성공을 주장할 수 없다. 반복 공격 등
 더 강한 방어 인지 공격 평가가 필요하며 선박 운항/충돌 방지를 검증하지 않는다.
