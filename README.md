@@ -2,7 +2,7 @@
 
 # 자율운항선박 이미지 분류 모델 적대적 AI 검증
 
-### Clean → FGSM → Evidence Audit 기반 해양 AI 보안 연구
+### Clean → FGSM → 전처리 방어 비교 → Evidence Audit 기반 해양 AI 보안 연구
 
 <img src="docs/assets/adversarial-ai-industrial-security-hero.jpg" alt="산업형 스마트항만과 자율운항선박 AI 보안 프로젝트 비전" width="900">
 
@@ -37,7 +37,24 @@
 - 가장 기본적인 1단계 공격인 FGSM을 구현하고 교란 크기가 약속된 범위를 넘지 않는지 검사했습니다.
 - 공격 성공률은 원래 정답을 맞힌 사진만 대상으로 계산해 수치가 과장되지 않도록 했습니다.
 - CSV·JSON·manifest·모델 해시·문서의 수치가 서로 맞는지 독립 감사 도구로 다시 확인합니다.
-- 현재 FGSM 수치는 멘토의 epsilon 범위 승인 전 **예비 결과(provisional)**이며 공식 결과로 확정하지 않았습니다.
+- 현재 정리 범위는 **ε=0, 0.01, 0.03, 0.05**입니다. FGSM 보존 수치는 **예비 결과(provisional)**, 가우시안 방어 결과는 **experimental**이며 코드 병합과 공식 결과 채택은 구분합니다.
+
+## 최신 통합 상태
+
+[PR #25](https://github.com/heechan9/AdversarialAI_Security/pull/25)는
+Jules 독립 감사와 소스 해시 검증 보완 후 `324a535`로 main에 병합했습니다.
+
+- 고정 3×3 가우시안 전처리, 전달 FGSM 및 방어 인지 FGSM 비교를 구현·실험했습니다.
+- 기존 공격에 전처리를 적용한 개선만으로 방어 성공을 주장하지 않습니다.
+  방어 인지 공격에는 효과가 크게 떨어지고 정상 정확도에도 모델별 영향이 있습니다.
+- Codex 직접 검증 247 passed / 경고 2개; Jules 별도 재검증도 247 passed / 경고 2개를 보고했습니다.
+  Research·Paper(9/9)·Stage A·방어 근거 감사가 통과했습니다.
+- 원본 ZIP·CSV·모델 및 기존 공격 결과는 보존했습니다. 실제 모델 추론 재현과
+  기록의 재계산 감사는 구분합니다.
+
+[현재 연구 범위와 결과](docs/CURRENT_RESEARCH_STATUS.md) ·
+[방어 실험 근거](results/defenses/experimental/gaussian_run_01/README.md) ·
+[Jules 감사](https://jules.google.com/session/11380383362183201753)
 
 ## 한눈에 보는 검증 방식
 
@@ -79,7 +96,7 @@ MobileNetV2는 CNN보다 109장을 더 맞혔습니다. 다만 두 모델 모두
 
 ### 2. 작은 FGSM 교란에도 성능이 크게 떨어졌습니다
 
-아래 값은 **멘토 승인 전 예비 결과**입니다.
+아래 값은 **공식 승격 전 예비 결과(provisional)**입니다. 사용한 공격 강도 범위와 공식 채택 상태는 별개입니다.
 
 | epsilon | CNN 공격 후 정확도 | CNN ASR | MobileNetV2 공격 후 정확도 | MobileNetV2 ASR |
 |---:|---:|---:|---:|---:|
@@ -175,7 +192,7 @@ python scripts\audit_paper_claims.py
 | `scripts/` | 감사 및 실험 실행 진입점 |
 | `tests/` | 계약·무결성·변조 탐지 테스트 |
 | `results/clean/` | canonical Clean 결과 |
-| `results/attacks/provisional/` | 멘토 승인 전 FGSM 예비 결과 |
+| `results/attacks/provisional/` | 공식 승격 전 FGSM 예비 결과 |
 | `results/audit/` | 연구근거 감사 보고서 |
 | `docs/` | 범위·실험계약·결과·재현성 문서 |
 
