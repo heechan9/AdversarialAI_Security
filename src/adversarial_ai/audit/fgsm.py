@@ -162,6 +162,7 @@ def audit_fgsm_results(
             df["adversarial_predicted_label"].tolist(),
             f"fgsm[{model_name}][{eps}].adversarial_predicted_label",
         )
+        class_names = list(dict.fromkeys(true_labels))
 
         if clean_relative_paths is not None:
             if relative_paths != clean_relative_paths:
@@ -239,6 +240,39 @@ def audit_fgsm_results(
         attack_success_count = int(computed_attack_success.sum())
         calculated_asr = float(attack_success_count / clean_correct_count) if clean_correct_count > 0 else 0.0
 
+        # Independently derive class-level ASR from sample evidence. Empty
+        # class denominators remain undefined instead of appearing robust.
+        class_asr: dict[str, dict[str, int | float | None]] = {}
+        for class_name in class_names:
+            class_mask = pd.Series(
+                [truth == class_name for truth in true_labels], dtype=bool
+            )
+            class_denominator = int((class_mask & clean_correct_derived).sum())
+            class_successes = int((class_mask & computed_attack_success).sum())
+            class_asr[class_name] = {
+                "clean_correct_denominator": class_denominator,
+                "attack_successes": class_successes,
+                "untargeted_asr": (
+                    float(class_successes / class_denominator)
+                    if class_denominator
+                    else None
+                ),
+            }
+        if (
+            sum(item["clean_correct_denominator"] for item in class_asr.values())
+            != clean_correct_count
+        ):
+            raise AuditError(
+                f"Class ASR denominators do not sum to the model denominator for {model_name} eps={eps}"
+            )
+        if (
+            sum(item["attack_successes"] for item in class_asr.values())
+            != attack_success_count
+        ):
+            raise AuditError(
+                f"Class ASR successes do not sum to total attack successes for {model_name} eps={eps}"
+            )
+
         # L_infinity validation
         linf_values = parse_finite_numbers(
             df["linf"].tolist(), f"fgsm[{model_name}][{eps}].linf", minimum=0.0
@@ -283,7 +317,6 @@ def audit_fgsm_results(
             ) from exc
         if not isinstance(report, dict):
             raise AuditError(f"FGSM report JSON root must be an object: {report_json}")
-        class_names = list(dict.fromkeys(true_labels))
         expected_report = classification_report(
             true_labels,
             adversarial_predictions,
@@ -373,6 +406,7 @@ def audit_fgsm_results(
             "asr_denominator": clean_correct_count,
             "untargeted_asr": calculated_asr,
             "max_linf": max_linf,
+            "class_asr": class_asr,
         }
 
     return audited_epsilons

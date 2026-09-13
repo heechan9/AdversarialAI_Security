@@ -1,1 +1,4 @@
 results/audit/evidence/*.csv -text
+
+# Preserve uploaded experimental defense evidence byte-for-byte.
+results/defenses/experimental/gaussian_run_01/* -text whitespace=cr-at-eol

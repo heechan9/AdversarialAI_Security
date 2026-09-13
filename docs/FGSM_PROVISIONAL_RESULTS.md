@@ -53,6 +53,19 @@
 | MobileNetV2 | Sailboat | Clean | 0.9583 | 0.3108 | 0.4694 |
 | MobileNetV2 | Sailboat | FGSM ε=0.03 | 0.0000 | 0.0000 | 0.0000 |
 
+### Class-level ASR reporting contract
+
+공격 후 precision·recall·F1과 별도로, 클래스별 ASR은 해당 클래스의
+`clean_correct=True` 표본만 분모로 사용한다.
+
+`class ASR = class attack successes / class clean-correct denominator`
+
+클래스별 분모의 합은 모델 전체 clean-correct 분모와, 클래스별 성공 수의
+합은 전체 attack success 수와 일치해야 한다. 분모가 0인 클래스의 ASR은
+0이 아니라 정의 불가로 처리한다. 감사기는 sample CSV에서 이 값을
+동적으로 재계산하므로 클래스별 수치를 문서에 독립 정답으로 하드코딩하지
+않는다. 작은 분모의 비율은 성공 수/분모와 함께 해석해야 한다.
+
 ## Artifact inventory verification
 
 - Bundle SHA-256와 보존 ref는 `results/attacks/provisional/PROVENANCE.json`에 기록한다. 이 기록은 결과를 공식화하지 않으며, 멘토 ε 승인 후 공식 재실행이 필요하다.
