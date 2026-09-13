@@ -1,0 +1,7 @@
+{
+  "source_commit": "324a53566760f47d707ab5ca8e6fa91cb6d84c16",
+  "source_path": "results/defenses/experimental/gaussian_run_01/summary.json",
+  "snapshot_sha256": "1c6812ec064b0f124e457bcd3fd5a96bdb700e03e72cc55bfe0df5301eb74759",
+  "status": "experimental",
+  "mode": "recorded replay; no inference"
+}
