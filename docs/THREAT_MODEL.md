@@ -103,3 +103,18 @@ The following are research extensions rather than evaluated capabilities:
 
 Each gate requires its own threat assumptions, success criteria and audit
 artifacts. Passing an earlier gate is not evidence that a later gate is secure.
+
+## Defense evaluation and operational comparison
+
+The experimental Gaussian comparison evaluates both base-model FGSM transferred
+through preprocessing and adaptive FGSM through the full differentiable f(D(x)).
+Report defended-clean degradation, pipeline-specific clean-correct denominators
+and attack-conditioned accuracy together. One-step adaptive evaluation does not
+establish worst-case robustness or prove gradient masking. A small L-infinity
+budget does not establish perceptual invisibility without a separate assessment.
+
+Operational object detection, tracking, range estimation, latency, false alarms
+and operator response are not measured by this static classification benchmark.
+ASR is conditional on the evaluator's access assumptions and clean-correct set;
+it is not the probability of a successful real-world intrusion or an accident.
+See [practice gap review](MARITIME_PRACTICE_GAP_REVIEW.md) for source boundaries.
