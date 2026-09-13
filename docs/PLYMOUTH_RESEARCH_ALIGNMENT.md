@@ -5,7 +5,9 @@
 `ecce270eafabc5753888dfc5aeddec44a335d999`와
 [Draft PR #21](https://github.com/heechan9/AdversarialAI_Security/pull/21)
 head `3e5a77fea53e3aeae6bd3410020e6887f364a818`이다.
-아래 구현 현황은 이 커밋 기준이며 PR 기능을 main의 기능으로 표현하지 않는다.
+아래는 작성 당시의 구현 현황 기록이다. 해당 연구 통합은 이후 PR #25로
+main `324a535`에 포함되었다. 최신 실무 대조와 방어 평가 경계는
+[추가 검토](MARITIME_PRACTICE_GAP_REVIEW.md)를 우선한다.
 
 ## 공식 출처와 적용 범위
 
