@@ -64,6 +64,33 @@ def aggregate(data):
         common_clean_correct={key:rate(common,key) for key in KEYS[2:]})
 
 
+SOURCE_PATHS = frozenset({
+    'src/adversarial_ai/evaluation/defense_evaluation.py',
+    'src/adversarial_ai/defenses/gaussian.py',
+    'src/adversarial_ai/attacks/fgsm.py',
+})
+
+
+def verify_sources(repo, source_files):
+    """Bind this checkout to recorded execution sources, allowing only LF/CRLF.
+
+    This is compatibility with archived source bytes, not Git ancestry proof.
+    A changed implementation requires a separate historical checkout for audit.
+    """
+    require(isinstance(source_files, dict) and set(source_files) == SOURCE_PATHS,
+            'source inventory')
+    for name, expected in source_files.items():
+        require(isinstance(expected, str) and len(expected) == 64 and
+                all(c in '0123456789abcdef' for c in expected), 'source hash format')
+        path = repo / name
+        require(not any(part.is_symlink() for part in [path, *path.parents]),
+                'symlink source')
+        raw = path.read_bytes()
+        lf = raw.replace(b'\r\n', b'\n')
+        require(expected in {digest(raw), digest(lf), digest(lf.replace(b'\n', b'\r\n'))},
+                'source file mismatch: ' + name)
+
+
 def audit(repo, root):
     provenance = document((root/'PROVENANCE.json').read_bytes())
     archive = (root/'original_bundle.zip').read_bytes()
@@ -91,6 +118,7 @@ def audit(repo, root):
     contract = document(members['contract.json'])
     require(contract['status']=='experimental' and contract['promoted'] is False, 'contract status')
     require(contract['source_sha']==provenance['source_commit'], 'source identity')
+    verify_sources(repo, contract['source_files'])
     manifest = document((repo/'configs/test_manifest.json').read_bytes())
     classes = document((repo/'configs/classes.json').read_bytes())
     for name,value in contract['inputs_sha256'].items():

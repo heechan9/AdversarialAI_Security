@@ -63,3 +63,39 @@ def test_archive_bytes_cannot_silently_change(evidence):
 def test_duplicate_json_and_nonfinite_fail():
     for raw in ['{"a":1,"a":2}','{"a":NaN}']:
         with pytest.raises(ValueError):module.document(raw)
+
+
+@pytest.mark.parametrize('change', ['hash', 'missing', 'extra', 'empty', 'type'])
+def test_source_contract_mutation_rehashed(evidence, change):
+    p = evidence / 'contract.json'
+    contract = json.loads(p.read_text())
+    sources = contract['source_files']
+    key = sorted(module.SOURCE_PATHS)[0]
+    if change == 'hash': sources[key] = '0' * 64
+    elif change == 'missing': del sources[key]
+    elif change == 'extra': sources['../escape.py'] = '0' * 64
+    elif change == 'empty': contract['source_files'] = {}
+    else: sources[key] = True
+    p.write_text(json.dumps(contract))
+    repack(evidence)
+    with pytest.raises(ValueError, match='source'):
+        module.audit(REPO, evidence)
+
+
+@pytest.mark.parametrize('crlf', [False, True])
+def test_source_line_endings_and_actual_change(tmp_path, crlf):
+    sources = {}
+    for name in module.SOURCE_PATHS:
+        path = tmp_path / name
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_bytes(b'line1\r\nline2\r\n' if crlf else b'line1\nline2\n')
+        sources[name] = module.digest(b'line1\r\nline2\r\n')
+    module.verify_sources(tmp_path, sources)
+    path.write_bytes(path.read_bytes() + b'# changed')
+    with pytest.raises(ValueError, match='source file mismatch'):
+        module.verify_sources(tmp_path, sources)
+
+
+def test_missing_source_file(tmp_path):
+    with pytest.raises(OSError):
+        module.verify_sources(tmp_path, {p: '0' * 64 for p in module.SOURCE_PATHS})
