@@ -1,0 +1,35 @@
+{
+  "schema": "maris-provenance/v1",
+  "source_commit": "ecce270eafabc5753888dfc5aeddec44a335d999",
+  "source_sha256": {
+    "configs/test_manifest.json": "36059fea372334509404aca0e66155bf99a8df270beb1cc3bf4865b361ae70a6",
+    "docs/EXPERIMENT_CONTRACT.md": "5d473536898e4178c86d20b1decd5de6219923ece4f497e17fe8caa458695689",
+    "src/adversarial_ai/evaluation/fgsm_evaluation.py": "8b98ee06946c1faf7796cf68a69ac522d07263a278ab9c2cb0fc7a1ac481001c",
+    "results/attacks/provisional/fgsm_comparison_summary.csv": "78f127e06ae4afaa064c63a3612641addcefa7713e93381a124e4e2358a8667f",
+    "results/clean/cnn_baseline_eval.csv": "7c19e93b975ac15414784360842c92c510165755fc4b2a537034170acf1ef944",
+    "results/attacks/provisional/fgsm_cnn_metadata.json": "9a4fa5795af3455eb5723b9a727f853dfb239a8fb8ebd0a54d5e7e94af5c8cd7",
+    "results/attacks/provisional/fgsm_cnn_eps_0_samples.csv": "50fa2827860f7b68e3076cf8194276b986bd11a10b58d9d18f9e2078ec61d63b",
+    "results/attacks/provisional/fgsm_cnn_eps_0.01_samples.csv": "4ce821323de4b4c5ca668c7d428acc5ff305d2fb59a86971a246dcfbfed003dd",
+    "results/attacks/provisional/fgsm_cnn_eps_0.03_samples.csv": "7a73d645bfa8ae1cb2842616e706681c70f44caa66baa4faec248837b1b9f5d4",
+    "results/attacks/provisional/fgsm_cnn_eps_0.05_samples.csv": "4386078520b89b9d8b6dde4282960a8fdb4006d941480920db3e3ff233d24cec",
+    "results/clean/mobilenet_eval.csv": "b97c3e6ca7ca2eabf6ca9b83111393a3972157a3f48fba6f2cb8499284953398",
+    "results/attacks/provisional/fgsm_mobilenet_metadata.json": "c25df54b7ada393722a3aece7c60c6fecbc0dfca4ba4a913c9018230d55ebd19",
+    "results/attacks/provisional/fgsm_mobilenet_eps_0_samples.csv": "14091dc565dc366fd4890dad8e78528f5a53c548e8a968e2461d97232659adb8",
+    "results/attacks/provisional/fgsm_mobilenet_eps_0.01_samples.csv": "2a05d951d016459802e240b59e498c060be14c339a0a5d04b0fca5e1593748bf",
+    "results/attacks/provisional/fgsm_mobilenet_eps_0.03_samples.csv": "96718b46149cad44bef2a45ca2a29821089eca246c765dedef3b96ce5e295b50",
+    "results/attacks/provisional/fgsm_mobilenet_eps_0.05_samples.csv": "59ab5a5975029a0f42258e448b4c94239d8deed36441fe55f38a4d8ba2b68292",
+    "results/attacks/provisional/samples/cnn_eps_0.03_success_0009.png": "7abcc94f3718a6e2b0a77aa2129dfac46390418870398ec98e3f43acb11e69ba",
+    "results/attacks/provisional/samples/mobilenet_eps_0.03_success_0000.png": "f5d5423951d80d78ab08243bf67817ed09f582c607947289f12f025a4c10401d",
+    "results/attacks/provisional/samples/cnn_eps_0.03_failure_0001.png": "f94fe9d3deb4c61583fc7992c972c7e0a5f9e414f42d7dfb82bc5767464041c3",
+    "results/attacks/provisional/samples/mobilenet_eps_0.03_failure_0028.png": "ee3e176bd431e111ec6aaa6e548a8266a095c5d0625ec4fc171a6a28157218c1"
+  },
+  "export_sha256": "20d2c4b7ec28b20c32c6c7f05b5b113e716ede611ea454335065ea2d8be682ae",
+  "research_audit_status": "PASSED",
+  "unverified_scopes": [
+    "Image dataset files (raw 781-image content verification: NOT_RUN / UNAVAILABLE on clean checkout)",
+    "Model binary files on disk (local .h5 model binary hash recomputation: NOT_RUN / UNAVAILABLE on clean checkout)"
+  ],
+  "mode": "recorded replay; no inference",
+  "image_presentation": "Byte-identical committed comparison plots. CSS crops plotted input panels, not raw original image files. Panel coordinates visually inspected.",
+  "attack_score": "Not recorded in per-sample FGSM CSV; never synthesized."
+}
