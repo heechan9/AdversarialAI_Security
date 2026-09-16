@@ -87,11 +87,13 @@ Jules 독립 감사와 소스 해시 검증 보완 후 `324a535`로 main에 병�
 | 연구 단계 | 상태 | 확인된 범위 |
 |---|---:|---|
 | Clean baseline | ✅ 검증 완료 | CNN·MobileNetV2, 테스트 이미지 781장 |
-| FGSM 구현 | ✅ 검증 완료 | 공격 방향·입력 clipping·$L_\infty$ 상한·epsilon 0 대조군 |
+| FGSM 구현 | ✅ 검증 완료 | 공격 방향·입력 clipping·L∞ 상한·epsilon 0 대조군 |
 | FGSM 성능 수치 | 🟡 예비 결과 | $\epsilon=0, 0.01, 0.03, 0.05$ |
 | 연구근거 감사 | ✅ 검증 완료 | manifest·모델 해시·CSV·JSON·문서 일관성·시각 검토 감사 |
-| 논문 Claim 감사 | ✅ 9/9 통과 | 정본 근거에서 논문용 주장을 동적으로 재계산 |
-| BIM·PGD·JSMA·방어 | ⚪ 향후 연구 | 아직 구현·검증하지 않음 |
+| 논문 Claim 감사 | ✅ 9/9 통과 | 기존 v1.5 claim snapshot 감사; 최신 원고 전체의 검증 완료를 뜻하지 않음 |
+| 가우시안 전처리 방어 | 🟡 구현·실험 완료 (experimental) | 고정 3×3 전처리; 기존 FGSM 입력 및 방어 인지 FGSM 비교·근거 감사 |
+| MARIS 가상 실험실 | ✅ 구현·소스 반영 | 설명용 3D 조작·저장된 이미지 비교·결과 재생; 실시간 추론 아님 |
+| BIM·PGD·JSMA·적대적 학습 | ⚪ 향후 연구 | 현재 검증 완료 범위에 포함하지 않음 |
 | VLM/LLM·안전영향 시뮬레이터 | ⚪ 목표 범위 | 현재 완료 기능이나 성능 근거가 아님 |
 
 ## 핵심 결과를 쉽게 읽으면
@@ -123,6 +125,15 @@ MobileNetV2는 CNN보다 109장을 더 맞혔습니다. 다만 두 모델 모두
 - 비단조적인 MobileNetV2 결과의 원인을 FGSM overshoot라고 단정하지 않으며, 추가 실험 전에는 관찰 사실로만 기록합니다.
 
 상세 근거: [Clean 결과](docs/CLEAN_BASELINE_RESULTS.md) · [FGSM 예비 결과](docs/FGSM_PROVISIONAL_RESULTS.md)
+
+### 3. 단순 전처리 방어의 효과와 한계도 비교했습니다
+
+고정 3×3 가우시안 전처리는 기존 FGSM 공격 이미지의 분류 정확도를 높였지만,
+전처리까지 고려해 생성한 **방어 인지 FGSM**에는 효과가 크게 떨어졌습니다.
+정상 이미지에서도 CNN 정확도는 낮아지고 MobileNetV2는 높아져, 모델별 영향을 함께 보고합니다.
+이는 **experimental 비교 결과**이며 일반적인 방어 성공이나 실제 운항 안전성을 입증하지 않습니다.
+
+수치·분모·원자료: [방어 실험 결과](results/defenses/experimental/gaussian_run_01/README.md) · [현재 연구 범위](docs/CURRENT_RESEARCH_STATUS.md).
 
 ## 기술 구조와 검증 원칙
 
@@ -233,7 +244,8 @@ python scripts\audit_paper_claims.py
 - FGSM 결과는 승인된 공식 결과가 아니라 예비 결과입니다.
 - 두 모델의 입력 해상도는 CNN 128×128, MobileNetV2 224×224로 다릅니다.
 - MobileNetV2의 학습 당시 실제 전처리·분할 비율·random seed는 확정되지 않았습니다.
-- BIM·PGD·JSMA·방어기법과 전이 공격은 아직 완료하지 않았습니다.
+- 고정 가우시안 전처리 방어는 구현·실험했으나 experimental입니다. 기존 공격 입력에서의 회복만으로 방어 성공을 주장하지 않으며, 방어 인지 FGSM과 정상 성능 손실을 함께 평가합니다.
+- BIM·PGD·JSMA·적대적 학습과 모델 간 전이 공격은 현재 검증 완료 범위에 포함하지 않습니다.
 - 분류 성능 저하가 실제 충돌·항로 이탈 같은 운항 피해를 유발한다는 인과관계는 검증하지 않았습니다.
 - VLM/LLM과 안전영향 시뮬레이터는 향후 목표이며 현재 구현 성과로 주장하지 않습니다.
 
