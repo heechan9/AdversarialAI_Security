@@ -10,7 +10,7 @@ async function loadTS(path) {
   code = code.replace(/from "(three[^"]*)"/g, (_, specifier) => `from ${JSON.stringify(import.meta.resolve(specifier))}`);
   return import('data:text/javascript;base64,' + Buffer.from(code).toString('base64'));
 }
-const { createShipControls, resetShipControls } = await loadTS('../lib/ship-controls.ts');
+const { createShipControls, resetShipControls, setShipView } = await loadTS('../lib/ship-controls.ts');
 const { boundView } = await loadTS('../lib/image-view.ts');
 class Surface extends EventTarget {
   style = {}; clientWidth = 390; clientHeight = 275;
@@ -56,6 +56,16 @@ assert.ok(Math.abs(controls.getDistance() - controls.maxDistance) < 1e-9);
 assert.ok(controls.target.distanceTo(startTarget) < 1e-9);
 pointer('pointerup', 2, 150, 140); pointer('pointerup', 3, 150.01, 140);
 assert.equal(surface.style.touchAction, 'none');
+for (const aspect of [1, 1.5, 2.4]) {
+  camera.aspect = aspect;
+  for (const view of ['bow', 'side', 'deck']) {
+    setShipView(controls, camera, view);
+    assert.ok(controls.getDistance() >= controls.minDistance && controls.getDistance() <= controls.maxDistance);
+    assert.ok(controls.target.distanceTo(startTarget) < 1e-9);
+    resetShipControls(controls);
+    assert.ok(camera.position.distanceTo(startPosition) < 1e-9);
+  }
+}
 controls.dispose();
 // Shared comparison viewport never reveals other panels/text outside its crop.
 for (const zoom of [.2, 1, 1.5, 2, 3, 99]) for (const x of [-90, -.4, 0, .4, 90]) {
@@ -65,4 +75,4 @@ for (const zoom of [.2, 1, 1.5, 2, 3, 99]) for (const x of [-90, -.4, 0, .4, 90]
   assert.ok(v.y - v.zoom/2 <= -.5 && v.y + v.zoom/2 >= .5);
 }
 assert.deepEqual(boundView({ zoom: 1, x: 5, y: -5 }), { zoom: 1, x: 0, y: 0 });
-console.log('PASS: touch rotation, auto-stop event, reset during inertia, two-touch pinch, camera limits, fixed target, 30 image viewport boundary cases. Synthetic input harness; not physical-device QA.');
+console.log('PASS: touch rotation, auto-stop event, reset during inertia, two-touch pinch, camera limits, fixed target, 30 image viewport boundary cases, 9 preset/aspect/reset combinations. Synthetic input harness; not physical-device QA.');
