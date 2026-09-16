@@ -1,0 +1,3922 @@
+[
+  {
+    "model": "cnn",
+    "epsilon": 0.0,
+    "overall": {
+      "samples": 781,
+      "accuracy": {
+        "clean": 0.645326504481434,
+        "defended_clean": 0.5364916773367477,
+        "attacked": 0.645326504481434,
+        "transfer_defended": 0.5364916773367477,
+        "adaptive_defended": 0.5364916773367477
+      },
+      "clean_harmed": 143,
+      "clean_recovered": 58,
+      "asr_original": {
+        "successes": 0,
+        "denominator": 504,
+        "asr": 0.0
+      },
+      "asr_transfer_defended": {
+        "successes": 0,
+        "denominator": 419,
+        "asr": 0.0
+      },
+      "asr_adaptive_defended": {
+        "successes": 0,
+        "denominator": 419,
+        "asr": 0.0
+      },
+      "common_clean_correct": {
+        "attacked": {
+          "successes": 0,
+          "denominator": 361,
+          "asr": 0.0
+        },
+        "transfer_defended": {
+          "successes": 0,
+          "denominator": 361,
+          "asr": 0.0
+        },
+        "adaptive_defended": {
+          "successes": 0,
+          "denominator": 361,
+          "asr": 0.0
+        }
+      }
+    },
+    "classes": {
+      "Aircraft Carrier": {
+        "samples": 59,
+        "accuracy": {
+          "clean": 0.7288135593220338,
+          "defended_clean": 0.5932203389830508,
+          "attacked": 0.7288135593220338,
+          "transfer_defended": 0.5932203389830508,
+          "adaptive_defended": 0.5932203389830508
+        },
+        "clean_harmed": 12,
+        "clean_recovered": 4,
+        "asr_original": {
+          "successes": 0,
+          "denominator": 43,
+          "asr": 0.0
+        },
+        "asr_transfer_defended": {
+          "successes": 0,
+          "denominator": 35,
+          "asr": 0.0
+        },
+        "asr_adaptive_defended": {
+          "successes": 0,
+          "denominator": 35,
+          "asr": 0.0
+        },
+        "common_clean_correct": {
+          "attacked": {
+            "successes": 0,
+            "denominator": 31,
+            "asr": 0.0
+          },
+          "transfer_defended": {
+            "successes": 0,
+            "denominator": 31,
+            "asr": 0.0
+          },
+          "adaptive_defended": {
+            "successes": 0,
+            "denominator": 31,
+            "asr": 0.0
+          }
+        }
+      },
+      "Bulkers": {
+        "samples": 97,
+        "accuracy": {
+          "clean": 0.7422680412371134,
+          "defended_clean": 0.28865979381443296,
+          "attacked": 0.7422680412371134,
+          "transfer_defended": 0.28865979381443296,
+          "adaptive_defended": 0.28865979381443296
+        },
+        "clean_harmed": 45,
+        "clean_recovered": 1,
+        "asr_original": {
+          "successes": 0,
+          "denominator": 72,
+          "asr": 0.0
+        },
+        "asr_transfer_defended": {
+          "successes": 0,
+          "denominator": 28,
+          "asr": 0.0
+        },
+        "asr_adaptive_defended": {
+          "successes": 0,
+          "denominator": 28,
+          "asr": 0.0
+        },
+        "common_clean_correct": {
+          "attacked": {
+            "successes": 0,
+            "denominator": 27,
+            "asr": 0.0
+          },
+          "transfer_defended": {
+            "successes": 0,
+            "denominator": 27,
+            "asr": 0.0
+          },
+          "adaptive_defended": {
+            "successes": 0,
+            "denominator": 27,
+            "asr": 0.0
+          }
+        }
+      },
+      "Car Carrier": {
+        "samples": 95,
+        "accuracy": {
+          "clean": 0.9368421052631579,
+          "defended_clean": 0.8421052631578947,
+          "attacked": 0.9368421052631579,
+          "transfer_defended": 0.8421052631578947,
+          "adaptive_defended": 0.8421052631578947
+        },
+        "clean_harmed": 9,
+        "clean_recovered": 0,
+        "asr_original": {
+          "successes": 0,
+          "denominator": 89,
+          "asr": 0.0
+        },
+        "asr_transfer_defended": {
+          "successes": 0,
+          "denominator": 80,
+          "asr": 0.0
+        },
+        "asr_adaptive_defended": {
+          "successes": 0,
+          "denominator": 80,
+          "asr": 0.0
+        },
+        "common_clean_correct": {
+          "attacked": {
+            "successes": 0,
+            "denominator": 80,
+            "asr": 0.0
+          },
+          "transfer_defended": {
+            "successes": 0,
+            "denominator": 80,
+            "asr": 0.0
+          },
+          "adaptive_defended": {
+            "successes": 0,
+            "denominator": 80,
+            "asr": 0.0
+          }
+        }
+      },
+      "Container Ship": {
+        "samples": 86,
+        "accuracy": {
+          "clean": 0.5697674418604651,
+          "defended_clean": 0.7790697674418605,
+          "attacked": 0.5697674418604651,
+          "transfer_defended": 0.7790697674418605,
+          "adaptive_defended": 0.7790697674418605
+        },
+        "clean_harmed": 0,
+        "clean_recovered": 18,
+        "asr_original": {
+          "successes": 0,
+          "denominator": 49,
+          "asr": 0.0
+        },
+        "asr_transfer_defended": {
+          "successes": 0,
+          "denominator": 67,
+          "asr": 0.0
+        },
+        "asr_adaptive_defended": {
+          "successes": 0,
+          "denominator": 67,
+          "asr": 0.0
+        },
+        "common_clean_correct": {
+          "attacked": {
+            "successes": 0,
+            "denominator": 49,
+            "asr": 0.0
+          },
+          "transfer_defended": {
+            "successes": 0,
+            "denominator": 49,
+            "asr": 0.0
+          },
+          "adaptive_defended": {
+            "successes": 0,
+            "denominator": 49,
+            "asr": 0.0
+          }
+        }
+      },
+      "Cruise": {
+        "samples": 45,
+        "accuracy": {
+          "clean": 0.8666666666666667,
+          "defended_clean": 0.6666666666666666,
+          "attacked": 0.8666666666666667,
+          "transfer_defended": 0.6666666666666666,
+          "adaptive_defended": 0.6666666666666666
+        },
+        "clean_harmed": 9,
+        "clean_recovered": 0,
+        "asr_original": {
+          "successes": 0,
+          "denominator": 39,
+          "asr": 0.0
+        },
+        "asr_transfer_defended": {
+          "successes": 0,
+          "denominator": 30,
+          "asr": 0.0
+        },
+        "asr_adaptive_defended": {
+          "successes": 0,
+          "denominator": 30,
+          "asr": 0.0
+        },
+        "common_clean_correct": {
+          "attacked": {
+            "successes": 0,
+            "denominator": 30,
+            "asr": 0.0
+          },
+          "transfer_defended": {
+            "successes": 0,
+            "denominator": 30,
+            "asr": 0.0
+          },
+          "adaptive_defended": {
+            "successes": 0,
+            "denominator": 30,
+            "asr": 0.0
+          }
+        }
+      },
+      "DDG": {
+        "samples": 102,
+        "accuracy": {
+          "clean": 0.37254901960784315,
+          "defended_clean": 0.0392156862745098,
+          "attacked": 0.37254901960784315,
+          "transfer_defended": 0.0392156862745098,
+          "adaptive_defended": 0.0392156862745098
+        },
+        "clean_harmed": 34,
+        "clean_recovered": 0,
+        "asr_original": {
+          "successes": 0,
+          "denominator": 38,
+          "asr": 0.0
+        },
+        "asr_transfer_defended": {
+          "successes": 0,
+          "denominator": 4,
+          "asr": 0.0
+        },
+        "asr_adaptive_defended": {
+          "successes": 0,
+          "denominator": 4,
+          "asr": 0.0
+        },
+        "common_clean_correct": {
+          "attacked": {
+            "successes": 0,
+            "denominator": 4,
+            "asr": 0.0
+          },
+          "transfer_defended": {
+            "successes": 0,
+            "denominator": 4,
+            "asr": 0.0
+          },
+          "adaptive_defended": {
+            "successes": 0,
+            "denominator": 4,
+            "asr": 0.0
+          }
+        }
+      },
+      "Recreational": {
+        "samples": 89,
+        "accuracy": {
+          "clean": 0.9775280898876404,
+          "defended_clean": 0.7415730337078652,
+          "attacked": 0.9775280898876404,
+          "transfer_defended": 0.7415730337078652,
+          "adaptive_defended": 0.7415730337078652
+        },
+        "clean_harmed": 22,
+        "clean_recovered": 1,
+        "asr_original": {
+          "successes": 0,
+          "denominator": 87,
+          "asr": 0.0
+        },
+        "asr_transfer_defended": {
+          "successes": 0,
+          "denominator": 66,
+          "asr": 0.0
+        },
+        "asr_adaptive_defended": {
+          "successes": 0,
+          "denominator": 66,
+          "asr": 0.0
+        },
+        "common_clean_correct": {
+          "attacked": {
+            "successes": 0,
+            "denominator": 65,
+            "asr": 0.0
+          },
+          "transfer_defended": {
+            "successes": 0,
+            "denominator": 65,
+            "asr": 0.0
+          },
+          "adaptive_defended": {
+            "successes": 0,
+            "denominator": 65,
+            "asr": 0.0
+          }
+        }
+      },
+      "Sailboat": {
+        "samples": 74,
+        "accuracy": {
+          "clean": 0.12162162162162163,
+          "defended_clean": 0.21621621621621623,
+          "attacked": 0.12162162162162163,
+          "transfer_defended": 0.21621621621621623,
+          "adaptive_defended": 0.21621621621621623
+        },
+        "clean_harmed": 2,
+        "clean_recovered": 9,
+        "asr_original": {
+          "successes": 0,
+          "denominator": 9,
+          "asr": 0.0
+        },
+        "asr_transfer_defended": {
+          "successes": 0,
+          "denominator": 16,
+          "asr": 0.0
+        },
+        "asr_adaptive_defended": {
+          "successes": 0,
+          "denominator": 16,
+          "asr": 0.0
+        },
+        "common_clean_correct": {
+          "attacked": {
+            "successes": 0,
+            "denominator": 7,
+            "asr": 0.0
+          },
+          "transfer_defended": {
+            "successes": 0,
+            "denominator": 7,
+            "asr": 0.0
+          },
+          "adaptive_defended": {
+            "successes": 0,
+            "denominator": 7,
+            "asr": 0.0
+          }
+        }
+      },
+      "Submarine": {
+        "samples": 66,
+        "accuracy": {
+          "clean": 0.5909090909090909,
+          "defended_clean": 0.45454545454545453,
+          "attacked": 0.5909090909090909,
+          "transfer_defended": 0.45454545454545453,
+          "adaptive_defended": 0.45454545454545453
+        },
+        "clean_harmed": 10,
+        "clean_recovered": 1,
+        "asr_original": {
+          "successes": 0,
+          "denominator": 39,
+          "asr": 0.0
+        },
+        "asr_transfer_defended": {
+          "successes": 0,
+          "denominator": 30,
+          "asr": 0.0
+        },
+        "asr_adaptive_defended": {
+          "successes": 0,
+          "denominator": 30,
+          "asr": 0.0
+        },
+        "common_clean_correct": {
+          "attacked": {
+            "successes": 0,
+            "denominator": 29,
+            "asr": 0.0
+          },
+          "transfer_defended": {
+            "successes": 0,
+            "denominator": 29,
+            "asr": 0.0
+          },
+          "adaptive_defended": {
+            "successes": 0,
+            "denominator": 29,
+            "asr": 0.0
+          }
+        }
+      },
+      "Tug": {
+        "samples": 68,
+        "accuracy": {
+          "clean": 0.5735294117647058,
+          "defended_clean": 0.9264705882352942,
+          "attacked": 0.5735294117647058,
+          "transfer_defended": 0.9264705882352942,
+          "adaptive_defended": 0.9264705882352942
+        },
+        "clean_harmed": 0,
+        "clean_recovered": 24,
+        "asr_original": {
+          "successes": 0,
+          "denominator": 39,
+          "asr": 0.0
+        },
+        "asr_transfer_defended": {
+          "successes": 0,
+          "denominator": 63,
+          "asr": 0.0
+        },
+        "asr_adaptive_defended": {
+          "successes": 0,
+          "denominator": 63,
+          "asr": 0.0
+        },
+        "common_clean_correct": {
+          "attacked": {
+            "successes": 0,
+            "denominator": 39,
+            "asr": 0.0
+          },
+          "transfer_defended": {
+            "successes": 0,
+            "denominator": 39,
+            "asr": 0.0
+          },
+          "adaptive_defended": {
+            "successes": 0,
+            "denominator": 39,
+            "asr": 0.0
+          }
+        }
+      }
+    }
+  },
+  {
+    "model": "cnn",
+    "epsilon": 0.01,
+    "overall": {
+      "samples": 781,
+      "accuracy": {
+        "clean": 0.645326504481434,
+        "defended_clean": 0.5364916773367477,
+        "attacked": 0.41613316261203587,
+        "transfer_defended": 0.4839948783610755,
+        "adaptive_defended": 0.29449423815621
+      },
+      "clean_harmed": 143,
+      "clean_recovered": 58,
+      "asr_original": {
+        "successes": 179,
+        "denominator": 504,
+        "asr": 0.3551587301587302
+      },
+      "asr_transfer_defended": {
+        "successes": 41,
+        "denominator": 419,
+        "asr": 0.09785202863961814
+      },
+      "asr_adaptive_defended": {
+        "successes": 189,
+        "denominator": 419,
+        "asr": 0.4510739856801909
+      },
+      "common_clean_correct": {
+        "attacked": {
+          "successes": 85,
+          "denominator": 361,
+          "asr": 0.23545706371191136
+        },
+        "transfer_defended": {
+          "successes": 31,
+          "denominator": 361,
+          "asr": 0.08587257617728532
+        },
+        "adaptive_defended": {
+          "successes": 154,
+          "denominator": 361,
+          "asr": 0.4265927977839335
+        }
+      }
+    },
+    "classes": {
+      "Aircraft Carrier": {
+        "samples": 59,
+        "accuracy": {
+          "clean": 0.7288135593220338,
+          "defended_clean": 0.5932203389830508,
+          "attacked": 0.3728813559322034,
+          "transfer_defended": 0.5254237288135594,
+          "adaptive_defended": 0.2033898305084746
+        },
+        "clean_harmed": 12,
+        "clean_recovered": 4,
+        "asr_original": {
+          "successes": 21,
+          "denominator": 43,
+          "asr": 0.4883720930232558
+        },
+        "asr_transfer_defended": {
+          "successes": 4,
+          "denominator": 35,
+          "asr": 0.11428571428571428
+        },
+        "asr_adaptive_defended": {
+          "successes": 23,
+          "denominator": 35,
+          "asr": 0.6571428571428571
+        },
+        "common_clean_correct": {
+          "attacked": {
+            "successes": 11,
+            "denominator": 31,
+            "asr": 0.3548387096774194
+          },
+          "transfer_defended": {
+            "successes": 4,
+            "denominator": 31,
+            "asr": 0.12903225806451613
+          },
+          "adaptive_defended": {
+            "successes": 19,
+            "denominator": 31,
+            "asr": 0.6129032258064516
+          }
+        }
+      },
+      "Bulkers": {
+        "samples": 97,
+        "accuracy": {
+          "clean": 0.7422680412371134,
+          "defended_clean": 0.28865979381443296,
+          "attacked": 0.38144329896907214,
+          "transfer_defended": 0.25773195876288657,
+          "adaptive_defended": 0.08247422680412371
+        },
+        "clean_harmed": 45,
+        "clean_recovered": 1,
+        "asr_original": {
+          "successes": 35,
+          "denominator": 72,
+          "asr": 0.4861111111111111
+        },
+        "asr_transfer_defended": {
+          "successes": 3,
+          "denominator": 28,
+          "asr": 0.10714285714285714
+        },
+        "asr_adaptive_defended": {
+          "successes": 20,
+          "denominator": 28,
+          "asr": 0.7142857142857143
+        },
+        "common_clean_correct": {
+          "attacked": {
+            "successes": 3,
+            "denominator": 27,
+            "asr": 0.1111111111111111
+          },
+          "transfer_defended": {
+            "successes": 3,
+            "denominator": 27,
+            "asr": 0.1111111111111111
+          },
+          "adaptive_defended": {
+            "successes": 19,
+            "denominator": 27,
+            "asr": 0.7037037037037037
+          }
+        }
+      },
+      "Car Carrier": {
+        "samples": 95,
+        "accuracy": {
+          "clean": 0.9368421052631579,
+          "defended_clean": 0.8421052631578947,
+          "attacked": 0.6947368421052632,
+          "transfer_defended": 0.7578947368421053,
+          "adaptive_defended": 0.37894736842105264
+        },
+        "clean_harmed": 9,
+        "clean_recovered": 0,
+        "asr_original": {
+          "successes": 23,
+          "denominator": 89,
+          "asr": 0.25842696629213485
+        },
+        "asr_transfer_defended": {
+          "successes": 8,
+          "denominator": 80,
+          "asr": 0.1
+        },
+        "asr_adaptive_defended": {
+          "successes": 44,
+          "denominator": 80,
+          "asr": 0.55
+        },
+        "common_clean_correct": {
+          "attacked": {
+            "successes": 18,
+            "denominator": 80,
+            "asr": 0.225
+          },
+          "transfer_defended": {
+            "successes": 8,
+            "denominator": 80,
+            "asr": 0.1
+          },
+          "adaptive_defended": {
+            "successes": 44,
+            "denominator": 80,
+            "asr": 0.55
+          }
+        }
+      },
+      "Container Ship": {
+        "samples": 86,
+        "accuracy": {
+          "clean": 0.5697674418604651,
+          "defended_clean": 0.7790697674418605,
+          "attacked": 0.5,
+          "transfer_defended": 0.6976744186046512,
+          "adaptive_defended": 0.47674418604651164
+        },
+        "clean_harmed": 0,
+        "clean_recovered": 18,
+        "asr_original": {
+          "successes": 6,
+          "denominator": 49,
+          "asr": 0.12244897959183673
+        },
+        "asr_transfer_defended": {
+          "successes": 7,
+          "denominator": 67,
+          "asr": 0.1044776119402985
+        },
+        "asr_adaptive_defended": {
+          "successes": 26,
+          "denominator": 67,
+          "asr": 0.3880597014925373
+        },
+        "common_clean_correct": {
+          "attacked": {
+            "successes": 6,
+            "denominator": 49,
+            "asr": 0.12244897959183673
+          },
+          "transfer_defended": {
+            "successes": 3,
+            "denominator": 49,
+            "asr": 0.061224489795918366
+          },
+          "adaptive_defended": {
+            "successes": 13,
+            "denominator": 49,
+            "asr": 0.2653061224489796
+          }
+        }
+      },
+      "Cruise": {
+        "samples": 45,
+        "accuracy": {
+          "clean": 0.8666666666666667,
+          "defended_clean": 0.6666666666666666,
+          "attacked": 0.6,
+          "transfer_defended": 0.6666666666666666,
+          "adaptive_defended": 0.4444444444444444
+        },
+        "clean_harmed": 9,
+        "clean_recovered": 0,
+        "asr_original": {
+          "successes": 12,
+          "denominator": 39,
+          "asr": 0.3076923076923077
+        },
+        "asr_transfer_defended": {
+          "successes": 0,
+          "denominator": 30,
+          "asr": 0.0
+        },
+        "asr_adaptive_defended": {
+          "successes": 10,
+          "denominator": 30,
+          "asr": 0.3333333333333333
+        },
+        "common_clean_correct": {
+          "attacked": {
+            "successes": 5,
+            "denominator": 30,
+            "asr": 0.16666666666666666
+          },
+          "transfer_defended": {
+            "successes": 0,
+            "denominator": 30,
+            "asr": 0.0
+          },
+          "adaptive_defended": {
+            "successes": 10,
+            "denominator": 30,
+            "asr": 0.3333333333333333
+          }
+        }
+      },
+      "DDG": {
+        "samples": 102,
+        "accuracy": {
+          "clean": 0.37254901960784315,
+          "defended_clean": 0.0392156862745098,
+          "attacked": 0.09803921568627451,
+          "transfer_defended": 0.00980392156862745,
+          "adaptive_defended": 0.0
+        },
+        "clean_harmed": 34,
+        "clean_recovered": 0,
+        "asr_original": {
+          "successes": 28,
+          "denominator": 38,
+          "asr": 0.7368421052631579
+        },
+        "asr_transfer_defended": {
+          "successes": 3,
+          "denominator": 4,
+          "asr": 0.75
+        },
+        "asr_adaptive_defended": {
+          "successes": 4,
+          "denominator": 4,
+          "asr": 1.0
+        },
+        "common_clean_correct": {
+          "attacked": {
+            "successes": 1,
+            "denominator": 4,
+            "asr": 0.25
+          },
+          "transfer_defended": {
+            "successes": 3,
+            "denominator": 4,
+            "asr": 0.75
+          },
+          "adaptive_defended": {
+            "successes": 4,
+            "denominator": 4,
+            "asr": 1.0
+          }
+        }
+      },
+      "Recreational": {
+        "samples": 89,
+        "accuracy": {
+          "clean": 0.9775280898876404,
+          "defended_clean": 0.7415730337078652,
+          "attacked": 0.8202247191011236,
+          "transfer_defended": 0.6966292134831461,
+          "adaptive_defended": 0.43820224719101125
+        },
+        "clean_harmed": 22,
+        "clean_recovered": 1,
+        "asr_original": {
+          "successes": 14,
+          "denominator": 87,
+          "asr": 0.16091954022988506
+        },
+        "asr_transfer_defended": {
+          "successes": 4,
+          "denominator": 66,
+          "asr": 0.06060606060606061
+        },
+        "asr_adaptive_defended": {
+          "successes": 27,
+          "denominator": 66,
+          "asr": 0.4090909090909091
+        },
+        "common_clean_correct": {
+          "attacked": {
+            "successes": 8,
+            "denominator": 65,
+            "asr": 0.12307692307692308
+          },
+          "transfer_defended": {
+            "successes": 3,
+            "denominator": 65,
+            "asr": 0.046153846153846156
+          },
+          "adaptive_defended": {
+            "successes": 26,
+            "denominator": 65,
+            "asr": 0.4
+          }
+        }
+      },
+      "Sailboat": {
+        "samples": 74,
+        "accuracy": {
+          "clean": 0.12162162162162163,
+          "defended_clean": 0.21621621621621623,
+          "attacked": 0.04054054054054054,
+          "transfer_defended": 0.13513513513513514,
+          "adaptive_defended": 0.05405405405405406
+        },
+        "clean_harmed": 2,
+        "clean_recovered": 9,
+        "asr_original": {
+          "successes": 6,
+          "denominator": 9,
+          "asr": 0.6666666666666666
+        },
+        "asr_transfer_defended": {
+          "successes": 6,
+          "denominator": 16,
+          "asr": 0.375
+        },
+        "asr_adaptive_defended": {
+          "successes": 12,
+          "denominator": 16,
+          "asr": 0.75
+        },
+        "common_clean_correct": {
+          "attacked": {
+            "successes": 4,
+            "denominator": 7,
+            "asr": 0.5714285714285714
+          },
+          "transfer_defended": {
+            "successes": 2,
+            "denominator": 7,
+            "asr": 0.2857142857142857
+          },
+          "adaptive_defended": {
+            "successes": 3,
+            "denominator": 7,
+            "asr": 0.42857142857142855
+          }
+        }
+      },
+      "Submarine": {
+        "samples": 66,
+        "accuracy": {
+          "clean": 0.5909090909090909,
+          "defended_clean": 0.45454545454545453,
+          "attacked": 0.3484848484848485,
+          "transfer_defended": 0.3787878787878788,
+          "adaptive_defended": 0.21212121212121213
+        },
+        "clean_harmed": 10,
+        "clean_recovered": 1,
+        "asr_original": {
+          "successes": 16,
+          "denominator": 39,
+          "asr": 0.41025641025641024
+        },
+        "asr_transfer_defended": {
+          "successes": 5,
+          "denominator": 30,
+          "asr": 0.16666666666666666
+        },
+        "asr_adaptive_defended": {
+          "successes": 16,
+          "denominator": 30,
+          "asr": 0.5333333333333333
+        },
+        "common_clean_correct": {
+          "attacked": {
+            "successes": 11,
+            "denominator": 29,
+            "asr": 0.3793103448275862
+          },
+          "transfer_defended": {
+            "successes": 5,
+            "denominator": 29,
+            "asr": 0.1724137931034483
+          },
+          "adaptive_defended": {
+            "successes": 15,
+            "denominator": 29,
+            "asr": 0.5172413793103449
+          }
+        }
+      },
+      "Tug": {
+        "samples": 68,
+        "accuracy": {
+          "clean": 0.5735294117647058,
+          "defended_clean": 0.9264705882352942,
+          "attacked": 0.3088235294117647,
+          "transfer_defended": 0.9117647058823529,
+          "adaptive_defended": 0.8235294117647058
+        },
+        "clean_harmed": 0,
+        "clean_recovered": 24,
+        "asr_original": {
+          "successes": 18,
+          "denominator": 39,
+          "asr": 0.46153846153846156
+        },
+        "asr_transfer_defended": {
+          "successes": 1,
+          "denominator": 63,
+          "asr": 0.015873015873015872
+        },
+        "asr_adaptive_defended": {
+          "successes": 7,
+          "denominator": 63,
+          "asr": 0.1111111111111111
+        },
+        "common_clean_correct": {
+          "attacked": {
+            "successes": 18,
+            "denominator": 39,
+            "asr": 0.46153846153846156
+          },
+          "transfer_defended": {
+            "successes": 0,
+            "denominator": 39,
+            "asr": 0.0
+          },
+          "adaptive_defended": {
+            "successes": 1,
+            "denominator": 39,
+            "asr": 0.02564102564102564
+          }
+        }
+      }
+    }
+  },
+  {
+    "model": "cnn",
+    "epsilon": 0.03,
+    "overall": {
+      "samples": 781,
+      "accuracy": {
+        "clean": 0.645326504481434,
+        "defended_clean": 0.5364916773367477,
+        "attacked": 0.24327784891165172,
+        "transfer_defended": 0.3687580025608195,
+        "adaptive_defended": 0.11011523687580026
+      },
+      "clean_harmed": 143,
+      "clean_recovered": 58,
+      "asr_original": {
+        "successes": 314,
+        "denominator": 504,
+        "asr": 0.623015873015873
+      },
+      "asr_transfer_defended": {
+        "successes": 131,
+        "denominator": 419,
+        "asr": 0.3126491646778043
+      },
+      "asr_adaptive_defended": {
+        "successes": 333,
+        "denominator": 419,
+        "asr": 0.7947494033412887
+      },
+      "common_clean_correct": {
+        "attacked": {
+          "successes": 191,
+          "denominator": 361,
+          "asr": 0.5290858725761773
+        },
+        "transfer_defended": {
+          "successes": 114,
+          "denominator": 361,
+          "asr": 0.3157894736842105
+        },
+        "adaptive_defended": {
+          "successes": 279,
+          "denominator": 361,
+          "asr": 0.7728531855955678
+        }
+      }
+    },
+    "classes": {
+      "Aircraft Carrier": {
+        "samples": 59,
+        "accuracy": {
+          "clean": 0.7288135593220338,
+          "defended_clean": 0.5932203389830508,
+          "attacked": 0.1694915254237288,
+          "transfer_defended": 0.11864406779661017,
+          "adaptive_defended": 0.05084745762711865
+        },
+        "clean_harmed": 12,
+        "clean_recovered": 4,
+        "asr_original": {
+          "successes": 33,
+          "denominator": 43,
+          "asr": 0.7674418604651163
+        },
+        "asr_transfer_defended": {
+          "successes": 28,
+          "denominator": 35,
+          "asr": 0.8
+        },
+        "asr_adaptive_defended": {
+          "successes": 32,
+          "denominator": 35,
+          "asr": 0.9142857142857143
+        },
+        "common_clean_correct": {
+          "attacked": {
+            "successes": 21,
+            "denominator": 31,
+            "asr": 0.6774193548387096
+          },
+          "transfer_defended": {
+            "successes": 26,
+            "denominator": 31,
+            "asr": 0.8387096774193549
+          },
+          "adaptive_defended": {
+            "successes": 28,
+            "denominator": 31,
+            "asr": 0.9032258064516129
+          }
+        }
+      },
+      "Bulkers": {
+        "samples": 97,
+        "accuracy": {
+          "clean": 0.7422680412371134,
+          "defended_clean": 0.28865979381443296,
+          "attacked": 0.21649484536082475,
+          "transfer_defended": 0.13402061855670103,
+          "adaptive_defended": 0.0
+        },
+        "clean_harmed": 45,
+        "clean_recovered": 1,
+        "asr_original": {
+          "successes": 51,
+          "denominator": 72,
+          "asr": 0.7083333333333334
+        },
+        "asr_transfer_defended": {
+          "successes": 15,
+          "denominator": 28,
+          "asr": 0.5357142857142857
+        },
+        "asr_adaptive_defended": {
+          "successes": 28,
+          "denominator": 28,
+          "asr": 1.0
+        },
+        "common_clean_correct": {
+          "attacked": {
+            "successes": 12,
+            "denominator": 27,
+            "asr": 0.4444444444444444
+          },
+          "transfer_defended": {
+            "successes": 14,
+            "denominator": 27,
+            "asr": 0.5185185185185185
+          },
+          "adaptive_defended": {
+            "successes": 27,
+            "denominator": 27,
+            "asr": 1.0
+          }
+        }
+      },
+      "Car Carrier": {
+        "samples": 95,
+        "accuracy": {
+          "clean": 0.9368421052631579,
+          "defended_clean": 0.8421052631578947,
+          "attacked": 0.42105263157894735,
+          "transfer_defended": 0.5263157894736842,
+          "adaptive_defended": 0.07368421052631578
+        },
+        "clean_harmed": 9,
+        "clean_recovered": 0,
+        "asr_original": {
+          "successes": 49,
+          "denominator": 89,
+          "asr": 0.550561797752809
+        },
+        "asr_transfer_defended": {
+          "successes": 30,
+          "denominator": 80,
+          "asr": 0.375
+        },
+        "asr_adaptive_defended": {
+          "successes": 73,
+          "denominator": 80,
+          "asr": 0.9125
+        },
+        "common_clean_correct": {
+          "attacked": {
+            "successes": 41,
+            "denominator": 80,
+            "asr": 0.5125
+          },
+          "transfer_defended": {
+            "successes": 30,
+            "denominator": 80,
+            "asr": 0.375
+          },
+          "adaptive_defended": {
+            "successes": 73,
+            "denominator": 80,
+            "asr": 0.9125
+          }
+        }
+      },
+      "Container Ship": {
+        "samples": 86,
+        "accuracy": {
+          "clean": 0.5697674418604651,
+          "defended_clean": 0.7790697674418605,
+          "attacked": 0.37209302325581395,
+          "transfer_defended": 0.5930232558139535,
+          "adaptive_defended": 0.2441860465116279
+        },
+        "clean_harmed": 0,
+        "clean_recovered": 18,
+        "asr_original": {
+          "successes": 17,
+          "denominator": 49,
+          "asr": 0.3469387755102041
+        },
+        "asr_transfer_defended": {
+          "successes": 16,
+          "denominator": 67,
+          "asr": 0.23880597014925373
+        },
+        "asr_adaptive_defended": {
+          "successes": 46,
+          "denominator": 67,
+          "asr": 0.6865671641791045
+        },
+        "common_clean_correct": {
+          "attacked": {
+            "successes": 17,
+            "denominator": 49,
+            "asr": 0.3469387755102041
+          },
+          "transfer_defended": {
+            "successes": 10,
+            "denominator": 49,
+            "asr": 0.20408163265306123
+          },
+          "adaptive_defended": {
+            "successes": 28,
+            "denominator": 49,
+            "asr": 0.5714285714285714
+          }
+        }
+      },
+      "Cruise": {
+        "samples": 45,
+        "accuracy": {
+          "clean": 0.8666666666666667,
+          "defended_clean": 0.6666666666666666,
+          "attacked": 0.4666666666666667,
+          "transfer_defended": 0.5555555555555556,
+          "adaptive_defended": 0.2222222222222222
+        },
+        "clean_harmed": 9,
+        "clean_recovered": 0,
+        "asr_original": {
+          "successes": 18,
+          "denominator": 39,
+          "asr": 0.46153846153846156
+        },
+        "asr_transfer_defended": {
+          "successes": 5,
+          "denominator": 30,
+          "asr": 0.16666666666666666
+        },
+        "asr_adaptive_defended": {
+          "successes": 20,
+          "denominator": 30,
+          "asr": 0.6666666666666666
+        },
+        "common_clean_correct": {
+          "attacked": {
+            "successes": 11,
+            "denominator": 30,
+            "asr": 0.36666666666666664
+          },
+          "transfer_defended": {
+            "successes": 5,
+            "denominator": 30,
+            "asr": 0.16666666666666666
+          },
+          "adaptive_defended": {
+            "successes": 20,
+            "denominator": 30,
+            "asr": 0.6666666666666666
+          }
+        }
+      },
+      "DDG": {
+        "samples": 102,
+        "accuracy": {
+          "clean": 0.37254901960784315,
+          "defended_clean": 0.0392156862745098,
+          "attacked": 0.0,
+          "transfer_defended": 0.0,
+          "adaptive_defended": 0.0
+        },
+        "clean_harmed": 34,
+        "clean_recovered": 0,
+        "asr_original": {
+          "successes": 38,
+          "denominator": 38,
+          "asr": 1.0
+        },
+        "asr_transfer_defended": {
+          "successes": 4,
+          "denominator": 4,
+          "asr": 1.0
+        },
+        "asr_adaptive_defended": {
+          "successes": 4,
+          "denominator": 4,
+          "asr": 1.0
+        },
+        "common_clean_correct": {
+          "attacked": {
+            "successes": 4,
+            "denominator": 4,
+            "asr": 1.0
+          },
+          "transfer_defended": {
+            "successes": 4,
+            "denominator": 4,
+            "asr": 1.0
+          },
+          "adaptive_defended": {
+            "successes": 4,
+            "denominator": 4,
+            "asr": 1.0
+          }
+        }
+      },
+      "Recreational": {
+        "samples": 89,
+        "accuracy": {
+          "clean": 0.9775280898876404,
+          "defended_clean": 0.7415730337078652,
+          "attacked": 0.5393258426966292,
+          "transfer_defended": 0.6179775280898876,
+          "adaptive_defended": 0.19101123595505617
+        },
+        "clean_harmed": 22,
+        "clean_recovered": 1,
+        "asr_original": {
+          "successes": 39,
+          "denominator": 87,
+          "asr": 0.4482758620689655
+        },
+        "asr_transfer_defended": {
+          "successes": 11,
+          "denominator": 66,
+          "asr": 0.16666666666666666
+        },
+        "asr_adaptive_defended": {
+          "successes": 49,
+          "denominator": 66,
+          "asr": 0.7424242424242424
+        },
+        "common_clean_correct": {
+          "attacked": {
+            "successes": 26,
+            "denominator": 65,
+            "asr": 0.4
+          },
+          "transfer_defended": {
+            "successes": 10,
+            "denominator": 65,
+            "asr": 0.15384615384615385
+          },
+          "adaptive_defended": {
+            "successes": 48,
+            "denominator": 65,
+            "asr": 0.7384615384615385
+          }
+        }
+      },
+      "Sailboat": {
+        "samples": 74,
+        "accuracy": {
+          "clean": 0.12162162162162163,
+          "defended_clean": 0.21621621621621623,
+          "attacked": 0.0,
+          "transfer_defended": 0.12162162162162163,
+          "adaptive_defended": 0.0
+        },
+        "clean_harmed": 2,
+        "clean_recovered": 9,
+        "asr_original": {
+          "successes": 9,
+          "denominator": 9,
+          "asr": 1.0
+        },
+        "asr_transfer_defended": {
+          "successes": 7,
+          "denominator": 16,
+          "asr": 0.4375
+        },
+        "asr_adaptive_defended": {
+          "successes": 16,
+          "denominator": 16,
+          "asr": 1.0
+        },
+        "common_clean_correct": {
+          "attacked": {
+            "successes": 7,
+            "denominator": 7,
+            "asr": 1.0
+          },
+          "transfer_defended": {
+            "successes": 2,
+            "denominator": 7,
+            "asr": 0.2857142857142857
+          },
+          "adaptive_defended": {
+            "successes": 7,
+            "denominator": 7,
+            "asr": 1.0
+          }
+        }
+      },
+      "Submarine": {
+        "samples": 66,
+        "accuracy": {
+          "clean": 0.5909090909090909,
+          "defended_clean": 0.45454545454545453,
+          "attacked": 0.25757575757575757,
+          "transfer_defended": 0.2727272727272727,
+          "adaptive_defended": 0.045454545454545456
+        },
+        "clean_harmed": 10,
+        "clean_recovered": 1,
+        "asr_original": {
+          "successes": 22,
+          "denominator": 39,
+          "asr": 0.5641025641025641
+        },
+        "asr_transfer_defended": {
+          "successes": 12,
+          "denominator": 30,
+          "asr": 0.4
+        },
+        "asr_adaptive_defended": {
+          "successes": 27,
+          "denominator": 30,
+          "asr": 0.9
+        },
+        "common_clean_correct": {
+          "attacked": {
+            "successes": 14,
+            "denominator": 29,
+            "asr": 0.4827586206896552
+          },
+          "transfer_defended": {
+            "successes": 12,
+            "denominator": 29,
+            "asr": 0.41379310344827586
+          },
+          "adaptive_defended": {
+            "successes": 26,
+            "denominator": 29,
+            "asr": 0.896551724137931
+          }
+        }
+      },
+      "Tug": {
+        "samples": 68,
+        "accuracy": {
+          "clean": 0.5735294117647058,
+          "defended_clean": 0.9264705882352942,
+          "attacked": 0.014705882352941176,
+          "transfer_defended": 0.8823529411764706,
+          "adaptive_defended": 0.36764705882352944
+        },
+        "clean_harmed": 0,
+        "clean_recovered": 24,
+        "asr_original": {
+          "successes": 38,
+          "denominator": 39,
+          "asr": 0.9743589743589743
+        },
+        "asr_transfer_defended": {
+          "successes": 3,
+          "denominator": 63,
+          "asr": 0.047619047619047616
+        },
+        "asr_adaptive_defended": {
+          "successes": 38,
+          "denominator": 63,
+          "asr": 0.6031746031746031
+        },
+        "common_clean_correct": {
+          "attacked": {
+            "successes": 38,
+            "denominator": 39,
+            "asr": 0.9743589743589743
+          },
+          "transfer_defended": {
+            "successes": 1,
+            "denominator": 39,
+            "asr": 0.02564102564102564
+          },
+          "adaptive_defended": {
+            "successes": 18,
+            "denominator": 39,
+            "asr": 0.46153846153846156
+          }
+        }
+      }
+    }
+  },
+  {
+    "model": "cnn",
+    "epsilon": 0.05,
+    "overall": {
+      "samples": 781,
+      "accuracy": {
+        "clean": 0.645326504481434,
+        "defended_clean": 0.5364916773367477,
+        "attacked": 0.2023047375160051,
+        "transfer_defended": 0.3060179257362356,
+        "adaptive_defended": 0.06658130601792574
+      },
+      "clean_harmed": 143,
+      "clean_recovered": 58,
+      "asr_original": {
+        "successes": 347,
+        "denominator": 504,
+        "asr": 0.6884920634920635
+      },
+      "asr_transfer_defended": {
+        "successes": 180,
+        "denominator": 419,
+        "asr": 0.4295942720763723
+      },
+      "asr_adaptive_defended": {
+        "successes": 367,
+        "denominator": 419,
+        "asr": 0.8758949880668258
+      },
+      "common_clean_correct": {
+        "attacked": {
+          "successes": 216,
+          "denominator": 361,
+          "asr": 0.5983379501385041
+        },
+        "transfer_defended": {
+          "successes": 153,
+          "denominator": 361,
+          "asr": 0.42382271468144045
+        },
+        "adaptive_defended": {
+          "successes": 310,
+          "denominator": 361,
+          "asr": 0.8587257617728532
+        }
+      }
+    },
+    "classes": {
+      "Aircraft Carrier": {
+        "samples": 59,
+        "accuracy": {
+          "clean": 0.7288135593220338,
+          "defended_clean": 0.5932203389830508,
+          "attacked": 0.13559322033898305,
+          "transfer_defended": 0.01694915254237288,
+          "adaptive_defended": 0.05084745762711865
+        },
+        "clean_harmed": 12,
+        "clean_recovered": 4,
+        "asr_original": {
+          "successes": 35,
+          "denominator": 43,
+          "asr": 0.813953488372093
+        },
+        "asr_transfer_defended": {
+          "successes": 34,
+          "denominator": 35,
+          "asr": 0.9714285714285714
+        },
+        "asr_adaptive_defended": {
+          "successes": 32,
+          "denominator": 35,
+          "asr": 0.9142857142857143
+        },
+        "common_clean_correct": {
+          "attacked": {
+            "successes": 23,
+            "denominator": 31,
+            "asr": 0.7419354838709677
+          },
+          "transfer_defended": {
+            "successes": 31,
+            "denominator": 31,
+            "asr": 1.0
+          },
+          "adaptive_defended": {
+            "successes": 28,
+            "denominator": 31,
+            "asr": 0.9032258064516129
+          }
+        }
+      },
+      "Bulkers": {
+        "samples": 97,
+        "accuracy": {
+          "clean": 0.7422680412371134,
+          "defended_clean": 0.28865979381443296,
+          "attacked": 0.14432989690721648,
+          "transfer_defended": 0.1134020618556701,
+          "adaptive_defended": 0.0
+        },
+        "clean_harmed": 45,
+        "clean_recovered": 1,
+        "asr_original": {
+          "successes": 58,
+          "denominator": 72,
+          "asr": 0.8055555555555556
+        },
+        "asr_transfer_defended": {
+          "successes": 17,
+          "denominator": 28,
+          "asr": 0.6071428571428571
+        },
+        "asr_adaptive_defended": {
+          "successes": 28,
+          "denominator": 28,
+          "asr": 1.0
+        },
+        "common_clean_correct": {
+          "attacked": {
+            "successes": 16,
+            "denominator": 27,
+            "asr": 0.5925925925925926
+          },
+          "transfer_defended": {
+            "successes": 16,
+            "denominator": 27,
+            "asr": 0.5925925925925926
+          },
+          "adaptive_defended": {
+            "successes": 27,
+            "denominator": 27,
+            "asr": 1.0
+          }
+        }
+      },
+      "Car Carrier": {
+        "samples": 95,
+        "accuracy": {
+          "clean": 0.9368421052631579,
+          "defended_clean": 0.8421052631578947,
+          "attacked": 0.2736842105263158,
+          "transfer_defended": 0.42105263157894735,
+          "adaptive_defended": 0.031578947368421054
+        },
+        "clean_harmed": 9,
+        "clean_recovered": 0,
+        "asr_original": {
+          "successes": 63,
+          "denominator": 89,
+          "asr": 0.7078651685393258
+        },
+        "asr_transfer_defended": {
+          "successes": 40,
+          "denominator": 80,
+          "asr": 0.5
+        },
+        "asr_adaptive_defended": {
+          "successes": 77,
+          "denominator": 80,
+          "asr": 0.9625
+        },
+        "common_clean_correct": {
+          "attacked": {
+            "successes": 54,
+            "denominator": 80,
+            "asr": 0.675
+          },
+          "transfer_defended": {
+            "successes": 40,
+            "denominator": 80,
+            "asr": 0.5
+          },
+          "adaptive_defended": {
+            "successes": 77,
+            "denominator": 80,
+            "asr": 0.9625
+          }
+        }
+      },
+      "Container Ship": {
+        "samples": 86,
+        "accuracy": {
+          "clean": 0.5697674418604651,
+          "defended_clean": 0.7790697674418605,
+          "attacked": 0.3488372093023256,
+          "transfer_defended": 0.5232558139534884,
+          "adaptive_defended": 0.23255813953488372
+        },
+        "clean_harmed": 0,
+        "clean_recovered": 18,
+        "asr_original": {
+          "successes": 19,
+          "denominator": 49,
+          "asr": 0.3877551020408163
+        },
+        "asr_transfer_defended": {
+          "successes": 22,
+          "denominator": 67,
+          "asr": 0.3283582089552239
+        },
+        "asr_adaptive_defended": {
+          "successes": 47,
+          "denominator": 67,
+          "asr": 0.7014925373134329
+        },
+        "common_clean_correct": {
+          "attacked": {
+            "successes": 19,
+            "denominator": 49,
+            "asr": 0.3877551020408163
+          },
+          "transfer_defended": {
+            "successes": 12,
+            "denominator": 49,
+            "asr": 0.24489795918367346
+          },
+          "adaptive_defended": {
+            "successes": 29,
+            "denominator": 49,
+            "asr": 0.5918367346938775
+          }
+        }
+      },
+      "Cruise": {
+        "samples": 45,
+        "accuracy": {
+          "clean": 0.8666666666666667,
+          "defended_clean": 0.6666666666666666,
+          "attacked": 0.4666666666666667,
+          "transfer_defended": 0.5111111111111111,
+          "adaptive_defended": 0.15555555555555556
+        },
+        "clean_harmed": 9,
+        "clean_recovered": 0,
+        "asr_original": {
+          "successes": 18,
+          "denominator": 39,
+          "asr": 0.46153846153846156
+        },
+        "asr_transfer_defended": {
+          "successes": 7,
+          "denominator": 30,
+          "asr": 0.23333333333333334
+        },
+        "asr_adaptive_defended": {
+          "successes": 23,
+          "denominator": 30,
+          "asr": 0.7666666666666667
+        },
+        "common_clean_correct": {
+          "attacked": {
+            "successes": 11,
+            "denominator": 30,
+            "asr": 0.36666666666666664
+          },
+          "transfer_defended": {
+            "successes": 7,
+            "denominator": 30,
+            "asr": 0.23333333333333334
+          },
+          "adaptive_defended": {
+            "successes": 23,
+            "denominator": 30,
+            "asr": 0.7666666666666667
+          }
+        }
+      },
+      "DDG": {
+        "samples": 102,
+        "accuracy": {
+          "clean": 0.37254901960784315,
+          "defended_clean": 0.0392156862745098,
+          "attacked": 0.0,
+          "transfer_defended": 0.0,
+          "adaptive_defended": 0.0
+        },
+        "clean_harmed": 34,
+        "clean_recovered": 0,
+        "asr_original": {
+          "successes": 38,
+          "denominator": 38,
+          "asr": 1.0
+        },
+        "asr_transfer_defended": {
+          "successes": 4,
+          "denominator": 4,
+          "asr": 1.0
+        },
+        "asr_adaptive_defended": {
+          "successes": 4,
+          "denominator": 4,
+          "asr": 1.0
+        },
+        "common_clean_correct": {
+          "attacked": {
+            "successes": 4,
+            "denominator": 4,
+            "asr": 1.0
+          },
+          "transfer_defended": {
+            "successes": 4,
+            "denominator": 4,
+            "asr": 1.0
+          },
+          "adaptive_defended": {
+            "successes": 4,
+            "denominator": 4,
+            "asr": 1.0
+          }
+        }
+      },
+      "Recreational": {
+        "samples": 89,
+        "accuracy": {
+          "clean": 0.9775280898876404,
+          "defended_clean": 0.7415730337078652,
+          "attacked": 0.47191011235955055,
+          "transfer_defended": 0.5280898876404494,
+          "adaptive_defended": 0.0449438202247191
+        },
+        "clean_harmed": 22,
+        "clean_recovered": 1,
+        "asr_original": {
+          "successes": 45,
+          "denominator": 87,
+          "asr": 0.5172413793103449
+        },
+        "asr_transfer_defended": {
+          "successes": 19,
+          "denominator": 66,
+          "asr": 0.2878787878787879
+        },
+        "asr_adaptive_defended": {
+          "successes": 62,
+          "denominator": 66,
+          "asr": 0.9393939393939394
+        },
+        "common_clean_correct": {
+          "attacked": {
+            "successes": 28,
+            "denominator": 65,
+            "asr": 0.4307692307692308
+          },
+          "transfer_defended": {
+            "successes": 18,
+            "denominator": 65,
+            "asr": 0.27692307692307694
+          },
+          "adaptive_defended": {
+            "successes": 61,
+            "denominator": 65,
+            "asr": 0.9384615384615385
+          }
+        }
+      },
+      "Sailboat": {
+        "samples": 74,
+        "accuracy": {
+          "clean": 0.12162162162162163,
+          "defended_clean": 0.21621621621621623,
+          "attacked": 0.0,
+          "transfer_defended": 0.08108108108108109,
+          "adaptive_defended": 0.0
+        },
+        "clean_harmed": 2,
+        "clean_recovered": 9,
+        "asr_original": {
+          "successes": 9,
+          "denominator": 9,
+          "asr": 1.0
+        },
+        "asr_transfer_defended": {
+          "successes": 10,
+          "denominator": 16,
+          "asr": 0.625
+        },
+        "asr_adaptive_defended": {
+          "successes": 16,
+          "denominator": 16,
+          "asr": 1.0
+        },
+        "common_clean_correct": {
+          "attacked": {
+            "successes": 7,
+            "denominator": 7,
+            "asr": 1.0
+          },
+          "transfer_defended": {
+            "successes": 3,
+            "denominator": 7,
+            "asr": 0.42857142857142855
+          },
+          "adaptive_defended": {
+            "successes": 7,
+            "denominator": 7,
+            "asr": 1.0
+          }
+        }
+      },
+      "Submarine": {
+        "samples": 66,
+        "accuracy": {
+          "clean": 0.5909090909090909,
+          "defended_clean": 0.45454545454545453,
+          "attacked": 0.24242424242424243,
+          "transfer_defended": 0.21212121212121213,
+          "adaptive_defended": 0.0
+        },
+        "clean_harmed": 10,
+        "clean_recovered": 1,
+        "asr_original": {
+          "successes": 24,
+          "denominator": 39,
+          "asr": 0.6153846153846154
+        },
+        "asr_transfer_defended": {
+          "successes": 16,
+          "denominator": 30,
+          "asr": 0.5333333333333333
+        },
+        "asr_adaptive_defended": {
+          "successes": 30,
+          "denominator": 30,
+          "asr": 1.0
+        },
+        "common_clean_correct": {
+          "attacked": {
+            "successes": 16,
+            "denominator": 29,
+            "asr": 0.5517241379310345
+          },
+          "transfer_defended": {
+            "successes": 16,
+            "denominator": 29,
+            "asr": 0.5517241379310345
+          },
+          "adaptive_defended": {
+            "successes": 29,
+            "denominator": 29,
+            "asr": 1.0
+          }
+        }
+      },
+      "Tug": {
+        "samples": 68,
+        "accuracy": {
+          "clean": 0.5735294117647058,
+          "defended_clean": 0.9264705882352942,
+          "attacked": 0.014705882352941176,
+          "transfer_defended": 0.7647058823529411,
+          "adaptive_defended": 0.22058823529411764
+        },
+        "clean_harmed": 0,
+        "clean_recovered": 24,
+        "asr_original": {
+          "successes": 38,
+          "denominator": 39,
+          "asr": 0.9743589743589743
+        },
+        "asr_transfer_defended": {
+          "successes": 11,
+          "denominator": 63,
+          "asr": 0.1746031746031746
+        },
+        "asr_adaptive_defended": {
+          "successes": 48,
+          "denominator": 63,
+          "asr": 0.7619047619047619
+        },
+        "common_clean_correct": {
+          "attacked": {
+            "successes": 38,
+            "denominator": 39,
+            "asr": 0.9743589743589743
+          },
+          "transfer_defended": {
+            "successes": 6,
+            "denominator": 39,
+            "asr": 0.15384615384615385
+          },
+          "adaptive_defended": {
+            "successes": 25,
+            "denominator": 39,
+            "asr": 0.6410256410256411
+          }
+        }
+      }
+    }
+  },
+  {
+    "model": "mobilenet",
+    "epsilon": 0.0,
+    "overall": {
+      "samples": 781,
+      "accuracy": {
+        "clean": 0.7848911651728553,
+        "defended_clean": 0.7964148527528809,
+        "attacked": 0.7848911651728553,
+        "transfer_defended": 0.7964148527528809,
+        "adaptive_defended": 0.7964148527528809
+      },
+      "clean_harmed": 38,
+      "clean_recovered": 47,
+      "asr_original": {
+        "successes": 0,
+        "denominator": 613,
+        "asr": 0.0
+      },
+      "asr_transfer_defended": {
+        "successes": 0,
+        "denominator": 622,
+        "asr": 0.0
+      },
+      "asr_adaptive_defended": {
+        "successes": 0,
+        "denominator": 622,
+        "asr": 0.0
+      },
+      "common_clean_correct": {
+        "attacked": {
+          "successes": 0,
+          "denominator": 575,
+          "asr": 0.0
+        },
+        "transfer_defended": {
+          "successes": 0,
+          "denominator": 575,
+          "asr": 0.0
+        },
+        "adaptive_defended": {
+          "successes": 0,
+          "denominator": 575,
+          "asr": 0.0
+        }
+      }
+    },
+    "classes": {
+      "Aircraft Carrier": {
+        "samples": 59,
+        "accuracy": {
+          "clean": 0.9152542372881356,
+          "defended_clean": 0.9322033898305084,
+          "attacked": 0.9152542372881356,
+          "transfer_defended": 0.9322033898305084,
+          "adaptive_defended": 0.9322033898305084
+        },
+        "clean_harmed": 0,
+        "clean_recovered": 1,
+        "asr_original": {
+          "successes": 0,
+          "denominator": 54,
+          "asr": 0.0
+        },
+        "asr_transfer_defended": {
+          "successes": 0,
+          "denominator": 55,
+          "asr": 0.0
+        },
+        "asr_adaptive_defended": {
+          "successes": 0,
+          "denominator": 55,
+          "asr": 0.0
+        },
+        "common_clean_correct": {
+          "attacked": {
+            "successes": 0,
+            "denominator": 54,
+            "asr": 0.0
+          },
+          "transfer_defended": {
+            "successes": 0,
+            "denominator": 54,
+            "asr": 0.0
+          },
+          "adaptive_defended": {
+            "successes": 0,
+            "denominator": 54,
+            "asr": 0.0
+          }
+        }
+      },
+      "Bulkers": {
+        "samples": 97,
+        "accuracy": {
+          "clean": 0.9896907216494846,
+          "defended_clean": 0.8247422680412371,
+          "attacked": 0.9896907216494846,
+          "transfer_defended": 0.8247422680412371,
+          "adaptive_defended": 0.8247422680412371
+        },
+        "clean_harmed": 16,
+        "clean_recovered": 0,
+        "asr_original": {
+          "successes": 0,
+          "denominator": 96,
+          "asr": 0.0
+        },
+        "asr_transfer_defended": {
+          "successes": 0,
+          "denominator": 80,
+          "asr": 0.0
+        },
+        "asr_adaptive_defended": {
+          "successes": 0,
+          "denominator": 80,
+          "asr": 0.0
+        },
+        "common_clean_correct": {
+          "attacked": {
+            "successes": 0,
+            "denominator": 80,
+            "asr": 0.0
+          },
+          "transfer_defended": {
+            "successes": 0,
+            "denominator": 80,
+            "asr": 0.0
+          },
+          "adaptive_defended": {
+            "successes": 0,
+            "denominator": 80,
+            "asr": 0.0
+          }
+        }
+      },
+      "Car Carrier": {
+        "samples": 95,
+        "accuracy": {
+          "clean": 0.9789473684210527,
+          "defended_clean": 0.9578947368421052,
+          "attacked": 0.9789473684210527,
+          "transfer_defended": 0.9578947368421052,
+          "adaptive_defended": 0.9578947368421052
+        },
+        "clean_harmed": 2,
+        "clean_recovered": 0,
+        "asr_original": {
+          "successes": 0,
+          "denominator": 93,
+          "asr": 0.0
+        },
+        "asr_transfer_defended": {
+          "successes": 0,
+          "denominator": 91,
+          "asr": 0.0
+        },
+        "asr_adaptive_defended": {
+          "successes": 0,
+          "denominator": 91,
+          "asr": 0.0
+        },
+        "common_clean_correct": {
+          "attacked": {
+            "successes": 0,
+            "denominator": 91,
+            "asr": 0.0
+          },
+          "transfer_defended": {
+            "successes": 0,
+            "denominator": 91,
+            "asr": 0.0
+          },
+          "adaptive_defended": {
+            "successes": 0,
+            "denominator": 91,
+            "asr": 0.0
+          }
+        }
+      },
+      "Container Ship": {
+        "samples": 86,
+        "accuracy": {
+          "clean": 0.7325581395348837,
+          "defended_clean": 0.7906976744186046,
+          "attacked": 0.7325581395348837,
+          "transfer_defended": 0.7906976744186046,
+          "adaptive_defended": 0.7906976744186046
+        },
+        "clean_harmed": 1,
+        "clean_recovered": 6,
+        "asr_original": {
+          "successes": 0,
+          "denominator": 63,
+          "asr": 0.0
+        },
+        "asr_transfer_defended": {
+          "successes": 0,
+          "denominator": 68,
+          "asr": 0.0
+        },
+        "asr_adaptive_defended": {
+          "successes": 0,
+          "denominator": 68,
+          "asr": 0.0
+        },
+        "common_clean_correct": {
+          "attacked": {
+            "successes": 0,
+            "denominator": 62,
+            "asr": 0.0
+          },
+          "transfer_defended": {
+            "successes": 0,
+            "denominator": 62,
+            "asr": 0.0
+          },
+          "adaptive_defended": {
+            "successes": 0,
+            "denominator": 62,
+            "asr": 0.0
+          }
+        }
+      },
+      "Cruise": {
+        "samples": 45,
+        "accuracy": {
+          "clean": 0.9333333333333333,
+          "defended_clean": 0.9333333333333333,
+          "attacked": 0.9333333333333333,
+          "transfer_defended": 0.9333333333333333,
+          "adaptive_defended": 0.9333333333333333
+        },
+        "clean_harmed": 0,
+        "clean_recovered": 0,
+        "asr_original": {
+          "successes": 0,
+          "denominator": 42,
+          "asr": 0.0
+        },
+        "asr_transfer_defended": {
+          "successes": 0,
+          "denominator": 42,
+          "asr": 0.0
+        },
+        "asr_adaptive_defended": {
+          "successes": 0,
+          "denominator": 42,
+          "asr": 0.0
+        },
+        "common_clean_correct": {
+          "attacked": {
+            "successes": 0,
+            "denominator": 42,
+            "asr": 0.0
+          },
+          "transfer_defended": {
+            "successes": 0,
+            "denominator": 42,
+            "asr": 0.0
+          },
+          "adaptive_defended": {
+            "successes": 0,
+            "denominator": 42,
+            "asr": 0.0
+          }
+        }
+      },
+      "DDG": {
+        "samples": 102,
+        "accuracy": {
+          "clean": 0.5,
+          "defended_clean": 0.5,
+          "attacked": 0.5,
+          "transfer_defended": 0.5,
+          "adaptive_defended": 0.5
+        },
+        "clean_harmed": 5,
+        "clean_recovered": 5,
+        "asr_original": {
+          "successes": 0,
+          "denominator": 51,
+          "asr": 0.0
+        },
+        "asr_transfer_defended": {
+          "successes": 0,
+          "denominator": 51,
+          "asr": 0.0
+        },
+        "asr_adaptive_defended": {
+          "successes": 0,
+          "denominator": 51,
+          "asr": 0.0
+        },
+        "common_clean_correct": {
+          "attacked": {
+            "successes": 0,
+            "denominator": 46,
+            "asr": 0.0
+          },
+          "transfer_defended": {
+            "successes": 0,
+            "denominator": 46,
+            "asr": 0.0
+          },
+          "adaptive_defended": {
+            "successes": 0,
+            "denominator": 46,
+            "asr": 0.0
+          }
+        }
+      },
+      "Recreational": {
+        "samples": 89,
+        "accuracy": {
+          "clean": 0.9662921348314607,
+          "defended_clean": 0.8764044943820225,
+          "attacked": 0.9662921348314607,
+          "transfer_defended": 0.8764044943820225,
+          "adaptive_defended": 0.8764044943820225
+        },
+        "clean_harmed": 9,
+        "clean_recovered": 1,
+        "asr_original": {
+          "successes": 0,
+          "denominator": 86,
+          "asr": 0.0
+        },
+        "asr_transfer_defended": {
+          "successes": 0,
+          "denominator": 78,
+          "asr": 0.0
+        },
+        "asr_adaptive_defended": {
+          "successes": 0,
+          "denominator": 78,
+          "asr": 0.0
+        },
+        "common_clean_correct": {
+          "attacked": {
+            "successes": 0,
+            "denominator": 77,
+            "asr": 0.0
+          },
+          "transfer_defended": {
+            "successes": 0,
+            "denominator": 77,
+            "asr": 0.0
+          },
+          "adaptive_defended": {
+            "successes": 0,
+            "denominator": 77,
+            "asr": 0.0
+          }
+        }
+      },
+      "Sailboat": {
+        "samples": 74,
+        "accuracy": {
+          "clean": 0.3108108108108108,
+          "defended_clean": 0.5405405405405406,
+          "attacked": 0.3108108108108108,
+          "transfer_defended": 0.5405405405405406,
+          "adaptive_defended": 0.5405405405405406
+        },
+        "clean_harmed": 1,
+        "clean_recovered": 18,
+        "asr_original": {
+          "successes": 0,
+          "denominator": 23,
+          "asr": 0.0
+        },
+        "asr_transfer_defended": {
+          "successes": 0,
+          "denominator": 40,
+          "asr": 0.0
+        },
+        "asr_adaptive_defended": {
+          "successes": 0,
+          "denominator": 40,
+          "asr": 0.0
+        },
+        "common_clean_correct": {
+          "attacked": {
+            "successes": 0,
+            "denominator": 22,
+            "asr": 0.0
+          },
+          "transfer_defended": {
+            "successes": 0,
+            "denominator": 22,
+            "asr": 0.0
+          },
+          "adaptive_defended": {
+            "successes": 0,
+            "denominator": 22,
+            "asr": 0.0
+          }
+        }
+      },
+      "Submarine": {
+        "samples": 66,
+        "accuracy": {
+          "clean": 0.9242424242424242,
+          "defended_clean": 0.9545454545454546,
+          "attacked": 0.9242424242424242,
+          "transfer_defended": 0.9545454545454546,
+          "adaptive_defended": 0.9545454545454546
+        },
+        "clean_harmed": 2,
+        "clean_recovered": 4,
+        "asr_original": {
+          "successes": 0,
+          "denominator": 61,
+          "asr": 0.0
+        },
+        "asr_transfer_defended": {
+          "successes": 0,
+          "denominator": 63,
+          "asr": 0.0
+        },
+        "asr_adaptive_defended": {
+          "successes": 0,
+          "denominator": 63,
+          "asr": 0.0
+        },
+        "common_clean_correct": {
+          "attacked": {
+            "successes": 0,
+            "denominator": 59,
+            "asr": 0.0
+          },
+          "transfer_defended": {
+            "successes": 0,
+            "denominator": 59,
+            "asr": 0.0
+          },
+          "adaptive_defended": {
+            "successes": 0,
+            "denominator": 59,
+            "asr": 0.0
+          }
+        }
+      },
+      "Tug": {
+        "samples": 68,
+        "accuracy": {
+          "clean": 0.6470588235294118,
+          "defended_clean": 0.7941176470588235,
+          "attacked": 0.6470588235294118,
+          "transfer_defended": 0.7941176470588235,
+          "adaptive_defended": 0.7941176470588235
+        },
+        "clean_harmed": 2,
+        "clean_recovered": 12,
+        "asr_original": {
+          "successes": 0,
+          "denominator": 44,
+          "asr": 0.0
+        },
+        "asr_transfer_defended": {
+          "successes": 0,
+          "denominator": 54,
+          "asr": 0.0
+        },
+        "asr_adaptive_defended": {
+          "successes": 0,
+          "denominator": 54,
+          "asr": 0.0
+        },
+        "common_clean_correct": {
+          "attacked": {
+            "successes": 0,
+            "denominator": 42,
+            "asr": 0.0
+          },
+          "transfer_defended": {
+            "successes": 0,
+            "denominator": 42,
+            "asr": 0.0
+          },
+          "adaptive_defended": {
+            "successes": 0,
+            "denominator": 42,
+            "asr": 0.0
+          }
+        }
+      }
+    }
+  },
+  {
+    "model": "mobilenet",
+    "epsilon": 0.01,
+    "overall": {
+      "samples": 781,
+      "accuracy": {
+        "clean": 0.7848911651728553,
+        "defended_clean": 0.7964148527528809,
+        "attacked": 0.12419974391805377,
+        "transfer_defended": 0.5236875800256082,
+        "adaptive_defended": 0.10499359795134443
+      },
+      "clean_harmed": 38,
+      "clean_recovered": 47,
+      "asr_original": {
+        "successes": 516,
+        "denominator": 613,
+        "asr": 0.8417618270799347
+      },
+      "asr_transfer_defended": {
+        "successes": 213,
+        "denominator": 622,
+        "asr": 0.342443729903537
+      },
+      "asr_adaptive_defended": {
+        "successes": 540,
+        "denominator": 622,
+        "asr": 0.8681672025723473
+      },
+      "common_clean_correct": {
+        "attacked": {
+          "successes": 478,
+          "denominator": 575,
+          "asr": 0.831304347826087
+        },
+        "transfer_defended": {
+          "successes": 174,
+          "denominator": 575,
+          "asr": 0.3026086956521739
+        },
+        "adaptive_defended": {
+          "successes": 493,
+          "denominator": 575,
+          "asr": 0.8573913043478261
+        }
+      }
+    },
+    "classes": {
+      "Aircraft Carrier": {
+        "samples": 59,
+        "accuracy": {
+          "clean": 0.9152542372881356,
+          "defended_clean": 0.9322033898305084,
+          "attacked": 0.1016949152542373,
+          "transfer_defended": 0.5084745762711864,
+          "adaptive_defended": 0.05084745762711865
+        },
+        "clean_harmed": 0,
+        "clean_recovered": 1,
+        "asr_original": {
+          "successes": 48,
+          "denominator": 54,
+          "asr": 0.8888888888888888
+        },
+        "asr_transfer_defended": {
+          "successes": 25,
+          "denominator": 55,
+          "asr": 0.45454545454545453
+        },
+        "asr_adaptive_defended": {
+          "successes": 52,
+          "denominator": 55,
+          "asr": 0.9454545454545454
+        },
+        "common_clean_correct": {
+          "attacked": {
+            "successes": 48,
+            "denominator": 54,
+            "asr": 0.8888888888888888
+          },
+          "transfer_defended": {
+            "successes": 24,
+            "denominator": 54,
+            "asr": 0.4444444444444444
+          },
+          "adaptive_defended": {
+            "successes": 51,
+            "denominator": 54,
+            "asr": 0.9444444444444444
+          }
+        }
+      },
+      "Bulkers": {
+        "samples": 97,
+        "accuracy": {
+          "clean": 0.9896907216494846,
+          "defended_clean": 0.8247422680412371,
+          "attacked": 0.10309278350515463,
+          "transfer_defended": 0.5257731958762887,
+          "adaptive_defended": 0.010309278350515464
+        },
+        "clean_harmed": 16,
+        "clean_recovered": 0,
+        "asr_original": {
+          "successes": 86,
+          "denominator": 96,
+          "asr": 0.8958333333333334
+        },
+        "asr_transfer_defended": {
+          "successes": 29,
+          "denominator": 80,
+          "asr": 0.3625
+        },
+        "asr_adaptive_defended": {
+          "successes": 79,
+          "denominator": 80,
+          "asr": 0.9875
+        },
+        "common_clean_correct": {
+          "attacked": {
+            "successes": 70,
+            "denominator": 80,
+            "asr": 0.875
+          },
+          "transfer_defended": {
+            "successes": 29,
+            "denominator": 80,
+            "asr": 0.3625
+          },
+          "adaptive_defended": {
+            "successes": 79,
+            "denominator": 80,
+            "asr": 0.9875
+          }
+        }
+      },
+      "Car Carrier": {
+        "samples": 95,
+        "accuracy": {
+          "clean": 0.9789473684210527,
+          "defended_clean": 0.9578947368421052,
+          "attacked": 0.23157894736842105,
+          "transfer_defended": 0.7789473684210526,
+          "adaptive_defended": 0.17894736842105263
+        },
+        "clean_harmed": 2,
+        "clean_recovered": 0,
+        "asr_original": {
+          "successes": 71,
+          "denominator": 93,
+          "asr": 0.7634408602150538
+        },
+        "asr_transfer_defended": {
+          "successes": 17,
+          "denominator": 91,
+          "asr": 0.18681318681318682
+        },
+        "asr_adaptive_defended": {
+          "successes": 74,
+          "denominator": 91,
+          "asr": 0.8131868131868132
+        },
+        "common_clean_correct": {
+          "attacked": {
+            "successes": 69,
+            "denominator": 91,
+            "asr": 0.7582417582417582
+          },
+          "transfer_defended": {
+            "successes": 17,
+            "denominator": 91,
+            "asr": 0.18681318681318682
+          },
+          "adaptive_defended": {
+            "successes": 74,
+            "denominator": 91,
+            "asr": 0.8131868131868132
+          }
+        }
+      },
+      "Container Ship": {
+        "samples": 86,
+        "accuracy": {
+          "clean": 0.7325581395348837,
+          "defended_clean": 0.7906976744186046,
+          "attacked": 0.20930232558139536,
+          "transfer_defended": 0.6627906976744186,
+          "adaptive_defended": 0.23255813953488372
+        },
+        "clean_harmed": 1,
+        "clean_recovered": 6,
+        "asr_original": {
+          "successes": 45,
+          "denominator": 63,
+          "asr": 0.7142857142857143
+        },
+        "asr_transfer_defended": {
+          "successes": 11,
+          "denominator": 68,
+          "asr": 0.16176470588235295
+        },
+        "asr_adaptive_defended": {
+          "successes": 48,
+          "denominator": 68,
+          "asr": 0.7058823529411765
+        },
+        "common_clean_correct": {
+          "attacked": {
+            "successes": 44,
+            "denominator": 62,
+            "asr": 0.7096774193548387
+          },
+          "transfer_defended": {
+            "successes": 7,
+            "denominator": 62,
+            "asr": 0.11290322580645161
+          },
+          "adaptive_defended": {
+            "successes": 42,
+            "denominator": 62,
+            "asr": 0.6774193548387096
+          }
+        }
+      },
+      "Cruise": {
+        "samples": 45,
+        "accuracy": {
+          "clean": 0.9333333333333333,
+          "defended_clean": 0.9333333333333333,
+          "attacked": 0.17777777777777778,
+          "transfer_defended": 0.8444444444444444,
+          "adaptive_defended": 0.35555555555555557
+        },
+        "clean_harmed": 0,
+        "clean_recovered": 0,
+        "asr_original": {
+          "successes": 34,
+          "denominator": 42,
+          "asr": 0.8095238095238095
+        },
+        "asr_transfer_defended": {
+          "successes": 4,
+          "denominator": 42,
+          "asr": 0.09523809523809523
+        },
+        "asr_adaptive_defended": {
+          "successes": 26,
+          "denominator": 42,
+          "asr": 0.6190476190476191
+        },
+        "common_clean_correct": {
+          "attacked": {
+            "successes": 34,
+            "denominator": 42,
+            "asr": 0.8095238095238095
+          },
+          "transfer_defended": {
+            "successes": 4,
+            "denominator": 42,
+            "asr": 0.09523809523809523
+          },
+          "adaptive_defended": {
+            "successes": 26,
+            "denominator": 42,
+            "asr": 0.6190476190476191
+          }
+        }
+      },
+      "DDG": {
+        "samples": 102,
+        "accuracy": {
+          "clean": 0.5,
+          "defended_clean": 0.5,
+          "attacked": 0.0,
+          "transfer_defended": 0.1568627450980392,
+          "adaptive_defended": 0.00980392156862745
+        },
+        "clean_harmed": 5,
+        "clean_recovered": 5,
+        "asr_original": {
+          "successes": 51,
+          "denominator": 51,
+          "asr": 1.0
+        },
+        "asr_transfer_defended": {
+          "successes": 35,
+          "denominator": 51,
+          "asr": 0.6862745098039216
+        },
+        "asr_adaptive_defended": {
+          "successes": 50,
+          "denominator": 51,
+          "asr": 0.9803921568627451
+        },
+        "common_clean_correct": {
+          "attacked": {
+            "successes": 46,
+            "denominator": 46,
+            "asr": 1.0
+          },
+          "transfer_defended": {
+            "successes": 30,
+            "denominator": 46,
+            "asr": 0.6521739130434783
+          },
+          "adaptive_defended": {
+            "successes": 45,
+            "denominator": 46,
+            "asr": 0.9782608695652174
+          }
+        }
+      },
+      "Recreational": {
+        "samples": 89,
+        "accuracy": {
+          "clean": 0.9662921348314607,
+          "defended_clean": 0.8764044943820225,
+          "attacked": 0.15730337078651685,
+          "transfer_defended": 0.6292134831460674,
+          "adaptive_defended": 0.10112359550561797
+        },
+        "clean_harmed": 9,
+        "clean_recovered": 1,
+        "asr_original": {
+          "successes": 72,
+          "denominator": 86,
+          "asr": 0.8372093023255814
+        },
+        "asr_transfer_defended": {
+          "successes": 22,
+          "denominator": 78,
+          "asr": 0.28205128205128205
+        },
+        "asr_adaptive_defended": {
+          "successes": 69,
+          "denominator": 78,
+          "asr": 0.8846153846153846
+        },
+        "common_clean_correct": {
+          "attacked": {
+            "successes": 63,
+            "denominator": 77,
+            "asr": 0.8181818181818182
+          },
+          "transfer_defended": {
+            "successes": 21,
+            "denominator": 77,
+            "asr": 0.2727272727272727
+          },
+          "adaptive_defended": {
+            "successes": 68,
+            "denominator": 77,
+            "asr": 0.8831168831168831
+          }
+        }
+      },
+      "Sailboat": {
+        "samples": 74,
+        "accuracy": {
+          "clean": 0.3108108108108108,
+          "defended_clean": 0.5405405405405406,
+          "attacked": 0.013513513513513514,
+          "transfer_defended": 0.22972972972972974,
+          "adaptive_defended": 0.05405405405405406
+        },
+        "clean_harmed": 1,
+        "clean_recovered": 18,
+        "asr_original": {
+          "successes": 22,
+          "denominator": 23,
+          "asr": 0.9565217391304348
+        },
+        "asr_transfer_defended": {
+          "successes": 23,
+          "denominator": 40,
+          "asr": 0.575
+        },
+        "asr_adaptive_defended": {
+          "successes": 36,
+          "denominator": 40,
+          "asr": 0.9
+        },
+        "common_clean_correct": {
+          "attacked": {
+            "successes": 21,
+            "denominator": 22,
+            "asr": 0.9545454545454546
+          },
+          "transfer_defended": {
+            "successes": 8,
+            "denominator": 22,
+            "asr": 0.36363636363636365
+          },
+          "adaptive_defended": {
+            "successes": 18,
+            "denominator": 22,
+            "asr": 0.8181818181818182
+          }
+        }
+      },
+      "Submarine": {
+        "samples": 66,
+        "accuracy": {
+          "clean": 0.9242424242424242,
+          "defended_clean": 0.9545454545454546,
+          "attacked": 0.2727272727272727,
+          "transfer_defended": 0.5909090909090909,
+          "adaptive_defended": 0.13636363636363635
+        },
+        "clean_harmed": 2,
+        "clean_recovered": 4,
+        "asr_original": {
+          "successes": 43,
+          "denominator": 61,
+          "asr": 0.7049180327868853
+        },
+        "asr_transfer_defended": {
+          "successes": 24,
+          "denominator": 63,
+          "asr": 0.38095238095238093
+        },
+        "asr_adaptive_defended": {
+          "successes": 54,
+          "denominator": 63,
+          "asr": 0.8571428571428571
+        },
+        "common_clean_correct": {
+          "attacked": {
+            "successes": 41,
+            "denominator": 59,
+            "asr": 0.6949152542372882
+          },
+          "transfer_defended": {
+            "successes": 20,
+            "denominator": 59,
+            "asr": 0.3389830508474576
+          },
+          "adaptive_defended": {
+            "successes": 50,
+            "denominator": 59,
+            "asr": 0.847457627118644
+          }
+        }
+      },
+      "Tug": {
+        "samples": 68,
+        "accuracy": {
+          "clean": 0.6470588235294118,
+          "defended_clean": 0.7941176470588235,
+          "attacked": 0.0,
+          "transfer_defended": 0.45588235294117646,
+          "adaptive_defended": 0.029411764705882353
+        },
+        "clean_harmed": 2,
+        "clean_recovered": 12,
+        "asr_original": {
+          "successes": 44,
+          "denominator": 44,
+          "asr": 1.0
+        },
+        "asr_transfer_defended": {
+          "successes": 23,
+          "denominator": 54,
+          "asr": 0.42592592592592593
+        },
+        "asr_adaptive_defended": {
+          "successes": 52,
+          "denominator": 54,
+          "asr": 0.9629629629629629
+        },
+        "common_clean_correct": {
+          "attacked": {
+            "successes": 42,
+            "denominator": 42,
+            "asr": 1.0
+          },
+          "transfer_defended": {
+            "successes": 14,
+            "denominator": 42,
+            "asr": 0.3333333333333333
+          },
+          "adaptive_defended": {
+            "successes": 40,
+            "denominator": 42,
+            "asr": 0.9523809523809523
+          }
+        }
+      }
+    }
+  },
+  {
+    "model": "mobilenet",
+    "epsilon": 0.03,
+    "overall": {
+      "samples": 781,
+      "accuracy": {
+        "clean": 0.7848911651728553,
+        "defended_clean": 0.7964148527528809,
+        "attacked": 0.13188220230473752,
+        "transfer_defended": 0.3265044814340589,
+        "adaptive_defended": 0.088348271446863
+      },
+      "clean_harmed": 38,
+      "clean_recovered": 47,
+      "asr_original": {
+        "successes": 510,
+        "denominator": 613,
+        "asr": 0.831973898858075
+      },
+      "asr_transfer_defended": {
+        "successes": 367,
+        "denominator": 622,
+        "asr": 0.590032154340836
+      },
+      "asr_adaptive_defended": {
+        "successes": 553,
+        "denominator": 622,
+        "asr": 0.8890675241157556
+      },
+      "common_clean_correct": {
+        "attacked": {
+          "successes": 473,
+          "denominator": 575,
+          "asr": 0.8226086956521739
+        },
+        "transfer_defended": {
+          "successes": 320,
+          "denominator": 575,
+          "asr": 0.5565217391304348
+        },
+        "adaptive_defended": {
+          "successes": 506,
+          "denominator": 575,
+          "asr": 0.88
+        }
+      }
+    },
+    "classes": {
+      "Aircraft Carrier": {
+        "samples": 59,
+        "accuracy": {
+          "clean": 0.9152542372881356,
+          "defended_clean": 0.9322033898305084,
+          "attacked": 0.0847457627118644,
+          "transfer_defended": 0.3050847457627119,
+          "adaptive_defended": 0.01694915254237288
+        },
+        "clean_harmed": 0,
+        "clean_recovered": 1,
+        "asr_original": {
+          "successes": 49,
+          "denominator": 54,
+          "asr": 0.9074074074074074
+        },
+        "asr_transfer_defended": {
+          "successes": 37,
+          "denominator": 55,
+          "asr": 0.6727272727272727
+        },
+        "asr_adaptive_defended": {
+          "successes": 54,
+          "denominator": 55,
+          "asr": 0.9818181818181818
+        },
+        "common_clean_correct": {
+          "attacked": {
+            "successes": 49,
+            "denominator": 54,
+            "asr": 0.9074074074074074
+          },
+          "transfer_defended": {
+            "successes": 36,
+            "denominator": 54,
+            "asr": 0.6666666666666666
+          },
+          "adaptive_defended": {
+            "successes": 53,
+            "denominator": 54,
+            "asr": 0.9814814814814815
+          }
+        }
+      },
+      "Bulkers": {
+        "samples": 97,
+        "accuracy": {
+          "clean": 0.9896907216494846,
+          "defended_clean": 0.8247422680412371,
+          "attacked": 0.2268041237113402,
+          "transfer_defended": 0.4020618556701031,
+          "adaptive_defended": 0.09278350515463918
+        },
+        "clean_harmed": 16,
+        "clean_recovered": 0,
+        "asr_original": {
+          "successes": 74,
+          "denominator": 96,
+          "asr": 0.7708333333333334
+        },
+        "asr_transfer_defended": {
+          "successes": 41,
+          "denominator": 80,
+          "asr": 0.5125
+        },
+        "asr_adaptive_defended": {
+          "successes": 71,
+          "denominator": 80,
+          "asr": 0.8875
+        },
+        "common_clean_correct": {
+          "attacked": {
+            "successes": 59,
+            "denominator": 80,
+            "asr": 0.7375
+          },
+          "transfer_defended": {
+            "successes": 41,
+            "denominator": 80,
+            "asr": 0.5125
+          },
+          "adaptive_defended": {
+            "successes": 71,
+            "denominator": 80,
+            "asr": 0.8875
+          }
+        }
+      },
+      "Car Carrier": {
+        "samples": 95,
+        "accuracy": {
+          "clean": 0.9789473684210527,
+          "defended_clean": 0.9578947368421052,
+          "attacked": 0.17894736842105263,
+          "transfer_defended": 0.4421052631578947,
+          "adaptive_defended": 0.08421052631578947
+        },
+        "clean_harmed": 2,
+        "clean_recovered": 0,
+        "asr_original": {
+          "successes": 76,
+          "denominator": 93,
+          "asr": 0.8172043010752689
+        },
+        "asr_transfer_defended": {
+          "successes": 49,
+          "denominator": 91,
+          "asr": 0.5384615384615384
+        },
+        "asr_adaptive_defended": {
+          "successes": 83,
+          "denominator": 91,
+          "asr": 0.9120879120879121
+        },
+        "common_clean_correct": {
+          "attacked": {
+            "successes": 74,
+            "denominator": 91,
+            "asr": 0.8131868131868132
+          },
+          "transfer_defended": {
+            "successes": 49,
+            "denominator": 91,
+            "asr": 0.5384615384615384
+          },
+          "adaptive_defended": {
+            "successes": 83,
+            "denominator": 91,
+            "asr": 0.9120879120879121
+          }
+        }
+      },
+      "Container Ship": {
+        "samples": 86,
+        "accuracy": {
+          "clean": 0.7325581395348837,
+          "defended_clean": 0.7906976744186046,
+          "attacked": 0.19767441860465115,
+          "transfer_defended": 0.4069767441860465,
+          "adaptive_defended": 0.1744186046511628
+        },
+        "clean_harmed": 1,
+        "clean_recovered": 6,
+        "asr_original": {
+          "successes": 46,
+          "denominator": 63,
+          "asr": 0.7301587301587301
+        },
+        "asr_transfer_defended": {
+          "successes": 33,
+          "denominator": 68,
+          "asr": 0.4852941176470588
+        },
+        "asr_adaptive_defended": {
+          "successes": 53,
+          "denominator": 68,
+          "asr": 0.7794117647058824
+        },
+        "common_clean_correct": {
+          "attacked": {
+            "successes": 45,
+            "denominator": 62,
+            "asr": 0.7258064516129032
+          },
+          "transfer_defended": {
+            "successes": 27,
+            "denominator": 62,
+            "asr": 0.43548387096774194
+          },
+          "adaptive_defended": {
+            "successes": 47,
+            "denominator": 62,
+            "asr": 0.7580645161290323
+          }
+        }
+      },
+      "Cruise": {
+        "samples": 45,
+        "accuracy": {
+          "clean": 0.9333333333333333,
+          "defended_clean": 0.9333333333333333,
+          "attacked": 0.13333333333333333,
+          "transfer_defended": 0.7111111111111111,
+          "adaptive_defended": 0.17777777777777778
+        },
+        "clean_harmed": 0,
+        "clean_recovered": 0,
+        "asr_original": {
+          "successes": 36,
+          "denominator": 42,
+          "asr": 0.8571428571428571
+        },
+        "asr_transfer_defended": {
+          "successes": 10,
+          "denominator": 42,
+          "asr": 0.23809523809523808
+        },
+        "asr_adaptive_defended": {
+          "successes": 34,
+          "denominator": 42,
+          "asr": 0.8095238095238095
+        },
+        "common_clean_correct": {
+          "attacked": {
+            "successes": 36,
+            "denominator": 42,
+            "asr": 0.8571428571428571
+          },
+          "transfer_defended": {
+            "successes": 10,
+            "denominator": 42,
+            "asr": 0.23809523809523808
+          },
+          "adaptive_defended": {
+            "successes": 34,
+            "denominator": 42,
+            "asr": 0.8095238095238095
+          }
+        }
+      },
+      "DDG": {
+        "samples": 102,
+        "accuracy": {
+          "clean": 0.5,
+          "defended_clean": 0.5,
+          "attacked": 0.0,
+          "transfer_defended": 0.0392156862745098,
+          "adaptive_defended": 0.00980392156862745
+        },
+        "clean_harmed": 5,
+        "clean_recovered": 5,
+        "asr_original": {
+          "successes": 51,
+          "denominator": 51,
+          "asr": 1.0
+        },
+        "asr_transfer_defended": {
+          "successes": 47,
+          "denominator": 51,
+          "asr": 0.9215686274509803
+        },
+        "asr_adaptive_defended": {
+          "successes": 50,
+          "denominator": 51,
+          "asr": 0.9803921568627451
+        },
+        "common_clean_correct": {
+          "attacked": {
+            "successes": 46,
+            "denominator": 46,
+            "asr": 1.0
+          },
+          "transfer_defended": {
+            "successes": 42,
+            "denominator": 46,
+            "asr": 0.9130434782608695
+          },
+          "adaptive_defended": {
+            "successes": 45,
+            "denominator": 46,
+            "asr": 0.9782608695652174
+          }
+        }
+      },
+      "Recreational": {
+        "samples": 89,
+        "accuracy": {
+          "clean": 0.9662921348314607,
+          "defended_clean": 0.8764044943820225,
+          "attacked": 0.16853932584269662,
+          "transfer_defended": 0.4044943820224719,
+          "adaptive_defended": 0.12359550561797752
+        },
+        "clean_harmed": 9,
+        "clean_recovered": 1,
+        "asr_original": {
+          "successes": 71,
+          "denominator": 86,
+          "asr": 0.8255813953488372
+        },
+        "asr_transfer_defended": {
+          "successes": 42,
+          "denominator": 78,
+          "asr": 0.5384615384615384
+        },
+        "asr_adaptive_defended": {
+          "successes": 67,
+          "denominator": 78,
+          "asr": 0.8589743589743589
+        },
+        "common_clean_correct": {
+          "attacked": {
+            "successes": 62,
+            "denominator": 77,
+            "asr": 0.8051948051948052
+          },
+          "transfer_defended": {
+            "successes": 41,
+            "denominator": 77,
+            "asr": 0.5324675324675324
+          },
+          "adaptive_defended": {
+            "successes": 66,
+            "denominator": 77,
+            "asr": 0.8571428571428571
+          }
+        }
+      },
+      "Sailboat": {
+        "samples": 74,
+        "accuracy": {
+          "clean": 0.3108108108108108,
+          "defended_clean": 0.5405405405405406,
+          "attacked": 0.0,
+          "transfer_defended": 0.0945945945945946,
+          "adaptive_defended": 0.0945945945945946
+        },
+        "clean_harmed": 1,
+        "clean_recovered": 18,
+        "asr_original": {
+          "successes": 23,
+          "denominator": 23,
+          "asr": 1.0
+        },
+        "asr_transfer_defended": {
+          "successes": 33,
+          "denominator": 40,
+          "asr": 0.825
+        },
+        "asr_adaptive_defended": {
+          "successes": 33,
+          "denominator": 40,
+          "asr": 0.825
+        },
+        "common_clean_correct": {
+          "attacked": {
+            "successes": 22,
+            "denominator": 22,
+            "asr": 1.0
+          },
+          "transfer_defended": {
+            "successes": 15,
+            "denominator": 22,
+            "asr": 0.6818181818181818
+          },
+          "adaptive_defended": {
+            "successes": 15,
+            "denominator": 22,
+            "asr": 0.6818181818181818
+          }
+        }
+      },
+      "Submarine": {
+        "samples": 66,
+        "accuracy": {
+          "clean": 0.9242424242424242,
+          "defended_clean": 0.9545454545454546,
+          "attacked": 0.3181818181818182,
+          "transfer_defended": 0.4696969696969697,
+          "adaptive_defended": 0.10606060606060606
+        },
+        "clean_harmed": 2,
+        "clean_recovered": 4,
+        "asr_original": {
+          "successes": 40,
+          "denominator": 61,
+          "asr": 0.6557377049180327
+        },
+        "asr_transfer_defended": {
+          "successes": 32,
+          "denominator": 63,
+          "asr": 0.5079365079365079
+        },
+        "asr_adaptive_defended": {
+          "successes": 56,
+          "denominator": 63,
+          "asr": 0.8888888888888888
+        },
+        "common_clean_correct": {
+          "attacked": {
+            "successes": 38,
+            "denominator": 59,
+            "asr": 0.6440677966101694
+          },
+          "transfer_defended": {
+            "successes": 28,
+            "denominator": 59,
+            "asr": 0.4745762711864407
+          },
+          "adaptive_defended": {
+            "successes": 52,
+            "denominator": 59,
+            "asr": 0.8813559322033898
+          }
+        }
+      },
+      "Tug": {
+        "samples": 68,
+        "accuracy": {
+          "clean": 0.6470588235294118,
+          "defended_clean": 0.7941176470588235,
+          "attacked": 0.0,
+          "transfer_defended": 0.16176470588235295,
+          "adaptive_defended": 0.029411764705882353
+        },
+        "clean_harmed": 2,
+        "clean_recovered": 12,
+        "asr_original": {
+          "successes": 44,
+          "denominator": 44,
+          "asr": 1.0
+        },
+        "asr_transfer_defended": {
+          "successes": 43,
+          "denominator": 54,
+          "asr": 0.7962962962962963
+        },
+        "asr_adaptive_defended": {
+          "successes": 52,
+          "denominator": 54,
+          "asr": 0.9629629629629629
+        },
+        "common_clean_correct": {
+          "attacked": {
+            "successes": 42,
+            "denominator": 42,
+            "asr": 1.0
+          },
+          "transfer_defended": {
+            "successes": 31,
+            "denominator": 42,
+            "asr": 0.7380952380952381
+          },
+          "adaptive_defended": {
+            "successes": 40,
+            "denominator": 42,
+            "asr": 0.9523809523809523
+          }
+        }
+      }
+    }
+  },
+  {
+    "model": "mobilenet",
+    "epsilon": 0.05,
+    "overall": {
+      "samples": 781,
+      "accuracy": {
+        "clean": 0.7848911651728553,
+        "defended_clean": 0.7964148527528809,
+        "attacked": 0.1613316261203585,
+        "transfer_defended": 0.30217669654289375,
+        "adaptive_defended": 0.08066581306017925
+      },
+      "clean_harmed": 38,
+      "clean_recovered": 47,
+      "asr_original": {
+        "successes": 487,
+        "denominator": 613,
+        "asr": 0.7944535073409462
+      },
+      "asr_transfer_defended": {
+        "successes": 387,
+        "denominator": 622,
+        "asr": 0.6221864951768489
+      },
+      "asr_adaptive_defended": {
+        "successes": 560,
+        "denominator": 622,
+        "asr": 0.9003215434083601
+      },
+      "common_clean_correct": {
+        "attacked": {
+          "successes": 453,
+          "denominator": 575,
+          "asr": 0.7878260869565218
+        },
+        "transfer_defended": {
+          "successes": 341,
+          "denominator": 575,
+          "asr": 0.5930434782608696
+        },
+        "adaptive_defended": {
+          "successes": 513,
+          "denominator": 575,
+          "asr": 0.8921739130434783
+        }
+      }
+    },
+    "classes": {
+      "Aircraft Carrier": {
+        "samples": 59,
+        "accuracy": {
+          "clean": 0.9152542372881356,
+          "defended_clean": 0.9322033898305084,
+          "attacked": 0.1016949152542373,
+          "transfer_defended": 0.22033898305084745,
+          "adaptive_defended": 0.0
+        },
+        "clean_harmed": 0,
+        "clean_recovered": 1,
+        "asr_original": {
+          "successes": 48,
+          "denominator": 54,
+          "asr": 0.8888888888888888
+        },
+        "asr_transfer_defended": {
+          "successes": 42,
+          "denominator": 55,
+          "asr": 0.7636363636363637
+        },
+        "asr_adaptive_defended": {
+          "successes": 55,
+          "denominator": 55,
+          "asr": 1.0
+        },
+        "common_clean_correct": {
+          "attacked": {
+            "successes": 48,
+            "denominator": 54,
+            "asr": 0.8888888888888888
+          },
+          "transfer_defended": {
+            "successes": 41,
+            "denominator": 54,
+            "asr": 0.7592592592592593
+          },
+          "adaptive_defended": {
+            "successes": 54,
+            "denominator": 54,
+            "asr": 1.0
+          }
+        }
+      },
+      "Bulkers": {
+        "samples": 97,
+        "accuracy": {
+          "clean": 0.9896907216494846,
+          "defended_clean": 0.8247422680412371,
+          "attacked": 0.36082474226804123,
+          "transfer_defended": 0.4536082474226804,
+          "adaptive_defended": 0.1134020618556701
+        },
+        "clean_harmed": 16,
+        "clean_recovered": 0,
+        "asr_original": {
+          "successes": 61,
+          "denominator": 96,
+          "asr": 0.6354166666666666
+        },
+        "asr_transfer_defended": {
+          "successes": 37,
+          "denominator": 80,
+          "asr": 0.4625
+        },
+        "asr_adaptive_defended": {
+          "successes": 69,
+          "denominator": 80,
+          "asr": 0.8625
+        },
+        "common_clean_correct": {
+          "attacked": {
+            "successes": 46,
+            "denominator": 80,
+            "asr": 0.575
+          },
+          "transfer_defended": {
+            "successes": 37,
+            "denominator": 80,
+            "asr": 0.4625
+          },
+          "adaptive_defended": {
+            "successes": 69,
+            "denominator": 80,
+            "asr": 0.8625
+          }
+        }
+      },
+      "Car Carrier": {
+        "samples": 95,
+        "accuracy": {
+          "clean": 0.9789473684210527,
+          "defended_clean": 0.9578947368421052,
+          "attacked": 0.15789473684210525,
+          "transfer_defended": 0.28421052631578947,
+          "adaptive_defended": 0.0
+        },
+        "clean_harmed": 2,
+        "clean_recovered": 0,
+        "asr_original": {
+          "successes": 78,
+          "denominator": 93,
+          "asr": 0.8387096774193549
+        },
+        "asr_transfer_defended": {
+          "successes": 64,
+          "denominator": 91,
+          "asr": 0.7032967032967034
+        },
+        "asr_adaptive_defended": {
+          "successes": 91,
+          "denominator": 91,
+          "asr": 1.0
+        },
+        "common_clean_correct": {
+          "attacked": {
+            "successes": 76,
+            "denominator": 91,
+            "asr": 0.8351648351648352
+          },
+          "transfer_defended": {
+            "successes": 64,
+            "denominator": 91,
+            "asr": 0.7032967032967034
+          },
+          "adaptive_defended": {
+            "successes": 91,
+            "denominator": 91,
+            "asr": 1.0
+          }
+        }
+      },
+      "Container Ship": {
+        "samples": 86,
+        "accuracy": {
+          "clean": 0.7325581395348837,
+          "defended_clean": 0.7906976744186046,
+          "attacked": 0.18604651162790697,
+          "transfer_defended": 0.3953488372093023,
+          "adaptive_defended": 0.16279069767441862
+        },
+        "clean_harmed": 1,
+        "clean_recovered": 6,
+        "asr_original": {
+          "successes": 47,
+          "denominator": 63,
+          "asr": 0.746031746031746
+        },
+        "asr_transfer_defended": {
+          "successes": 34,
+          "denominator": 68,
+          "asr": 0.5
+        },
+        "asr_adaptive_defended": {
+          "successes": 54,
+          "denominator": 68,
+          "asr": 0.7941176470588235
+        },
+        "common_clean_correct": {
+          "attacked": {
+            "successes": 46,
+            "denominator": 62,
+            "asr": 0.7419354838709677
+          },
+          "transfer_defended": {
+            "successes": 28,
+            "denominator": 62,
+            "asr": 0.45161290322580644
+          },
+          "adaptive_defended": {
+            "successes": 48,
+            "denominator": 62,
+            "asr": 0.7741935483870968
+          }
+        }
+      },
+      "Cruise": {
+        "samples": 45,
+        "accuracy": {
+          "clean": 0.9333333333333333,
+          "defended_clean": 0.9333333333333333,
+          "attacked": 0.17777777777777778,
+          "transfer_defended": 0.6222222222222222,
+          "adaptive_defended": 0.1111111111111111
+        },
+        "clean_harmed": 0,
+        "clean_recovered": 0,
+        "asr_original": {
+          "successes": 34,
+          "denominator": 42,
+          "asr": 0.8095238095238095
+        },
+        "asr_transfer_defended": {
+          "successes": 14,
+          "denominator": 42,
+          "asr": 0.3333333333333333
+        },
+        "asr_adaptive_defended": {
+          "successes": 37,
+          "denominator": 42,
+          "asr": 0.8809523809523809
+        },
+        "common_clean_correct": {
+          "attacked": {
+            "successes": 34,
+            "denominator": 42,
+            "asr": 0.8095238095238095
+          },
+          "transfer_defended": {
+            "successes": 14,
+            "denominator": 42,
+            "asr": 0.3333333333333333
+          },
+          "adaptive_defended": {
+            "successes": 37,
+            "denominator": 42,
+            "asr": 0.8809523809523809
+          }
+        }
+      },
+      "DDG": {
+        "samples": 102,
+        "accuracy": {
+          "clean": 0.5,
+          "defended_clean": 0.5,
+          "attacked": 0.0,
+          "transfer_defended": 0.058823529411764705,
+          "adaptive_defended": 0.0
+        },
+        "clean_harmed": 5,
+        "clean_recovered": 5,
+        "asr_original": {
+          "successes": 51,
+          "denominator": 51,
+          "asr": 1.0
+        },
+        "asr_transfer_defended": {
+          "successes": 45,
+          "denominator": 51,
+          "asr": 0.8823529411764706
+        },
+        "asr_adaptive_defended": {
+          "successes": 51,
+          "denominator": 51,
+          "asr": 1.0
+        },
+        "common_clean_correct": {
+          "attacked": {
+            "successes": 46,
+            "denominator": 46,
+            "asr": 1.0
+          },
+          "transfer_defended": {
+            "successes": 40,
+            "denominator": 46,
+            "asr": 0.8695652173913043
+          },
+          "adaptive_defended": {
+            "successes": 46,
+            "denominator": 46,
+            "asr": 1.0
+          }
+        }
+      },
+      "Recreational": {
+        "samples": 89,
+        "accuracy": {
+          "clean": 0.9662921348314607,
+          "defended_clean": 0.8764044943820225,
+          "attacked": 0.20224719101123595,
+          "transfer_defended": 0.4157303370786517,
+          "adaptive_defended": 0.15730337078651685
+        },
+        "clean_harmed": 9,
+        "clean_recovered": 1,
+        "asr_original": {
+          "successes": 68,
+          "denominator": 86,
+          "asr": 0.7906976744186046
+        },
+        "asr_transfer_defended": {
+          "successes": 41,
+          "denominator": 78,
+          "asr": 0.5256410256410257
+        },
+        "asr_adaptive_defended": {
+          "successes": 64,
+          "denominator": 78,
+          "asr": 0.8205128205128205
+        },
+        "common_clean_correct": {
+          "attacked": {
+            "successes": 62,
+            "denominator": 77,
+            "asr": 0.8051948051948052
+          },
+          "transfer_defended": {
+            "successes": 40,
+            "denominator": 77,
+            "asr": 0.5194805194805194
+          },
+          "adaptive_defended": {
+            "successes": 63,
+            "denominator": 77,
+            "asr": 0.8181818181818182
+          }
+        }
+      },
+      "Sailboat": {
+        "samples": 74,
+        "accuracy": {
+          "clean": 0.3108108108108108,
+          "defended_clean": 0.5405405405405406,
+          "attacked": 0.02702702702702703,
+          "transfer_defended": 0.10810810810810811,
+          "adaptive_defended": 0.16216216216216217
+        },
+        "clean_harmed": 1,
+        "clean_recovered": 18,
+        "asr_original": {
+          "successes": 21,
+          "denominator": 23,
+          "asr": 0.9130434782608695
+        },
+        "asr_transfer_defended": {
+          "successes": 32,
+          "denominator": 40,
+          "asr": 0.8
+        },
+        "asr_adaptive_defended": {
+          "successes": 29,
+          "denominator": 40,
+          "asr": 0.725
+        },
+        "common_clean_correct": {
+          "attacked": {
+            "successes": 20,
+            "denominator": 22,
+            "asr": 0.9090909090909091
+          },
+          "transfer_defended": {
+            "successes": 15,
+            "denominator": 22,
+            "asr": 0.6818181818181818
+          },
+          "adaptive_defended": {
+            "successes": 11,
+            "denominator": 22,
+            "asr": 0.5
+          }
+        }
+      },
+      "Submarine": {
+        "samples": 66,
+        "accuracy": {
+          "clean": 0.9242424242424242,
+          "defended_clean": 0.9545454545454546,
+          "attacked": 0.3787878787878788,
+          "transfer_defended": 0.42424242424242425,
+          "adaptive_defended": 0.06060606060606061
+        },
+        "clean_harmed": 2,
+        "clean_recovered": 4,
+        "asr_original": {
+          "successes": 36,
+          "denominator": 61,
+          "asr": 0.5901639344262295
+        },
+        "asr_transfer_defended": {
+          "successes": 35,
+          "denominator": 63,
+          "asr": 0.5555555555555556
+        },
+        "asr_adaptive_defended": {
+          "successes": 59,
+          "denominator": 63,
+          "asr": 0.9365079365079365
+        },
+        "common_clean_correct": {
+          "attacked": {
+            "successes": 34,
+            "denominator": 59,
+            "asr": 0.576271186440678
+          },
+          "transfer_defended": {
+            "successes": 31,
+            "denominator": 59,
+            "asr": 0.5254237288135594
+          },
+          "adaptive_defended": {
+            "successes": 55,
+            "denominator": 59,
+            "asr": 0.9322033898305084
+          }
+        }
+      },
+      "Tug": {
+        "samples": 68,
+        "accuracy": {
+          "clean": 0.6470588235294118,
+          "defended_clean": 0.7941176470588235,
+          "attacked": 0.014705882352941176,
+          "transfer_defended": 0.16176470588235295,
+          "adaptive_defended": 0.04411764705882353
+        },
+        "clean_harmed": 2,
+        "clean_recovered": 12,
+        "asr_original": {
+          "successes": 43,
+          "denominator": 44,
+          "asr": 0.9772727272727273
+        },
+        "asr_transfer_defended": {
+          "successes": 43,
+          "denominator": 54,
+          "asr": 0.7962962962962963
+        },
+        "asr_adaptive_defended": {
+          "successes": 51,
+          "denominator": 54,
+          "asr": 0.9444444444444444
+        },
+        "common_clean_correct": {
+          "attacked": {
+            "successes": 41,
+            "denominator": 42,
+            "asr": 0.9761904761904762
+          },
+          "transfer_defended": {
+            "successes": 31,
+            "denominator": 42,
+            "asr": 0.7380952380952381
+          },
+          "adaptive_defended": {
+            "successes": 39,
+            "denominator": 42,
+            "asr": 0.9285714285714286
+          }
+        }
+      }
+    }
+  }
+]

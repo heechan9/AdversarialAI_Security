@@ -38,3 +38,27 @@
 .missing-evidence [data-slot=accordion-trigger]:hover{color:#a7efdc}.missing-evidence [data-slot=accordion-trigger]>svg{color:#bbd7df;width:20px;height:20px}
 .missing-evidence [data-slot=accordion-content]{padding:0 4px}.missing-evidence h4{font-size:1rem;font-weight:550;color:#dcf2ec;margin:6px 0 8px}.missing-evidence p+h4{margin-top:20px}
 @media(max-width:700px){.scene-intro>p:not(.scene-kicker){font-size:1rem}.sample-card .compact{display:none}.sample-card small,.sample-card span{font-size:.875rem}.dataset-note{line-height:1.8}.scene-replay{font-size:.875rem}.metric{grid-template-columns:1fr auto}.metric small{line-height:1.8}.figure-label span{font-size:.875rem}.missing-evidence [data-slot=accordion-trigger]{font-size:1rem}.comparison-images figcaption{font-size:.875rem}.orbit-hint{font-size:.875rem}}
+
+/* MARIS model study: a framed, tactile exhibit beside the evidence journey. */
+.scene-section{background:radial-gradient(ellipse at 76% 12%,#1e4658 0%,#102c3d 38%,#081b29 80%);gap:40px;padding-top:40px;padding-bottom:36px}
+.scene-intro h1{font-weight:550;line-height:1.13;letter-spacing:-.045em;color:#f0f8fa}
+.scene-intro .eyebrow{letter-spacing:.18em;color:#a9dfd8}
+.scene-workspace{padding:16px;background:#0b2130b8;border:1px solid #426071;border-radius:16px;box-shadow:0 24px 60px #020c164d}
+.stage-heading{display:flex;justify-content:space-between;gap:12px;margin:0 2px 12px;font-size:.875rem;color:#cbdee7;letter-spacing:.04em}
+.stage-heading>span:first-child{color:#a8e6d4}
+.scene-stage{height:410px;border-radius:9px;border-color:#496776}
+.view-presets{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:14px 0 2px}
+.view-presets>span{margin-right:auto;font-size:.875rem;color:#b8cfdb}
+.view-presets button{min-height:44px;padding:8px 13px;border:1px solid #496777;background:#153344;color:#e0ecef;font-size:.875rem}
+.view-presets button:hover,.orbit-controls button:hover{background:#254c5a;border-color:#97d5c6;color:#fff}
+button:focus-visible,a:focus-visible,select:focus-visible{outline:2px solid #a0edda;outline-offset:4px}
+.model-boundary{border-top:1px solid #345061;padding-top:12px;margin-top:12px}
+.experiment-grid{border-color:#466170;box-shadow:0 12px 40px #020c1626}
+.sample-card.selected{border-color:#97d7c5;background:#1b3e48}
+.section-heading h2{letter-spacing:-.035em;color:#edf7f9}
+.flow-strip b{color:#a5dfd0}.comparison{background:linear-gradient(145deg,#142e3c,#0c202e)}
+.case-verdict{padding-bottom:16px;border-bottom:1px solid #37515f}
+.metric-grid{border-color:#486572}.metric.accent{background:#163d3e}
+@media(min-width:1600px){.scene-stage{height:460px}}
+@media(max-width:1100px){.scene-section{gap:24px}.scene-workspace{padding:12px}.scene-stage{height:360px}.view-presets>span{width:100%}.view-presets button{flex:1;padding:8px}}
+@media(max-width:700px){.scene-section{padding:26px 16px}.scene-workspace{padding:10px;border-radius:12px}.scene-stage{height:310px}.scene-intro h1{font-size:38px}.stage-heading{font-size:.8125rem;letter-spacing:0}.view-presets{gap:5px}.view-presets button{font-size:.8125rem;padding:7px 5px}.scene-label{font-size:.75rem}.orbit-controls{gap:8px}.orbit-controls>button{padding:0 5px}.model-boundary{font-size:.875rem}}

@@ -1,0 +1,16 @@
+{
+  "status": "experimental",
+  "promoted": false,
+  "original_bundle_sha256": "d836470841f9494d25d321bf5f8bd848640228add3ebdca3a6640b870bc599b2",
+  "source_commit": "e81ff1fc0a9d24f0773f5c57574a1b58bc720ee3",
+  "supplied_by": "heechan9",
+  "implementation": "Codex",
+  "execution": "User Windows PC; recorded Python 3.11.15, TensorFlow 2.21.0, Keras 3.15.1",
+  "limitations": [
+    "Artifact audit only: no independent H5 inference or raw adversarial array verification",
+    "Weight/input preservation reported by PC runner; model hashes matched manifest metadata",
+    "Source/input LF and CRLF equivalence allowed; uploaded bytes preserved",
+    "Fixed mean filter, single-step FGSM, no universal defense or navigation safety claim"
+  ],
+  "windows_component_tests": "User log: 19 passed, 2 warnings; not full Windows suite"
+}

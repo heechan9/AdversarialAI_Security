@@ -1,4 +1,4 @@
-# 고정 평균 필터 방어 비교 실험 (실행 준비, experimental)
+# 고정 평균 필터 방어 비교 실험 (실행·산출물 감사 완료, experimental)
 
 ## 목적과 사전 고정 조건
 
@@ -50,3 +50,7 @@ python -m adversarial_ai.evaluation.mean_defense_evaluation --defense mean --out
 현재 원본 이미지와 H5가 없는 환경의 합성 테스트는 실제 선박 성능 실험을 대신하지 않는다.
 기존 Gaussian archive 감사 스크립트를 새 mean 출력에 그대로 적용해 통과했다고
 주장하지 않는다. 새 결과의 독립 감사·팀 검토·채택은 후속 단계이며 자동 승격/병합하지 않는다.
+
+## 첫 실행 결과
+
+[원본 ZIP·CSV와 동적 집계](../../results/defenses/experimental/mean_run_01/README.md)를 별도로 보존합니다. 실행 조건과 기존 Gaussian 자료는 변경하지 않았습니다. 산출물 감사 통과는 공식 결과 승격이나 독립 추론을 의미하지 않습니다.
