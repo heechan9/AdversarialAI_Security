@@ -143,3 +143,24 @@ upload, account form, defense experiment, interpolated result or navigation cont
 - Full Python suite on the evidence integration tree: 297 passed, 4 Keras deprecation warnings. Research/Paper (9/9)/Gaussian/mean artifact audits passed. Images and H5 unavailable; no independent inference or raw-pixel verification.
 - Browser: mean CNN epsilon .03 and Gaussian MobileNetV2 epsilon .03 cards matched the audited summaries; epsilon zero returned normal/filtered-normal controls. Model and filter selection worked; 390px iframe (375px content) had no document horizontal overflow and epsilon controls/cards remained legible. Existing scene uses SVG fallback here; physical phone and WebGL/GPU remain unverified.
 - Web evidence/hash/mutations and OrbitControls tests passed. New defense export checks passed for full condition inventory, counts, pipeline denominators, epsilon zero and shared baselines.
+
+## Gray CAD study mode — 2026-09-16
+
+- Added an optional gray material/outline view to the existing procedural ship,
+  three selectable external structure groups, unitless grid and explicit model
+  boundary. Original sea mode and all public/evidence bytes remain unchanged.
+- Desktop preview: mode switching, all group buttons, keyboard-compatible native
+  buttons, zoom (1.3x), reset and manual group selection stopping auto rotation.
+  Returning to sea restores original materials, ocean and removes the CAD panel.
+- 390px iframe / 375px content: no horizontal page overflow; four structure buttons
+  are 44px high. Gray scene, short notes, presets and controls visually inspected.
+  Initial pre-hydration click required retry after data loaded. Small-layout mouse
+  drag projection and zoom were checked; it is not a real touchscreen test.
+- Browser uses SVGRenderer fallback; outline painter ordering can expose back edges.
+  Actual GPU lighting, WebGL depth testing, performance and physical iOS/Android
+  gestures are unverified. A mispositioned automation drag timed out before retry
+  against the observed viewport. No claim of real-device QA.
+- Evidence/hash/mutation checks, defense export checks, installed OrbitControls
+  synthetic interaction/preset harness and TypeScript check passed. No new tests
+  duplicate this reversible visual implementation. No Python/research code changed.
+- Temporary mobile QA wrapper removed before packaging.
