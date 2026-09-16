@@ -1,0 +1,782 @@
+relative_path,epsilon,true_index,true_label,clean_predicted_index,clean_predicted_label,adversarial_predicted_index,adversarial_predicted_label,clean_correct,attack_success,linf
+Aircraft Carrier\Aircraft Carrier_1.jpeg,0.01,0,Aircraft Carrier,0,Aircraft Carrier,2,Car Carrier,True,True,0.010000005
+Aircraft Carrier\Aircraft Carrier_10.jpeg,0.01,0,Aircraft Carrier,0,Aircraft Carrier,1,Bulkers,True,True,0.010000005
+Aircraft Carrier\Aircraft Carrier_1001.jpeg,0.01,0,Aircraft Carrier,6,Recreational,6,Recreational,False,False,0.010000005
+Aircraft Carrier\Aircraft Carrier_1002.jpeg,0.01,0,Aircraft Carrier,0,Aircraft Carrier,8,Submarine,True,True,0.010000005
+Aircraft Carrier\Aircraft Carrier_1003.jpeg,0.01,0,Aircraft Carrier,6,Recreational,6,Recreational,False,False,0.010000005
+Aircraft Carrier\Aircraft Carrier_1004.jpeg,0.01,0,Aircraft Carrier,0,Aircraft Carrier,1,Bulkers,True,True,0.010000005
+Aircraft Carrier\Aircraft Carrier_1005.jpeg,0.01,0,Aircraft Carrier,0,Aircraft Carrier,6,Recreational,True,True,0.010000005
+Aircraft Carrier\Aircraft Carrier_1006.jpeg,0.01,0,Aircraft Carrier,0,Aircraft Carrier,1,Bulkers,True,True,0.010000005
+Aircraft Carrier\Aircraft Carrier_1007.jpeg,0.01,0,Aircraft Carrier,0,Aircraft Carrier,6,Recreational,True,True,0.010000005
+Aircraft Carrier\Aircraft Carrier_1008.jpeg,0.01,0,Aircraft Carrier,0,Aircraft Carrier,6,Recreational,True,True,0.010000005
+Aircraft Carrier\Aircraft Carrier_1009.jpeg,0.01,0,Aircraft Carrier,6,Recreational,6,Recreational,False,False,0.010000005
+Aircraft Carrier\Aircraft Carrier_1010.jpeg,0.01,0,Aircraft Carrier,0,Aircraft Carrier,6,Recreational,True,True,0.010000005
+Aircraft Carrier\Aircraft Carrier_1011.jpeg,0.01,0,Aircraft Carrier,0,Aircraft Carrier,1,Bulkers,True,True,0.010000005
+Aircraft Carrier\Aircraft Carrier_1012.jpeg,0.01,0,Aircraft Carrier,6,Recreational,6,Recreational,False,False,0.010000005
+Aircraft Carrier\Aircraft Carrier_1013.jpeg,0.01,0,Aircraft Carrier,1,Bulkers,1,Bulkers,False,False,0.010000005
+Aircraft Carrier\Aircraft Carrier_1014.jpeg,0.01,0,Aircraft Carrier,0,Aircraft Carrier,1,Bulkers,True,True,0.010000005
+Aircraft Carrier\Aircraft Carrier_1015.jpeg,0.01,0,Aircraft Carrier,0,Aircraft Carrier,6,Recreational,True,True,0.010000005
+Aircraft Carrier\Aircraft Carrier_11.jpeg,0.01,0,Aircraft Carrier,0,Aircraft Carrier,5,DDG,True,True,0.010000005
+Aircraft Carrier\Aircraft Carrier_12.jpeg,0.01,0,Aircraft Carrier,0,Aircraft Carrier,1,Bulkers,True,True,0.010000005
+Aircraft Carrier\Aircraft Carrier_13.jpeg,0.01,0,Aircraft Carrier,0,Aircraft Carrier,5,DDG,True,True,0.010000005
+Aircraft Carrier\Aircraft Carrier_14.jpeg,0.01,0,Aircraft Carrier,0,Aircraft Carrier,4,Cruise,True,True,0.010000005
+Aircraft Carrier\Aircraft Carrier_15.jpeg,0.01,0,Aircraft Carrier,0,Aircraft Carrier,6,Recreational,True,True,0.010000005
+Aircraft Carrier\Aircraft Carrier_16.jpeg,0.01,0,Aircraft Carrier,0,Aircraft Carrier,9,Tug,True,True,0.010000005
+Aircraft Carrier\Aircraft Carrier_17.jpeg,0.01,0,Aircraft Carrier,0,Aircraft Carrier,6,Recreational,True,True,0.010000005
+Aircraft Carrier\Aircraft Carrier_18.jpeg,0.01,0,Aircraft Carrier,0,Aircraft Carrier,6,Recreational,True,True,0.010000005
+Aircraft Carrier\Aircraft Carrier_19.jpeg,0.01,0,Aircraft Carrier,0,Aircraft Carrier,5,DDG,True,True,0.010000005
+Aircraft Carrier\Aircraft Carrier_2.jpeg,0.01,0,Aircraft Carrier,0,Aircraft Carrier,1,Bulkers,True,True,0.010000005
+Aircraft Carrier\Aircraft Carrier_20.jpeg,0.01,0,Aircraft Carrier,0,Aircraft Carrier,5,DDG,True,True,0.010000005
+Aircraft Carrier\Aircraft Carrier_21.jpeg,0.01,0,Aircraft Carrier,0,Aircraft Carrier,5,DDG,True,True,0.010000005
+Aircraft Carrier\Aircraft Carrier_22.jpeg,0.01,0,Aircraft Carrier,0,Aircraft Carrier,0,Aircraft Carrier,True,False,0.010000005
+Aircraft Carrier\Aircraft Carrier_23.jpeg,0.01,0,Aircraft Carrier,0,Aircraft Carrier,8,Submarine,True,True,0.010000005
+Aircraft Carrier\Aircraft Carrier_24.jpeg,0.01,0,Aircraft Carrier,0,Aircraft Carrier,0,Aircraft Carrier,True,False,0.010000005
+Aircraft Carrier\Aircraft Carrier_25.jpeg,0.01,0,Aircraft Carrier,0,Aircraft Carrier,0,Aircraft Carrier,True,False,0.010000005
+Aircraft Carrier\Aircraft Carrier_26.jpeg,0.01,0,Aircraft Carrier,0,Aircraft Carrier,8,Submarine,True,True,0.010000005
+Aircraft Carrier\Aircraft Carrier_27.jpeg,0.01,0,Aircraft Carrier,0,Aircraft Carrier,7,Sailboat,True,True,0.010000005
+Aircraft Carrier\Aircraft Carrier_28.jpeg,0.01,0,Aircraft Carrier,0,Aircraft Carrier,1,Bulkers,True,True,0.010000005
+Aircraft Carrier\Aircraft Carrier_29.jpeg,0.01,0,Aircraft Carrier,0,Aircraft Carrier,5,DDG,True,True,0.010000005
+Aircraft Carrier\Aircraft Carrier_3.jpeg,0.01,0,Aircraft Carrier,0,Aircraft Carrier,1,Bulkers,True,True,0.010000005
+Aircraft Carrier\Aircraft Carrier_30.jpeg,0.01,0,Aircraft Carrier,0,Aircraft Carrier,0,Aircraft Carrier,True,False,0.010000005
+Aircraft Carrier\Aircraft Carrier_31.jpeg,0.01,0,Aircraft Carrier,0,Aircraft Carrier,1,Bulkers,True,True,0.010000005
+Aircraft Carrier\Aircraft Carrier_32.jpeg,0.01,0,Aircraft Carrier,0,Aircraft Carrier,6,Recreational,True,True,0.010000005
+Aircraft Carrier\Aircraft Carrier_33.jpeg,0.01,0,Aircraft Carrier,0,Aircraft Carrier,0,Aircraft Carrier,True,False,0.010000005
+Aircraft Carrier\Aircraft Carrier_34.jpeg,0.01,0,Aircraft Carrier,0,Aircraft Carrier,1,Bulkers,True,True,0.010000005
+Aircraft Carrier\Aircraft Carrier_35.jpeg,0.01,0,Aircraft Carrier,0,Aircraft Carrier,0,Aircraft Carrier,True,False,0.010000005
+Aircraft Carrier\Aircraft Carrier_36.jpeg,0.01,0,Aircraft Carrier,0,Aircraft Carrier,6,Recreational,True,True,0.010000005
+Aircraft Carrier\Aircraft Carrier_37.jpeg,0.01,0,Aircraft Carrier,0,Aircraft Carrier,1,Bulkers,True,True,0.010000005
+Aircraft Carrier\Aircraft Carrier_38.jpeg,0.01,0,Aircraft Carrier,0,Aircraft Carrier,6,Recreational,True,True,0.010000005
+Aircraft Carrier\Aircraft Carrier_39.jpeg,0.01,0,Aircraft Carrier,0,Aircraft Carrier,1,Bulkers,True,True,0.010000005
+Aircraft Carrier\Aircraft Carrier_4.jpeg,0.01,0,Aircraft Carrier,0,Aircraft Carrier,5,DDG,True,True,0.010000005
+Aircraft Carrier\Aircraft Carrier_40.jpeg,0.01,0,Aircraft Carrier,0,Aircraft Carrier,1,Bulkers,True,True,0.010000005
+Aircraft Carrier\Aircraft Carrier_41.jpeg,0.01,0,Aircraft Carrier,0,Aircraft Carrier,5,DDG,True,True,0.010000005
+Aircraft Carrier\Aircraft Carrier_42.jpeg,0.01,0,Aircraft Carrier,0,Aircraft Carrier,9,Tug,True,True,0.010000005
+Aircraft Carrier\Aircraft Carrier_43.jpeg,0.01,0,Aircraft Carrier,0,Aircraft Carrier,1,Bulkers,True,True,0.010000005
+Aircraft Carrier\Aircraft Carrier_44.jpeg,0.01,0,Aircraft Carrier,0,Aircraft Carrier,6,Recreational,True,True,0.010000005
+Aircraft Carrier\Aircraft Carrier_5.jpeg,0.01,0,Aircraft Carrier,0,Aircraft Carrier,1,Bulkers,True,True,0.010000005
+Aircraft Carrier\Aircraft Carrier_6.jpeg,0.01,0,Aircraft Carrier,0,Aircraft Carrier,1,Bulkers,True,True,0.010000005
+Aircraft Carrier\Aircraft Carrier_7.jpeg,0.01,0,Aircraft Carrier,0,Aircraft Carrier,1,Bulkers,True,True,0.010000005
+Aircraft Carrier\Aircraft Carrier_8.jpeg,0.01,0,Aircraft Carrier,0,Aircraft Carrier,6,Recreational,True,True,0.010000005
+Aircraft Carrier\Aircraft Carrier_9.jpeg,0.01,0,Aircraft Carrier,0,Aircraft Carrier,8,Submarine,True,True,0.010000005
+Bulkers\Bulkers_1.jpeg,0.01,1,Bulkers,1,Bulkers,0,Aircraft Carrier,True,True,0.010000005
+Bulkers\Bulkers_10.jpeg,0.01,1,Bulkers,1,Bulkers,3,Container Ship,True,True,0.010000005
+Bulkers\Bulkers_1001.jpeg,0.01,1,Bulkers,1,Bulkers,6,Recreational,True,True,0.010000005
+Bulkers\Bulkers_1002.jpeg,0.01,1,Bulkers,1,Bulkers,6,Recreational,True,True,0.010000005
+Bulkers\Bulkers_1003.jpeg,0.01,1,Bulkers,1,Bulkers,1,Bulkers,True,False,0.010000005
+Bulkers\Bulkers_1004.jpeg,0.01,1,Bulkers,1,Bulkers,6,Recreational,True,True,0.010000005
+Bulkers\Bulkers_1005.jpeg,0.01,1,Bulkers,1,Bulkers,3,Container Ship,True,True,0.010000005
+Bulkers\Bulkers_1006.jpeg,0.01,1,Bulkers,1,Bulkers,0,Aircraft Carrier,True,True,0.010000005
+Bulkers\Bulkers_1007.jpeg,0.01,1,Bulkers,1,Bulkers,6,Recreational,True,True,0.010000005
+Bulkers\Bulkers_1008.jpeg,0.01,1,Bulkers,1,Bulkers,6,Recreational,True,True,0.010000005
+Bulkers\Bulkers_1009.jpeg,0.01,1,Bulkers,1,Bulkers,6,Recreational,True,True,0.010000005
+Bulkers\Bulkers_1010.jpeg,0.01,1,Bulkers,1,Bulkers,6,Recreational,True,True,0.010000005
+Bulkers\Bulkers_1011.jpeg,0.01,1,Bulkers,1,Bulkers,6,Recreational,True,True,0.010000005
+Bulkers\Bulkers_1012.jpeg,0.01,1,Bulkers,1,Bulkers,7,Sailboat,True,True,0.010000005
+Bulkers\Bulkers_1013.jpeg,0.01,1,Bulkers,1,Bulkers,1,Bulkers,True,False,0.010000005
+Bulkers\Bulkers_1014.jpeg,0.01,1,Bulkers,1,Bulkers,5,DDG,True,True,0.010000005
+Bulkers\Bulkers_1015.jpeg,0.01,1,Bulkers,1,Bulkers,2,Car Carrier,True,True,0.010000005
+Bulkers\Bulkers_1016.jpeg,0.01,1,Bulkers,1,Bulkers,6,Recreational,True,True,0.010000005
+Bulkers\Bulkers_1017.jpeg,0.01,1,Bulkers,1,Bulkers,6,Recreational,True,True,0.010000005
+Bulkers\Bulkers_1018.jpeg,0.01,1,Bulkers,1,Bulkers,6,Recreational,True,True,0.010000005
+Bulkers\Bulkers_1019.jpeg,0.01,1,Bulkers,1,Bulkers,6,Recreational,True,True,0.010000005
+Bulkers\Bulkers_1020.jpeg,0.01,1,Bulkers,1,Bulkers,6,Recreational,True,True,0.010000005
+Bulkers\Bulkers_1021.jpeg,0.01,1,Bulkers,1,Bulkers,1,Bulkers,True,False,0.010000005
+Bulkers\Bulkers_1022.jpeg,0.01,1,Bulkers,1,Bulkers,6,Recreational,True,True,0.010000005
+Bulkers\Bulkers_1023.jpeg,0.01,1,Bulkers,1,Bulkers,6,Recreational,True,True,0.010000005
+Bulkers\Bulkers_1024.jpeg,0.01,1,Bulkers,1,Bulkers,1,Bulkers,True,False,0.010000005
+Bulkers\Bulkers_1025.jpeg,0.01,1,Bulkers,1,Bulkers,9,Tug,True,True,0.010000005
+Bulkers\Bulkers_1026.jpeg,0.01,1,Bulkers,1,Bulkers,3,Container Ship,True,True,0.010000005
+Bulkers\Bulkers_1027.jpeg,0.01,1,Bulkers,1,Bulkers,0,Aircraft Carrier,True,True,0.010000005
+Bulkers\Bulkers_1028.jpeg,0.01,1,Bulkers,1,Bulkers,3,Container Ship,True,True,0.010000005
+Bulkers\Bulkers_1029.jpeg,0.01,1,Bulkers,1,Bulkers,6,Recreational,True,True,0.010000005
+Bulkers\Bulkers_1030.jpeg,0.01,1,Bulkers,1,Bulkers,3,Container Ship,True,True,0.010000005
+Bulkers\Bulkers_1031.jpeg,0.01,1,Bulkers,1,Bulkers,6,Recreational,True,True,0.010000005
+Bulkers\Bulkers_1032.jpeg,0.01,1,Bulkers,1,Bulkers,6,Recreational,True,True,0.010000005
+Bulkers\Bulkers_1033.jpeg,0.01,1,Bulkers,1,Bulkers,3,Container Ship,True,True,0.010000005
+Bulkers\Bulkers_1034.jpeg,0.01,1,Bulkers,1,Bulkers,6,Recreational,True,True,0.010000005
+Bulkers\Bulkers_1035.jpeg,0.01,1,Bulkers,1,Bulkers,6,Recreational,True,True,0.010000005
+Bulkers\Bulkers_1036.jpeg,0.01,1,Bulkers,1,Bulkers,6,Recreational,True,True,0.010000005
+Bulkers\Bulkers_1037.jpeg,0.01,1,Bulkers,1,Bulkers,6,Recreational,True,True,0.010000005
+Bulkers\Bulkers_1038.jpeg,0.01,1,Bulkers,1,Bulkers,6,Recreational,True,True,0.010000005
+Bulkers\Bulkers_1039.jpeg,0.01,1,Bulkers,1,Bulkers,6,Recreational,True,True,0.010000005
+Bulkers\Bulkers_1040.jpeg,0.01,1,Bulkers,1,Bulkers,6,Recreational,True,True,0.010000005
+Bulkers\Bulkers_1041.jpeg,0.01,1,Bulkers,1,Bulkers,1,Bulkers,True,False,0.010000005
+Bulkers\Bulkers_1042.jpeg,0.01,1,Bulkers,1,Bulkers,9,Tug,True,True,0.010000005
+Bulkers\Bulkers_1043.jpeg,0.01,1,Bulkers,1,Bulkers,6,Recreational,True,True,0.010000005
+Bulkers\Bulkers_1044.jpeg,0.01,1,Bulkers,1,Bulkers,0,Aircraft Carrier,True,True,0.010000005
+Bulkers\Bulkers_1045.jpeg,0.01,1,Bulkers,1,Bulkers,3,Container Ship,True,True,0.010000005
+Bulkers\Bulkers_1046.jpeg,0.01,1,Bulkers,1,Bulkers,3,Container Ship,True,True,0.010000005
+Bulkers\Bulkers_1047.jpeg,0.01,1,Bulkers,1,Bulkers,3,Container Ship,True,True,0.010000005
+Bulkers\Bulkers_1049.jpeg,0.01,1,Bulkers,1,Bulkers,0,Aircraft Carrier,True,True,0.010000005
+Bulkers\Bulkers_1050.jpeg,0.01,1,Bulkers,1,Bulkers,6,Recreational,True,True,0.010000005
+Bulkers\Bulkers_1051.jpeg,0.01,1,Bulkers,1,Bulkers,6,Recreational,True,True,0.010000005
+Bulkers\Bulkers_1052.jpeg,0.01,1,Bulkers,1,Bulkers,6,Recreational,True,True,0.010000005
+Bulkers\Bulkers_1053.jpeg,0.01,1,Bulkers,1,Bulkers,2,Car Carrier,True,True,0.010000005
+Bulkers\Bulkers_1054.jpeg,0.01,1,Bulkers,1,Bulkers,1,Bulkers,True,False,0.010000005
+Bulkers\Bulkers_1055.jpeg,0.01,1,Bulkers,1,Bulkers,6,Recreational,True,True,0.010000005
+Bulkers\Bulkers_1056.jpeg,0.01,1,Bulkers,1,Bulkers,6,Recreational,True,True,0.010000005
+Bulkers\Bulkers_1057.jpeg,0.01,1,Bulkers,1,Bulkers,9,Tug,True,True,0.010000005
+Bulkers\Bulkers_1058.jpeg,0.01,1,Bulkers,1,Bulkers,6,Recreational,True,True,0.010000005
+Bulkers\Bulkers_1059.jpeg,0.01,1,Bulkers,1,Bulkers,6,Recreational,True,True,0.010000005
+Bulkers\Bulkers_1060.jpeg,0.01,1,Bulkers,1,Bulkers,2,Car Carrier,True,True,0.010000005
+Bulkers\Bulkers_1061.jpeg,0.01,1,Bulkers,1,Bulkers,1,Bulkers,True,False,0.010000005
+Bulkers\Bulkers_1062.jpeg,0.01,1,Bulkers,1,Bulkers,1,Bulkers,True,False,0.010000005
+Bulkers\Bulkers_1063.jpeg,0.01,1,Bulkers,1,Bulkers,3,Container Ship,True,True,0.010000005
+Bulkers\Bulkers_1064.jpeg,0.01,1,Bulkers,1,Bulkers,3,Container Ship,True,True,0.010000005
+Bulkers\Bulkers_1065.jpeg,0.01,1,Bulkers,1,Bulkers,2,Car Carrier,True,True,0.010000005
+Bulkers\Bulkers_1066.jpeg,0.01,1,Bulkers,1,Bulkers,6,Recreational,True,True,0.010000005
+Bulkers\Bulkers_1067.jpeg,0.01,1,Bulkers,1,Bulkers,3,Container Ship,True,True,0.010000005
+Bulkers\Bulkers_1068.jpeg,0.01,1,Bulkers,1,Bulkers,6,Recreational,True,True,0.010000005
+Bulkers\Bulkers_1069.jpeg,0.01,1,Bulkers,1,Bulkers,6,Recreational,True,True,0.010000005
+Bulkers\Bulkers_1070.jpeg,0.01,1,Bulkers,1,Bulkers,6,Recreational,True,True,0.010000005
+Bulkers\Bulkers_1071.jpeg,0.01,1,Bulkers,1,Bulkers,6,Recreational,True,True,0.010000005
+Bulkers\Bulkers_1072.jpeg,0.01,1,Bulkers,1,Bulkers,6,Recreational,True,True,0.010000005
+Bulkers\Bulkers_1073.jpeg,0.01,1,Bulkers,1,Bulkers,3,Container Ship,True,True,0.010000005
+Bulkers\Bulkers_1074.jpeg,0.01,1,Bulkers,1,Bulkers,1,Bulkers,True,False,0.010000005
+Bulkers\Bulkers_1075.jpeg,0.01,1,Bulkers,1,Bulkers,6,Recreational,True,True,0.010000005
+Bulkers\Bulkers_1076.jpeg,0.01,1,Bulkers,1,Bulkers,6,Recreational,True,True,0.010000005
+Bulkers\Bulkers_1077.jpeg,0.01,1,Bulkers,1,Bulkers,6,Recreational,True,True,0.010000005
+Bulkers\Bulkers_1078.jpeg,0.01,1,Bulkers,1,Bulkers,1,Bulkers,True,False,0.010000005
+Bulkers\Bulkers_1079.jpeg,0.01,1,Bulkers,1,Bulkers,2,Car Carrier,True,True,0.010000005
+Bulkers\Bulkers_1080.jpeg,0.01,1,Bulkers,1,Bulkers,6,Recreational,True,True,0.010000005
+Bulkers\Bulkers_1081.jpeg,0.01,1,Bulkers,1,Bulkers,6,Recreational,True,True,0.010000005
+Bulkers\Bulkers_1082.jpeg,0.01,1,Bulkers,1,Bulkers,6,Recreational,True,True,0.010000005
+Bulkers\Bulkers_1083.jpeg,0.01,1,Bulkers,1,Bulkers,6,Recreational,True,True,0.010000005
+Bulkers\Bulkers_1084.jpeg,0.01,1,Bulkers,1,Bulkers,6,Recreational,True,True,0.010000005
+Bulkers\Bulkers_11.jpeg,0.01,1,Bulkers,1,Bulkers,8,Submarine,True,True,0.010000005
+Bulkers\Bulkers_12.jpeg,0.01,1,Bulkers,1,Bulkers,8,Submarine,True,True,0.010000005
+Bulkers\Bulkers_13.jpeg,0.01,1,Bulkers,1,Bulkers,3,Container Ship,True,True,0.010000005
+Bulkers\Bulkers_14.jpeg,0.01,1,Bulkers,9,Tug,6,Recreational,False,False,0.010000005
+Bulkers\Bulkers_2.jpeg,0.01,1,Bulkers,1,Bulkers,0,Aircraft Carrier,True,True,0.010000005
+Bulkers\Bulkers_3.jpeg,0.01,1,Bulkers,1,Bulkers,0,Aircraft Carrier,True,True,0.010000005
+Bulkers\Bulkers_4.jpeg,0.01,1,Bulkers,1,Bulkers,5,DDG,True,True,0.010000005
+Bulkers\Bulkers_5.jpeg,0.01,1,Bulkers,1,Bulkers,9,Tug,True,True,0.010000005
+Bulkers\Bulkers_6.jpeg,0.01,1,Bulkers,1,Bulkers,8,Submarine,True,True,0.010000005
+Bulkers\Bulkers_7.jpeg,0.01,1,Bulkers,1,Bulkers,6,Recreational,True,True,0.010000005
+Bulkers\Bulkers_8.jpeg,0.01,1,Bulkers,1,Bulkers,2,Car Carrier,True,True,0.010000005
+Bulkers\Bulkers_9.jpeg,0.01,1,Bulkers,1,Bulkers,6,Recreational,True,True,0.010000005
+Car Carrier\Car Carrier_1.jpeg,0.01,2,Car Carrier,2,Car Carrier,4,Cruise,True,True,0.010000005
+Car Carrier\Car Carrier_10.jpeg,0.01,2,Car Carrier,2,Car Carrier,2,Car Carrier,True,False,0.010000005
+Car Carrier\Car Carrier_1001.jpeg,0.01,2,Car Carrier,2,Car Carrier,1,Bulkers,True,True,0.010000005
+Car Carrier\Car Carrier_1002.jpeg,0.01,2,Car Carrier,1,Bulkers,1,Bulkers,False,False,0.010000005
+Car Carrier\Car Carrier_1003.jpeg,0.01,2,Car Carrier,1,Bulkers,1,Bulkers,False,False,0.010000005
+Car Carrier\Car Carrier_1004.jpeg,0.01,2,Car Carrier,2,Car Carrier,6,Recreational,True,True,0.010000005
+Car Carrier\Car Carrier_1005.jpeg,0.01,2,Car Carrier,2,Car Carrier,6,Recreational,True,True,0.010000005
+Car Carrier\Car Carrier_11.jpeg,0.01,2,Car Carrier,2,Car Carrier,1,Bulkers,True,True,0.010000005
+Car Carrier\Car Carrier_12.jpeg,0.01,2,Car Carrier,2,Car Carrier,2,Car Carrier,True,False,0.010000005
+Car Carrier\Car Carrier_13.jpeg,0.01,2,Car Carrier,2,Car Carrier,2,Car Carrier,True,False,0.010000005
+Car Carrier\Car Carrier_14.jpeg,0.01,2,Car Carrier,2,Car Carrier,2,Car Carrier,True,False,0.010000005
+Car Carrier\Car Carrier_15.jpeg,0.01,2,Car Carrier,2,Car Carrier,8,Submarine,True,True,0.010000005
+Car Carrier\Car Carrier_16.jpeg,0.01,2,Car Carrier,2,Car Carrier,1,Bulkers,True,True,0.010000005
+Car Carrier\Car Carrier_17.jpeg,0.01,2,Car Carrier,2,Car Carrier,2,Car Carrier,True,False,0.010000005
+Car Carrier\Car Carrier_18.jpeg,0.01,2,Car Carrier,2,Car Carrier,1,Bulkers,True,True,0.010000005
+Car Carrier\Car Carrier_19.jpeg,0.01,2,Car Carrier,2,Car Carrier,1,Bulkers,True,True,0.010000005
+Car Carrier\Car Carrier_2.jpeg,0.01,2,Car Carrier,2,Car Carrier,6,Recreational,True,True,0.010000005
+Car Carrier\Car Carrier_20.jpeg,0.01,2,Car Carrier,2,Car Carrier,2,Car Carrier,True,False,0.010000005
+Car Carrier\Car Carrier_21.jpeg,0.01,2,Car Carrier,2,Car Carrier,1,Bulkers,True,True,0.010000005
+Car Carrier\Car Carrier_22.jpeg,0.01,2,Car Carrier,2,Car Carrier,2,Car Carrier,True,False,0.010000005
+Car Carrier\Car Carrier_23.jpeg,0.01,2,Car Carrier,2,Car Carrier,8,Submarine,True,True,0.010000005
+Car Carrier\Car Carrier_24.jpeg,0.01,2,Car Carrier,2,Car Carrier,8,Submarine,True,True,0.010000005
+Car Carrier\Car Carrier_25.jpeg,0.01,2,Car Carrier,2,Car Carrier,2,Car Carrier,True,False,0.010000005
+Car Carrier\Car Carrier_26.jpeg,0.01,2,Car Carrier,2,Car Carrier,8,Submarine,True,True,0.010000005
+Car Carrier\Car Carrier_27.jpeg,0.01,2,Car Carrier,2,Car Carrier,2,Car Carrier,True,False,0.010000005
+Car Carrier\Car Carrier_28.jpeg,0.01,2,Car Carrier,2,Car Carrier,4,Cruise,True,True,0.010000005
+Car Carrier\Car Carrier_29.jpeg,0.01,2,Car Carrier,2,Car Carrier,8,Submarine,True,True,0.010000005
+Car Carrier\Car Carrier_3.jpeg,0.01,2,Car Carrier,2,Car Carrier,2,Car Carrier,True,False,0.010000005
+Car Carrier\Car Carrier_30.jpeg,0.01,2,Car Carrier,2,Car Carrier,6,Recreational,True,True,0.010000005
+Car Carrier\Car Carrier_31.jpeg,0.01,2,Car Carrier,2,Car Carrier,0,Aircraft Carrier,True,True,0.010000005
+Car Carrier\Car Carrier_32.jpeg,0.01,2,Car Carrier,2,Car Carrier,2,Car Carrier,True,False,0.010000005
+Car Carrier\Car Carrier_33.jpeg,0.01,2,Car Carrier,2,Car Carrier,6,Recreational,True,True,0.010000005
+Car Carrier\Car Carrier_34.jpeg,0.01,2,Car Carrier,2,Car Carrier,1,Bulkers,True,True,0.010000005
+Car Carrier\Car Carrier_35.jpeg,0.01,2,Car Carrier,2,Car Carrier,2,Car Carrier,True,False,0.010000005
+Car Carrier\Car Carrier_36.jpeg,0.01,2,Car Carrier,2,Car Carrier,2,Car Carrier,True,False,0.010000005
+Car Carrier\Car Carrier_37.jpeg,0.01,2,Car Carrier,2,Car Carrier,7,Sailboat,True,True,0.010000005
+Car Carrier\Car Carrier_38.jpeg,0.01,2,Car Carrier,2,Car Carrier,1,Bulkers,True,True,0.010000005
+Car Carrier\Car Carrier_39.jpeg,0.01,2,Car Carrier,2,Car Carrier,6,Recreational,True,True,0.010000005
+Car Carrier\Car Carrier_4.jpeg,0.01,2,Car Carrier,2,Car Carrier,3,Container Ship,True,True,0.010000005
+Car Carrier\Car Carrier_40.jpeg,0.01,2,Car Carrier,2,Car Carrier,4,Cruise,True,True,0.010000005
+Car Carrier\Car Carrier_41.jpeg,0.01,2,Car Carrier,2,Car Carrier,2,Car Carrier,True,False,0.010000005
+Car Carrier\Car Carrier_42.jpeg,0.01,2,Car Carrier,2,Car Carrier,1,Bulkers,True,True,0.010000005
+Car Carrier\Car Carrier_43.jpeg,0.01,2,Car Carrier,2,Car Carrier,2,Car Carrier,True,False,0.010000005
+Car Carrier\Car Carrier_44.jpeg,0.01,2,Car Carrier,2,Car Carrier,1,Bulkers,True,True,0.010000005
+Car Carrier\Car Carrier_45.jpeg,0.01,2,Car Carrier,2,Car Carrier,8,Submarine,True,True,0.010000005
+Car Carrier\Car Carrier_46.jpeg,0.01,2,Car Carrier,2,Car Carrier,6,Recreational,True,True,0.010000005
+Car Carrier\Car Carrier_47.jpeg,0.01,2,Car Carrier,2,Car Carrier,8,Submarine,True,True,0.010000005
+Car Carrier\Car Carrier_48.jpeg,0.01,2,Car Carrier,2,Car Carrier,6,Recreational,True,True,0.010000005
+Car Carrier\Car Carrier_49.jpeg,0.01,2,Car Carrier,2,Car Carrier,1,Bulkers,True,True,0.010000005
+Car Carrier\Car Carrier_5.jpeg,0.01,2,Car Carrier,2,Car Carrier,3,Container Ship,True,True,0.010000005
+Car Carrier\Car Carrier_50.jpeg,0.01,2,Car Carrier,2,Car Carrier,1,Bulkers,True,True,0.010000005
+Car Carrier\Car Carrier_51.jpeg,0.01,2,Car Carrier,2,Car Carrier,1,Bulkers,True,True,0.010000005
+Car Carrier\Car Carrier_52.jpeg,0.01,2,Car Carrier,2,Car Carrier,1,Bulkers,True,True,0.010000005
+Car Carrier\Car Carrier_53.jpeg,0.01,2,Car Carrier,2,Car Carrier,8,Submarine,True,True,0.010000005
+Car Carrier\Car Carrier_54.jpeg,0.01,2,Car Carrier,2,Car Carrier,1,Bulkers,True,True,0.010000005
+Car Carrier\Car Carrier_55.jpeg,0.01,2,Car Carrier,2,Car Carrier,2,Car Carrier,True,False,0.010000005
+Car Carrier\Car Carrier_56.jpeg,0.01,2,Car Carrier,2,Car Carrier,6,Recreational,True,True,0.010000005
+Car Carrier\Car Carrier_57.jpeg,0.01,2,Car Carrier,2,Car Carrier,1,Bulkers,True,True,0.010000005
+Car Carrier\Car Carrier_58.jpeg,0.01,2,Car Carrier,2,Car Carrier,1,Bulkers,True,True,0.010000005
+Car Carrier\Car Carrier_59.jpeg,0.01,2,Car Carrier,2,Car Carrier,2,Car Carrier,True,False,0.010000005
+Car Carrier\Car Carrier_6.jpeg,0.01,2,Car Carrier,2,Car Carrier,3,Container Ship,True,True,0.010000005
+Car Carrier\Car Carrier_60.jpeg,0.01,2,Car Carrier,2,Car Carrier,2,Car Carrier,True,False,0.010000005
+Car Carrier\Car Carrier_61.jpeg,0.01,2,Car Carrier,2,Car Carrier,1,Bulkers,True,True,0.010000005
+Car Carrier\Car Carrier_62.jpeg,0.01,2,Car Carrier,2,Car Carrier,2,Car Carrier,True,False,0.010000005
+Car Carrier\Car Carrier_63.jpeg,0.01,2,Car Carrier,2,Car Carrier,2,Car Carrier,True,False,0.010000005
+Car Carrier\Car Carrier_64.jpeg,0.01,2,Car Carrier,2,Car Carrier,8,Submarine,True,True,0.010000005
+Car Carrier\Car Carrier_65.jpeg,0.01,2,Car Carrier,2,Car Carrier,3,Container Ship,True,True,0.010000005
+Car Carrier\Car Carrier_66.jpeg,0.01,2,Car Carrier,2,Car Carrier,1,Bulkers,True,True,0.010000005
+Car Carrier\Car Carrier_67.jpeg,0.01,2,Car Carrier,2,Car Carrier,1,Bulkers,True,True,0.010000005
+Car Carrier\Car Carrier_68.jpeg,0.01,2,Car Carrier,2,Car Carrier,1,Bulkers,True,True,0.010000005
+Car Carrier\Car Carrier_69.jpeg,0.01,2,Car Carrier,2,Car Carrier,7,Sailboat,True,True,0.010000005
+Car Carrier\Car Carrier_7.jpeg,0.01,2,Car Carrier,2,Car Carrier,3,Container Ship,True,True,0.010000005
+Car Carrier\Car Carrier_70.jpeg,0.01,2,Car Carrier,2,Car Carrier,1,Bulkers,True,True,0.010000005
+Car Carrier\Car Carrier_71.jpeg,0.01,2,Car Carrier,2,Car Carrier,1,Bulkers,True,True,0.010000005
+Car Carrier\Car Carrier_72.jpeg,0.01,2,Car Carrier,2,Car Carrier,1,Bulkers,True,True,0.010000005
+Car Carrier\Car Carrier_73.jpeg,0.01,2,Car Carrier,2,Car Carrier,3,Container Ship,True,True,0.010000005
+Car Carrier\Car Carrier_74.jpeg,0.01,2,Car Carrier,2,Car Carrier,2,Car Carrier,True,False,0.010000005
+Car Carrier\Car Carrier_75.jpeg,0.01,2,Car Carrier,2,Car Carrier,1,Bulkers,True,True,0.010000005
+Car Carrier\Car Carrier_76.jpeg,0.01,2,Car Carrier,2,Car Carrier,6,Recreational,True,True,0.010000005
+Car Carrier\Car Carrier_77.jpeg,0.01,2,Car Carrier,2,Car Carrier,1,Bulkers,True,True,0.010000005
+Car Carrier\Car Carrier_78.jpeg,0.01,2,Car Carrier,2,Car Carrier,3,Container Ship,True,True,0.010000005
+Car Carrier\Car Carrier_79.jpeg,0.01,2,Car Carrier,2,Car Carrier,8,Submarine,True,True,0.010000005
+Car Carrier\Car Carrier_8.jpeg,0.01,2,Car Carrier,2,Car Carrier,3,Container Ship,True,True,0.010000005
+Car Carrier\Car Carrier_80.jpeg,0.01,2,Car Carrier,2,Car Carrier,8,Submarine,True,True,0.010000005
+Car Carrier\Car Carrier_81.jpeg,0.01,2,Car Carrier,2,Car Carrier,3,Container Ship,True,True,0.010000005
+Car Carrier\Car Carrier_82.jpeg,0.01,2,Car Carrier,2,Car Carrier,4,Cruise,True,True,0.010000005
+Car Carrier\Car Carrier_83.jpeg,0.01,2,Car Carrier,2,Car Carrier,6,Recreational,True,True,0.010000005
+Car Carrier\Car Carrier_84.jpeg,0.01,2,Car Carrier,2,Car Carrier,3,Container Ship,True,True,0.010000005
+Car Carrier\Car Carrier_85.jpeg,0.01,2,Car Carrier,2,Car Carrier,1,Bulkers,True,True,0.010000005
+Car Carrier\Car Carrier_86.jpeg,0.01,2,Car Carrier,2,Car Carrier,1,Bulkers,True,True,0.010000005
+Car Carrier\Car Carrier_87.jpeg,0.01,2,Car Carrier,2,Car Carrier,2,Car Carrier,True,False,0.010000005
+Car Carrier\Car Carrier_88.jpeg,0.01,2,Car Carrier,2,Car Carrier,4,Cruise,True,True,0.00999999
+Car Carrier\Car Carrier_89.jpeg,0.01,2,Car Carrier,2,Car Carrier,6,Recreational,True,True,0.010000005
+Car Carrier\Car Carrier_9.jpeg,0.01,2,Car Carrier,2,Car Carrier,1,Bulkers,True,True,0.010000005
+Car Carrier\Car Carrier_90.jpeg,0.01,2,Car Carrier,2,Car Carrier,1,Bulkers,True,True,0.010000005
+Container Ship\Container Ship_1.jpeg,0.01,3,Container Ship,3,Container Ship,1,Bulkers,True,True,0.010000005
+Container Ship\Container Ship_10.jpeg,0.01,3,Container Ship,3,Container Ship,3,Container Ship,True,False,0.010000005
+Container Ship\Container Ship_1001.jpeg,0.01,3,Container Ship,1,Bulkers,1,Bulkers,False,False,0.010000005
+Container Ship\Container Ship_1002.jpeg,0.01,3,Container Ship,3,Container Ship,1,Bulkers,True,True,0.010000005
+Container Ship\Container Ship_1003.jpeg,0.01,3,Container Ship,1,Bulkers,1,Bulkers,False,False,0.010000005
+Container Ship\Container Ship_1004.jpeg,0.01,3,Container Ship,1,Bulkers,1,Bulkers,False,False,0.010000005
+Container Ship\Container Ship_1005.jpeg,0.01,3,Container Ship,1,Bulkers,1,Bulkers,False,False,0.010000005
+Container Ship\Container Ship_1006.jpeg,0.01,3,Container Ship,3,Container Ship,1,Bulkers,True,True,0.010000005
+Container Ship\Container Ship_1007.jpeg,0.01,3,Container Ship,3,Container Ship,6,Recreational,True,True,0.010000005
+Container Ship\Container Ship_1008.jpeg,0.01,3,Container Ship,1,Bulkers,1,Bulkers,False,False,0.010000005
+Container Ship\Container Ship_1009.jpeg,0.01,3,Container Ship,3,Container Ship,1,Bulkers,True,True,0.010000005
+Container Ship\Container Ship_1010.jpeg,0.01,3,Container Ship,3,Container Ship,1,Bulkers,True,True,0.010000005
+Container Ship\Container Ship_1011.jpeg,0.01,3,Container Ship,1,Bulkers,1,Bulkers,False,False,0.010000005
+Container Ship\Container Ship_1012.jpeg,0.01,3,Container Ship,3,Container Ship,1,Bulkers,True,True,0.010000005
+Container Ship\Container Ship_1013.jpeg,0.01,3,Container Ship,3,Container Ship,1,Bulkers,True,True,0.010000005
+Container Ship\Container Ship_1014.jpeg,0.01,3,Container Ship,1,Bulkers,1,Bulkers,False,False,0.010000005
+Container Ship\Container Ship_1015.jpeg,0.01,3,Container Ship,6,Recreational,6,Recreational,False,False,0.010000005
+Container Ship\Container Ship_1016.jpeg,0.01,3,Container Ship,1,Bulkers,1,Bulkers,False,False,0.010000005
+Container Ship\Container Ship_1017.jpeg,0.01,3,Container Ship,1,Bulkers,1,Bulkers,False,False,0.010000005
+Container Ship\Container Ship_1018.jpeg,0.01,3,Container Ship,3,Container Ship,1,Bulkers,True,True,0.010000005
+Container Ship\Container Ship_1019.jpeg,0.01,3,Container Ship,3,Container Ship,1,Bulkers,True,True,0.010000005
+Container Ship\Container Ship_1021.jpeg,0.01,3,Container Ship,1,Bulkers,1,Bulkers,False,False,0.010000005
+Container Ship\Container Ship_1022.jpeg,0.01,3,Container Ship,1,Bulkers,1,Bulkers,False,False,0.010000005
+Container Ship\Container Ship_1023.jpeg,0.01,3,Container Ship,3,Container Ship,1,Bulkers,True,True,0.010000005
+Container Ship\Container Ship_1024.jpeg,0.01,3,Container Ship,3,Container Ship,1,Bulkers,True,True,0.010000005
+Container Ship\Container Ship_1025.jpeg,0.01,3,Container Ship,3,Container Ship,1,Bulkers,True,True,0.010000005
+Container Ship\Container Ship_1026.jpeg,0.01,3,Container Ship,3,Container Ship,1,Bulkers,True,True,0.010000005
+Container Ship\Container Ship_1027.jpeg,0.01,3,Container Ship,1,Bulkers,6,Recreational,False,False,0.010000005
+Container Ship\Container Ship_1028.jpeg,0.01,3,Container Ship,1,Bulkers,1,Bulkers,False,False,0.010000005
+Container Ship\Container Ship_1029.jpeg,0.01,3,Container Ship,3,Container Ship,6,Recreational,True,True,0.010000005
+Container Ship\Container Ship_1030.jpeg,0.01,3,Container Ship,1,Bulkers,6,Recreational,False,False,0.010000005
+Container Ship\Container Ship_1031.jpeg,0.01,3,Container Ship,1,Bulkers,1,Bulkers,False,False,0.010000005
+Container Ship\Container Ship_1032.jpeg,0.01,3,Container Ship,1,Bulkers,1,Bulkers,False,False,0.010000005
+Container Ship\Container Ship_1033.jpeg,0.01,3,Container Ship,3,Container Ship,1,Bulkers,True,True,0.010000005
+Container Ship\Container Ship_1034.jpeg,0.01,3,Container Ship,3,Container Ship,6,Recreational,True,True,0.010000005
+Container Ship\Container Ship_1035.jpeg,0.01,3,Container Ship,1,Bulkers,1,Bulkers,False,False,0.010000005
+Container Ship\Container Ship_1036.jpeg,0.01,3,Container Ship,1,Bulkers,1,Bulkers,False,False,0.010000005
+Container Ship\Container Ship_1037.jpeg,0.01,3,Container Ship,3,Container Ship,1,Bulkers,True,True,0.010000005
+Container Ship\Container Ship_1038.jpeg,0.01,3,Container Ship,1,Bulkers,1,Bulkers,False,False,0.010000005
+Container Ship\Container Ship_1039.jpeg,0.01,3,Container Ship,1,Bulkers,1,Bulkers,False,False,0.010000005
+Container Ship\Container Ship_11.jpeg,0.01,3,Container Ship,3,Container Ship,8,Submarine,True,True,0.010000005
+Container Ship\Container Ship_12.jpeg,0.01,3,Container Ship,3,Container Ship,2,Car Carrier,True,True,0.010000005
+Container Ship\Container Ship_13.jpeg,0.01,3,Container Ship,3,Container Ship,2,Car Carrier,True,True,0.010000005
+Container Ship\Container Ship_14.jpeg,0.01,3,Container Ship,3,Container Ship,1,Bulkers,True,True,0.010000005
+Container Ship\Container Ship_15.jpeg,0.01,3,Container Ship,3,Container Ship,1,Bulkers,True,True,0.010000005
+Container Ship\Container Ship_16.jpeg,0.01,3,Container Ship,3,Container Ship,2,Car Carrier,True,True,0.010000005
+Container Ship\Container Ship_17.jpeg,0.01,3,Container Ship,3,Container Ship,2,Car Carrier,True,True,0.010000005
+Container Ship\Container Ship_18.jpeg,0.01,3,Container Ship,3,Container Ship,3,Container Ship,True,False,0.010000005
+Container Ship\Container Ship_19.jpeg,0.01,3,Container Ship,3,Container Ship,8,Submarine,True,True,0.010000005
+Container Ship\Container Ship_2.jpeg,0.01,3,Container Ship,3,Container Ship,3,Container Ship,True,False,0.010000005
+Container Ship\Container Ship_20.jpeg,0.01,3,Container Ship,3,Container Ship,2,Car Carrier,True,True,0.010000005
+Container Ship\Container Ship_21.jpeg,0.01,3,Container Ship,3,Container Ship,3,Container Ship,True,False,0.010000005
+Container Ship\Container Ship_22.jpeg,0.01,3,Container Ship,3,Container Ship,8,Submarine,True,True,0.010000005
+Container Ship\Container Ship_23.jpeg,0.01,3,Container Ship,3,Container Ship,3,Container Ship,True,False,0.010000005
+Container Ship\Container Ship_24.jpeg,0.01,3,Container Ship,3,Container Ship,7,Sailboat,True,True,0.010000005
+Container Ship\Container Ship_25.jpeg,0.01,3,Container Ship,3,Container Ship,3,Container Ship,True,False,0.010000005
+Container Ship\Container Ship_26.jpeg,0.01,3,Container Ship,3,Container Ship,1,Bulkers,True,True,0.010000005
+Container Ship\Container Ship_27.jpeg,0.01,3,Container Ship,3,Container Ship,6,Recreational,True,True,0.010000005
+Container Ship\Container Ship_28.jpeg,0.01,3,Container Ship,3,Container Ship,6,Recreational,True,True,0.010000005
+Container Ship\Container Ship_29.jpeg,0.01,3,Container Ship,3,Container Ship,3,Container Ship,True,False,0.010000005
+Container Ship\Container Ship_3.jpeg,0.01,3,Container Ship,3,Container Ship,2,Car Carrier,True,True,0.010000005
+Container Ship\Container Ship_30.jpeg,0.01,3,Container Ship,3,Container Ship,3,Container Ship,True,False,0.010000005
+Container Ship\Container Ship_31.jpeg,0.01,3,Container Ship,3,Container Ship,8,Submarine,True,True,0.010000005
+Container Ship\Container Ship_32.jpeg,0.01,3,Container Ship,3,Container Ship,3,Container Ship,True,False,0.010000005
+Container Ship\Container Ship_33.jpeg,0.01,3,Container Ship,3,Container Ship,6,Recreational,True,True,0.010000005
+Container Ship\Container Ship_34.jpeg,0.01,3,Container Ship,3,Container Ship,1,Bulkers,True,True,0.010000005
+Container Ship\Container Ship_35.jpeg,0.01,3,Container Ship,3,Container Ship,6,Recreational,True,True,0.010000005
+Container Ship\Container Ship_36.jpeg,0.01,3,Container Ship,3,Container Ship,3,Container Ship,True,False,0.010000005
+Container Ship\Container Ship_37.jpeg,0.01,3,Container Ship,3,Container Ship,3,Container Ship,True,False,0.010000005
+Container Ship\Container Ship_38.jpeg,0.01,3,Container Ship,3,Container Ship,1,Bulkers,True,True,0.010000005
+Container Ship\Container Ship_39.jpeg,0.01,3,Container Ship,7,Sailboat,7,Sailboat,False,False,0.010000005
+Container Ship\Container Ship_4.jpeg,0.01,3,Container Ship,3,Container Ship,2,Car Carrier,True,True,0.010000005
+Container Ship\Container Ship_40.jpeg,0.01,3,Container Ship,3,Container Ship,1,Bulkers,True,True,0.010000005
+Container Ship\Container Ship_41.jpeg,0.01,3,Container Ship,3,Container Ship,3,Container Ship,True,False,0.010000005
+Container Ship\Container Ship_42.jpeg,0.01,3,Container Ship,3,Container Ship,6,Recreational,True,True,0.010000005
+Container Ship\Container Ship_43.jpeg,0.01,3,Container Ship,3,Container Ship,3,Container Ship,True,False,0.010000005
+Container Ship\Container Ship_44.jpeg,0.01,3,Container Ship,1,Bulkers,1,Bulkers,False,False,0.010000005
+Container Ship\Container Ship_45.jpeg,0.01,3,Container Ship,3,Container Ship,3,Container Ship,True,False,0.010000005
+Container Ship\Container Ship_46.jpeg,0.01,3,Container Ship,3,Container Ship,3,Container Ship,True,False,0.010000005
+Container Ship\Container Ship_47.jpeg,0.01,3,Container Ship,3,Container Ship,1,Bulkers,True,True,0.010000005
+Container Ship\Container Ship_48.jpeg,0.01,3,Container Ship,3,Container Ship,1,Bulkers,True,True,0.010000005
+Container Ship\Container Ship_5.jpeg,0.01,3,Container Ship,3,Container Ship,3,Container Ship,True,False,0.010000005
+Container Ship\Container Ship_6.jpeg,0.01,3,Container Ship,3,Container Ship,6,Recreational,True,True,0.010000005
+Container Ship\Container Ship_7.jpeg,0.01,3,Container Ship,3,Container Ship,3,Container Ship,True,False,0.010000005
+Container Ship\Container Ship_8.jpeg,0.01,3,Container Ship,3,Container Ship,3,Container Ship,True,False,0.010000005
+Container Ship\Container Ship_9.jpeg,0.01,3,Container Ship,3,Container Ship,1,Bulkers,True,True,0.010000005
+Cruise\Cruise_1.jpeg,0.01,4,Cruise,4,Cruise,9,Tug,True,True,0.010000005
+Cruise\Cruise_10.jpeg,0.01,4,Cruise,4,Cruise,6,Recreational,True,True,0.010000005
+Cruise\Cruise_1001.jpeg,0.01,4,Cruise,6,Recreational,6,Recreational,False,False,0.010000005
+Cruise\Cruise_1002.jpeg,0.01,4,Cruise,4,Cruise,6,Recreational,True,True,0.010000005
+Cruise\Cruise_1003.jpeg,0.01,4,Cruise,4,Cruise,1,Bulkers,True,True,0.010000005
+Cruise\Cruise_1004.jpeg,0.01,4,Cruise,1,Bulkers,1,Bulkers,False,False,0.010000005
+Cruise\Cruise_1005.jpeg,0.01,4,Cruise,4,Cruise,6,Recreational,True,True,0.010000005
+Cruise\Cruise_1006.jpeg,0.01,4,Cruise,4,Cruise,6,Recreational,True,True,0.010000005
+Cruise\Cruise_11.jpeg,0.01,4,Cruise,4,Cruise,4,Cruise,True,False,0.010000005
+Cruise\Cruise_12.jpeg,0.01,4,Cruise,4,Cruise,6,Recreational,True,True,0.010000005
+Cruise\Cruise_13.jpeg,0.01,4,Cruise,4,Cruise,9,Tug,True,True,0.010000005
+Cruise\Cruise_14.jpeg,0.01,4,Cruise,4,Cruise,4,Cruise,True,False,0.010000005
+Cruise\Cruise_15.jpeg,0.01,4,Cruise,4,Cruise,3,Container Ship,True,True,0.010000005
+Cruise\Cruise_16.jpeg,0.01,4,Cruise,4,Cruise,4,Cruise,True,False,0.010000005
+Cruise\Cruise_17.jpeg,0.01,4,Cruise,4,Cruise,4,Cruise,True,False,0.010000005
+Cruise\Cruise_18.jpeg,0.01,4,Cruise,4,Cruise,4,Cruise,True,False,0.010000005
+Cruise\Cruise_19.jpeg,0.01,4,Cruise,4,Cruise,3,Container Ship,True,True,0.010000005
+Cruise\Cruise_2.jpeg,0.01,4,Cruise,4,Cruise,6,Recreational,True,True,0.010000005
+Cruise\Cruise_20.jpeg,0.01,4,Cruise,4,Cruise,6,Recreational,True,True,0.010000005
+Cruise\Cruise_21.jpeg,0.01,4,Cruise,4,Cruise,6,Recreational,True,True,0.010000005
+Cruise\Cruise_22.jpeg,0.01,4,Cruise,4,Cruise,1,Bulkers,True,True,0.010000005
+Cruise\Cruise_23.jpeg,0.01,4,Cruise,4,Cruise,6,Recreational,True,True,0.010000005
+Cruise\Cruise_24.jpeg,0.01,4,Cruise,4,Cruise,4,Cruise,True,False,0.010000005
+Cruise\Cruise_25.jpeg,0.01,4,Cruise,4,Cruise,4,Cruise,True,False,0.010000005
+Cruise\Cruise_26.jpeg,0.01,4,Cruise,4,Cruise,9,Tug,True,True,0.010000005
+Cruise\Cruise_27.jpeg,0.01,4,Cruise,4,Cruise,6,Recreational,True,True,0.010000005
+Cruise\Cruise_28.jpeg,0.01,4,Cruise,4,Cruise,6,Recreational,True,True,0.010000005
+Cruise\Cruise_29.jpeg,0.01,4,Cruise,4,Cruise,6,Recreational,True,True,0.010000005
+Cruise\Cruise_3.jpeg,0.01,4,Cruise,4,Cruise,4,Cruise,True,False,0.010000005
+Cruise\Cruise_30.jpeg,0.01,4,Cruise,4,Cruise,9,Tug,True,True,0.010000005
+Cruise\Cruise_31.jpeg,0.01,4,Cruise,4,Cruise,9,Tug,True,True,0.010000005
+Cruise\Cruise_32.jpeg,0.01,4,Cruise,4,Cruise,6,Recreational,True,True,0.010000005
+Cruise\Cruise_33.jpeg,0.01,4,Cruise,4,Cruise,6,Recreational,True,True,0.010000005
+Cruise\Cruise_34.jpeg,0.01,4,Cruise,4,Cruise,9,Tug,True,True,0.010000005
+Cruise\Cruise_35.jpeg,0.01,4,Cruise,4,Cruise,6,Recreational,True,True,0.010000005
+Cruise\Cruise_36.jpeg,0.01,4,Cruise,4,Cruise,1,Bulkers,True,True,0.010000005
+Cruise\Cruise_37.jpeg,0.01,4,Cruise,4,Cruise,1,Bulkers,True,True,0.010000005
+Cruise\Cruise_38.jpeg,0.01,4,Cruise,4,Cruise,6,Recreational,True,True,0.010000005
+Cruise\Cruise_39.jpeg,0.01,4,Cruise,3,Container Ship,3,Container Ship,False,False,0.010000005
+Cruise\Cruise_4.jpeg,0.01,4,Cruise,4,Cruise,6,Recreational,True,True,0.010000005
+Cruise\Cruise_5.jpeg,0.01,4,Cruise,4,Cruise,0,Aircraft Carrier,True,True,0.010000005
+Cruise\Cruise_6.jpeg,0.01,4,Cruise,4,Cruise,6,Recreational,True,True,0.010000005
+Cruise\Cruise_7.jpeg,0.01,4,Cruise,4,Cruise,2,Car Carrier,True,True,0.010000005
+Cruise\Cruise_8.jpeg,0.01,4,Cruise,4,Cruise,6,Recreational,True,True,0.010000005
+Cruise\Cruise_9.jpeg,0.01,4,Cruise,4,Cruise,0,Aircraft Carrier,True,True,0.010000005
+DDG\DDG_1.jpeg,0.01,5,DDG,5,DDG,0,Aircraft Carrier,True,True,0.010000005
+DDG\DDG_10.jpeg,0.01,5,DDG,5,DDG,0,Aircraft Carrier,True,True,0.010000005
+DDG\DDG_1001.jpeg,0.01,5,DDG,6,Recreational,6,Recreational,False,False,0.010000005
+DDG\DDG_1002.jpeg,0.01,5,DDG,1,Bulkers,1,Bulkers,False,False,0.010000005
+DDG\DDG_1003.jpeg,0.01,5,DDG,6,Recreational,6,Recreational,False,False,0.010000005
+DDG\DDG_1004.jpeg,0.01,5,DDG,6,Recreational,6,Recreational,False,False,0.010000005
+DDG\DDG_1005.jpeg,0.01,5,DDG,6,Recreational,6,Recreational,False,False,0.010000005
+DDG\DDG_1006.jpeg,0.01,5,DDG,6,Recreational,6,Recreational,False,False,0.010000005
+DDG\DDG_1007.jpeg,0.01,5,DDG,6,Recreational,6,Recreational,False,False,0.010000005
+DDG\DDG_1008.jpeg,0.01,5,DDG,6,Recreational,6,Recreational,False,False,0.010000005
+DDG\DDG_1009.jpeg,0.01,5,DDG,6,Recreational,6,Recreational,False,False,0.010000005
+DDG\DDG_1010.jpeg,0.01,5,DDG,0,Aircraft Carrier,0,Aircraft Carrier,False,False,0.010000005
+DDG\DDG_1011.jpeg,0.01,5,DDG,1,Bulkers,1,Bulkers,False,False,0.010000005
+DDG\DDG_1012.jpeg,0.01,5,DDG,6,Recreational,6,Recreational,False,False,0.010000005
+DDG\DDG_1013.jpeg,0.01,5,DDG,5,DDG,0,Aircraft Carrier,True,True,0.010000005
+DDG\DDG_1014.jpeg,0.01,5,DDG,6,Recreational,6,Recreational,False,False,0.010000005
+DDG\DDG_1015.jpeg,0.01,5,DDG,6,Recreational,6,Recreational,False,False,0.010000005
+DDG\DDG_1016.jpeg,0.01,5,DDG,6,Recreational,6,Recreational,False,False,0.010000005
+DDG\DDG_1017.jpeg,0.01,5,DDG,6,Recreational,6,Recreational,False,False,0.010000005
+DDG\DDG_1018.jpeg,0.01,5,DDG,5,DDG,0,Aircraft Carrier,True,True,0.010000005
+DDG\DDG_1019.jpeg,0.01,5,DDG,6,Recreational,1,Bulkers,False,False,0.010000005
+DDG\DDG_1020.jpeg,0.01,5,DDG,5,DDG,0,Aircraft Carrier,True,True,0.010000005
+DDG\DDG_1021.jpeg,0.01,5,DDG,6,Recreational,6,Recreational,False,False,0.010000005
+DDG\DDG_1022.jpeg,0.01,5,DDG,6,Recreational,6,Recreational,False,False,0.010000005
+DDG\DDG_1023.jpeg,0.01,5,DDG,6,Recreational,6,Recreational,False,False,0.010000005
+DDG\DDG_1024.jpeg,0.01,5,DDG,5,DDG,2,Car Carrier,True,True,0.010000005
+DDG\DDG_1025.jpeg,0.01,5,DDG,5,DDG,6,Recreational,True,True,0.010000005
+DDG\DDG_1026.jpeg,0.01,5,DDG,6,Recreational,6,Recreational,False,False,0.010000005
+DDG\DDG_1027.jpeg,0.01,5,DDG,6,Recreational,6,Recreational,False,False,0.010000005
+DDG\DDG_1028.jpeg,0.01,5,DDG,5,DDG,6,Recreational,True,True,0.010000005
+DDG\DDG_1029.jpeg,0.01,5,DDG,6,Recreational,6,Recreational,False,False,0.010000005
+DDG\DDG_1030.jpeg,0.01,5,DDG,0,Aircraft Carrier,1,Bulkers,False,False,0.010000005
+DDG\DDG_1031.jpeg,0.01,5,DDG,6,Recreational,6,Recreational,False,False,0.010000005
+DDG\DDG_1032.jpeg,0.01,5,DDG,6,Recreational,6,Recreational,False,False,0.010000005
+DDG\DDG_1033.jpeg,0.01,5,DDG,6,Recreational,6,Recreational,False,False,0.010000005
+DDG\DDG_1034.jpeg,0.01,5,DDG,6,Recreational,6,Recreational,False,False,0.010000005
+DDG\DDG_1035.jpeg,0.01,5,DDG,6,Recreational,6,Recreational,False,False,0.010000005
+DDG\DDG_1036.jpeg,0.01,5,DDG,6,Recreational,6,Recreational,False,False,0.010000005
+DDG\DDG_1037.jpeg,0.01,5,DDG,6,Recreational,6,Recreational,False,False,0.010000005
+DDG\DDG_1038.jpeg,0.01,5,DDG,5,DDG,6,Recreational,True,True,0.010000005
+DDG\DDG_1039.jpeg,0.01,5,DDG,5,DDG,6,Recreational,True,True,0.010000005
+DDG\DDG_1040.jpeg,0.01,5,DDG,5,DDG,6,Recreational,True,True,0.010000005
+DDG\DDG_1041.jpeg,0.01,5,DDG,6,Recreational,6,Recreational,False,False,0.010000005
+DDG\DDG_1042.jpeg,0.01,5,DDG,6,Recreational,6,Recreational,False,False,0.010000005
+DDG\DDG_1043.jpeg,0.01,5,DDG,6,Recreational,6,Recreational,False,False,0.010000005
+DDG\DDG_1044.jpeg,0.01,5,DDG,5,DDG,6,Recreational,True,True,0.010000005
+DDG\DDG_1045.jpeg,0.01,5,DDG,6,Recreational,6,Recreational,False,False,0.010000005
+DDG\DDG_1046.jpeg,0.01,5,DDG,5,DDG,6,Recreational,True,True,0.010000005
+DDG\DDG_1047.jpeg,0.01,5,DDG,6,Recreational,6,Recreational,False,False,0.010000005
+DDG\DDG_1048.jpeg,0.01,5,DDG,5,DDG,6,Recreational,True,True,0.010000005
+DDG\DDG_1049.jpeg,0.01,5,DDG,5,DDG,0,Aircraft Carrier,True,True,0.010000005
+DDG\DDG_1050.jpeg,0.01,5,DDG,6,Recreational,6,Recreational,False,False,0.010000005
+DDG\DDG_1051.jpeg,0.01,5,DDG,5,DDG,1,Bulkers,True,True,0.010000005
+DDG\DDG_1052.jpeg,0.01,5,DDG,5,DDG,0,Aircraft Carrier,True,True,0.010000005
+DDG\DDG_1053.jpeg,0.01,5,DDG,6,Recreational,6,Recreational,False,False,0.010000005
+DDG\DDG_1054.jpeg,0.01,5,DDG,6,Recreational,6,Recreational,False,False,0.010000005
+DDG\DDG_1055.jpeg,0.01,5,DDG,6,Recreational,6,Recreational,False,False,0.010000005
+DDG\DDG_1056.jpeg,0.01,5,DDG,6,Recreational,6,Recreational,False,False,0.010000005
+DDG\DDG_1057.jpeg,0.01,5,DDG,6,Recreational,8,Submarine,False,False,0.010000005
+DDG\DDG_1058.jpeg,0.01,5,DDG,6,Recreational,6,Recreational,False,False,0.010000005
+DDG\DDG_1059.jpeg,0.01,5,DDG,6,Recreational,6,Recreational,False,False,0.010000005
+DDG\DDG_1060.jpeg,0.01,5,DDG,0,Aircraft Carrier,0,Aircraft Carrier,False,False,0.010000005
+DDG\DDG_11.jpeg,0.01,5,DDG,5,DDG,0,Aircraft Carrier,True,True,0.010000005
+DDG\DDG_12.jpeg,0.01,5,DDG,0,Aircraft Carrier,0,Aircraft Carrier,False,False,0.010000005
+DDG\DDG_13.jpeg,0.01,5,DDG,0,Aircraft Carrier,0,Aircraft Carrier,False,False,0.010000005
+DDG\DDG_14.jpeg,0.01,5,DDG,5,DDG,0,Aircraft Carrier,True,True,0.010000005
+DDG\DDG_15.jpeg,0.01,5,DDG,5,DDG,0,Aircraft Carrier,True,True,0.010000005
+DDG\DDG_16.jpeg,0.01,5,DDG,0,Aircraft Carrier,0,Aircraft Carrier,False,False,0.010000005
+DDG\DDG_17.jpeg,0.01,5,DDG,5,DDG,0,Aircraft Carrier,True,True,0.010000005
+DDG\DDG_18.jpeg,0.01,5,DDG,5,DDG,0,Aircraft Carrier,True,True,0.010000005
+DDG\DDG_19.jpeg,0.01,5,DDG,5,DDG,6,Recreational,True,True,0.010000005
+DDG\DDG_2.jpeg,0.01,5,DDG,5,DDG,9,Tug,True,True,0.010000005
+DDG\DDG_20.jpeg,0.01,5,DDG,5,DDG,9,Tug,True,True,0.010000005
+DDG\DDG_21.jpeg,0.01,5,DDG,5,DDG,9,Tug,True,True,0.010000005
+DDG\DDG_22.jpeg,0.01,5,DDG,5,DDG,1,Bulkers,True,True,0.010000005
+DDG\DDG_23.jpeg,0.01,5,DDG,0,Aircraft Carrier,0,Aircraft Carrier,False,False,0.010000005
+DDG\DDG_24.jpeg,0.01,5,DDG,5,DDG,0,Aircraft Carrier,True,True,0.010000005
+DDG\DDG_25.jpeg,0.01,5,DDG,5,DDG,0,Aircraft Carrier,True,True,0.010000005
+DDG\DDG_26.jpeg,0.01,5,DDG,5,DDG,1,Bulkers,True,True,0.010000005
+DDG\DDG_27.jpeg,0.01,5,DDG,5,DDG,1,Bulkers,True,True,0.010000005
+DDG\DDG_28.jpeg,0.01,5,DDG,5,DDG,0,Aircraft Carrier,True,True,0.010000005
+DDG\DDG_29.jpeg,0.01,5,DDG,5,DDG,0,Aircraft Carrier,True,True,0.010000005
+DDG\DDG_3.jpeg,0.01,5,DDG,5,DDG,0,Aircraft Carrier,True,True,0.010000005
+DDG\DDG_30.jpeg,0.01,5,DDG,5,DDG,1,Bulkers,True,True,0.010000005
+DDG\DDG_31.jpeg,0.01,5,DDG,5,DDG,0,Aircraft Carrier,True,True,0.010000005
+DDG\DDG_32.jpeg,0.01,5,DDG,5,DDG,0,Aircraft Carrier,True,True,0.010000005
+DDG\DDG_33.jpeg,0.01,5,DDG,5,DDG,0,Aircraft Carrier,True,True,0.010000005
+DDG\DDG_34.jpeg,0.01,5,DDG,5,DDG,0,Aircraft Carrier,True,True,0.010000005
+DDG\DDG_35.jpeg,0.01,5,DDG,5,DDG,0,Aircraft Carrier,True,True,0.010000005
+DDG\DDG_36.jpeg,0.01,5,DDG,5,DDG,0,Aircraft Carrier,True,True,0.010000005
+DDG\DDG_37.jpeg,0.01,5,DDG,5,DDG,0,Aircraft Carrier,True,True,0.010000005
+DDG\DDG_38.jpeg,0.01,5,DDG,5,DDG,8,Submarine,True,True,0.010000005
+DDG\DDG_39.jpeg,0.01,5,DDG,5,DDG,0,Aircraft Carrier,True,True,0.010000005
+DDG\DDG_4.jpeg,0.01,5,DDG,5,DDG,0,Aircraft Carrier,True,True,0.010000005
+DDG\DDG_40.jpeg,0.01,5,DDG,5,DDG,6,Recreational,True,True,0.010000005
+DDG\DDG_41.jpeg,0.01,5,DDG,5,DDG,6,Recreational,True,True,0.010000005
+DDG\DDG_42.jpeg,0.01,5,DDG,9,Tug,9,Tug,False,False,0.010000005
+DDG\DDG_5.jpeg,0.01,5,DDG,5,DDG,0,Aircraft Carrier,True,True,0.010000005
+DDG\DDG_6.jpeg,0.01,5,DDG,5,DDG,6,Recreational,True,True,0.010000005
+DDG\DDG_7.jpeg,0.01,5,DDG,5,DDG,0,Aircraft Carrier,True,True,0.010000005
+DDG\DDG_8.jpeg,0.01,5,DDG,6,Recreational,6,Recreational,False,False,0.010000005
+DDG\DDG_9.jpeg,0.01,5,DDG,5,DDG,6,Recreational,True,True,0.010000005
+Recreational\Recreational_1.jpeg,0.01,6,Recreational,9,Tug,9,Tug,False,False,0.010000005
+Recreational\Recreational_10.jpeg,0.01,6,Recreational,6,Recreational,9,Tug,True,True,0.010000005
+Recreational\Recreational_1001.jpeg,0.01,6,Recreational,6,Recreational,1,Bulkers,True,True,0.010000005
+Recreational\Recreational_1002.jpeg,0.01,6,Recreational,6,Recreational,1,Bulkers,True,True,0.010000005
+Recreational\Recreational_1003.jpeg,0.01,6,Recreational,6,Recreational,6,Recreational,True,False,0.010000005
+Recreational\Recreational_1004.jpeg,0.01,6,Recreational,6,Recreational,9,Tug,True,True,0.010000005
+Recreational\Recreational_1005.jpeg,0.01,6,Recreational,6,Recreational,8,Submarine,True,True,0.010000005
+Recreational\Recreational_1006.jpeg,0.01,6,Recreational,6,Recreational,1,Bulkers,True,True,0.010000005
+Recreational\Recreational_1007.jpeg,0.01,6,Recreational,6,Recreational,4,Cruise,True,True,0.010000005
+Recreational\Recreational_1008.jpeg,0.01,6,Recreational,6,Recreational,6,Recreational,True,False,0.010000005
+Recreational\Recreational_1009.jpeg,0.01,6,Recreational,6,Recreational,6,Recreational,True,False,0.010000005
+Recreational\Recreational_1010.jpeg,0.01,6,Recreational,6,Recreational,4,Cruise,True,True,0.010000005
+Recreational\Recreational_1011.jpeg,0.01,6,Recreational,6,Recreational,0,Aircraft Carrier,True,True,0.010000005
+Recreational\Recreational_1012.jpeg,0.01,6,Recreational,6,Recreational,0,Aircraft Carrier,True,True,0.010000005
+Recreational\Recreational_1013.jpeg,0.01,6,Recreational,6,Recreational,5,DDG,True,True,0.010000005
+Recreational\Recreational_1014.jpeg,0.01,6,Recreational,6,Recreational,0,Aircraft Carrier,True,True,0.010000005
+Recreational\Recreational_1015.jpeg,0.01,6,Recreational,6,Recreational,9,Tug,True,True,0.010000005
+Recreational\Recreational_1016.jpeg,0.01,6,Recreational,6,Recreational,4,Cruise,True,True,0.010000005
+Recreational\Recreational_1017.jpeg,0.01,6,Recreational,6,Recreational,4,Cruise,True,True,0.010000005
+Recreational\Recreational_1018.jpeg,0.01,6,Recreational,6,Recreational,5,DDG,True,True,0.010000005
+Recreational\Recreational_1019.jpeg,0.01,6,Recreational,6,Recreational,1,Bulkers,True,True,0.010000005
+Recreational\Recreational_1020.jpeg,0.01,6,Recreational,6,Recreational,0,Aircraft Carrier,True,True,0.010000005
+Recreational\Recreational_1021.jpeg,0.01,6,Recreational,6,Recreational,1,Bulkers,True,True,0.010000005
+Recreational\Recreational_1022.jpeg,0.01,6,Recreational,6,Recreational,0,Aircraft Carrier,True,True,0.010000005
+Recreational\Recreational_1023.jpeg,0.01,6,Recreational,6,Recreational,1,Bulkers,True,True,0.010000005
+Recreational\Recreational_1024.jpeg,0.01,6,Recreational,6,Recreational,4,Cruise,True,True,0.010000005
+Recreational\Recreational_1025.jpeg,0.01,6,Recreational,6,Recreational,6,Recreational,True,False,0.010000005
+Recreational\Recreational_1026.jpeg,0.01,6,Recreational,6,Recreational,1,Bulkers,True,True,0.010000005
+Recreational\Recreational_1027.jpeg,0.01,6,Recreational,6,Recreational,1,Bulkers,True,True,0.010000005
+Recreational\Recreational_1028.jpeg,0.01,6,Recreational,6,Recreational,1,Bulkers,True,True,0.010000005
+Recreational\Recreational_1029.jpeg,0.01,6,Recreational,6,Recreational,1,Bulkers,True,True,0.010000005
+Recreational\Recreational_1030.jpeg,0.01,6,Recreational,6,Recreational,1,Bulkers,True,True,0.010000005
+Recreational\Recreational_1031.jpeg,0.01,6,Recreational,6,Recreational,0,Aircraft Carrier,True,True,0.010000005
+Recreational\Recreational_1032.jpeg,0.01,6,Recreational,6,Recreational,6,Recreational,True,False,0.010000005
+Recreational\Recreational_1033.jpeg,0.01,6,Recreational,6,Recreational,4,Cruise,True,True,0.010000005
+Recreational\Recreational_1034.jpeg,0.01,6,Recreational,6,Recreational,1,Bulkers,True,True,0.010000005
+Recreational\Recreational_1035.jpeg,0.01,6,Recreational,6,Recreational,1,Bulkers,True,True,0.010000005
+Recreational\Recreational_1036.jpeg,0.01,6,Recreational,6,Recreational,1,Bulkers,True,True,0.010000005
+Recreational\Recreational_1037.jpeg,0.01,6,Recreational,6,Recreational,1,Bulkers,True,True,0.010000005
+Recreational\Recreational_1038.jpeg,0.01,6,Recreational,6,Recreational,6,Recreational,True,False,0.010000005
+Recreational\Recreational_1039.jpeg,0.01,6,Recreational,6,Recreational,6,Recreational,True,False,0.010000005
+Recreational\Recreational_1040.jpeg,0.01,6,Recreational,6,Recreational,1,Bulkers,True,True,0.010000005
+Recreational\Recreational_1041.jpeg,0.01,6,Recreational,6,Recreational,1,Bulkers,True,True,0.010000005
+Recreational\Recreational_1042.jpeg,0.01,6,Recreational,6,Recreational,5,DDG,True,True,0.010000005
+Recreational\Recreational_1043.jpeg,0.01,6,Recreational,6,Recreational,0,Aircraft Carrier,True,True,0.010000005
+Recreational\Recreational_1044.jpeg,0.01,6,Recreational,6,Recreational,8,Submarine,True,True,0.010000005
+Recreational\Recreational_1045.jpeg,0.01,6,Recreational,6,Recreational,1,Bulkers,True,True,0.010000005
+Recreational\Recreational_1046.jpeg,0.01,6,Recreational,6,Recreational,1,Bulkers,True,True,0.010000005
+Recreational\Recreational_1047.jpeg,0.01,6,Recreational,6,Recreational,6,Recreational,True,False,0.010000005
+Recreational\Recreational_1048.jpeg,0.01,6,Recreational,6,Recreational,1,Bulkers,True,True,0.010000005
+Recreational\Recreational_1049.jpeg,0.01,6,Recreational,6,Recreational,1,Bulkers,True,True,0.010000005
+Recreational\Recreational_1050.jpeg,0.01,6,Recreational,6,Recreational,6,Recreational,True,False,0.010000005
+Recreational\Recreational_1051.jpeg,0.01,6,Recreational,6,Recreational,0,Aircraft Carrier,True,True,0.010000005
+Recreational\Recreational_1052.jpeg,0.01,6,Recreational,6,Recreational,1,Bulkers,True,True,0.010000005
+Recreational\Recreational_1053.jpeg,0.01,6,Recreational,6,Recreational,1,Bulkers,True,True,0.010000005
+Recreational\Recreational_1054.jpeg,0.01,6,Recreational,6,Recreational,4,Cruise,True,True,0.010000005
+Recreational\Recreational_1055.jpeg,0.01,6,Recreational,6,Recreational,1,Bulkers,True,True,0.010000005
+Recreational\Recreational_1056.jpeg,0.01,6,Recreational,6,Recreational,1,Bulkers,True,True,0.010000005
+Recreational\Recreational_1057.jpeg,0.01,6,Recreational,6,Recreational,6,Recreational,True,False,0.010000005
+Recreational\Recreational_1058.jpeg,0.01,6,Recreational,6,Recreational,1,Bulkers,True,True,0.010000005
+Recreational\Recreational_1059.jpeg,0.01,6,Recreational,6,Recreational,1,Bulkers,True,True,0.010000005
+Recreational\Recreational_1060.jpeg,0.01,6,Recreational,6,Recreational,1,Bulkers,True,True,0.010000005
+Recreational\Recreational_1061.jpeg,0.01,6,Recreational,6,Recreational,9,Tug,True,True,0.010000005
+Recreational\Recreational_1062.jpeg,0.01,6,Recreational,6,Recreational,6,Recreational,True,False,0.010000005
+Recreational\Recreational_1063.jpeg,0.01,6,Recreational,6,Recreational,6,Recreational,True,False,0.010000005
+Recreational\Recreational_1064.jpeg,0.01,6,Recreational,6,Recreational,0,Aircraft Carrier,True,True,0.010000005
+Recreational\Recreational_1065.jpeg,0.01,6,Recreational,6,Recreational,6,Recreational,True,False,0.010000005
+Recreational\Recreational_1066.jpeg,0.01,6,Recreational,6,Recreational,1,Bulkers,True,True,0.010000005
+Recreational\Recreational_1067.jpeg,0.01,6,Recreational,6,Recreational,0,Aircraft Carrier,True,True,0.010000005
+Recreational\Recreational_1068.jpeg,0.01,6,Recreational,6,Recreational,6,Recreational,True,False,0.010000005
+Recreational\Recreational_1069.jpeg,0.01,6,Recreational,6,Recreational,1,Bulkers,True,True,0.010000005
+Recreational\Recreational_1070.jpeg,0.01,6,Recreational,6,Recreational,9,Tug,True,True,0.010000005
+Recreational\Recreational_1071.jpeg,0.01,6,Recreational,6,Recreational,1,Bulkers,True,True,0.010000005
+Recreational\Recreational_1072.jpeg,0.01,6,Recreational,1,Bulkers,1,Bulkers,False,False,0.010000005
+Recreational\Recreational_1073.jpeg,0.01,6,Recreational,6,Recreational,0,Aircraft Carrier,True,True,0.010000005
+Recreational\Recreational_11.jpeg,0.01,6,Recreational,6,Recreational,9,Tug,True,True,0.010000005
+Recreational\Recreational_12.jpeg,0.01,6,Recreational,6,Recreational,7,Sailboat,True,True,0.00999999
+Recreational\Recreational_13.jpeg,0.01,6,Recreational,6,Recreational,9,Tug,True,True,0.010000005
+Recreational\Recreational_14.jpeg,0.01,6,Recreational,6,Recreational,7,Sailboat,True,True,0.00999999
+Recreational\Recreational_15.jpeg,0.01,6,Recreational,6,Recreational,2,Car Carrier,True,True,0.010000005
+Recreational\Recreational_16.jpeg,0.01,6,Recreational,6,Recreational,9,Tug,True,True,0.010000005
+Recreational\Recreational_2.jpeg,0.01,6,Recreational,6,Recreational,7,Sailboat,True,True,0.00999999
+Recreational\Recreational_3.jpeg,0.01,6,Recreational,6,Recreational,3,Container Ship,True,True,0.00999999
+Recreational\Recreational_4.jpeg,0.01,6,Recreational,9,Tug,9,Tug,False,False,0.010000005
+Recreational\Recreational_5.jpeg,0.01,6,Recreational,6,Recreational,9,Tug,True,True,0.010000005
+Recreational\Recreational_6.jpeg,0.01,6,Recreational,6,Recreational,7,Sailboat,True,True,0.00999999
+Recreational\Recreational_7.jpeg,0.01,6,Recreational,6,Recreational,9,Tug,True,True,0.010000005
+Recreational\Recreational_8.jpeg,0.01,6,Recreational,6,Recreational,7,Sailboat,True,True,0.010000005
+Recreational\Recreational_9.jpeg,0.01,6,Recreational,6,Recreational,9,Tug,True,True,0.010000005
+Sailboat\Sailboat_1.jpeg,0.01,7,Sailboat,9,Tug,9,Tug,False,False,0.010000005
+Sailboat\Sailboat_10.jpeg,0.01,7,Sailboat,7,Sailboat,6,Recreational,True,True,0.010000005
+Sailboat\Sailboat_1001.jpeg,0.01,7,Sailboat,6,Recreational,6,Recreational,False,False,0.010000005
+Sailboat\Sailboat_1002.jpeg,0.01,7,Sailboat,0,Aircraft Carrier,1,Bulkers,False,False,0.010000005
+Sailboat\Sailboat_1003.jpeg,0.01,7,Sailboat,1,Bulkers,1,Bulkers,False,False,0.010000005
+Sailboat\Sailboat_1004.jpeg,0.01,7,Sailboat,1,Bulkers,1,Bulkers,False,False,0.010000005
+Sailboat\Sailboat_1005.jpeg,0.01,7,Sailboat,6,Recreational,6,Recreational,False,False,0.010000005
+Sailboat\Sailboat_1006.jpeg,0.01,7,Sailboat,7,Sailboat,6,Recreational,True,True,0.010000005
+Sailboat\Sailboat_1007.jpeg,0.01,7,Sailboat,1,Bulkers,1,Bulkers,False,False,0.010000005
+Sailboat\Sailboat_1008.jpeg,0.01,7,Sailboat,6,Recreational,1,Bulkers,False,False,0.010000005
+Sailboat\Sailboat_1009.jpeg,0.01,7,Sailboat,1,Bulkers,1,Bulkers,False,False,0.010000005
+Sailboat\Sailboat_1010.jpeg,0.01,7,Sailboat,6,Recreational,6,Recreational,False,False,0.010000005
+Sailboat\Sailboat_1011.jpeg,0.01,7,Sailboat,7,Sailboat,1,Bulkers,True,True,0.010000005
+Sailboat\Sailboat_1012.jpeg,0.01,7,Sailboat,7,Sailboat,1,Bulkers,True,True,0.010000005
+Sailboat\Sailboat_1013.jpeg,0.01,7,Sailboat,6,Recreational,6,Recreational,False,False,0.010000005
+Sailboat\Sailboat_1014.jpeg,0.01,7,Sailboat,1,Bulkers,1,Bulkers,False,False,0.010000005
+Sailboat\Sailboat_1015.jpeg,0.01,7,Sailboat,1,Bulkers,1,Bulkers,False,False,0.010000005
+Sailboat\Sailboat_1016.jpeg,0.01,7,Sailboat,1,Bulkers,1,Bulkers,False,False,0.010000005
+Sailboat\Sailboat_1017.jpeg,0.01,7,Sailboat,1,Bulkers,1,Bulkers,False,False,0.010000005
+Sailboat\Sailboat_1018.jpeg,0.01,7,Sailboat,6,Recreational,6,Recreational,False,False,0.010000005
+Sailboat\Sailboat_1019.jpeg,0.01,7,Sailboat,6,Recreational,6,Recreational,False,False,0.010000005
+Sailboat\Sailboat_1020.jpeg,0.01,7,Sailboat,1,Bulkers,1,Bulkers,False,False,0.010000005
+Sailboat\Sailboat_1021.jpeg,0.01,7,Sailboat,1,Bulkers,1,Bulkers,False,False,0.010000005
+Sailboat\Sailboat_1022.jpeg,0.01,7,Sailboat,1,Bulkers,1,Bulkers,False,False,0.010000005
+Sailboat\Sailboat_1023.jpeg,0.01,7,Sailboat,1,Bulkers,1,Bulkers,False,False,0.010000005
+Sailboat\Sailboat_1024.jpeg,0.01,7,Sailboat,6,Recreational,6,Recreational,False,False,0.010000005
+Sailboat\Sailboat_1025.jpeg,0.01,7,Sailboat,7,Sailboat,6,Recreational,True,True,0.010000005
+Sailboat\Sailboat_1026.jpeg,0.01,7,Sailboat,0,Aircraft Carrier,1,Bulkers,False,False,0.010000005
+Sailboat\Sailboat_1027.jpeg,0.01,7,Sailboat,7,Sailboat,6,Recreational,True,True,0.010000005
+Sailboat\Sailboat_1028.jpeg,0.01,7,Sailboat,7,Sailboat,6,Recreational,True,True,0.010000005
+Sailboat\Sailboat_1029.jpeg,0.01,7,Sailboat,6,Recreational,6,Recreational,False,False,0.010000005
+Sailboat\Sailboat_1030.jpeg,0.01,7,Sailboat,5,DDG,5,DDG,False,False,0.010000005
+Sailboat\Sailboat_1031.jpeg,0.01,7,Sailboat,6,Recreational,1,Bulkers,False,False,0.010000005
+Sailboat\Sailboat_1032.jpeg,0.01,7,Sailboat,6,Recreational,6,Recreational,False,False,0.010000005
+Sailboat\Sailboat_1033.jpeg,0.01,7,Sailboat,6,Recreational,6,Recreational,False,False,0.010000005
+Sailboat\Sailboat_1034.jpeg,0.01,7,Sailboat,1,Bulkers,1,Bulkers,False,False,0.010000005
+Sailboat\Sailboat_1035.jpeg,0.01,7,Sailboat,7,Sailboat,6,Recreational,True,True,0.010000005
+Sailboat\Sailboat_1036.jpeg,0.01,7,Sailboat,7,Sailboat,1,Bulkers,True,True,0.010000005
+Sailboat\Sailboat_1037.jpeg,0.01,7,Sailboat,1,Bulkers,1,Bulkers,False,False,0.010000005
+Sailboat\Sailboat_1038.jpeg,0.01,7,Sailboat,1,Bulkers,1,Bulkers,False,False,0.010000005
+Sailboat\Sailboat_1039.jpeg,0.01,7,Sailboat,1,Bulkers,1,Bulkers,False,False,0.010000005
+Sailboat\Sailboat_1040.jpeg,0.01,7,Sailboat,7,Sailboat,1,Bulkers,True,True,0.010000005
+Sailboat\Sailboat_1041.jpeg,0.01,7,Sailboat,1,Bulkers,1,Bulkers,False,False,0.010000005
+Sailboat\Sailboat_1042.jpeg,0.01,7,Sailboat,1,Bulkers,1,Bulkers,False,False,0.010000005
+Sailboat\Sailboat_1043.jpeg,0.01,7,Sailboat,6,Recreational,6,Recreational,False,False,0.010000005
+Sailboat\Sailboat_1044.jpeg,0.01,7,Sailboat,6,Recreational,1,Bulkers,False,False,0.010000005
+Sailboat\Sailboat_1045.jpeg,0.01,7,Sailboat,1,Bulkers,1,Bulkers,False,False,0.010000005
+Sailboat\Sailboat_1046.jpeg,0.01,7,Sailboat,0,Aircraft Carrier,1,Bulkers,False,False,0.010000005
+Sailboat\Sailboat_1047.jpeg,0.01,7,Sailboat,7,Sailboat,6,Recreational,True,True,0.010000005
+Sailboat\Sailboat_1048.jpeg,0.01,7,Sailboat,6,Recreational,6,Recreational,False,False,0.010000005
+Sailboat\Sailboat_1049.jpeg,0.01,7,Sailboat,6,Recreational,6,Recreational,False,False,0.010000005
+Sailboat\Sailboat_1050.jpeg,0.01,7,Sailboat,1,Bulkers,1,Bulkers,False,False,0.010000005
+Sailboat\Sailboat_1051.jpeg,0.01,7,Sailboat,6,Recreational,6,Recreational,False,False,0.010000005
+Sailboat\Sailboat_1052.jpeg,0.01,7,Sailboat,1,Bulkers,1,Bulkers,False,False,0.010000005
+Sailboat\Sailboat_1053.jpeg,0.01,7,Sailboat,0,Aircraft Carrier,5,DDG,False,False,0.010000005
+Sailboat\Sailboat_1054.jpeg,0.01,7,Sailboat,6,Recreational,1,Bulkers,False,False,0.010000005
+Sailboat\Sailboat_1055.jpeg,0.01,7,Sailboat,1,Bulkers,1,Bulkers,False,False,0.010000005
+Sailboat\Sailboat_1056.jpeg,0.01,7,Sailboat,6,Recreational,6,Recreational,False,False,0.010000005
+Sailboat\Sailboat_1057.jpeg,0.01,7,Sailboat,6,Recreational,6,Recreational,False,False,0.010000005
+Sailboat\Sailboat_1058.jpeg,0.01,7,Sailboat,6,Recreational,6,Recreational,False,False,0.010000005
+Sailboat\Sailboat_1059.jpeg,0.01,7,Sailboat,7,Sailboat,6,Recreational,True,True,0.010000005
+Sailboat\Sailboat_11.jpeg,0.01,7,Sailboat,1,Bulkers,1,Bulkers,False,False,0.010000005
+Sailboat\Sailboat_12.jpeg,0.01,7,Sailboat,7,Sailboat,1,Bulkers,True,True,0.010000005
+Sailboat\Sailboat_13.jpeg,0.01,7,Sailboat,7,Sailboat,6,Recreational,True,True,0.010000005
+Sailboat\Sailboat_14.jpeg,0.01,7,Sailboat,7,Sailboat,9,Tug,True,True,0.010000005
+Sailboat\Sailboat_15.jpeg,0.01,7,Sailboat,7,Sailboat,9,Tug,True,True,0.010000005
+Sailboat\Sailboat_2.jpeg,0.01,7,Sailboat,7,Sailboat,7,Sailboat,True,False,0.010000005
+Sailboat\Sailboat_3.jpeg,0.01,7,Sailboat,9,Tug,9,Tug,False,False,0.010000005
+Sailboat\Sailboat_4.jpeg,0.01,7,Sailboat,7,Sailboat,1,Bulkers,True,True,0.010000005
+Sailboat\Sailboat_5.jpeg,0.01,7,Sailboat,7,Sailboat,1,Bulkers,True,True,0.00999999
+Sailboat\Sailboat_6.jpeg,0.01,7,Sailboat,7,Sailboat,6,Recreational,True,True,0.010000005
+Sailboat\Sailboat_7.jpeg,0.01,7,Sailboat,7,Sailboat,1,Bulkers,True,True,0.010000005
+Sailboat\Sailboat_8.jpeg,0.01,7,Sailboat,7,Sailboat,1,Bulkers,True,True,0.010000005
+Sailboat\Sailboat_9.jpeg,0.01,7,Sailboat,7,Sailboat,9,Tug,True,True,0.010000005
+Submarine\Submarine_1.jpeg,0.01,8,Submarine,8,Submarine,8,Submarine,True,False,0.010000005
+Submarine\Submarine_10.jpeg,0.01,8,Submarine,8,Submarine,8,Submarine,True,False,0.010000005
+Submarine\Submarine_1001.jpeg,0.01,8,Submarine,1,Bulkers,1,Bulkers,False,False,0.010000005
+Submarine\Submarine_1002.jpeg,0.01,8,Submarine,8,Submarine,6,Recreational,True,True,0.010000005
+Submarine\Submarine_1003.jpeg,0.01,8,Submarine,8,Submarine,6,Recreational,True,True,0.010000005
+Submarine\Submarine_1004.jpeg,0.01,8,Submarine,8,Submarine,1,Bulkers,True,True,0.010000005
+Submarine\Submarine_1005.jpeg,0.01,8,Submarine,8,Submarine,1,Bulkers,True,True,0.010000005
+Submarine\Submarine_1006.jpeg,0.01,8,Submarine,8,Submarine,7,Sailboat,True,True,0.010000005
+Submarine\Submarine_1007.jpeg,0.01,8,Submarine,8,Submarine,6,Recreational,True,True,0.010000005
+Submarine\Submarine_1008.jpeg,0.01,8,Submarine,8,Submarine,6,Recreational,True,True,0.010000005
+Submarine\Submarine_1009.jpeg,0.01,8,Submarine,8,Submarine,1,Bulkers,True,True,0.010000005
+Submarine\Submarine_1010.jpeg,0.01,8,Submarine,8,Submarine,6,Recreational,True,True,0.010000005
+Submarine\Submarine_1011.jpeg,0.01,8,Submarine,8,Submarine,8,Submarine,True,False,0.010000005
+Submarine\Submarine_1012.jpeg,0.01,8,Submarine,8,Submarine,1,Bulkers,True,True,0.010000005
+Submarine\Submarine_1013.jpeg,0.01,8,Submarine,8,Submarine,6,Recreational,True,True,0.010000005
+Submarine\Submarine_1014.jpeg,0.01,8,Submarine,8,Submarine,6,Recreational,True,True,0.010000005
+Submarine\Submarine_1015.jpeg,0.01,8,Submarine,8,Submarine,6,Recreational,True,True,0.010000005
+Submarine\Submarine_1016.jpeg,0.01,8,Submarine,8,Submarine,1,Bulkers,True,True,0.010000005
+Submarine\Submarine_1017.jpeg,0.01,8,Submarine,8,Submarine,6,Recreational,True,True,0.010000005
+Submarine\Submarine_1018.jpeg,0.01,8,Submarine,8,Submarine,6,Recreational,True,True,0.010000005
+Submarine\Submarine_1019.jpeg,0.01,8,Submarine,8,Submarine,1,Bulkers,True,True,0.010000005
+Submarine\Submarine_1020.jpeg,0.01,8,Submarine,8,Submarine,6,Recreational,True,True,0.010000005
+Submarine\Submarine_1021.jpeg,0.01,8,Submarine,6,Recreational,6,Recreational,False,False,0.010000005
+Submarine\Submarine_1022.jpeg,0.01,8,Submarine,8,Submarine,6,Recreational,True,True,0.010000005
+Submarine\Submarine_1023.jpeg,0.01,8,Submarine,6,Recreational,6,Recreational,False,False,0.010000005
+Submarine\Submarine_1024.jpeg,0.01,8,Submarine,8,Submarine,1,Bulkers,True,True,0.010000005
+Submarine\Submarine_1025.jpeg,0.01,8,Submarine,8,Submarine,6,Recreational,True,True,0.010000005
+Submarine\Submarine_1026.jpeg,0.01,8,Submarine,8,Submarine,1,Bulkers,True,True,0.010000005
+Submarine\Submarine_1027.jpeg,0.01,8,Submarine,8,Submarine,6,Recreational,True,True,0.010000005
+Submarine\Submarine_1028.jpeg,0.01,8,Submarine,6,Recreational,6,Recreational,False,False,0.010000005
+Submarine\Submarine_11.jpeg,0.01,8,Submarine,8,Submarine,5,DDG,True,True,0.010000005
+Submarine\Submarine_12.jpeg,0.01,8,Submarine,8,Submarine,8,Submarine,True,False,0.010000005
+Submarine\Submarine_13.jpeg,0.01,8,Submarine,8,Submarine,8,Submarine,True,False,0.010000005
+Submarine\Submarine_14.jpeg,0.01,8,Submarine,8,Submarine,5,DDG,True,True,0.010000005
+Submarine\Submarine_15.jpeg,0.01,8,Submarine,8,Submarine,8,Submarine,True,False,0.010000005
+Submarine\Submarine_16.jpeg,0.01,8,Submarine,8,Submarine,8,Submarine,True,False,0.010000005
+Submarine\Submarine_17.jpeg,0.01,8,Submarine,8,Submarine,0,Aircraft Carrier,True,True,0.010000005
+Submarine\Submarine_18.jpeg,0.01,8,Submarine,8,Submarine,8,Submarine,True,False,0.010000005
+Submarine\Submarine_19.jpeg,0.01,8,Submarine,8,Submarine,7,Sailboat,True,True,0.010000005
+Submarine\Submarine_2.jpeg,0.01,8,Submarine,8,Submarine,8,Submarine,True,False,0.010000005
+Submarine\Submarine_20.jpeg,0.01,8,Submarine,8,Submarine,8,Submarine,True,False,0.010000005
+Submarine\Submarine_21.jpeg,0.01,8,Submarine,8,Submarine,1,Bulkers,True,True,0.010000005
+Submarine\Submarine_22.jpeg,0.01,8,Submarine,8,Submarine,7,Sailboat,True,True,0.010000005
+Submarine\Submarine_23.jpeg,0.01,8,Submarine,8,Submarine,8,Submarine,True,False,0.010000005
+Submarine\Submarine_24.jpeg,0.01,8,Submarine,8,Submarine,1,Bulkers,True,True,0.010000005
+Submarine\Submarine_25.jpeg,0.01,8,Submarine,8,Submarine,7,Sailboat,True,True,0.010000005
+Submarine\Submarine_26.jpeg,0.01,8,Submarine,8,Submarine,8,Submarine,True,False,0.010000005
+Submarine\Submarine_27.jpeg,0.01,8,Submarine,8,Submarine,8,Submarine,True,False,0.010000005
+Submarine\Submarine_28.jpeg,0.01,8,Submarine,8,Submarine,5,DDG,True,True,0.010000005
+Submarine\Submarine_29.jpeg,0.01,8,Submarine,8,Submarine,8,Submarine,True,False,0.010000005
+Submarine\Submarine_3.jpeg,0.01,8,Submarine,8,Submarine,9,Tug,True,True,0.010000005
+Submarine\Submarine_30.jpeg,0.01,8,Submarine,8,Submarine,1,Bulkers,True,True,0.010000005
+Submarine\Submarine_31.jpeg,0.01,8,Submarine,8,Submarine,8,Submarine,True,False,0.010000005
+Submarine\Submarine_32.jpeg,0.01,8,Submarine,8,Submarine,8,Submarine,True,False,0.010000005
+Submarine\Submarine_33.jpeg,0.01,8,Submarine,8,Submarine,5,DDG,True,True,0.010000005
+Submarine\Submarine_34.jpeg,0.01,8,Submarine,8,Submarine,7,Sailboat,True,True,0.010000005
+Submarine\Submarine_35.jpeg,0.01,8,Submarine,8,Submarine,5,DDG,True,True,0.010000005
+Submarine\Submarine_36.jpeg,0.01,8,Submarine,8,Submarine,8,Submarine,True,False,0.010000005
+Submarine\Submarine_37.jpeg,0.01,8,Submarine,8,Submarine,7,Sailboat,True,True,0.010000005
+Submarine\Submarine_38.jpeg,0.01,8,Submarine,8,Submarine,6,Recreational,True,True,0.010000005
+Submarine\Submarine_4.jpeg,0.01,8,Submarine,8,Submarine,6,Recreational,True,True,0.010000005
+Submarine\Submarine_5.jpeg,0.01,8,Submarine,8,Submarine,8,Submarine,True,False,0.010000005
+Submarine\Submarine_6.jpeg,0.01,8,Submarine,0,Aircraft Carrier,0,Aircraft Carrier,False,False,0.010000005
+Submarine\Submarine_7.jpeg,0.01,8,Submarine,8,Submarine,7,Sailboat,True,True,0.010000005
+Submarine\Submarine_8.jpeg,0.01,8,Submarine,8,Submarine,9,Tug,True,True,0.010000005
+Submarine\Submarine_9.jpeg,0.01,8,Submarine,8,Submarine,6,Recreational,True,True,0.010000005
+Tug\Tug_1.jpeg,0.01,9,Tug,9,Tug,5,DDG,True,True,0.010000005
+Tug\Tug_10.jpeg,0.01,9,Tug,9,Tug,3,Container Ship,True,True,0.010000005
+Tug\Tug_1001.jpeg,0.01,9,Tug,1,Bulkers,1,Bulkers,False,False,0.010000005
+Tug\Tug_1002.jpeg,0.01,9,Tug,1,Bulkers,1,Bulkers,False,False,0.010000005
+Tug\Tug_1003.jpeg,0.01,9,Tug,6,Recreational,6,Recreational,False,False,0.010000005
+Tug\Tug_1004.jpeg,0.01,9,Tug,6,Recreational,6,Recreational,False,False,0.010000005
+Tug\Tug_1005.jpeg,0.01,9,Tug,6,Recreational,6,Recreational,False,False,0.010000005
+Tug\Tug_1006.jpeg,0.01,9,Tug,1,Bulkers,1,Bulkers,False,False,0.010000005
+Tug\Tug_1007.jpeg,0.01,9,Tug,9,Tug,6,Recreational,True,True,0.010000005
+Tug\Tug_1008.jpeg,0.01,9,Tug,1,Bulkers,1,Bulkers,False,False,0.010000005
+Tug\Tug_1009.jpeg,0.01,9,Tug,1,Bulkers,1,Bulkers,False,False,0.010000005
+Tug\Tug_1010.jpeg,0.01,9,Tug,6,Recreational,6,Recreational,False,False,0.010000005
+Tug\Tug_1011.jpeg,0.01,9,Tug,6,Recreational,6,Recreational,False,False,0.010000005
+Tug\Tug_1012.jpeg,0.01,9,Tug,1,Bulkers,1,Bulkers,False,False,0.010000005
+Tug\Tug_1013.jpeg,0.01,9,Tug,6,Recreational,6,Recreational,False,False,0.010000005
+Tug\Tug_1014.jpeg,0.01,9,Tug,1,Bulkers,1,Bulkers,False,False,0.010000005
+Tug\Tug_1015.jpeg,0.01,9,Tug,9,Tug,6,Recreational,True,True,0.010000005
+Tug\Tug_1016.jpeg,0.01,9,Tug,9,Tug,6,Recreational,True,True,0.010000005
+Tug\Tug_1017.jpeg,0.01,9,Tug,9,Tug,1,Bulkers,True,True,0.010000005
+Tug\Tug_1018.jpeg,0.01,9,Tug,1,Bulkers,1,Bulkers,False,False,0.010000005
+Tug\Tug_1019.jpeg,0.01,9,Tug,9,Tug,1,Bulkers,True,True,0.010000005
+Tug\Tug_1020.jpeg,0.01,9,Tug,1,Bulkers,1,Bulkers,False,False,0.010000005
+Tug\Tug_1021.jpeg,0.01,9,Tug,6,Recreational,6,Recreational,False,False,0.010000005
+Tug\Tug_1022.jpeg,0.01,9,Tug,9,Tug,6,Recreational,True,True,0.010000005
+Tug\Tug_1023.jpeg,0.01,9,Tug,9,Tug,1,Bulkers,True,True,0.010000005
+Tug\Tug_1024.jpeg,0.01,9,Tug,6,Recreational,6,Recreational,False,False,0.010000005
+Tug\Tug_1025.jpeg,0.01,9,Tug,9,Tug,6,Recreational,True,True,0.010000005
+Tug\Tug_1026.jpeg,0.01,9,Tug,9,Tug,6,Recreational,True,True,0.010000005
+Tug\Tug_1027.jpeg,0.01,9,Tug,9,Tug,1,Bulkers,True,True,0.010000005
+Tug\Tug_1028.jpeg,0.01,9,Tug,9,Tug,1,Bulkers,True,True,0.010000005
+Tug\Tug_1029.jpeg,0.01,9,Tug,6,Recreational,6,Recreational,False,False,0.010000005
+Tug\Tug_1030.jpeg,0.01,9,Tug,1,Bulkers,1,Bulkers,False,False,0.010000005
+Tug\Tug_1031.jpeg,0.01,9,Tug,1,Bulkers,1,Bulkers,False,False,0.010000005
+Tug\Tug_1032.jpeg,0.01,9,Tug,6,Recreational,6,Recreational,False,False,0.010000005
+Tug\Tug_1033.jpeg,0.01,9,Tug,6,Recreational,6,Recreational,False,False,0.010000005
+Tug\Tug_11.jpeg,0.01,9,Tug,9,Tug,6,Recreational,True,True,0.010000005
+Tug\Tug_12.jpeg,0.01,9,Tug,8,Submarine,8,Submarine,False,False,0.010000005
+Tug\Tug_13.jpeg,0.01,9,Tug,9,Tug,8,Submarine,True,True,0.010000005
+Tug\Tug_14.jpeg,0.01,9,Tug,9,Tug,8,Submarine,True,True,0.010000005
+Tug\Tug_15.jpeg,0.01,9,Tug,9,Tug,6,Recreational,True,True,0.010000005
+Tug\Tug_16.jpeg,0.01,9,Tug,9,Tug,1,Bulkers,True,True,0.010000005
+Tug\Tug_17.jpeg,0.01,9,Tug,9,Tug,0,Aircraft Carrier,True,True,0.010000005
+Tug\Tug_18.jpeg,0.01,9,Tug,9,Tug,1,Bulkers,True,True,0.010000005
+Tug\Tug_19.jpeg,0.01,9,Tug,9,Tug,0,Aircraft Carrier,True,True,0.010000005
+Tug\Tug_2.jpeg,0.01,9,Tug,9,Tug,1,Bulkers,True,True,0.010000005
+Tug\Tug_20.jpeg,0.01,9,Tug,9,Tug,6,Recreational,True,True,0.010000005
+Tug\Tug_21.jpeg,0.01,9,Tug,9,Tug,1,Bulkers,True,True,0.010000005
+Tug\Tug_22.jpeg,0.01,9,Tug,9,Tug,1,Bulkers,True,True,0.010000005
+Tug\Tug_23.jpeg,0.01,9,Tug,9,Tug,5,DDG,True,True,0.010000005
+Tug\Tug_24.jpeg,0.01,9,Tug,9,Tug,1,Bulkers,True,True,0.010000005
+Tug\Tug_25.jpeg,0.01,9,Tug,9,Tug,1,Bulkers,True,True,0.010000005
+Tug\Tug_26.jpeg,0.01,9,Tug,9,Tug,5,DDG,True,True,0.010000005
+Tug\Tug_27.jpeg,0.01,9,Tug,9,Tug,1,Bulkers,True,True,0.010000005
+Tug\Tug_28.jpeg,0.01,9,Tug,9,Tug,7,Sailboat,True,True,0.010000005
+Tug\Tug_29.jpeg,0.01,9,Tug,1,Bulkers,1,Bulkers,False,False,0.010000005
+Tug\Tug_3.jpeg,0.01,9,Tug,9,Tug,6,Recreational,True,True,0.010000005
+Tug\Tug_30.jpeg,0.01,9,Tug,9,Tug,3,Container Ship,True,True,0.010000005
+Tug\Tug_31.jpeg,0.01,9,Tug,9,Tug,3,Container Ship,True,True,0.010000005
+Tug\Tug_32.jpeg,0.01,9,Tug,9,Tug,0,Aircraft Carrier,True,True,0.010000005
+Tug\Tug_33.jpeg,0.01,9,Tug,9,Tug,5,DDG,True,True,0.010000005
+Tug\Tug_34.jpeg,0.01,9,Tug,9,Tug,1,Bulkers,True,True,0.010000005
+Tug\Tug_35.jpeg,0.01,9,Tug,9,Tug,3,Container Ship,True,True,0.010000005
+Tug\Tug_4.jpeg,0.01,9,Tug,9,Tug,1,Bulkers,True,True,0.010000005
+Tug\Tug_5.jpeg,0.01,9,Tug,9,Tug,1,Bulkers,True,True,0.010000005
+Tug\Tug_6.jpeg,0.01,9,Tug,9,Tug,6,Recreational,True,True,0.010000005
+Tug\Tug_7.jpeg,0.01,9,Tug,9,Tug,6,Recreational,True,True,0.010000005
+Tug\Tug_8.jpeg,0.01,9,Tug,9,Tug,1,Bulkers,True,True,0.010000005
+Tug\Tug_9.jpeg,0.01,9,Tug,9,Tug,6,Recreational,True,True,0.010000005

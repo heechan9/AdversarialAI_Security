@@ -1,0 +1,888 @@
+{
+  "schema": "maris-evidence/v1",
+  "sourceCommit": "ecce270eafabc5753888dfc5aeddec44a335d999",
+  "repoUrl": "https://github.com/heechan9/AdversarialAI_Security",
+  "total": 781,
+  "models": [
+    "cnn",
+    "mobilenet"
+  ],
+  "epsilons": [
+    0.0,
+    0.01,
+    0.03,
+    0.05
+  ],
+  "classNames": [
+    "Aircraft Carrier",
+    "Bulkers",
+    "Car Carrier",
+    "Container Ship",
+    "Cruise",
+    "DDG",
+    "Recreational",
+    "Sailboat",
+    "Submarine",
+    "Tug"
+  ],
+  "samples": [
+    {
+      "id": "cnn_eps_0.03_success_0009",
+      "model": "cnn",
+      "epsilon": 0.03,
+      "path": "Aircraft Carrier/Aircraft Carrier_1008.jpeg",
+      "truth": "Aircraft Carrier",
+      "cleanPrediction": "Aircraft Carrier",
+      "attackPrediction": "Recreational",
+      "cleanScore": 0.528101,
+      "success": true,
+      "asset": "/evidence/images/cnn_eps_0.03_success_0009.png",
+      "sourceUrl": "https://github.com/heechan9/AdversarialAI_Security/blob/ecce270eafabc5753888dfc5aeddec44a335d999/results/attacks/provisional/samples/cnn_eps_0.03_success_0009.png",
+      "width": 1542,
+      "height": 556,
+      "panels": [
+        {
+          "x": 16,
+          "y": 80,
+          "size": 460
+        },
+        {
+          "x": 541,
+          "y": 80,
+          "size": 460
+        },
+        {
+          "x": 1067,
+          "y": 80,
+          "size": 460
+        }
+      ]
+    },
+    {
+      "id": "mobilenet_eps_0.03_success_0000",
+      "model": "mobilenet",
+      "epsilon": 0.03,
+      "path": "Aircraft Carrier/Aircraft Carrier_1.jpeg",
+      "truth": "Aircraft Carrier",
+      "cleanPrediction": "Aircraft Carrier",
+      "attackPrediction": "Car Carrier",
+      "cleanScore": 0.99851066,
+      "success": true,
+      "asset": "/evidence/images/mobilenet_eps_0.03_success_0000.png",
+      "sourceUrl": "https://github.com/heechan9/AdversarialAI_Security/blob/ecce270eafabc5753888dfc5aeddec44a335d999/results/attacks/provisional/samples/mobilenet_eps_0.03_success_0000.png",
+      "width": 1542,
+      "height": 556,
+      "panels": [
+        {
+          "x": 16,
+          "y": 80,
+          "size": 460
+        },
+        {
+          "x": 541,
+          "y": 80,
+          "size": 460
+        },
+        {
+          "x": 1067,
+          "y": 80,
+          "size": 460
+        }
+      ]
+    },
+    {
+      "id": "cnn_eps_0.03_failure_0001",
+      "model": "cnn",
+      "epsilon": 0.03,
+      "path": "Aircraft Carrier/Aircraft Carrier_10.jpeg",
+      "truth": "Aircraft Carrier",
+      "cleanPrediction": "Aircraft Carrier",
+      "attackPrediction": "Aircraft Carrier",
+      "cleanScore": 0.99996364,
+      "success": false,
+      "asset": "/evidence/images/cnn_eps_0.03_failure_0001.png",
+      "sourceUrl": "https://github.com/heechan9/AdversarialAI_Security/blob/ecce270eafabc5753888dfc5aeddec44a335d999/results/attacks/provisional/samples/cnn_eps_0.03_failure_0001.png",
+      "width": 1542,
+      "height": 556,
+      "panels": [
+        {
+          "x": 16,
+          "y": 80,
+          "size": 460
+        },
+        {
+          "x": 541,
+          "y": 80,
+          "size": 460
+        },
+        {
+          "x": 1067,
+          "y": 80,
+          "size": 460
+        }
+      ]
+    },
+    {
+      "id": "mobilenet_eps_0.03_failure_0028",
+      "model": "mobilenet",
+      "epsilon": 0.03,
+      "path": "Aircraft Carrier/Aircraft Carrier_21.jpeg",
+      "truth": "Aircraft Carrier",
+      "cleanPrediction": "Aircraft Carrier",
+      "attackPrediction": "Aircraft Carrier",
+      "cleanScore": 0.99999857,
+      "success": false,
+      "asset": "/evidence/images/mobilenet_eps_0.03_failure_0028.png",
+      "sourceUrl": "https://github.com/heechan9/AdversarialAI_Security/blob/ecce270eafabc5753888dfc5aeddec44a335d999/results/attacks/provisional/samples/mobilenet_eps_0.03_failure_0028.png",
+      "width": 1542,
+      "height": 556,
+      "panels": [
+        {
+          "x": 16,
+          "y": 80,
+          "size": 460
+        },
+        {
+          "x": 541,
+          "y": 80,
+          "size": 460
+        },
+        {
+          "x": 1067,
+          "y": 80,
+          "size": 460
+        }
+      ]
+    }
+  ],
+  "results": [
+    {
+      "model": "cnn",
+      "epsilon": 0.0,
+      "n": 781,
+      "cleanCorrect": 504,
+      "robustCorrect": 504,
+      "successes": 0,
+      "asr": 0.0,
+      "classes": [
+        {
+          "name": "Aircraft Carrier",
+          "n": 59,
+          "cleanCorrect": 43,
+          "robustCorrect": 43,
+          "successes": 0,
+          "asr": 0.0
+        },
+        {
+          "name": "Bulkers",
+          "n": 97,
+          "cleanCorrect": 72,
+          "robustCorrect": 72,
+          "successes": 0,
+          "asr": 0.0
+        },
+        {
+          "name": "Car Carrier",
+          "n": 95,
+          "cleanCorrect": 89,
+          "robustCorrect": 89,
+          "successes": 0,
+          "asr": 0.0
+        },
+        {
+          "name": "Container Ship",
+          "n": 86,
+          "cleanCorrect": 49,
+          "robustCorrect": 49,
+          "successes": 0,
+          "asr": 0.0
+        },
+        {
+          "name": "Cruise",
+          "n": 45,
+          "cleanCorrect": 39,
+          "robustCorrect": 39,
+          "successes": 0,
+          "asr": 0.0
+        },
+        {
+          "name": "DDG",
+          "n": 102,
+          "cleanCorrect": 38,
+          "robustCorrect": 38,
+          "successes": 0,
+          "asr": 0.0
+        },
+        {
+          "name": "Recreational",
+          "n": 89,
+          "cleanCorrect": 87,
+          "robustCorrect": 87,
+          "successes": 0,
+          "asr": 0.0
+        },
+        {
+          "name": "Sailboat",
+          "n": 74,
+          "cleanCorrect": 9,
+          "robustCorrect": 9,
+          "successes": 0,
+          "asr": 0.0
+        },
+        {
+          "name": "Submarine",
+          "n": 66,
+          "cleanCorrect": 39,
+          "robustCorrect": 39,
+          "successes": 0,
+          "asr": 0.0
+        },
+        {
+          "name": "Tug",
+          "n": 68,
+          "cleanCorrect": 39,
+          "robustCorrect": 39,
+          "successes": 0,
+          "asr": 0.0
+        }
+      ]
+    },
+    {
+      "model": "cnn",
+      "epsilon": 0.01,
+      "n": 781,
+      "cleanCorrect": 504,
+      "robustCorrect": 325,
+      "successes": 179,
+      "asr": 0.3551587301587302,
+      "classes": [
+        {
+          "name": "Aircraft Carrier",
+          "n": 59,
+          "cleanCorrect": 43,
+          "robustCorrect": 22,
+          "successes": 21,
+          "asr": 0.4883720930232558
+        },
+        {
+          "name": "Bulkers",
+          "n": 97,
+          "cleanCorrect": 72,
+          "robustCorrect": 37,
+          "successes": 35,
+          "asr": 0.4861111111111111
+        },
+        {
+          "name": "Car Carrier",
+          "n": 95,
+          "cleanCorrect": 89,
+          "robustCorrect": 66,
+          "successes": 23,
+          "asr": 0.25842696629213485
+        },
+        {
+          "name": "Container Ship",
+          "n": 86,
+          "cleanCorrect": 49,
+          "robustCorrect": 43,
+          "successes": 6,
+          "asr": 0.12244897959183673
+        },
+        {
+          "name": "Cruise",
+          "n": 45,
+          "cleanCorrect": 39,
+          "robustCorrect": 27,
+          "successes": 12,
+          "asr": 0.3076923076923077
+        },
+        {
+          "name": "DDG",
+          "n": 102,
+          "cleanCorrect": 38,
+          "robustCorrect": 10,
+          "successes": 28,
+          "asr": 0.7368421052631579
+        },
+        {
+          "name": "Recreational",
+          "n": 89,
+          "cleanCorrect": 87,
+          "robustCorrect": 73,
+          "successes": 14,
+          "asr": 0.16091954022988506
+        },
+        {
+          "name": "Sailboat",
+          "n": 74,
+          "cleanCorrect": 9,
+          "robustCorrect": 3,
+          "successes": 6,
+          "asr": 0.6666666666666666
+        },
+        {
+          "name": "Submarine",
+          "n": 66,
+          "cleanCorrect": 39,
+          "robustCorrect": 23,
+          "successes": 16,
+          "asr": 0.41025641025641024
+        },
+        {
+          "name": "Tug",
+          "n": 68,
+          "cleanCorrect": 39,
+          "robustCorrect": 21,
+          "successes": 18,
+          "asr": 0.46153846153846156
+        }
+      ]
+    },
+    {
+      "model": "cnn",
+      "epsilon": 0.03,
+      "n": 781,
+      "cleanCorrect": 504,
+      "robustCorrect": 190,
+      "successes": 314,
+      "asr": 0.623015873015873,
+      "classes": [
+        {
+          "name": "Aircraft Carrier",
+          "n": 59,
+          "cleanCorrect": 43,
+          "robustCorrect": 10,
+          "successes": 33,
+          "asr": 0.7674418604651163
+        },
+        {
+          "name": "Bulkers",
+          "n": 97,
+          "cleanCorrect": 72,
+          "robustCorrect": 21,
+          "successes": 51,
+          "asr": 0.7083333333333334
+        },
+        {
+          "name": "Car Carrier",
+          "n": 95,
+          "cleanCorrect": 89,
+          "robustCorrect": 40,
+          "successes": 49,
+          "asr": 0.550561797752809
+        },
+        {
+          "name": "Container Ship",
+          "n": 86,
+          "cleanCorrect": 49,
+          "robustCorrect": 32,
+          "successes": 17,
+          "asr": 0.3469387755102041
+        },
+        {
+          "name": "Cruise",
+          "n": 45,
+          "cleanCorrect": 39,
+          "robustCorrect": 21,
+          "successes": 18,
+          "asr": 0.46153846153846156
+        },
+        {
+          "name": "DDG",
+          "n": 102,
+          "cleanCorrect": 38,
+          "robustCorrect": 0,
+          "successes": 38,
+          "asr": 1.0
+        },
+        {
+          "name": "Recreational",
+          "n": 89,
+          "cleanCorrect": 87,
+          "robustCorrect": 48,
+          "successes": 39,
+          "asr": 0.4482758620689655
+        },
+        {
+          "name": "Sailboat",
+          "n": 74,
+          "cleanCorrect": 9,
+          "robustCorrect": 0,
+          "successes": 9,
+          "asr": 1.0
+        },
+        {
+          "name": "Submarine",
+          "n": 66,
+          "cleanCorrect": 39,
+          "robustCorrect": 17,
+          "successes": 22,
+          "asr": 0.5641025641025641
+        },
+        {
+          "name": "Tug",
+          "n": 68,
+          "cleanCorrect": 39,
+          "robustCorrect": 1,
+          "successes": 38,
+          "asr": 0.9743589743589743
+        }
+      ]
+    },
+    {
+      "model": "cnn",
+      "epsilon": 0.05,
+      "n": 781,
+      "cleanCorrect": 504,
+      "robustCorrect": 158,
+      "successes": 347,
+      "asr": 0.6884920634920635,
+      "classes": [
+        {
+          "name": "Aircraft Carrier",
+          "n": 59,
+          "cleanCorrect": 43,
+          "robustCorrect": 8,
+          "successes": 35,
+          "asr": 0.813953488372093
+        },
+        {
+          "name": "Bulkers",
+          "n": 97,
+          "cleanCorrect": 72,
+          "robustCorrect": 14,
+          "successes": 58,
+          "asr": 0.8055555555555556
+        },
+        {
+          "name": "Car Carrier",
+          "n": 95,
+          "cleanCorrect": 89,
+          "robustCorrect": 26,
+          "successes": 63,
+          "asr": 0.7078651685393258
+        },
+        {
+          "name": "Container Ship",
+          "n": 86,
+          "cleanCorrect": 49,
+          "robustCorrect": 30,
+          "successes": 19,
+          "asr": 0.3877551020408163
+        },
+        {
+          "name": "Cruise",
+          "n": 45,
+          "cleanCorrect": 39,
+          "robustCorrect": 21,
+          "successes": 18,
+          "asr": 0.46153846153846156
+        },
+        {
+          "name": "DDG",
+          "n": 102,
+          "cleanCorrect": 38,
+          "robustCorrect": 0,
+          "successes": 38,
+          "asr": 1.0
+        },
+        {
+          "name": "Recreational",
+          "n": 89,
+          "cleanCorrect": 87,
+          "robustCorrect": 42,
+          "successes": 45,
+          "asr": 0.5172413793103449
+        },
+        {
+          "name": "Sailboat",
+          "n": 74,
+          "cleanCorrect": 9,
+          "robustCorrect": 0,
+          "successes": 9,
+          "asr": 1.0
+        },
+        {
+          "name": "Submarine",
+          "n": 66,
+          "cleanCorrect": 39,
+          "robustCorrect": 16,
+          "successes": 24,
+          "asr": 0.6153846153846154
+        },
+        {
+          "name": "Tug",
+          "n": 68,
+          "cleanCorrect": 39,
+          "robustCorrect": 1,
+          "successes": 38,
+          "asr": 0.9743589743589743
+        }
+      ]
+    },
+    {
+      "model": "mobilenet",
+      "epsilon": 0.0,
+      "n": 781,
+      "cleanCorrect": 613,
+      "robustCorrect": 613,
+      "successes": 0,
+      "asr": 0.0,
+      "classes": [
+        {
+          "name": "Aircraft Carrier",
+          "n": 59,
+          "cleanCorrect": 54,
+          "robustCorrect": 54,
+          "successes": 0,
+          "asr": 0.0
+        },
+        {
+          "name": "Bulkers",
+          "n": 97,
+          "cleanCorrect": 96,
+          "robustCorrect": 96,
+          "successes": 0,
+          "asr": 0.0
+        },
+        {
+          "name": "Car Carrier",
+          "n": 95,
+          "cleanCorrect": 93,
+          "robustCorrect": 93,
+          "successes": 0,
+          "asr": 0.0
+        },
+        {
+          "name": "Container Ship",
+          "n": 86,
+          "cleanCorrect": 63,
+          "robustCorrect": 63,
+          "successes": 0,
+          "asr": 0.0
+        },
+        {
+          "name": "Cruise",
+          "n": 45,
+          "cleanCorrect": 42,
+          "robustCorrect": 42,
+          "successes": 0,
+          "asr": 0.0
+        },
+        {
+          "name": "DDG",
+          "n": 102,
+          "cleanCorrect": 51,
+          "robustCorrect": 51,
+          "successes": 0,
+          "asr": 0.0
+        },
+        {
+          "name": "Recreational",
+          "n": 89,
+          "cleanCorrect": 86,
+          "robustCorrect": 86,
+          "successes": 0,
+          "asr": 0.0
+        },
+        {
+          "name": "Sailboat",
+          "n": 74,
+          "cleanCorrect": 23,
+          "robustCorrect": 23,
+          "successes": 0,
+          "asr": 0.0
+        },
+        {
+          "name": "Submarine",
+          "n": 66,
+          "cleanCorrect": 61,
+          "robustCorrect": 61,
+          "successes": 0,
+          "asr": 0.0
+        },
+        {
+          "name": "Tug",
+          "n": 68,
+          "cleanCorrect": 44,
+          "robustCorrect": 44,
+          "successes": 0,
+          "asr": 0.0
+        }
+      ]
+    },
+    {
+      "model": "mobilenet",
+      "epsilon": 0.01,
+      "n": 781,
+      "cleanCorrect": 613,
+      "robustCorrect": 97,
+      "successes": 516,
+      "asr": 0.8417618270799347,
+      "classes": [
+        {
+          "name": "Aircraft Carrier",
+          "n": 59,
+          "cleanCorrect": 54,
+          "robustCorrect": 6,
+          "successes": 48,
+          "asr": 0.8888888888888888
+        },
+        {
+          "name": "Bulkers",
+          "n": 97,
+          "cleanCorrect": 96,
+          "robustCorrect": 10,
+          "successes": 86,
+          "asr": 0.8958333333333334
+        },
+        {
+          "name": "Car Carrier",
+          "n": 95,
+          "cleanCorrect": 93,
+          "robustCorrect": 22,
+          "successes": 71,
+          "asr": 0.7634408602150538
+        },
+        {
+          "name": "Container Ship",
+          "n": 86,
+          "cleanCorrect": 63,
+          "robustCorrect": 18,
+          "successes": 45,
+          "asr": 0.7142857142857143
+        },
+        {
+          "name": "Cruise",
+          "n": 45,
+          "cleanCorrect": 42,
+          "robustCorrect": 8,
+          "successes": 34,
+          "asr": 0.8095238095238095
+        },
+        {
+          "name": "DDG",
+          "n": 102,
+          "cleanCorrect": 51,
+          "robustCorrect": 0,
+          "successes": 51,
+          "asr": 1.0
+        },
+        {
+          "name": "Recreational",
+          "n": 89,
+          "cleanCorrect": 86,
+          "robustCorrect": 14,
+          "successes": 72,
+          "asr": 0.8372093023255814
+        },
+        {
+          "name": "Sailboat",
+          "n": 74,
+          "cleanCorrect": 23,
+          "robustCorrect": 1,
+          "successes": 22,
+          "asr": 0.9565217391304348
+        },
+        {
+          "name": "Submarine",
+          "n": 66,
+          "cleanCorrect": 61,
+          "robustCorrect": 18,
+          "successes": 43,
+          "asr": 0.7049180327868853
+        },
+        {
+          "name": "Tug",
+          "n": 68,
+          "cleanCorrect": 44,
+          "robustCorrect": 0,
+          "successes": 44,
+          "asr": 1.0
+        }
+      ]
+    },
+    {
+      "model": "mobilenet",
+      "epsilon": 0.03,
+      "n": 781,
+      "cleanCorrect": 613,
+      "robustCorrect": 103,
+      "successes": 510,
+      "asr": 0.831973898858075,
+      "classes": [
+        {
+          "name": "Aircraft Carrier",
+          "n": 59,
+          "cleanCorrect": 54,
+          "robustCorrect": 5,
+          "successes": 49,
+          "asr": 0.9074074074074074
+        },
+        {
+          "name": "Bulkers",
+          "n": 97,
+          "cleanCorrect": 96,
+          "robustCorrect": 22,
+          "successes": 74,
+          "asr": 0.7708333333333334
+        },
+        {
+          "name": "Car Carrier",
+          "n": 95,
+          "cleanCorrect": 93,
+          "robustCorrect": 17,
+          "successes": 76,
+          "asr": 0.8172043010752689
+        },
+        {
+          "name": "Container Ship",
+          "n": 86,
+          "cleanCorrect": 63,
+          "robustCorrect": 17,
+          "successes": 46,
+          "asr": 0.7301587301587301
+        },
+        {
+          "name": "Cruise",
+          "n": 45,
+          "cleanCorrect": 42,
+          "robustCorrect": 6,
+          "successes": 36,
+          "asr": 0.8571428571428571
+        },
+        {
+          "name": "DDG",
+          "n": 102,
+          "cleanCorrect": 51,
+          "robustCorrect": 0,
+          "successes": 51,
+          "asr": 1.0
+        },
+        {
+          "name": "Recreational",
+          "n": 89,
+          "cleanCorrect": 86,
+          "robustCorrect": 15,
+          "successes": 71,
+          "asr": 0.8255813953488372
+        },
+        {
+          "name": "Sailboat",
+          "n": 74,
+          "cleanCorrect": 23,
+          "robustCorrect": 0,
+          "successes": 23,
+          "asr": 1.0
+        },
+        {
+          "name": "Submarine",
+          "n": 66,
+          "cleanCorrect": 61,
+          "robustCorrect": 21,
+          "successes": 40,
+          "asr": 0.6557377049180327
+        },
+        {
+          "name": "Tug",
+          "n": 68,
+          "cleanCorrect": 44,
+          "robustCorrect": 0,
+          "successes": 44,
+          "asr": 1.0
+        }
+      ]
+    },
+    {
+      "model": "mobilenet",
+      "epsilon": 0.05,
+      "n": 781,
+      "cleanCorrect": 613,
+      "robustCorrect": 126,
+      "successes": 487,
+      "asr": 0.7944535073409462,
+      "classes": [
+        {
+          "name": "Aircraft Carrier",
+          "n": 59,
+          "cleanCorrect": 54,
+          "robustCorrect": 6,
+          "successes": 48,
+          "asr": 0.8888888888888888
+        },
+        {
+          "name": "Bulkers",
+          "n": 97,
+          "cleanCorrect": 96,
+          "robustCorrect": 35,
+          "successes": 61,
+          "asr": 0.6354166666666666
+        },
+        {
+          "name": "Car Carrier",
+          "n": 95,
+          "cleanCorrect": 93,
+          "robustCorrect": 15,
+          "successes": 78,
+          "asr": 0.8387096774193549
+        },
+        {
+          "name": "Container Ship",
+          "n": 86,
+          "cleanCorrect": 63,
+          "robustCorrect": 16,
+          "successes": 47,
+          "asr": 0.746031746031746
+        },
+        {
+          "name": "Cruise",
+          "n": 45,
+          "cleanCorrect": 42,
+          "robustCorrect": 8,
+          "successes": 34,
+          "asr": 0.8095238095238095
+        },
+        {
+          "name": "DDG",
+          "n": 102,
+          "cleanCorrect": 51,
+          "robustCorrect": 0,
+          "successes": 51,
+          "asr": 1.0
+        },
+        {
+          "name": "Recreational",
+          "n": 89,
+          "cleanCorrect": 86,
+          "robustCorrect": 18,
+          "successes": 68,
+          "asr": 0.7906976744186046
+        },
+        {
+          "name": "Sailboat",
+          "n": 74,
+          "cleanCorrect": 23,
+          "robustCorrect": 2,
+          "successes": 21,
+          "asr": 0.9130434782608695
+        },
+        {
+          "name": "Submarine",
+          "n": 66,
+          "cleanCorrect": 61,
+          "robustCorrect": 25,
+          "successes": 36,
+          "asr": 0.5901639344262295
+        },
+        {
+          "name": "Tug",
+          "n": 68,
+          "cleanCorrect": 44,
+          "robustCorrect": 1,
+          "successes": 43,
+          "asr": 0.9772727272727273
+        }
+      ]
+    }
+  ]
+}

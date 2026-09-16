@@ -29,11 +29,20 @@
 | Robust Accuracy | 공격 적용 후에도 올바르게 분류한 비율 |
 | Accuracy Drop | Clean Accuracy − Robust Accuracy |
 | Macro Precision / Recall / F1 | 클래스 불균형(support 45~102) 고려한 클래스별 평균 |
-| Untargeted ASR | **(proposed)** Clean 상태에서 정분류된 표본만을 분모로, 공격 후 오분류로 전환된 비율 |
+| Untargeted ASR | Clean 상태에서 정분류된 표본만을 분모로, 공격 후 오분류로 전환된 비율. CNN 분모 504장, MobileNet 분모 613장 |
 | Targeted ASR | **(proposed)** Clean 정분류 표본 중 공격 후 지정 목표 클래스로 전환된 비율 — Untargeted와 혼용 금지 |
 
 ## 아직 확정되지 않은 것 (proposed 상태)
-- ASR 분모 정의 최종 확정
-- epsilon / step size / iteration 수치
+- FGSM ε 최종값(1차 후보 `0, 0.01, 0.03, 0.05`; 멘토 확인 대기)
+- BIM/PGD step size와 iteration 수치
 - MobileNet 학습 당시 실제 전처리 방식(학습 코드 미확보)
 - 학습 random seed 값(clean 평가는 `shuffle=False`로 고정)
+
+## FGSM 사전등록 조건
+
+- Untargeted, true-label categorical cross-entropy, 정확히 1-step
+- 입력과 출력 범위 `[0,1]`, perturbation norm `L∞`, 각 표본에서 `L∞ ≤ ε`
+- `ε=0`은 clean prediction 일치 여부를 검증하는 대조조건
+- Robust Accuracy와 Macro F1은 전체 781장, Untargeted ASR은 clean-correct 표본만 사용
+- CNN·MobileNet 모두 같은 ε 후보를 유지하며, 1차 결과를 본 뒤 기존 결과를 삭제하거나 유리한 값만 선택하지 않는다
+- 모델별 입력 해상도 차이(128×128 대 224×224)는 비교 한계로 기록한다

@@ -1,0 +1,33 @@
+﻿file_path,current_label,cnn_prediction,cnn_confidence,mnv2_prediction,mnv2_confidence,판정,검토자,검토일,비고
+DDG/DDG_1045.jpeg,DDG,Recreational,0.996,Recreational,0.997,라벨 정확,이재혁,2026-09-05,"각진 회색 전투함 선체, 전방 함포와 높은 통합형 마스트가 보여 DDG 계열 전투함 특징과 부합"
+DDG/DDG_1001.jpeg,DDG,Recreational,0.994,Recreational,1.0,라벨 정확,이재혁,2026-09-05,"대형 회색 군함 선체와 각진 상부구조, 전방 무장·레이더 마스트가 확인되어 구축함형 전투함과 부합"
+DDG/DDG_1023.jpeg,DDG,Recreational,0.994,Recreational,0.799,판단 보류,이재혁,2026-09-05,회색 군함과 함재 헬기는 확인되지만 촬영각도와 해상도로 구축함(DDG)과 다른 수상전투함을 시각적으로 확정하기 어려움
+DDG/DDG_1037.jpeg,DDG,Recreational,0.994,Recreational,0.986,라벨 정확,이재혁,2026-09-05,"회색 군함 선체, 함수 무장과 대형 상부구조·마스트가 뚜렷해 구축함형 전투함 특징과 부합"
+DDG/DDG_1007.jpeg,DDG,Recreational,0.992,Recreational,0.995,라벨 정확,이재혁,2026-09-05,"긴 회색 전투함 선체, 전방 함포와 다층 전투함 상부구조가 확인되어 DDG 범주와 부합"
+DDG/DDG_1015.jpeg,DDG,Recreational,0.989,Recreational,0.984,라벨 정확,이재혁,2026-09-05,"스텔스형 각진 회색 선체와 통합 마스트, 전방 함포가 확인되어 현대 구축함형 전투함 특징과 부합"
+DDG/DDG_1050.jpeg,DDG,Recreational,0.976,Recreational,1.0,라벨 정확,이재혁,2026-09-05,각진 군함 선체와 전방 함포·레이더 마스트를 갖춘 전투함 형상이 명확하여 DDG 범주와 부합
+DDG/DDG_1004.jpeg,DDG,Recreational,0.955,Recreational,0.991,라벨 정확,이재혁,2026-09-05,"길고 낮은 회색 군함 선체, 전방 함포와 중앙 마스트가 확인되어 구축함형 수상전투함 특징과 부합"
+DDG/DDG_1014.jpeg,DDG,Recreational,0.95,Recreational,0.998,라벨 정확,이재혁,2026-09-05,"회색 스텔스 전투함 형상, 전방 함포와 통합형 상부구조가 확인되어 DDG 범주와 부합"
+DDG/DDG_1041.jpeg,DDG,Recreational,0.936,Recreational,0.997,라벨 정확,이재혁,2026-09-05,"각진 함수와 스텔스형 회색 상부구조, 전방 함포가 뚜렷해 현대 구축함형 전투함과 부합"
+DDG/DDG_1006.jpeg,DDG,Recreational,0.927,Recreational,1.0,라벨 정확,이재혁,2026-09-05,해상 기동 중인 회색 군함으로 전방 함포·레이더 마스트·전투함 상부구조가 확인됨
+DDG/DDG_1058.jpeg,DDG,Recreational,0.752,Recreational,0.709,라벨 정확,이재혁,2026-09-05,"전형적인 회색 군함 선체와 다수 안테나·마스트, 전방 무장 구조가 보여 구축함형 전투함과 부합"
+DDG/DDG_8.jpeg,DDG,Recreational,0.725,Recreational,0.938,라벨 정확,이재혁,2026-09-05,군함 번호가 표시된 회색 수상전투함이며 전방 함포와 대형 레이더 마스트가 확인되어 DDG 범주와 부합
+Sailboat/Sailboat_1010.jpeg,Sailboat,Recreational,1.0,Recreational,0.968,라벨 정확,이재혁,2026-09-05,복수 마스트에 여러 장의 돛을 펼친 대형 범선으로 추진·외형 특징이 Sailboat와 명확히 일치
+Sailboat/Sailboat_1031.jpeg,Sailboat,Recreational,1.0,Recreational,0.707,라벨 정확,이재혁,2026-09-05,상공 시점에서 여러 개의 돛과 마스트를 갖춘 범선이 확인되어 Sailboat 특징과 일치
+Sailboat/Sailboat_1043.jpeg,Sailboat,Recreational,1.0,Recreational,0.995,라벨 정확,이재혁,2026-09-05,다수의 사각돛과 높은 마스트를 가진 전통 범선 형상이 뚜렷해 Sailboat와 일치
+Sailboat/Sailboat_1048.jpeg,Sailboat,Recreational,1.0,Recreational,0.993,라벨 정확,이재혁,2026-09-05,복수 마스트와 흰색 돛을 펼친 대형 범선이 확인되어 Sailboat와 일치
+Sailboat/Sailboat_1001.jpeg,Sailboat,Recreational,0.999,Recreational,0.995,라벨 정확,이재혁,2026-09-05,"대형 마스트와 다수의 흰색 돛, 범선형 선체가 뚜렷하여 Sailboat와 일치"
+Sailboat/Sailboat_1005.jpeg,Sailboat,Recreational,0.999,Recreational,0.973,라벨 정확,이재혁,2026-09-05,여러 척의 전통 범선과 다수의 돛·마스트가 명확히 보이므로 Sailboat 범주와 일치
+Sailboat/Sailboat_1032.jpeg,Sailboat,Recreational,0.999,Recreational,0.96,라벨 정확,이재혁,2026-09-05,복수 마스트와 삼각형·사각형 돛을 펼친 범선으로 Sailboat 특징과 일치
+Sailboat/Sailboat_1018.jpeg,Sailboat,Recreational,0.966,Recreational,0.855,라벨 정확,이재혁,2026-09-05,여러 개의 높은 마스트와 층층이 배치된 돛을 가진 대형 범선이 확인되어 Sailboat와 일치
+Sailboat/Sailboat_1042.jpeg,Sailboat,Bulkers,0.962,Bulkers,0.951,라벨 정확,이재혁,2026-09-05,회화 이미지이지만 다수의 마스트와 대형 돛을 갖춘 전통 범선이 명확하여 Sailboat와 일치
+Submarine/Submarine_1021.jpeg,Submarine,Recreational,0.927,Recreational,0.831,라벨 정확,이재혁,2026-09-05,수면 위 낮게 드러난 유선형 원통 선체와 중앙 세일(함교탑)이 뚜렷해 잠수함 특징과 일치
+Tug/Tug_1004.jpeg,Tug,Recreational,1.0,Recreational,0.994,라벨 정확,이재혁,2026-09-05,"짧고 넓은 작업선 선체, 높은 조타실과 선측 고무 방현재가 확인되어 예인선 특징과 일치"
+Tug/Tug_1029.jpeg,Tug,Recreational,1.0,Recreational,0.935,라벨 정확,이재혁,2026-09-05,소형 작업선에 높은 조타실과 선체 둘레의 타이어형 방현재가 보여 Tug 특징과 일치
+Tug/Tug_1033.jpeg,Tug,Recreational,1.0,Recreational,0.998,라벨 정확,이재혁,2026-09-05,"짧은 선체와 높은 조타실, 두꺼운 선측 방현재를 갖춘 전형적인 예인선 형상과 일치"
+Tug/Tug_1013.jpeg,Tug,Recreational,0.998,Recreational,0.767,라벨 정확,이재혁,2026-09-05,"소형 작업선 선체와 높은 조타실, 선측 펜더·작업 갑판이 확인되어 Tug 특징과 일치"
+Tug/Tug_1021.jpeg,Tug,Recreational,0.992,Recreational,0.766,라벨 정확,이재혁,2026-09-05,"짧고 넓은 소형 선체, 높은 조타실과 검은 방현재가 뚜렷해 예인선과 일치"
+Tug/Tug_1020.jpeg,Tug,Bulkers,0.957,Bulkers,0.984,라벨 정확,이재혁,2026-09-05,소형 예인 작업선의 높은 조타실과 선체 주위 타이어형 펜더가 확인되어 Tug와 일치
+Tug/Tug_1010.jpeg,Tug,Recreational,0.945,Recreational,0.753,라벨 정확,이재혁,2026-09-05,검은 선체의 소형 작업선으로 높은 조타실과 두꺼운 방현재가 보여 Tug 특징과 일치
+Tug/Tug_1005.jpeg,Tug,Recreational,0.905,Recreational,0.97,라벨 정확,이재혁,2026-09-05,"짧은 선체, 높은 조타실과 선측 고무 펜더가 뚜렷하여 예인선 특징과 일치"
+Tug/Tug_1031.jpeg,Tug,Bulkers,0.783,Bulkers,0.99,라벨 정확,이재혁,2026-09-05,소형 작업선의 높은 조타실과 선체 둘레 다수의 타이어형 방현재가 명확하여 Tug와 일치
