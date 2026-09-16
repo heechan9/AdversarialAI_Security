@@ -134,3 +134,12 @@ upload, account form, defense experiment, interpolated result or navigation cont
 - Evidence/hash/mutation checks PASS. Installed OrbitControls synthetic rotation/pinch/reset/limits checks PASS, including nine new preset/aspect/reset combinations. These are not physical-device tests.
 - Browser preview: three preset buttons, auto-rotation stop on preset, zoom (1.2x), reset, paired image zoom (matching 1.5x transforms), success/failure case selection, and MobileNetV2 epsilon-zero statistics verified. At 390px iframe width, content/scroll widths were both 375px; mobile preset/reset controls were usable and hull framing was corrected after inspection.
 - Browser used SVGRenderer fallback. Actual WebGL water/shadow appearance, physical phone touch gestures and GPU performance are unverified. No navigation, sensor or collision simulation is claimed.
+
+## Public defense comparison — 2026-09-16
+
+- Site audience changed to public at the owner's explicit request. No private manuscript, reviewer responses or local model files added.
+- Added a plain-language four-condition defense explorer, independently selectable model/filter/recorded epsilon, accuracy counts, normal-image loss/recovery, and pipeline-specific adaptive ASR denominators. Both Gaussian and mean are experimental, not officially promoted. All conditions remain available; no interpolation or generated defense images.
+- Exporter runs both independent artifact auditors before compacting all condition summaries. Export/source ZIP/source summary hashes and audit limitations are published separately. Source artifact commit: 5c0b74a6650742c49deeb98cc72f9fe882916051.
+- Full Python suite on the evidence integration tree: 297 passed, 4 Keras deprecation warnings. Research/Paper (9/9)/Gaussian/mean artifact audits passed. Images and H5 unavailable; no independent inference or raw-pixel verification.
+- Browser: mean CNN epsilon .03 and Gaussian MobileNetV2 epsilon .03 cards matched the audited summaries; epsilon zero returned normal/filtered-normal controls. Model and filter selection worked; 390px iframe (375px content) had no document horizontal overflow and epsilon controls/cards remained legible. Existing scene uses SVG fallback here; physical phone and WebGL/GPU remain unverified.
+- Web evidence/hash/mutations and OrbitControls tests passed. New defense export checks passed for full condition inventory, counts, pipeline denominators, epsilon zero and shared baselines.

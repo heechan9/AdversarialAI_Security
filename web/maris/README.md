@@ -55,3 +55,8 @@ TensorFlow 추론은 필요하지 않습니다. `pnpm-lock.yaml`이 웹 의존�
 선수·선체·갑판 버튼으로 설명용 3D 모형의 관찰 방향을 바꿀 수 있습니다.
 드래그·확대 및 시점 변경은 자동 회전을 멈추며, 실험 데이터 선택과 독립적입니다.
 모형의 난간·계류 장치·갑판 구조는 시각적 설명을 위한 것으로 원본 이미지나 실제 선박 사양을 재현하지 않습니다.
+
+## 전처리 방어 비교
+
+`python scripts/export-defense-comparison.py --repo /path/to/repo --source-commit <published-artifact-commit>`는 두 방어 산출물 감사를 통과한 후에만 전체 조건을 내보냅니다. `node scripts/test-defense-comparison.mjs`로 내보내기 해시·집계·ASR 분모를 확인합니다.
+화면의 네 카드는 정상 / 원래 공격 / 원래 공격+필터 / 방어 인지 공격+필터이며 마지막 조건은 새로 생성했던 별도 공격 기록입니다. 정상 성능 손실과 서로 다른 ASR 분모를 함께 표시합니다. 공식 채택이나 실시간 추론을 뜻하지 않습니다.

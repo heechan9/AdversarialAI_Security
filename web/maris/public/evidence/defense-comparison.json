@@ -1,0 +1,800 @@
+{
+  "status": "experimental",
+  "mode": "recorded replay; no inference",
+  "models": [
+    "cnn",
+    "mobilenet"
+  ],
+  "epsilons": [
+    0.0,
+    0.01,
+    0.03,
+    0.05
+  ],
+  "methods": [
+    {
+      "id": "gaussian",
+      "name": "가우시안 필터",
+      "description": "가까운 픽셀에 더 큰 비중을 두는 고정 3×3 필터",
+      "sourceUrl": "https://github.com/heechan9/AdversarialAI_Security/tree/5c0b74a6650742c49deeb98cc72f9fe882916051/results/defenses/experimental/gaussian_run_01",
+      "results": [
+        {
+          "model": "cnn",
+          "epsilon": 0.0,
+          "overall": {
+            "samples": 781,
+            "accuracy": {
+              "clean": 0.645326504481434,
+              "defended_clean": 0.5697823303457106,
+              "attacked": 0.645326504481434,
+              "transfer_defended": 0.5697823303457106,
+              "adaptive_defended": 0.5697823303457106
+            },
+            "clean_harmed": 115,
+            "clean_recovered": 56,
+            "asr_original": {
+              "successes": 0,
+              "denominator": 504,
+              "asr": 0.0
+            },
+            "asr_transfer_defended": {
+              "successes": 0,
+              "denominator": 445,
+              "asr": 0.0
+            },
+            "asr_adaptive_defended": {
+              "successes": 0,
+              "denominator": 445,
+              "asr": 0.0
+            },
+            "common_clean_correct": {
+              "attacked": {
+                "successes": 0,
+                "denominator": 389,
+                "asr": 0.0
+              },
+              "transfer_defended": {
+                "successes": 0,
+                "denominator": 389,
+                "asr": 0.0
+              },
+              "adaptive_defended": {
+                "successes": 0,
+                "denominator": 389,
+                "asr": 0.0
+              }
+            }
+          }
+        },
+        {
+          "model": "cnn",
+          "epsilon": 0.01,
+          "overall": {
+            "samples": 781,
+            "accuracy": {
+              "clean": 0.645326504481434,
+              "defended_clean": 0.5697823303457106,
+              "attacked": 0.41613316261203587,
+              "transfer_defended": 0.5044814340588989,
+              "adaptive_defended": 0.31370038412291934
+            },
+            "clean_harmed": 115,
+            "clean_recovered": 56,
+            "asr_original": {
+              "successes": 179,
+              "denominator": 504,
+              "asr": 0.3551587301587302
+            },
+            "asr_transfer_defended": {
+              "successes": 51,
+              "denominator": 445,
+              "asr": 0.1146067415730337
+            },
+            "asr_adaptive_defended": {
+              "successes": 200,
+              "denominator": 445,
+              "asr": 0.449438202247191
+            },
+            "common_clean_correct": {
+              "attacked": {
+                "successes": 98,
+                "denominator": 389,
+                "asr": 0.2519280205655527
+              },
+              "transfer_defended": {
+                "successes": 44,
+                "denominator": 389,
+                "asr": 0.11311053984575835
+              },
+              "adaptive_defended": {
+                "successes": 168,
+                "denominator": 389,
+                "asr": 0.4318766066838046
+              }
+            }
+          }
+        },
+        {
+          "model": "cnn",
+          "epsilon": 0.03,
+          "overall": {
+            "samples": 781,
+            "accuracy": {
+              "clean": 0.645326504481434,
+              "defended_clean": 0.5697823303457106,
+              "attacked": 0.24327784891165172,
+              "transfer_defended": 0.34699103713188223,
+              "adaptive_defended": 0.12548015364916773
+            },
+            "clean_harmed": 115,
+            "clean_recovered": 56,
+            "asr_original": {
+              "successes": 314,
+              "denominator": 504,
+              "asr": 0.623015873015873
+            },
+            "asr_transfer_defended": {
+              "successes": 175,
+              "denominator": 445,
+              "asr": 0.39325842696629215
+            },
+            "asr_adaptive_defended": {
+              "successes": 347,
+              "denominator": 445,
+              "asr": 0.7797752808988764
+            },
+            "common_clean_correct": {
+              "attacked": {
+                "successes": 215,
+                "denominator": 389,
+                "asr": 0.5526992287917738
+              },
+              "transfer_defended": {
+                "successes": 157,
+                "denominator": 389,
+                "asr": 0.40359897172236503
+              },
+              "adaptive_defended": {
+                "successes": 296,
+                "denominator": 389,
+                "asr": 0.7609254498714653
+              }
+            }
+          }
+        },
+        {
+          "model": "cnn",
+          "epsilon": 0.05,
+          "overall": {
+            "samples": 781,
+            "accuracy": {
+              "clean": 0.645326504481434,
+              "defended_clean": 0.5697823303457106,
+              "attacked": 0.2023047375160051,
+              "transfer_defended": 0.2765685019206146,
+              "adaptive_defended": 0.08322663252240717
+            },
+            "clean_harmed": 115,
+            "clean_recovered": 56,
+            "asr_original": {
+              "successes": 347,
+              "denominator": 504,
+              "asr": 0.6884920634920635
+            },
+            "asr_transfer_defended": {
+              "successes": 231,
+              "denominator": 445,
+              "asr": 0.5191011235955056
+            },
+            "asr_adaptive_defended": {
+              "successes": 380,
+              "denominator": 445,
+              "asr": 0.8539325842696629
+            },
+            "common_clean_correct": {
+              "attacked": {
+                "successes": 241,
+                "denominator": 389,
+                "asr": 0.6195372750642674
+              },
+              "transfer_defended": {
+                "successes": 199,
+                "denominator": 389,
+                "asr": 0.5115681233933161
+              },
+              "adaptive_defended": {
+                "successes": 325,
+                "denominator": 389,
+                "asr": 0.8354755784061697
+              }
+            }
+          }
+        },
+        {
+          "model": "mobilenet",
+          "epsilon": 0.0,
+          "overall": {
+            "samples": 781,
+            "accuracy": {
+              "clean": 0.7848911651728553,
+              "defended_clean": 0.8297055057618438,
+              "attacked": 0.7848911651728553,
+              "transfer_defended": 0.8297055057618438,
+              "adaptive_defended": 0.8297055057618438
+            },
+            "clean_harmed": 36,
+            "clean_recovered": 71,
+            "asr_original": {
+              "successes": 0,
+              "denominator": 613,
+              "asr": 0.0
+            },
+            "asr_transfer_defended": {
+              "successes": 0,
+              "denominator": 648,
+              "asr": 0.0
+            },
+            "asr_adaptive_defended": {
+              "successes": 0,
+              "denominator": 648,
+              "asr": 0.0
+            },
+            "common_clean_correct": {
+              "attacked": {
+                "successes": 0,
+                "denominator": 577,
+                "asr": 0.0
+              },
+              "transfer_defended": {
+                "successes": 0,
+                "denominator": 577,
+                "asr": 0.0
+              },
+              "adaptive_defended": {
+                "successes": 0,
+                "denominator": 577,
+                "asr": 0.0
+              }
+            }
+          }
+        },
+        {
+          "model": "mobilenet",
+          "epsilon": 0.01,
+          "overall": {
+            "samples": 781,
+            "accuracy": {
+              "clean": 0.7848911651728553,
+              "defended_clean": 0.8297055057618438,
+              "attacked": 0.12419974391805377,
+              "transfer_defended": 0.43661971830985913,
+              "adaptive_defended": 0.09475032010243278
+            },
+            "clean_harmed": 36,
+            "clean_recovered": 71,
+            "asr_original": {
+              "successes": 516,
+              "denominator": 613,
+              "asr": 0.8417618270799347
+            },
+            "asr_transfer_defended": {
+              "successes": 307,
+              "denominator": 648,
+              "asr": 0.4737654320987654
+            },
+            "asr_adaptive_defended": {
+              "successes": 574,
+              "denominator": 648,
+              "asr": 0.8858024691358025
+            },
+            "common_clean_correct": {
+              "attacked": {
+                "successes": 480,
+                "denominator": 577,
+                "asr": 0.8318890814558059
+              },
+              "transfer_defended": {
+                "successes": 242,
+                "denominator": 577,
+                "asr": 0.4194107452339688
+              },
+              "adaptive_defended": {
+                "successes": 503,
+                "denominator": 577,
+                "asr": 0.8717504332755632
+              }
+            }
+          }
+        },
+        {
+          "model": "mobilenet",
+          "epsilon": 0.03,
+          "overall": {
+            "samples": 781,
+            "accuracy": {
+              "clean": 0.7848911651728553,
+              "defended_clean": 0.8297055057618438,
+              "attacked": 0.13188220230473752,
+              "transfer_defended": 0.26632522407170295,
+              "adaptive_defended": 0.07170294494238157
+            },
+            "clean_harmed": 36,
+            "clean_recovered": 71,
+            "asr_original": {
+              "successes": 510,
+              "denominator": 613,
+              "asr": 0.831973898858075
+            },
+            "asr_transfer_defended": {
+              "successes": 440,
+              "denominator": 648,
+              "asr": 0.6790123456790124
+            },
+            "asr_adaptive_defended": {
+              "successes": 592,
+              "denominator": 648,
+              "asr": 0.9135802469135802
+            },
+            "common_clean_correct": {
+              "attacked": {
+                "successes": 475,
+                "denominator": 577,
+                "asr": 0.8232235701906413
+              },
+              "transfer_defended": {
+                "successes": 371,
+                "denominator": 577,
+                "asr": 0.6429809358752167
+              },
+              "adaptive_defended": {
+                "successes": 521,
+                "denominator": 577,
+                "asr": 0.902946273830156
+              }
+            }
+          }
+        },
+        {
+          "model": "mobilenet",
+          "epsilon": 0.05,
+          "overall": {
+            "samples": 781,
+            "accuracy": {
+              "clean": 0.7848911651728553,
+              "defended_clean": 0.8297055057618438,
+              "attacked": 0.1613316261203585,
+              "transfer_defended": 0.25096030729833546,
+              "adaptive_defended": 0.08706786171574904
+            },
+            "clean_harmed": 36,
+            "clean_recovered": 71,
+            "asr_original": {
+              "successes": 487,
+              "denominator": 613,
+              "asr": 0.7944535073409462
+            },
+            "asr_transfer_defended": {
+              "successes": 453,
+              "denominator": 648,
+              "asr": 0.6990740740740741
+            },
+            "asr_adaptive_defended": {
+              "successes": 581,
+              "denominator": 648,
+              "asr": 0.8966049382716049
+            },
+            "common_clean_correct": {
+              "attacked": {
+                "successes": 455,
+                "denominator": 577,
+                "asr": 0.7885615251299827
+              },
+              "transfer_defended": {
+                "successes": 388,
+                "denominator": 577,
+                "asr": 0.6724436741767764
+              },
+              "adaptive_defended": {
+                "successes": 512,
+                "denominator": 577,
+                "asr": 0.8873483535528596
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "mean",
+      "name": "평균 필터",
+      "description": "주변 픽셀을 같은 비중으로 섞는 고정 3×3 필터",
+      "sourceUrl": "https://github.com/heechan9/AdversarialAI_Security/tree/5c0b74a6650742c49deeb98cc72f9fe882916051/results/defenses/experimental/mean_run_01",
+      "results": [
+        {
+          "model": "cnn",
+          "epsilon": 0.0,
+          "overall": {
+            "samples": 781,
+            "accuracy": {
+              "clean": 0.645326504481434,
+              "defended_clean": 0.5364916773367477,
+              "attacked": 0.645326504481434,
+              "transfer_defended": 0.5364916773367477,
+              "adaptive_defended": 0.5364916773367477
+            },
+            "clean_harmed": 143,
+            "clean_recovered": 58,
+            "asr_original": {
+              "successes": 0,
+              "denominator": 504,
+              "asr": 0.0
+            },
+            "asr_transfer_defended": {
+              "successes": 0,
+              "denominator": 419,
+              "asr": 0.0
+            },
+            "asr_adaptive_defended": {
+              "successes": 0,
+              "denominator": 419,
+              "asr": 0.0
+            },
+            "common_clean_correct": {
+              "attacked": {
+                "successes": 0,
+                "denominator": 361,
+                "asr": 0.0
+              },
+              "transfer_defended": {
+                "successes": 0,
+                "denominator": 361,
+                "asr": 0.0
+              },
+              "adaptive_defended": {
+                "successes": 0,
+                "denominator": 361,
+                "asr": 0.0
+              }
+            }
+          }
+        },
+        {
+          "model": "cnn",
+          "epsilon": 0.01,
+          "overall": {
+            "samples": 781,
+            "accuracy": {
+              "clean": 0.645326504481434,
+              "defended_clean": 0.5364916773367477,
+              "attacked": 0.41613316261203587,
+              "transfer_defended": 0.4839948783610755,
+              "adaptive_defended": 0.29449423815621
+            },
+            "clean_harmed": 143,
+            "clean_recovered": 58,
+            "asr_original": {
+              "successes": 179,
+              "denominator": 504,
+              "asr": 0.3551587301587302
+            },
+            "asr_transfer_defended": {
+              "successes": 41,
+              "denominator": 419,
+              "asr": 0.09785202863961814
+            },
+            "asr_adaptive_defended": {
+              "successes": 189,
+              "denominator": 419,
+              "asr": 0.4510739856801909
+            },
+            "common_clean_correct": {
+              "attacked": {
+                "successes": 85,
+                "denominator": 361,
+                "asr": 0.23545706371191136
+              },
+              "transfer_defended": {
+                "successes": 31,
+                "denominator": 361,
+                "asr": 0.08587257617728532
+              },
+              "adaptive_defended": {
+                "successes": 154,
+                "denominator": 361,
+                "asr": 0.4265927977839335
+              }
+            }
+          }
+        },
+        {
+          "model": "cnn",
+          "epsilon": 0.03,
+          "overall": {
+            "samples": 781,
+            "accuracy": {
+              "clean": 0.645326504481434,
+              "defended_clean": 0.5364916773367477,
+              "attacked": 0.24327784891165172,
+              "transfer_defended": 0.3687580025608195,
+              "adaptive_defended": 0.11011523687580026
+            },
+            "clean_harmed": 143,
+            "clean_recovered": 58,
+            "asr_original": {
+              "successes": 314,
+              "denominator": 504,
+              "asr": 0.623015873015873
+            },
+            "asr_transfer_defended": {
+              "successes": 131,
+              "denominator": 419,
+              "asr": 0.3126491646778043
+            },
+            "asr_adaptive_defended": {
+              "successes": 333,
+              "denominator": 419,
+              "asr": 0.7947494033412887
+            },
+            "common_clean_correct": {
+              "attacked": {
+                "successes": 191,
+                "denominator": 361,
+                "asr": 0.5290858725761773
+              },
+              "transfer_defended": {
+                "successes": 114,
+                "denominator": 361,
+                "asr": 0.3157894736842105
+              },
+              "adaptive_defended": {
+                "successes": 279,
+                "denominator": 361,
+                "asr": 0.7728531855955678
+              }
+            }
+          }
+        },
+        {
+          "model": "cnn",
+          "epsilon": 0.05,
+          "overall": {
+            "samples": 781,
+            "accuracy": {
+              "clean": 0.645326504481434,
+              "defended_clean": 0.5364916773367477,
+              "attacked": 0.2023047375160051,
+              "transfer_defended": 0.3060179257362356,
+              "adaptive_defended": 0.06658130601792574
+            },
+            "clean_harmed": 143,
+            "clean_recovered": 58,
+            "asr_original": {
+              "successes": 347,
+              "denominator": 504,
+              "asr": 0.6884920634920635
+            },
+            "asr_transfer_defended": {
+              "successes": 180,
+              "denominator": 419,
+              "asr": 0.4295942720763723
+            },
+            "asr_adaptive_defended": {
+              "successes": 367,
+              "denominator": 419,
+              "asr": 0.8758949880668258
+            },
+            "common_clean_correct": {
+              "attacked": {
+                "successes": 216,
+                "denominator": 361,
+                "asr": 0.5983379501385041
+              },
+              "transfer_defended": {
+                "successes": 153,
+                "denominator": 361,
+                "asr": 0.42382271468144045
+              },
+              "adaptive_defended": {
+                "successes": 310,
+                "denominator": 361,
+                "asr": 0.8587257617728532
+              }
+            }
+          }
+        },
+        {
+          "model": "mobilenet",
+          "epsilon": 0.0,
+          "overall": {
+            "samples": 781,
+            "accuracy": {
+              "clean": 0.7848911651728553,
+              "defended_clean": 0.7964148527528809,
+              "attacked": 0.7848911651728553,
+              "transfer_defended": 0.7964148527528809,
+              "adaptive_defended": 0.7964148527528809
+            },
+            "clean_harmed": 38,
+            "clean_recovered": 47,
+            "asr_original": {
+              "successes": 0,
+              "denominator": 613,
+              "asr": 0.0
+            },
+            "asr_transfer_defended": {
+              "successes": 0,
+              "denominator": 622,
+              "asr": 0.0
+            },
+            "asr_adaptive_defended": {
+              "successes": 0,
+              "denominator": 622,
+              "asr": 0.0
+            },
+            "common_clean_correct": {
+              "attacked": {
+                "successes": 0,
+                "denominator": 575,
+                "asr": 0.0
+              },
+              "transfer_defended": {
+                "successes": 0,
+                "denominator": 575,
+                "asr": 0.0
+              },
+              "adaptive_defended": {
+                "successes": 0,
+                "denominator": 575,
+                "asr": 0.0
+              }
+            }
+          }
+        },
+        {
+          "model": "mobilenet",
+          "epsilon": 0.01,
+          "overall": {
+            "samples": 781,
+            "accuracy": {
+              "clean": 0.7848911651728553,
+              "defended_clean": 0.7964148527528809,
+              "attacked": 0.12419974391805377,
+              "transfer_defended": 0.5236875800256082,
+              "adaptive_defended": 0.10499359795134443
+            },
+            "clean_harmed": 38,
+            "clean_recovered": 47,
+            "asr_original": {
+              "successes": 516,
+              "denominator": 613,
+              "asr": 0.8417618270799347
+            },
+            "asr_transfer_defended": {
+              "successes": 213,
+              "denominator": 622,
+              "asr": 0.342443729903537
+            },
+            "asr_adaptive_defended": {
+              "successes": 540,
+              "denominator": 622,
+              "asr": 0.8681672025723473
+            },
+            "common_clean_correct": {
+              "attacked": {
+                "successes": 478,
+                "denominator": 575,
+                "asr": 0.831304347826087
+              },
+              "transfer_defended": {
+                "successes": 174,
+                "denominator": 575,
+                "asr": 0.3026086956521739
+              },
+              "adaptive_defended": {
+                "successes": 493,
+                "denominator": 575,
+                "asr": 0.8573913043478261
+              }
+            }
+          }
+        },
+        {
+          "model": "mobilenet",
+          "epsilon": 0.03,
+          "overall": {
+            "samples": 781,
+            "accuracy": {
+              "clean": 0.7848911651728553,
+              "defended_clean": 0.7964148527528809,
+              "attacked": 0.13188220230473752,
+              "transfer_defended": 0.3265044814340589,
+              "adaptive_defended": 0.088348271446863
+            },
+            "clean_harmed": 38,
+            "clean_recovered": 47,
+            "asr_original": {
+              "successes": 510,
+              "denominator": 613,
+              "asr": 0.831973898858075
+            },
+            "asr_transfer_defended": {
+              "successes": 367,
+              "denominator": 622,
+              "asr": 0.590032154340836
+            },
+            "asr_adaptive_defended": {
+              "successes": 553,
+              "denominator": 622,
+              "asr": 0.8890675241157556
+            },
+            "common_clean_correct": {
+              "attacked": {
+                "successes": 473,
+                "denominator": 575,
+                "asr": 0.8226086956521739
+              },
+              "transfer_defended": {
+                "successes": 320,
+                "denominator": 575,
+                "asr": 0.5565217391304348
+              },
+              "adaptive_defended": {
+                "successes": 506,
+                "denominator": 575,
+                "asr": 0.88
+              }
+            }
+          }
+        },
+        {
+          "model": "mobilenet",
+          "epsilon": 0.05,
+          "overall": {
+            "samples": 781,
+            "accuracy": {
+              "clean": 0.7848911651728553,
+              "defended_clean": 0.7964148527528809,
+              "attacked": 0.1613316261203585,
+              "transfer_defended": 0.30217669654289375,
+              "adaptive_defended": 0.08066581306017925
+            },
+            "clean_harmed": 38,
+            "clean_recovered": 47,
+            "asr_original": {
+              "successes": 487,
+              "denominator": 613,
+              "asr": 0.7944535073409462
+            },
+            "asr_transfer_defended": {
+              "successes": 387,
+              "denominator": 622,
+              "asr": 0.6221864951768489
+            },
+            "asr_adaptive_defended": {
+              "successes": 560,
+              "denominator": 622,
+              "asr": 0.9003215434083601
+            },
+            "common_clean_correct": {
+              "attacked": {
+                "successes": 453,
+                "denominator": 575,
+                "asr": 0.7878260869565218
+              },
+              "transfer_defended": {
+                "successes": 341,
+                "denominator": 575,
+                "asr": 0.5930434782608696
+              },
+              "adaptive_defended": {
+                "successes": 513,
+                "denominator": 575,
+                "asr": 0.8921739130434783
+              }
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
