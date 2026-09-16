@@ -4,7 +4,16 @@
 
 ### Clean → FGSM → 전처리 방어 비교 → Evidence Audit 기반 해양 AI 보안 연구
 
+<a href="https://maritime-adversarial-lab.hc24734503.chatgpt.site/">
 <img src="docs/assets/adversarial-ai-industrial-security-hero.jpg" alt="산업형 스마트항만과 자율운항선박 AI 보안 프로젝트 비전" width="900">
+</a>
+
+[![MARIS 열기](https://img.shields.io/badge/MARIS-가상_실험실_열기-0077B6?style=for-the-badge)](https://maritime-adversarial-lab.hc24734503.chatgpt.site/)
+
+[MARIS 가상 실험실 바로가기](https://maritime-adversarial-lab.hc24734503.chatgpt.site/) · [웹 소스 및 실행 안내](web/maris/README.md)
+
+현재 사이트는 소유자 전용이며 허용된 ChatGPT 계정으로 로그인해야 합니다.
+저장 결과를 재생하는 공간이며 실제 자율운항 제어 또는 실시간 모델 추론이 아닙니다.
 
 <br>
 
