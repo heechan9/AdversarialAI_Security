@@ -50,6 +50,10 @@
 
 [실무 활용·평가 기준 대조](docs/MARITIME_PRACTICE_GAP_REVIEW.md): 실제 해상 영상 시스템과의 차이, 배경 참고와 후속 과제. 작은 L∞ 값만으로 사람에게 보이지 않는 교란임을 입증하지는 않습니다.
 
+## 논문 통합 원고
+
+[ACK 2026 v2.5 원고와 팀원 반영 기록](docs/papers/ack2026_v2_5/README.md): 기호 원고 기반의 공격·방어·분할 검토 통합 초안입니다. 저자·소속과 팀의 최종 채택 확인 전이며 공식 결과 승격을 의미하지 않습니다.
+
 ## 최신 통합 상태
 
 [PR #25](https://github.com/heechan9/AdversarialAI_Security/pull/25)는
