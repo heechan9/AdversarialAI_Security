@@ -250,7 +250,7 @@ def audit_paper_claims(repo_root: Path = Path(".")) -> list[PaperClaim]:
             "strict_visual_review_evidence",
             "passed",
             "results/audit/evidence/*.csv + manifest.json",
-            f"{visual['total_candidates']} candidate samples verified across Taehee ({visual['split_counts']['taehee']}) and Jaehyuk ({visual['split_counts']['jaehyuk']}) splits",
+            f"{visual['total_candidates']} candidate records checked across Taehee ({visual['split_counts']['taehee']}) and Jaehyuk ({visual['split_counts']['jaehyuk']}) splits; record integrity/consistency only, not label correctness",
         ),
         PaperClaim(
             "CLAIM-009",

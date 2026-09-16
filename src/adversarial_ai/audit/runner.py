@@ -163,7 +163,7 @@ def run_full_audit(
         clean_mobilenet_csv=mob_clean_path,
     )
     verified_scopes.append(
-        "Strict visual-review evidence audit "
+        "Strict visual-review record integrity/consistency audit (not label correctness) "
         f"({visual_res['total_candidates']} candidate samples dynamically verified across Taehee/Jaehyuk split files and combined file)"
     )
 
@@ -190,6 +190,7 @@ def run_full_audit(
                 "split_counts": visual_res["split_counts"],
                 "reviewer_counts": visual_res["reviewer_counts"],
                 "judgment_counts": visual_res["judgment_counts"],
+                "claim_boundary": visual_res["claim_boundary"],
                 "class_distribution": visual_res["class_distribution"],
                 "special_case_rows": visual_res["special_case_rows"],
                 "candidate_rule": visual_res["candidate_rule"],

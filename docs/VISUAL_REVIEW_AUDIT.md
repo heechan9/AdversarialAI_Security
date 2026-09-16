@@ -62,3 +62,28 @@ The audit tool (`adversarial_ai.audit.visual_review`) verifies:
 ### Mandatory Claim Boundaries
 - **Record Integrity Only:** This audit certifies CSV record integrity, Clean baseline consistency, and review split/union correctness. It does NOT independently inspect raw image bytes and does NOT certify that visual ship-type judgments are objectively correct ground truth.
 - **No Publication Authorship:** Participation in visual review does not imply academic or publication co-authorship.
+
+
+## 감사 통과와 판정 의미의 경계
+
+`PASSED`는 고정된 CSV의 해시·형식·후보 일치·분할/통합 기록 일관성에 대한
+통과이다. 실제 이미지의 선종 정답성, 전문가 검토 또는 독립 이중 검토를
+입증하지 않는다. `judgment_counts`는 기존 CSV 문자열의 빈도이며 정답률이 아니다.
+JSON의 `claim_boundary`와 CLI/Paper Claim 출력에 이 경계를 명시한다.
+
+사용자가 전달한 후속 확인에 따르면 김태희의 **추가 회신**에서 ‘라벨 정확’은
+선종 클래스가 아닌 비고 설명이 맞다는 의미였다. 이 확인을 기존 고정 CSV
+전체의 의미로 소급 적용하거나 기존 파일을 재라벨링하지 않는다. 추가 회신은
+이번 변경에서 가져오지 않으며 공개 저장소에 원본을 추가하지 않는다.
+
+향후 회신 연결용 `summarize_followup_reviews(records, meaning=...)`는 정규화된
+행마다 `sample_id`, `reviewer`, `judgment`, `meaning`, `meaning_source`를 요구한다.
+의미는 `description_confirmation`(설명 확인) 또는 `class_label_opinion`(선종 의견)
+중 명시적으로 확인한 값만 허용한다. 빈값·미확인 값·추가 열·중복 행과 혼합
+의미 집계는 `AuditError`로 거부한다. 판정 문자열이나 검토자 이름으로 의미를
+추정하지 않는다. 다른 판정값의 의미도 확인 전 자동 변환하지 않는다.
+
+이 함수는 기존 CSV importer가 아닌, 후속 연결에서 사용할 집계 API이다.
+확인 출처 문자열은 추적용이며 확인의 진실성을 코드가 인증하는 것은 아니다.
+설명 확인과 선종 의견은 각각 집계하더라도 합산해 라벨 정답률로 표현하면 안 된다.
+선종 의견만 집계한 경우에도 `label_correctness_verified`는 false이다.

@@ -8,6 +8,8 @@ and cross-checks predictions and confidences against canonical Clean baseline CS
 
 from __future__ import annotations
 
+from adversarial_ai.audit.review_semantics import audit_claim_boundary
+
 import csv
 import datetime
 import hashlib
@@ -372,6 +374,7 @@ def audit_visual_reviews(
         },
         "reviewer_counts": reviewer_counts,
         "judgment_counts": judgment_counts,
+        "claim_boundary": audit_claim_boundary(),
         "class_distribution": class_distribution,
         "special_case_rows": special_case_rows,
         "candidate_rule": {
