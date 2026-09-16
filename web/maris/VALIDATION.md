@@ -124,3 +124,13 @@ upload, account form, defense experiment, interpolated result or navigation cont
 - Browser used SVGRenderer fallback. Real WebGL shader compilation, water appearance, shadow rendering, context-loss behavior after these edits, physical Android/iOS touch gestures, GPU frame rate, and mobile Safari have NOT been tested. They require actual device review.
 - `DEMO_GUIDE.md` supplies an approximately 80-second Korean walkthrough using both success and failure cases; it reads current values from the interface rather than maintaining another set of metric answers.
 - Temporary mobile QA wrapper removed before production build.
+
+
+## Model study update — 2026-09-16
+
+- Added perimeter-following railings, mooring fittings, service hatches, bridge platform and steps. Static explanatory geometry only; no selected-case or attack-dependent motion. Improved coated hull material and lighting exposure; retained bounded pixel ratio, cached shadows and existing water shader.
+- Added bow, side and deck camera presets. Presets stop auto rotation; reset returns to the initial camera. Initial framing now fits the hull on narrow screens. Framed stage, contrast, focus rings and mobile controls refined.
+- Evidence snapshot, four comparison PNGs and Gaussian data are byte-identical to the previous publication. Mean-filter results were not supplied and are not included.
+- Evidence/hash/mutation checks PASS. Installed OrbitControls synthetic rotation/pinch/reset/limits checks PASS, including nine new preset/aspect/reset combinations. These are not physical-device tests.
+- Browser preview: three preset buttons, auto-rotation stop on preset, zoom (1.2x), reset, paired image zoom (matching 1.5x transforms), success/failure case selection, and MobileNetV2 epsilon-zero statistics verified. At 390px iframe width, content/scroll widths were both 375px; mobile preset/reset controls were usable and hull framing was corrected after inspection.
+- Browser used SVGRenderer fallback. Actual WebGL water/shadow appearance, physical phone touch gestures and GPU performance are unverified. No navigation, sensor or collision simulation is claimed.

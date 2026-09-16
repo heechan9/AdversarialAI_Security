@@ -8,6 +8,11 @@ export function createShipControls(camera: THREE.PerspectiveCamera, element: HTM
   camera.position.set(18, 17, 28);
   const controls = new OrbitControls(camera, element);
   controls.target.set(0, 2, 0);
+  // Fit the full hull on narrow displays without weakening orbit distance limits.
+  const halfHorizontalFov = Math.atan(Math.tan(THREE.MathUtils.degToRad(camera.fov / 2)) * camera.aspect);
+  const initialOffset = camera.position.clone().sub(controls.target);
+  initialOffset.setLength(Math.min(88, Math.max(initialOffset.length(), 15 / Math.sin(halfHorizontalFov))));
+  camera.position.copy(controls.target).add(initialOffset);
   controls.enablePan = false;
   controls.enableDamping = true;
   controls.dampingFactor = 0.09;
@@ -34,4 +39,19 @@ export function resetShipControls(controls: OrbitControls) {
   controls.update();
   controls.reset();
   controls.enableDamping = damping;
+}
+
+export type ShipCommand = "reset" | "in" | "out" | "bow" | "side" | "deck";
+
+// Presets change only the explanatory camera. They never select a research case.
+export function setShipView(controls: OrbitControls, camera: THREE.PerspectiveCamera, view: "bow" | "side" | "deck") {
+  resetShipControls(controls);
+  const vectors = { bow: [31, 15, 19], side: [0, 13, 40], deck: [4, 42, 13] };
+  const offset = new THREE.Vector3(...vectors[view]);
+  // A broadside view needs more room when the viewport is narrow.
+  const halfHorizontalFov = Math.atan(Math.tan(THREE.MathUtils.degToRad(camera.fov / 2)) * camera.aspect);
+  const fit = 15 / Math.sin(halfHorizontalFov);
+  offset.setLength(THREE.MathUtils.clamp(Math.max(offset.length(), fit), controls.minDistance, controls.maxDistance));
+  camera.position.copy(controls.target).add(offset);
+  controls.update();
 }
