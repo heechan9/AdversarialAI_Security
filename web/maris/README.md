@@ -60,3 +60,11 @@ TensorFlow 추론은 필요하지 않습니다. `pnpm-lock.yaml`이 웹 의존�
 
 `python scripts/export-defense-comparison.py --repo /path/to/repo --source-commit <published-artifact-commit>`는 두 방어 산출물 감사를 통과한 후에만 전체 조건을 내보냅니다. `node scripts/test-defense-comparison.mjs`로 내보내기 해시·집계·ASR 분모를 확인합니다.
 화면의 네 카드는 정상 / 원래 공격 / 원래 공격+필터 / 방어 인지 공격+필터이며 마지막 조건은 새로 생성했던 별도 공격 기록입니다. 정상 성능 손실과 서로 다른 ASR 분모를 함께 표시합니다. 공식 채택이나 실시간 추론을 뜻하지 않습니다.
+
+## CAD 구조 보기
+
+첫 화면에서 해상 모형 / CAD 구조 보기를 전환합니다. 무광 회색 모형과 얇은 윤곽선,
+치수가 없는 격자 위에서 전체·선체·갑판·상부 구조를 선택할 수 있습니다. 선택은
+화면의 재질과 윤곽만 바꾸며 카메라·원본 geometry·실험 결과를 바꾸지 않습니다.
+실제 CAD 파일, 실선 치수, 내부 설계 또는 공격 시뮬레이션을 제공하지 않습니다.
+참고 자료 검토와 자산 사용 경계는 `CAD_DESIGN_REVIEW.md`에 기록합니다.
