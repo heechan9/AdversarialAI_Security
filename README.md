@@ -55,7 +55,7 @@
 [PR #25](https://github.com/heechan9/AdversarialAI_Security/pull/25)는
 Jules 독립 감사와 소스 해시 검증 보완 후 `324a535`로 main에 병합했습니다.
 
-- 고정 3×3 가우시안 전처리, 전달 FGSM 및 방어 인지 FGSM 비교를 구현·실험했습니다.
+- 고정 3×3 가우시안·평균 필터 전처리, 전달 FGSM 및 방어 인지 FGSM 비교를 구현·실험했습니다.
 - 기존 공격에 전처리를 적용한 개선만으로 방어 성공을 주장하지 않습니다.
   방어 인지 공격에는 효과가 크게 떨어지고 정상 정확도에도 모델별 영향이 있습니다.
 - Codex 직접 검증 247 passed / 경고 2개; Jules 별도 재검증도 247 passed / 경고 2개를 보고했습니다.
@@ -64,7 +64,8 @@ Jules 독립 감사와 소스 해시 검증 보완 후 `324a535`로 main에 병�
   기록의 재계산 감사는 구분합니다.
 
 [현재 연구 범위와 결과](docs/CURRENT_RESEARCH_STATUS.md) ·
-[방어 실험 근거](results/defenses/experimental/gaussian_run_01/README.md) ·
+[Gaussian 근거](results/defenses/experimental/gaussian_run_01/README.md) ·
+[평균 필터 근거](results/defenses/experimental/mean_run_01/README.md) ·
 [Jules 감사](https://jules.google.com/session/11380383362183201753)
 
 ## 한눈에 보는 검증 방식
@@ -91,7 +92,7 @@ Jules 독립 감사와 소스 해시 검증 보완 후 `324a535`로 main에 병�
 | FGSM 성능 수치 | 🟡 예비 결과 | $\epsilon=0, 0.01, 0.03, 0.05$ |
 | 연구근거 감사 | ✅ 검증 완료 | manifest·모델 해시·CSV·JSON·문서 일관성·시각 검토 감사 |
 | 논문 Claim 감사 | ✅ 9/9 통과 | 기존 v1.5 claim snapshot 감사; 최신 원고 전체의 검증 완료를 뜻하지 않음 |
-| 가우시안 전처리 방어 | 🟡 구현·실험 완료 (experimental) | 고정 3×3 전처리; 기존 FGSM 입력 및 방어 인지 FGSM 비교·근거 감사 |
+| 가우시안·평균 필터 방어 | 🟡 구현·실험 완료 (experimental) | 고정 3×3 전처리; 기존 FGSM 입력 및 방어 인지 FGSM 비교·근거 감사 |
 | MARIS 가상 실험실 | ✅ 구현·소스 반영 | 설명용 3D 조작·저장된 이미지 비교·결과 재생; 실시간 추론 아님 |
 | BIM·PGD·JSMA·적대적 학습 | ⚪ 향후 연구 | 현재 검증 완료 범위에 포함하지 않음 |
 | VLM/LLM·안전영향 시뮬레이터 | ⚪ 목표 범위 | 현재 완료 기능이나 성능 근거가 아님 |
