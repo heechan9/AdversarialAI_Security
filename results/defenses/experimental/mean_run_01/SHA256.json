@@ -1,0 +1,12 @@
+{
+  "cnn_eps_0.01_samples.csv": "732c1ef0a9b7df9102639233afcf50291d58dd782960f5f28ea92d39fb4c0283",
+  "cnn_eps_0.03_samples.csv": "c78c038e1753f05b63b45e86396fb849a8e424f5a6b4cd6abb9726d1373dd080",
+  "cnn_eps_0.05_samples.csv": "51968a86783bfcf51125c298980a0080aea77539e8464194005169aef05e1b02",
+  "cnn_eps_0_samples.csv": "e44838c6ea74b3e499d9d7019f2555f4d58f7b6c1a706ba8c1903cd67d0049ab",
+  "contract.json": "2b9fea752c25e03506381fc316c2234c443dce2912ecd3f3bc1503f23f927049",
+  "mobilenet_eps_0.01_samples.csv": "3d173d3b19b4941d5287bf5482c3a0f400f22edde33d1320121fb143d8f01ef4",
+  "mobilenet_eps_0.03_samples.csv": "c7e911245483838a9907fe66caadcd9366340363a08d34f99879741292df82a6",
+  "mobilenet_eps_0.05_samples.csv": "57e57090dcb1e5036863495eeb59e0b6c41002a035d2a6f1fb638ba83077c6b4",
+  "mobilenet_eps_0_samples.csv": "2fbc4b8b669e6ac5e49f3170aa56caf4c32b3cd323459732622e76fc4ea0008d",
+  "summary.json": "cf1fadd8362a02f9659eab0dadb27840ff4d203b804a55dd65c9124e779c3027"
+}

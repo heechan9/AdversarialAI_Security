@@ -109,3 +109,8 @@
 커밋의 `Co-authored-by: Codex <codex@openai.com>`와 이 문서로 구분한다.
 이는 heechan9가 보완 코드를 독립 구현했다는 뜻이 아니다. 현수 및 기존 PR의 원본
 커밋들은 원격 통합 커밋의 부모 이력으로 보존한다.
+
+## 평균 필터 비교 실험 (2026-09-16, experimental)
+
+- 최희찬 (heechan9): Windows에서 구성요소 테스트(사용자 로그 19 passed)와 전체 선박 이미지 실험을 실행하고 원본 ZIP 제공.
+- Codex: 고정 평균 필터와 실행 연결 구현, 제공된 CSV/JSON의 독립 재계산, 근거 감사·mutation tests 및 Git 통합. 실제 모델 재추론이나 팀/멘토의 공식 채택을 대신하지 않음.

@@ -134,3 +134,60 @@ upload, account form, defense experiment, interpolated result or navigation cont
 - Evidence/hash/mutation checks PASS. Installed OrbitControls synthetic rotation/pinch/reset/limits checks PASS, including nine new preset/aspect/reset combinations. These are not physical-device tests.
 - Browser preview: three preset buttons, auto-rotation stop on preset, zoom (1.2x), reset, paired image zoom (matching 1.5x transforms), success/failure case selection, and MobileNetV2 epsilon-zero statistics verified. At 390px iframe width, content/scroll widths were both 375px; mobile preset/reset controls were usable and hull framing was corrected after inspection.
 - Browser used SVGRenderer fallback. Actual WebGL water/shadow appearance, physical phone touch gestures and GPU performance are unverified. No navigation, sensor or collision simulation is claimed.
+
+## Public defense comparison — 2026-09-16
+
+- Site audience changed to public at the owner's explicit request. No private manuscript, reviewer responses or local model files added.
+- Added a plain-language four-condition defense explorer, independently selectable model/filter/recorded epsilon, accuracy counts, normal-image loss/recovery, and pipeline-specific adaptive ASR denominators. Both Gaussian and mean are experimental, not officially promoted. All conditions remain available; no interpolation or generated defense images.
+- Exporter runs both independent artifact auditors before compacting all condition summaries. Export/source ZIP/source summary hashes and audit limitations are published separately. Source artifact commit: 5c0b74a6650742c49deeb98cc72f9fe882916051.
+- Full Python suite on the evidence integration tree: 297 passed, 4 Keras deprecation warnings. Research/Paper (9/9)/Gaussian/mean artifact audits passed. Images and H5 unavailable; no independent inference or raw-pixel verification.
+- Browser: mean CNN epsilon .03 and Gaussian MobileNetV2 epsilon .03 cards matched the audited summaries; epsilon zero returned normal/filtered-normal controls. Model and filter selection worked; 390px iframe (375px content) had no document horizontal overflow and epsilon controls/cards remained legible. Existing scene uses SVG fallback here; physical phone and WebGL/GPU remain unverified.
+- Web evidence/hash/mutations and OrbitControls tests passed. New defense export checks passed for full condition inventory, counts, pipeline denominators, epsilon zero and shared baselines.
+
+## Gray CAD study mode — 2026-09-16
+
+- Added an optional gray material/outline view to the existing procedural ship,
+  three selectable external structure groups, unitless grid and explicit model
+  boundary. Original sea mode and all public/evidence bytes remain unchanged.
+- Desktop preview: mode switching, all group buttons, keyboard-compatible native
+  buttons, zoom (1.3x), reset and manual group selection stopping auto rotation.
+  Returning to sea restores original materials, ocean and removes the CAD panel.
+- 390px iframe / 375px content: no horizontal page overflow; four structure buttons
+  are 44px high. Gray scene, short notes, presets and controls visually inspected.
+  Initial pre-hydration click required retry after data loaded. Small-layout mouse
+  drag projection and zoom were checked; it is not a real touchscreen test.
+- Browser uses SVGRenderer fallback; outline painter ordering can expose back edges.
+  Actual GPU lighting, WebGL depth testing, performance and physical iOS/Android
+  gestures are unverified. A mispositioned automation drag timed out before retry
+  against the observed viewport. No claim of real-device QA.
+- Evidence/hash/mutation checks, defense export checks, installed OrbitControls
+  synthetic interaction/preset harness and TypeScript check passed. No new tests
+  duplicate this reversible visual implementation. No Python/research code changed.
+- Temporary mobile QA wrapper removed before packaging.
+
+## Readability update — 2026-09-17
+
+- Reordered existing dynamically computed normal accuracy, attack accuracy and ASR
+  cards above the filter controls; kept current model/epsilon/class, sample counts
+  and ASR denominator visible. Filters now live in a initially collapsed accordion.
+- Case/statistics mismatch and explicit alignment remain visible outside the
+  accordion. The controls do not change the selected image.
+- Added a labeled Radix tab list with matching selected tabpanel, high-contrast
+  selection and plain-language score/missing-record explanations. Shared image
+  viewport persists between tabs. No scores are treated as calibrated correctness.
+- Replaced the ambiguous steps with a sticky three-section table of contents,
+  linked to image comparison / aggregate results / defense, with aria-current and
+  scroll-position highlighting. No completion/progress percentage is invented.
+- Desktop browser: initial CNN epsilon .03 remains 504/781, 190/781, ASR 314/504;
+  MobileNetV2 epsilon zero remains 613/781 and ASR 0/613. Accordion collapse/open
+  and model selection worked. ArrowRight selected the normal-input tab, its ARIA
+  linkage matched the panel, and 1.5x image zoom persisted.
+- 390px iframe / 375px content: no horizontal overflow. Filter/class selection
+  showed CNN Sailboat epsilon .03: normal 9/74, attack 0/74, ASR 9/9. These are
+  observations of existing data, not additional implementation constants. Tabs
+  were 46px high; attack selection and current-section highlighting worked after
+  a transient automation timeout was retried.
+- Existing snapshot/image hash and mutation checks, defense-export checks and
+  TypeScript passed. No research source, evidence, dependency, 3D scene or model
+  file changed. Physical-device touch and WebGL/GPU remain unverified.
+- Temporary mobile wrapper removed before production packaging.
