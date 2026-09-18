@@ -8,9 +8,9 @@ from adversarial_ai.data.manifest import build_manifest
 from adversarial_ai.evaluation.clean_baseline import (
     build_prediction_frame,
     load_expected_classes,
-    sha256_file,
     validate_class_mapping,
 )
+from adversarial_ai.evaluation.integrity import sha256_file
 
 
 def test_classes_match_repository_contract():

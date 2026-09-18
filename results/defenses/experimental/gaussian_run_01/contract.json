@@ -1,0 +1,32 @@
+{
+  "status": "experimental",
+  "promoted": false,
+  "source_sha": "26324bea8ffdeb3c7b1d100229c49003ec99a587",
+  "source_files": {
+    "src/adversarial_ai/evaluation/defense_evaluation.py": "c064f8dba5d8cc8490fac54bc57e3575d9e59f8afc441f91471a4414f467747d",
+    "src/adversarial_ai/defenses/gaussian.py": "c9216ac5bfad786d31ad03e62054c1d7f34d1571f611507b2dab31e238230de2",
+    "src/adversarial_ai/attacks/fgsm.py": "21884da1945b90a9ec26d643f3cc1a8db0f98c5ca60d60a09ba560132af97384"
+  },
+  "python": "3.11.15",
+  "tensorflow": "2.21.0",
+  "keras": "3.15.1",
+  "started_utc": "2026-09-12T17:38:43.722391+00:00",
+  "inputs_sha256": {
+    "configs/test_manifest.json": "8d30ed9fed51f41835dcebb191f3ded56812624a1b8eb3f3753a89eebb80a2d1",
+    "configs/classes.json": "76a5a03002e706af9d89c98317b33e64cbbca46687da24291e7e0b3bb5faaa83",
+    "models/cnn_baseline.h5": "cb256b1a5d6f605d355334e4e8667257a2bfbd29e08836cc4114869bd7068701",
+    "models/mobilenet_finetuned.h5": "58c4878fa1480035d0bd5a63f8c3e22beac3a03f27f1aada6690b27f167129ae",
+    "results/clean/cnn_baseline_eval.csv": "33695f708b2e1df4905166509ab511a952415ed6d39a6eca15bbbe6ef8d6ba3f",
+    "results/clean/mobilenet_eval.csv": "7516b1248f925f727baa121a3463adb0cba57a125616f44f577209576e1044b5"
+  },
+  "epsilons": [
+    0.0,
+    0.01,
+    0.03,
+    0.05
+  ],
+  "defense": "fixed 3x3 binomial /16, REFLECT, NHWC",
+  "evaluation": "full manifest; inference executed locally; no promotion",
+  "asr_denominator": "clean-correct for the evaluated pipeline; common subset separately",
+  "pixel_evidence": "bounds/clipping checked in memory; raw arrays not exported"
+}

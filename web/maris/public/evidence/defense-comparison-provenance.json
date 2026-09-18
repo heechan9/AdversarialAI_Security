@@ -1,0 +1,32 @@
+{
+  "source_commit": "5c0b74a6650742c49deeb98cc72f9fe882916051",
+  "export_sha256": "650664277a0fad868c2f0776dff27331717c2ff8cbcc1d1fae47668707139453",
+  "source_hashes": {
+    "gaussian": {
+      "summary_sha256": "d5ec353ac536c4dd873f9d14c86b0324d2ebfe0ff5ac289936dea4865db9cffd",
+      "original_zip_sha256": "dc12787a7ff8a2696ea3b8e182b7e19f7ca6fc812c4a6739cb7f7f1895257df6"
+    },
+    "mean": {
+      "summary_sha256": "cf1fadd8362a02f9659eab0dadb27840ff4d203b804a55dd65c9124e779c3027",
+      "original_zip_sha256": "d836470841f9494d25d321bf5f8bd848640228add3ebdca3a6640b870bc599b2"
+    }
+  },
+  "audits": {
+    "gaussian": {
+      "status": "PASSED",
+      "rows": 6248,
+      "conditions": 8,
+      "class_summaries": 80,
+      "limits": "No independent inference, raw-pixel checks or model-file hashing; PC record and artifact audit only"
+    },
+    "mean": {
+      "status": "PASSED",
+      "rows": 6248,
+      "conditions": 8,
+      "class_summaries": 80,
+      "limits": "No independent inference, raw-pixel checks or model-file hashing; PC record and artifact audit only"
+    }
+  },
+  "status": "experimental",
+  "limits": "Artifact audit only. No independent model inference, raw arrays or H5 verification."
+}

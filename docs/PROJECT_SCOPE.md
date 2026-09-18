@@ -9,6 +9,21 @@
 2. **Adversarial Attack** — FGSM·BIM·PGD·JSMA를 CNN/MobileNet에 White-box로 적용, 취약성 정량 분석
 3. **Safety Simulation** — 인식 오류가 항로판단에 미치는 영향을 검증하는 **연구용 안전영향 시뮬레이터** (실제 자율운항 제어시스템이 아님)
 
+위 구조는 전체 연구 로드맵이다. 현재 저장소에서 canonical evidence로
+검증된 범위와 계획 범위를 혼동하지 않는다.
+
+| 근거 상태 | 현재 범위 |
+| --- | --- |
+| 구현·검증됨 | CNN·MobileNetV2 Clean baseline |
+| 예비 결과·감사됨 | one-step untargeted FGSM (`provisional`) |
+| 코드 지원과 결과 주장을 분리해야 함 | targeted FGSM 등 canonical 결과가 고정되지 않은 기능 |
+| 구현·실험됨 (experimental) | 고정 3×3 가우시안 전처리, 기존 FGSM 입력·방어 인지 FGSM 비교 및 근거 감사 |
+| 구현됨 (기록 재생) | MARIS 설명용 3D·저장 이미지 비교·결과 조회; 실시간 추론·운항 제어 아님 |
+| 계획 | BIM·PGD·JSMA, 모델 간 transfer evaluation, VLM·LLM 연동, 적대적 학습, 안전영향 시뮬레이션 |
+| 장기 확장 | physical patch, camera/AIS/GNSS/radar fusion, navigation decision robustness, MASS cyber-physical red teaming |
+
+현재 실증 범위와 해양 운영 영향의 경계는 `docs/THREAT_MODEL.md`를 따른다.
+
 ## 범위 단계 (Decision Gate 포함)
 
 | 구분 | 범위 | 상태 |
