@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { ArrowRight, ExternalLink, Info, Minus, Plus, RotateCcw } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -7,13 +7,18 @@ import { type Sample } from "@/lib/evidence";
 import { ko, modelName, pct } from "@/lib/display";
 import { boundView, initialView, type ImageView } from "@/lib/image-view";
 
-export function Panel({ sample, part, compact = false, viewport = initialView, onPan }: {
+type PanelProps = {
   sample: Sample; part: number; compact?: boolean; viewport?: ImageView;
   onPan?: (dx: number, dy: number) => void;
-}) {
+};
+
+export function Panel(props: PanelProps) {
+  return <ImagePanel key={props.sample.asset} {...props} />;
+}
+
+function ImagePanel({ sample, part, compact = false, viewport = initialView, onPan }: PanelProps) {
   const [bad, setBad] = useState(false);
   const drag = useRef<{ id: number; x: number; y: number } | null>(null);
-  useEffect(() => setBad(false), [sample.asset]);
   const crop = sample.panels[part];
   const movable = !compact && viewport.zoom > 1 && !bad;
   return <div className={`image-panel ${compact ? "compact" : ""} ${movable ? "pannable" : ""}`}

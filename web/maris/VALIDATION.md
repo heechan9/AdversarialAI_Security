@@ -191,3 +191,11 @@ upload, account form, defense experiment, interpolated result or navigation cont
   TypeScript passed. No research source, evidence, dependency, 3D scene or model
   file changed. Physical-device touch and WebGL/GPU remain unverified.
 - Temporary mobile wrapper removed before production packaging.
+
+## UI effect-state cleanup — 2026-09-20
+
+- Image load-error and pointer state now reset through an asset-keyed inner panel instead of synchronous setState in an effect. The outer comparison retains its existing viewport/tab behavior.
+- Retry clears the previous data-load error in the button handler before incrementing the request attempt. Effect cleanup still ignores stale responses.
+- ESLint: 0 errors, 1 pre-existing no-img-element recommendation for the raw evidence PNG. TypeScript, production build and existing synthetic interaction checks passed. No lint rule was disabled.
+- Local browser fault injection: initial evidence HTTP 503 displayed the error view; retry loaded validated results. An image HTTP 503 displayed the fallback; selecting another case and returning restored the main comparison. The failed thumbnail remains a fallback until remount/reload, matching the existing behavior. Image zoom stayed at 1.5x when switching to the attack tab.
+- No evidence values, image bytes, dependencies or research code changed. These checks do not represent physical mobile-device testing.
