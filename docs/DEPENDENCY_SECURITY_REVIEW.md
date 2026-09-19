@@ -1,6 +1,6 @@
 # Dependency security review — 2026-09-20
 
-Base: personal `main` at `c9109af4cb1fdc501d647ca51e865c0d00025421`. This is a known-vulnerability database check, separate from the local source-security scan. Counts below are scanner advisory records, not confirmed exploitable application flaws.
+Base: personal `main` at `c9109af4cb1fdc501d647ca51e865c0d00025421`. This is a known-vulnerability database check, separate from the local source-security scan. Counts below are scanner advisory records, not confirmed exploitable application flaws. The initial inventory below is historical; see the remediation follow-up at the end for the updated state.
 
 ## Scope and results
 
@@ -75,3 +75,39 @@ Base: personal `main` at `c9109af4cb1fdc501d647ca51e865c0d00025421`. This is a k
 6. **Deployment verification remains open:** actual hosting configuration and ingress controls were not supplied. A clean dependency scan would not replace that check.
 
 The raw scanner JSON and exact installed-version inventory are saved with the local audit artifacts. Source-review limitations and numerical/model validation limits continue to apply.
+
+## Remediation follow-up — 2026-09-20
+
+The updated MARIS lockfile returns **0 known advisories** in both full and production-only `pnpm audit --json` runs. React/React DOM/RSC move together to 19.2.8, Vite to 8.0.16, Vinext to beta.6 with plugin-rsc 0.5.34, and the stable Cloudflare plugin/Wrangler pair to 1.42.0/4.102.0. Targeted transitive overrides cover the affected Babel, YAML, glob expansion, browser-target mapping, compression, HTTP client and esbuild packages. The seven-day release-age policy and approved build-script policy remain enabled.
+
+Vinext beta.6 removes the vulnerable image-size dependency. The alternative image-size 2.0.3 override was rejected by the release-age policy, so it was not retained. The original advisory's Babel lower bound 7.29.1 is not a published version; the candidate uses published 7.29.7 instead. The forced esbuild consumers were checked with both the application build and a disposable SQLite/Drizzle schema-generation smoke test.
+
+The original `adversarial_ai` Conda environment remains unchanged (all 149 recorded distribution versions compared). A separate clone upgrades `httpx2` to 2.12.0, its `httpcore2` dependency to 2.12.0, Jupyter Server to 2.21.0, pip to 26.2, and Tornado to 6.5.8. The clone passes `pip check`; a fresh `pip-audit --path <clone>/Lib/site-packages --format json` reports **0 known advisories**. This does not erase the historical environment's warnings. Use the validated clone for future work; retain the old environment solely as the reproducibility snapshot.
+
+### Verification and limits
+
+- pnpm 11.25.0 frozen installation, TypeScript check, Vinext/Cloudflare production build: passed.
+- Existing evidence hashes/four image hashes/six rejected mutations, defense comparison invariants, and synthetic controls checks: passed. Original Git evidence blobs were restored after Windows automatic CRLF conversion caused initial hash failures. `.gitattributes` now preserves those JSON bytes; no numeric records were changed.
+- Disposable Drizzle SQLite schema generation: passed; no production database was accessed.
+- Updated Python clone: `PYTHONPATH=src python -X utf8 -m pytest -q` passed with **309 passed, 5 skipped, 4 existing Keras/NumPy deprecation warnings**. The first attempt lacked `PYTHONPATH=src` and stopped at collection; correcting that invocation resolved it. Research Evidence audit also passed. Raw image/model binary verification remains unavailable in this checkout, as before.
+- Browser against the updated local Worker build: data loaded; CAD toggle and Gaussian epsilon-zero controls worked, with 504/781 clean, 445/781 defended and ASR 0/445.
+- Lint is **not clean**: two pre-existing `react-hooks/set-state-in-effect` errors in `app/image-comparison.tsx` and `app/page.tsx`, and one `no-img-element` warning. These files and the relevant ESLint/plugin versions are unchanged; no rule was disabled.
+- Known-advisory database checks do not prove absence of undisclosed vulnerabilities or establish every advisory's exploitability.
+
+### Deployment boundary
+
+Sites confirms MARIS is public and its existing saved version 10 (`33f0a9efd3223b35ae79ef0e4389be8fdbcac6ee`) deployed successfully. An ordinary browser loads the public site and its epsilon-zero control works. A separate unauthenticated scripted HTTP request received a Cloudflare challenge (403), not application content; its challenge-page headers are not evidence of the application's header configuration.
+
+The actual Sites source repository was retrieved and its hosting configuration confirms no D1 or R2 binding. A successful local build alone is not a production update. The deployment follow-up report records whether the patched source is published; do not infer that live version 10 has the patched lockfile.
+
+### Reproduce the optional Python tool update
+
+Keep the historical experiment environment. Clone it to a separate destination and use that clone's Python explicitly:
+
+```text
+conda create --name adversarial_ai_security --clone adversarial_ai
+conda run -n adversarial_ai_security python -m pip install --upgrade httpx2==2.12.0 jupyter-server==2.21.0 pip==26.2 tornado==6.5.8
+conda run -n adversarial_ai_security python -m pip check
+```
+
+Run the repository tests with `PYTHONPATH` pointing to its `src` directory and UTF-8 enabled. These optional notebook/developer tools are not added to the core TensorFlow/Keras requirements. The exact verified clone inventory and scanner JSON are preserved in the local audit artifacts.

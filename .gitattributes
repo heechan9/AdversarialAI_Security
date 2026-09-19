@@ -4,3 +4,6 @@ results/audit/evidence/*.csv -text
 results/defenses/experimental/gaussian_run_01/* -text whitespace=cr-at-eol
 
 results/defenses/experimental/mean_run_01/* -text whitespace=cr-at-eol
+
+# Preserve exported web evidence hashes across Windows checkouts.
+web/maris/public/evidence/*.json -text
