@@ -1,8 +1,8 @@
-# FGSM Provisional Results
+# FGSM 실험 결과와 보존 이력
 
-> **상태: Provisional / Preliminary**
+> **현재 범위: ε=0, 0.01, 0.03, 0.05 확정 / 실험·기록 감사 완료**
 >
-> 아래 수치는 멘토의 최종 ε 범위 승인 전 예비 실험 결과다. 공식 결과로 인용하거나 유리한 ε만 선택하지 않으며, 승인 후 `results/attacks/`에 다시 실행해 확정한다.
+> 2026-09-20 사용자 확인을 반영했다. 아래는 해당 범위의 보존 실험 결과이며, 유리한 ε만 선택하지 않고 전체를 보고한다. 기존 파일명·경로와 `provisional` 상태는 추적을 위해 유지한다. 별도 공식 실행계약의 승인·재실행 기록은 아직 연결되지 않았으며, 이 문서 수정으로 해당 기록을 생성하지 않는다.
 
 ## 실행·검증 조건
 
@@ -11,7 +11,7 @@
 - 모델: CNN·MobileNetV2 SHA-256이 manifest 기록값과 일치
 - 공격: Untargeted FGSM, true-label categorical cross-entropy, 정확히 1-step
 - 입력 범위: `[0,1]`, `L∞` 제한, `[0,1]` clipping
-- ε 후보: `0, 0.01, 0.03, 0.05`
+- 확정 ε 범위: `0, 0.01, 0.03, 0.05`
 - ASR 분모: clean-correct 표본만 사용(CNN 504장, MobileNetV2 613장)
 - 전체 테스트: Linux 30 passed; Windows 일반 사용자 환경 28 passed, 2 skipped (symlink 생성 권한 제한에 따른 정상 skip)
 
@@ -33,7 +33,7 @@
 - 전체 ε에서 `linf_max ≤ ε + 1e-6`을 확인했다.
 - NaN/Inf와 실행 오류가 없었고 모델별 결과 파일은 분리 저장됐다.
 
-## 예비 관찰
+## 관측 결과
 
 1. MobileNetV2는 clean accuracy가 CNN보다 높았지만 FGSM ε=0.01에서 robust accuracy가 0.124200까지 하락했다. 이번 비교에서는 높은 clean accuracy가 공격 강건성을 보장하지 않았다.
 2. ε=0.03에서 DDG와 Sailboat는 두 모델 모두 precision·recall·F1이 0이었다. `0/0/0`은 표본 수가 아니라 세 지표가 모두 0이라는 뜻이다.
@@ -68,7 +68,7 @@
 
 ## Artifact inventory verification
 
-- Bundle SHA-256와 보존 ref는 `results/attacks/provisional/PROVENANCE.json`에 기록한다. 이 기록은 결과를 공식화하지 않으며, 멘토 ε 승인 후 공식 재실행이 필요하다.
+- Bundle SHA-256와 보존 ref는 `results/attacks/provisional/PROVENANCE.json`에 기록한다. 이는 최초 산출물의 이력이다. ε 범위는 확정되었으며 별도 공식 실행의 승인·재실행 기록과 구분한다.
 - 로컬 실행에서는 CNN·MobileNetV2의 ε=0.01/0.03/0.05 success·failure 샘플이 생성됐지만, 저장소에는 검토용 최소 증거로 ε=0.03의 모델별 success·failure 대표 이미지 4개만 추적한다.
 - ε=0은 공격 성공·실패 시각화 대상에서 제외됐다.
 - 파일명은 `{model}_eps_{epsilon}_{success|failure}_{index}.png` 규칙을 따른다.
