@@ -34,11 +34,19 @@ def digest(data):
     return hashlib.sha256(data).hexdigest()
 
 
-def rows(data):
-    reader = csv.DictReader(io.StringIO(data.decode('utf-8-sig')))
-    require(reader.fieldnames and len(set(reader.fieldnames)) == len(reader.fieldnames), 'CSV header')
-    values = list(reader)
-    require(all(None not in row and None not in row.values() for row in values), 'CSV width')
+def rows(data, expected_fields=None, max_rows=None):
+    reader = csv.reader(io.StringIO(data.decode('utf-8-sig')))
+    fields = next(reader, None)
+    require(fields and len(set(fields)) == len(fields), 'CSV header')
+    if expected_fields is not None:
+        require(fields == expected_fields, 'exact CSV schema')
+    values = []
+    for row in reader:
+        if not row:  # Preserve DictReader's handling of blank lines.
+            continue
+        require(len(row) == len(fields), 'CSV width')
+        require(max_rows is None or len(values) < max_rows, 'CSV row count')
+        values.append(dict(zip(fields, row)))
     return values
 
 
@@ -70,6 +78,29 @@ SOURCE_PATHS = frozenset({
     'src/adversarial_ai/attacks/fgsm.py',
 })
 
+# The archived run expands to about 0.53 MB in twelve CSV/JSON members.
+# Leave room for legitimate repacks while bounding every supplier-owned read.
+MAX_PROVENANCE_BYTES = 65_536
+MAX_ARCHIVE_BYTES = 2_000_000
+MAX_MEMBER_BYTES = 1_000_000
+MAX_TOTAL_BYTES = 2_000_000
+EXPECTED_MEMBERS = frozenset(
+    {'summary.json', 'contract.json', 'SHA256.json', 'COMPLETE.json'} |
+    {f'{model}_eps_{epsilon}_samples.csv'
+     for model in ('cnn', 'mobilenet') for epsilon in ('0', '0.01', '0.03', '0.05')}
+)
+
+
+def bounded_read(stream, limit, label):
+    data = stream.read(limit + 1)
+    require(len(data) <= limit, 'size limit: ' + label)
+    return data
+
+
+def bounded_file(path, limit):
+    with path.open('rb') as stream:
+        return bounded_read(stream, limit, path.name)
+
 
 def verify_sources(repo, source_files):
     """Bind this checkout to recorded execution sources, allowing only LF/CRLF.
@@ -92,20 +123,39 @@ def verify_sources(repo, source_files):
 
 
 def audit(repo, root):
-    provenance = document((root/'PROVENANCE.json').read_bytes())
-    archive = (root/'original_bundle.zip').read_bytes()
+    provenance = document(bounded_file(root/'PROVENANCE.json', MAX_PROVENANCE_BYTES))
+    archive = bounded_file(root/'original_bundle.zip', MAX_ARCHIVE_BYTES)
     require(digest(archive) == provenance['original_bundle_sha256'], 'original ZIP hash')
     members = {}
     with zipfile.ZipFile(io.BytesIO(archive)) as z:
-        require(z.testzip() is None, 'ZIP CRC')
-        for info in z.infolist():
+        infos = z.infolist()
+        require(len(infos) == len(EXPECTED_MEMBERS), 'archive member count')
+        require(sum(info.file_size for info in infos) <= MAX_TOTAL_BYTES, 'ZIP total size limit')
+        names = set()
+        checked = []
+        # Validate the entire inventory before opening even the first member.
+        for info in infos:
             path = PurePosixPath(info.filename.replace('\\','/'))
             require(not path.is_absolute() and '..' not in path.parts and len(path.parts)==2
-                    and ':' not in info.filename and path.name not in members, 'unsafe/duplicate ZIP member')
-            local = root/path.name
+                    and ':' not in info.filename and path.name not in names, 'unsafe/duplicate ZIP member')
+            require(path.name in EXPECTED_MEMBERS, 'archive inventory')
+            require(info.file_size <= MAX_MEMBER_BYTES, 'ZIP member size limit')
+            require(info.compress_type in (zipfile.ZIP_STORED, zipfile.ZIP_DEFLATED), 'unsupported ZIP codec')
+            require(not info.flag_bits & 1, 'encrypted ZIP member')
+            names.add(path.name)
+            checked.append((info, path.name))
+        total = 0
+        for info, name in checked:
+            # Reading accepted members to EOF also verifies their CRC, without
+            # the unbounded duplicate decompression previously done by testzip.
+            with z.open(info) as stream:
+                data = bounded_read(stream, min(MAX_MEMBER_BYTES, MAX_TOTAL_BYTES - total), name)
+            require(len(data) == info.file_size, 'ZIP member size mismatch')
+            total += len(data)
+            members[name] = data
+            local = root/name
             require(not local.is_symlink(), 'symlink evidence')
-            members[path.name] = z.read(info)
-            require(local.read_bytes() == members[path.name], 'archive member mismatch: '+path.name)
+            require(bounded_file(local, MAX_MEMBER_BYTES) == data, 'archive member mismatch: '+name)
     checks = document(members['SHA256.json'])
     require(set(members) == set(checks) | {'SHA256.json','COMPLETE.json'}, 'archive inventory')
     for name, value in checks.items():
@@ -138,7 +188,8 @@ def audit(repo, root):
         epsilons=[float(r['epsilon']) for r in rows((repo/f'results/attacks/provisional/fgsm_{model}.csv').read_bytes())]
         require(contract['epsilons']==epsilons, 'epsilon contract')
         for epsilon in epsilons:
-            data=rows(members[f'{model}_eps_{epsilon:g}_samples.csv'])
+            data=rows(members[f'{model}_eps_{epsilon:g}_samples.csv'],
+                      expected_fields=expected_fields, max_rows=len(canonical))
             require(len(data)==len(canonical)==len(manifest['test_files']), 'row count')
             old=rows((repo/f'results/attacks/provisional/fgsm_{model}_eps_{epsilon:g}_samples.csv').read_bytes())
             require(len(old)==len(data), 'old row count')
