@@ -1,5 +1,27 @@
 # Codex Security Audit
 
+## 2026-09-20 follow-up
+
+The Standard source scan at personal main `c9109af` reported one low-severity
+Gaussian evidence ZIP resource-exhaustion issue. The follow-up patch bounds
+supplier-owned file reads, validates the entire archive inventory before
+decompression, and permits only STORED/DEFLATED members with explicit size caps.
+Its CSV parser now validates header/row width and row count before accumulating
+records, closing the memory-amplification path found during patch review.
+Normal archived results, byte comparisons and CRC checks remain enforced.
+
+The FGSM result document preserves the historical `Provisional` classification
+required by the cross-document auditor while retaining the confirmed research
+scope. This repairs a documentation-check regression; it does not alter results.
+
+The separate [dependency review](DEPENDENCY_SECURITY_REVIEW.md) records current
+library advisories and their unresolved deployment/compatibility prerequisites.
+The source scan's one finding must not be interpreted as a clean dependency scan
+or a certification of the deployed service. No model weights, experiment data,
+package lockfile or original Conda environment were changed by this patch.
+
+## Historical audit — 2026-09-06
+
 Audit date: 2026-09-06
 Scope: research-evidence audit code and repository automation surfaces on the
 `main` commit produced by PR #17.
