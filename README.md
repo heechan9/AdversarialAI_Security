@@ -46,7 +46,7 @@
 - 가장 기본적인 1단계 공격인 FGSM을 구현하고 교란 크기가 약속된 범위를 넘지 않는지 검사했습니다.
 - 공격 성공률은 원래 정답을 맞힌 사진만 대상으로 계산해 수치가 과장되지 않도록 했습니다.
 - CSV·JSON·manifest·모델 해시·문서의 수치가 서로 맞는지 독립 감사 도구로 다시 확인합니다.
-- 현재 정리 범위는 **ε=0, 0.01, 0.03, 0.05**입니다. FGSM 보존 수치는 **예비 결과(provisional)**, 가우시안·평균 필터 방어 결과는 **experimental**이며 코드 병합과 공식 결과 채택은 구분합니다.
+- 확정된 공격 강도는 **ε=0, 0.01, 0.03, 0.05**입니다. CNN·MobileNetV2의 Clean·FGSM 및 고정 3×3 가우시안·평균 필터 비교는 실험과 기록 감사를 완료했습니다. 원자료의 `provisional`·`experimental` 표기는 보존 이력이며, 연구 범위 미확정을 뜻하지 않습니다.
 
 [실무 활용·평가 기준 대조](docs/MARITIME_PRACTICE_GAP_REVIEW.md): 실제 해상 영상 시스템과의 차이, 배경 참고와 후속 과제. 작은 L∞ 값만으로 사람에게 보이지 않는 교란임을 입증하지는 않습니다.
 
@@ -90,13 +90,13 @@
 |---|---:|---|
 | Clean baseline | ✅ 검증 완료 | CNN·MobileNetV2, 테스트 이미지 781장 |
 | FGSM 구현 | ✅ 검증 완료 | 공격 방향·입력 clipping·L∞ 상한·epsilon 0 대조군 |
-| FGSM 성능 수치 | 🟡 예비 결과 | $\epsilon=0, 0.01, 0.03, 0.05$ |
+| FGSM 성능 수치 | ✅ 실험·기록 감사 완료 | 확정 범위 $\epsilon=0, 0.01, 0.03, 0.05$; 원자료 상태는 아래 설명 참조 |
 | 연구근거 감사 | ✅ 검증 완료 | manifest·모델 해시·CSV·JSON·문서 일관성·시각 검토 감사 |
 | 논문 Claim 감사 | ✅ 9/9 통과 | 기존 v1.5 claim snapshot 감사; 최신 원고 전체의 검증 완료를 뜻하지 않음 |
-| 가우시안·평균 필터 방어 | 🟡 구현·실험 완료 (experimental) | 고정 3×3 전처리; 기존 FGSM 입력 및 방어 인지 FGSM 비교·근거 감사 |
+| 가우시안·평균 필터 방어 | ✅ 실험·기록 감사 완료 | 고정 3×3 전처리; 기존 FGSM 입력 및 방어 인지 FGSM 비교·근거 감사 |
 | MARIS 가상 실험실 | ✅ 구현·소스 반영 | 설명용 3D 조작·저장된 이미지 비교·결과 재생; 실시간 추론 아님 |
 | BIM·PGD·JSMA·적대적 학습 | ⚪ 향후 연구 | 현재 검증 완료 범위에 포함하지 않음 |
-| VLM/LLM·안전영향 시뮬레이터 | ⚪ 목표 범위 | 현재 완료 기능이나 성능 근거가 아님 |
+| VLM/LLM·안전영향 시뮬레이터 | ⚪ 후속 확장 | 전체 프로젝트 로드맵; 현재 논문 실험 범위 밖 |
 
 ## 핵심 결과를 쉽게 읽으면
 
@@ -111,7 +111,7 @@ MobileNetV2는 CNN보다 109장을 더 맞혔습니다. 다만 두 모델 모두
 
 ### 2. 작은 FGSM 교란에도 성능이 크게 떨어졌습니다
 
-아래 값은 **공식 승격 전 예비 결과(provisional)**입니다. 사용한 공격 강도 범위와 공식 채택 상태는 별개입니다.
+아래 값은 **확정된 ε 범위에서 완료한 FGSM 실험의 보존 결과**입니다. CSV·JSON의 수치 일관성을 감사했습니다. 원자료는 기존 `provisional` 경로와 상태를 유지하며, 별도 공식 실행계약의 승인·재실행 기록은 아직 연결되지 않았습니다. 이는 ε 범위를 다시 정해야 한다는 뜻이 아닙니다.
 
 | epsilon | CNN 공격 후 정확도 | CNN ASR | MobileNetV2 공격 후 정확도 | MobileNetV2 ASR |
 |---:|---:|---:|---:|---:|
@@ -126,14 +126,14 @@ MobileNetV2는 CNN보다 109장을 더 맞혔습니다. 다만 두 모델 모두
 - MobileNetV2는 Clean 정확도가 더 높았지만 $epsilon=0.01$에서 ASR이 약 84.18%였습니다. 따라서 이번 실험에서는 **높은 일반 정확도가 공격 강건성을 보장하지 않았습니다.**
 - 비단조적인 MobileNetV2 결과의 원인을 FGSM overshoot라고 단정하지 않으며, 추가 실험 전에는 관찰 사실로만 기록합니다.
 
-상세 근거: [Clean 결과](docs/CLEAN_BASELINE_RESULTS.md) · [FGSM 예비 결과](docs/FGSM_PROVISIONAL_RESULTS.md)
+상세 근거: [Clean 결과](docs/CLEAN_BASELINE_RESULTS.md) · [FGSM 실험 결과](docs/FGSM_PROVISIONAL_RESULTS.md)
 
 ### 3. 단순 전처리 방어의 효과와 한계도 비교했습니다
 
 고정 3×3 가우시안·평균 필터 전처리는 기존 FGSM 공격 이미지의 분류 정확도를 높였지만,
 전처리까지 고려해 생성한 **방어 인지 FGSM**에는 효과가 크게 떨어졌습니다.
 정상 이미지에서도 CNN 정확도는 낮아지고 MobileNetV2는 높아져, 모델별 영향을 함께 보고합니다.
-이는 **experimental 비교 결과**이며 일반적인 방어 성공이나 실제 운항 안전성을 입증하지 않습니다.
+이 비교 실험은 완료되었으며 원자료의 `experimental` 상태는 유지합니다. 관측된 회복은 일반적인 방어 성공이나 실제 운항 안전성을 입증하지 않습니다.
 
 수치·분모·원자료: [가우시안 결과](results/defenses/experimental/gaussian_run_01/README.md) · [평균 필터 결과](results/defenses/experimental/mean_run_01/README.md) · [현재 연구 범위](docs/CURRENT_RESEARCH_STATUS.md).
 
@@ -163,7 +163,7 @@ flowchart LR
 | 높은 Clean 정확도만으로 AI 안전성을 판단할 수 없다고 정의 | 두 모델에 동일한 FGSM 평가계약과 epsilon sweep 적용 | 표본별 CSV·요약 JSON·모델별 보고서 | AI 모델 강건성 평가 |
 | ASR 계산 방식에 따라 결과가 과장될 수 있음을 통제 | Clean-correct 표본만 분모로 사용하고 epsilon 0 대조군 적용 | 실험 계약·단위 테스트·변조 테스트 | 공정한 KPI 설계·품질보증 |
 | 논문 수치와 원자료가 따로 변할 위험을 관리 | manifest·모델 SHA-256·CSV·JSON·문서를 동적으로 교차 검증 | Evidence Audit PASS·Paper Claims 9/9 | 데이터 거버넌스·감사 가능성 |
-| 구현 범위와 향후 목표가 섞이지 않도록 구분 | FGSM 예비 결과와 BIM·PGD·VLM/LLM 계획을 명시적으로 분리 | 프로젝트 범위·결과 문서·주장 경계 | 책임 있는 기술 커뮤니케이션 |
+| 구현 범위와 향후 목표가 섞이지 않도록 구분 | FGSM 실험 결과와 BIM·PGD·VLM/LLM 계획을 명시적으로 분리 | 프로젝트 범위·결과 문서·주장 경계 | 책임 있는 기술 커뮤니케이션 |
 
 > **최희찬의 역할:** 연구 범위와 감사 요구사항을 정의하고, Windows 환경에서 원본 이미지 781장과 로컬 모델 바이너리를 사용해 무결성·재현성·테스트를 검증했으며, 결과 리뷰와 저장소 통합을 담당했습니다. 구현·검증의 세부 출처는 [기여 기록](CONTRIBUTIONS.md)에 구분합니다.
 
@@ -216,7 +216,7 @@ python scripts\audit_paper_claims.py
 | `scripts/` | 감사 및 실험 실행 진입점 |
 | `tests/` | 계약·무결성·변조 탐지 테스트 |
 | `results/clean/` | canonical Clean 결과 |
-| `results/attacks/provisional/` | 공식 승격 전 FGSM 예비 결과 |
+| `results/attacks/provisional/` | 공식 승격 전 FGSM 실험 결과 |
 | `results/audit/` | 연구근거 감사 보고서 |
 | `docs/` | 범위·실험계약·결과·재현성 문서 |
 
@@ -227,7 +227,7 @@ python scripts\audit_paper_claims.py
 | [프로젝트 범위](docs/PROJECT_SCOPE.md) | 완료 범위·Decision Gate·향후 연구 |
 | [실험 계약](docs/EXPERIMENT_CONTRACT.md) | 입력·FGSM·지표·재현 기준 |
 | [Clean 결과](docs/CLEAN_BASELINE_RESULTS.md) | 모델별 기준 성능과 클래스별 한계 |
-| [FGSM 예비 결과](docs/FGSM_PROVISIONAL_RESULTS.md) | epsilon별 결과와 해석 제한 |
+| [FGSM 실험 결과](docs/FGSM_PROVISIONAL_RESULTS.md) | epsilon별 결과와 해석 제한 |
 | [재현성 안내](docs/REPRODUCIBILITY.md) | 데이터·모델 배치와 실행 방법 |
 | [연구근거 감사](docs/RESEARCH_EVIDENCE_AUDIT.md) | 감사 범위·상태·CLI |
 | [논문 Claim 감사](docs/PAPER_CLAIM_AUDIT.md) | 9개 Claim과 canonical 근거 |
@@ -243,10 +243,10 @@ python scripts\audit_paper_claims.py
 
 ## 현재 한계
 
-- FGSM 결과는 승인된 공식 결과가 아니라 예비 결과입니다.
+- FGSM 실험과 기록 감사는 완료되었습니다. 원자료의 `provisional` 상태와 별도 공식 실행계약의 미연결 승인·재실행 기록은 보존하며, 확정된 ε 범위와 구분합니다.
 - 두 모델의 입력 해상도는 CNN 128×128, MobileNetV2 224×224로 다릅니다.
 - MobileNetV2의 학습 당시 실제 전처리·분할 비율·random seed는 확정되지 않았습니다.
-- 고정 가우시안·평균 필터 전처리 방어는 구현·실험했으나 experimental입니다. 기존 공격 입력에서의 회복만으로 방어 성공을 주장하지 않으며, 방어 인지 FGSM과 정상 성능 손실을 함께 평가합니다.
+- 고정 가우시안·평균 필터 전처리 방어는 구현·실험 및 기록 감사를 완료했습니다. 원자료는 `experimental`로 보존합니다. 기존 공격 입력에서의 회복만으로 방어 성공을 주장하지 않으며, 방어 인지 FGSM과 정상 성능 손실을 함께 평가합니다.
 - BIM·PGD·JSMA·적대적 학습과 모델 간 전이 공격은 현재 검증 완료 범위에 포함하지 않습니다.
 - 분류 성능 저하가 실제 충돌·항로 이탈 같은 운항 피해를 유발한다는 인과관계는 검증하지 않았습니다.
 - VLM/LLM과 안전영향 시뮬레이터는 향후 목표이며 현재 구현 성과로 주장하지 않습니다.
