@@ -111,3 +111,8 @@ conda run -n adversarial_ai_security python -m pip check
 ```
 
 Run the repository tests with `PYTHONPATH` pointing to its `src` directory and UTF-8 enabled. These optional notebook/developer tools are not added to the core TensorFlow/Keras requirements. The exact verified clone inventory and scanner JSON are preserved in the local audit artifacts.
+
+### Subsequent UI check cleanup — 2026-09-20
+
+The two historical set-state-in-effect errors described above have since been fixed by resetting image state through an asset key and clearing retry errors in the button handler. ESLint now exits successfully with 0 errors and the existing raw-image recommendation (1 warning). TypeScript, production build, interaction checks and local browser failure/retry recovery passed; see web/maris/VALIDATION.md. The dependency versions and evidence bytes are unchanged.
+
