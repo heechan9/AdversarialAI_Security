@@ -98,7 +98,7 @@ The original `adversarial_ai` Conda environment remains unchanged (all 149 recor
 
 Sites confirms MARIS is public and its existing saved version 10 (`33f0a9efd3223b35ae79ef0e4389be8fdbcac6ee`) deployed successfully. An ordinary browser loads the public site and its epsilon-zero control works. A separate unauthenticated scripted HTTP request received a Cloudflare challenge (403), not application content; its challenge-page headers are not evidence of the application's header configuration.
 
-The actual Sites source repository was retrieved and its hosting configuration confirms no D1 or R2 binding. A successful local build alone is not a production update. The deployment follow-up report records whether the patched source is published; do not infer that live version 10 has the patched lockfile.
+The actual Sites source repository was retrieved and its hosting configuration confirms no D1 or R2 binding. The patched source `daa428bf6a70cae8320f255fea7a274fb6ee3bc2` was pushed and saved as Sites version 11. Deployment `appgdep_6aaebd839f28819182cc17950a80c397` succeeded at 2026-09-19 16:55:38 UTC (2026-09-20 01:55:38 KST), preserving the public audience. The source was also built locally; the supported remote-build publication path was used because the Sites packaging helper was unavailable in this environment. GitHub PRs remain separate and unmerged.
 
 ### Reproduce the optional Python tool update
 
