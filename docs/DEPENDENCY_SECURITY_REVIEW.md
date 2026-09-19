@@ -115,4 +115,4 @@ Run the repository tests with `PYTHONPATH` pointing to its `src` directory and U
 ### Subsequent UI check cleanup — 2026-09-20
 
 The two historical set-state-in-effect errors described above have since been fixed by resetting image state through an asset key and clearing retry errors in the button handler. ESLint now exits successfully with 0 errors and the existing raw-image recommendation (1 warning). TypeScript, production build, interaction checks and local browser failure/retry recovery passed; see web/maris/VALIDATION.md. The dependency versions and evidence bytes are unchanged.
-
+UI deployment follow-up: Sites version 12, source `4820613de9b017201a52edfb246f7ba9ade9b6e0`, deployment `appgdep_6aaec23d1aa081918370912d3cb4ff9b` succeeded at 2026-09-19 17:15:31 UTC / 2026-09-20 02:15:31 KST. Public audience preserved. Post-publication Chrome checks confirmed result loading, case selection and 1.5x zoom retained across the attack-tab switch. GitHub PRs remain open. No production fault injection was performed.
