@@ -50,6 +50,10 @@
 
 [실무 활용·평가 기준 대조](docs/MARITIME_PRACTICE_GAP_REVIEW.md): 실제 해상 영상 시스템과의 차이, 배경 참고와 후속 과제. 작은 L∞ 값만으로 사람에게 보이지 않는 교란임을 입증하지는 않습니다.
 
+## 논문 편집 이력
+
+[v2.5 → v3.0 편집 경위](docs/papers/ack2026_v2_5/README.md)와 [현재 논문 관리 현황](docs/PAPER_RELEASE_STATUS.md)을 구분합니다. 이력 문서는 최종 Word·PDF나 v3.5 검증 완료를 뜻하지 않습니다.
+
 ## 최신 통합 상태
 
 2026-09-19 기준, Clean·FGSM·가우시안·평균 필터 실험과 MARIS 회색 CAD 보기·방어 비교 소스가 반영되어 있습니다.
