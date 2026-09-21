@@ -55,6 +55,7 @@ def test_orchestration_report_and_no_overwrite(tmp_path,monkeypatch,fail):
     def fake_run(cmd,**kw):
         if 'freeze' in cmd:return SimpleNamespace(stdout='mock environment\n')
         if fail:raise RuntimeError('simulated inference failure')
+        if 'verification.stage_b_preflight' in cmd:return SimpleNamespace(returncode=0)
         Path(cmd[-1]).mkdir()
         return SimpleNamespace(returncode=0)
     monkeypatch.setattr(runner.subprocess,'run',fake_run)
@@ -65,7 +66,7 @@ def test_orchestration_report_and_no_overwrite(tmp_path,monkeypatch,fail):
         assert runner.run(root,path)['status']=='PASS'
     report=json.loads((tmp_path/'stage-b-test-01/rerun-report.json').read_text())
     assert report['status']==('FAIL' if fail else 'PASS')
-    assert len(report['commands'])==(1 if fail else 2)
+    assert len(report['commands'])==(1 if fail else 3)
     with pytest.raises(FileExistsError):runner.run(root,path)
 
 
@@ -74,3 +75,72 @@ def test_not_ready_never_starts_process(tmp_path,monkeypatch):
     monkeypatch.setattr(runner.subprocess,'run',lambda *a,**k:pytest.fail('must not execute'))
     with pytest.raises(ValueError,match='assets missing'):
         runner.run(tmp_path,tmp_path/'absent.json')
+
+@pytest.mark.parametrize('bad_shape',[False,True])
+def test_preflight_loads_model_and_rejects_shape(tmp_path,monkeypatch,bad_shape):
+    import hashlib
+    import sys
+    from verification import stage_b_preflight as module
+    modelpath=tmp_path/'model.h5';modelpath.write_bytes(b'fixture only')
+    sha=hashlib.sha256(modelpath.read_bytes()).hexdigest()
+    metadata=tmp_path/'results/clean';metadata.mkdir(parents=True)
+    (metadata/'cnn_baseline_metadata.json').write_text(json.dumps({'model_sha256':sha}))
+    calls=[]
+    def load(path):
+        calls.append(path)
+        return SimpleNamespace(input_shape=(None,128,128,3),output_shape=(None,9 if bad_shape else 10))
+    fake=SimpleNamespace(__version__='2.21.0',keras=SimpleNamespace(models=SimpleNamespace(load_model=load),backend=SimpleNamespace(clear_session=lambda:None)))
+    monkeypatch.setitem(sys.modules,'tensorflow',fake)
+    monkeypatch.setitem(sys.modules,'keras',SimpleNamespace(__version__='3.15.1'))
+    monkeypatch.setattr(module.sys,'version_info',(3,11))
+    contract={'models':[{'id':'cnn_baseline','path':'model.h5','sha256':sha,'input_shape':[128,128,3]}]}
+    if bad_shape:
+        with pytest.raises(ValueError,match='shape'):module.preflight(tmp_path,contract)
+    else:
+        result=module.preflight(tmp_path,contract)
+        assert result['models_loaded']==['cnn_baseline']
+        assert result['inference_performed'] is False
+    assert calls==[modelpath]
+
+
+@pytest.mark.parametrize('method',['gaussian','mean'])
+def test_defense_csv_tamper_rejected(tmp_path,method):
+    import csv
+    for folder in ['configs','results','web/maris/public/evidence']:
+        shutil.copytree(ROOT/folder,tmp_path/folder)
+    p=tmp_path/f'results/defenses/experimental/{method}_run_01/cnn_eps_0.03_samples.csv'
+    rows=runner.read_rows(p)
+    row=rows[0]
+    row['adaptive_defended_pred']=str((int(row['true_index'])+1)%10) if row['adaptive_defended_pred']==row['true_index'] else row['true_index']
+    with p.open('w',newline='') as f:
+        w=csv.DictWriter(f,fieldnames=rows[0]);w.writeheader();w.writerows(rows)
+    with pytest.raises(ValueError,match='defense CSV to summary'):
+        check(tmp_path)
+
+
+def test_keyboard_interrupt_is_not_running(tmp_path,monkeypatch):
+    monkeypatch.setattr(runner.platform,'platform',lambda:'test')
+    root=tmp_path/'repo';root.mkdir()
+    contract=json.loads((ROOT/'configs/stage_b_verification_contract.json').read_text())
+    contract['outputs']['run_id']='interrupted'
+    path=tmp_path/'contract.json';path.write_text(json.dumps(contract))
+    monkeypatch.setattr(runner,'check_stage_b_readiness',lambda *a:{'ready':True,'blockers':[]})
+    def interrupt(cmd,**kw):
+        if 'freeze' in cmd:return SimpleNamespace(stdout='test')
+        raise KeyboardInterrupt()
+    monkeypatch.setattr(runner.subprocess,'run',interrupt)
+    with pytest.raises(KeyboardInterrupt):runner.run(root,path)
+    report=json.loads((tmp_path/'stage-b-interrupted/rerun-report.json').read_text())
+    assert report['status']=='INTERRUPTED'
+    assert report['comparisons']==[]
+
+
+@pytest.mark.parametrize('versions',[((3,12),'2.21.0','3.15.1'),((3,11),'2.20.0','3.15.1'),((3,11),'2.21.0','3.14.0')])
+def test_preflight_rejects_wrong_runtime(versions):
+    from verification.stage_b_preflight import validate_versions
+    with pytest.raises(ValueError):validate_versions(*versions)
+
+
+def test_preflight_accepts_documented_runtime():
+    from verification.stage_b_preflight import validate_versions
+    validate_versions((3,11),'2.21.0','3.15.1')
