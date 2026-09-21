@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "status": "draft_assets_required",
+  "verification_kind": "independent_original_model_image_rerun",
+  "source": {
+    "repository": "https://github.com/heechan9/AdversarialAI_Security",
+    "commit_sha": null
+  },
+  "dataset": {
+    "manifest_path": "configs/test_manifest.json",
+    "manifest_sha256": "36059fea372334509404aca0e66155bf99a8df270beb1cc3bf4865b361ae70a6",
+    "data_root": "data/test",
+    "samples": 781
+  },
+  "models": [
+    {
+      "id": "cnn_baseline",
+      "path": "models/cnn_baseline.h5",
+      "sha256": "cb256b1a5d6f605d355334e4e8667257a2bfbd29e08836cc4114869bd7068701",
+      "input_shape": [128, 128, 3],
+      "normalization": "rescale=1./255"
+    },
+    {
+      "id": "mobilenet",
+      "path": "models/mobilenet_finetuned.h5",
+      "sha256": "58c4878fa1480035d0bd5a63f8c3e22beac3a03f27f1aada6690b27f167129ae",
+      "input_shape": [224, 224, 3],
+      "normalization": "rescale=1./255"
+    }
+  ],
+  "attack": {
+    "name": "fgsm",
+    "objective": "untargeted",
+    "steps": 1,
+    "epsilons": [0.0, 0.01, 0.03, 0.05],
+    "input_range": [0, 1],
+    "clip_range": [0, 1],
+    "norm": "linf"
+  },
+  "comparison": {
+    "status": "requires_reviewer_confirmation",
+    "label_match_fraction": 1.0,
+    "metric_abs_tolerance": 1e-06,
+    "probability_abs_tolerance_reference_only": 1e-05,
+    "linf_tolerance": 1e-06
+  },
+  "review": {
+    "approved_by": null,
+    "approved_at": null
+  },
+  "outputs": {
+    "root": "results/verification/stage_b",
+    "run_id": null
+  }
+}
