@@ -111,3 +111,14 @@ def test_duplicate_json_key_is_rejected(tmp_path):
     result = check_stage_b_readiness(root, contract_path, contract_only=True)
     assert result["contract_valid"] is False
     assert "duplicate JSON key" in result["blockers"][0]
+
+
+def test_paper_scope_and_formal_run_approval_are_not_conflated():
+    official = json.loads(Path("configs/fgsm_official_contract.json").read_text(encoding="utf-8"))
+    experiment = Path("configs/experiment.yaml").read_text(encoding="utf-8")
+    assert official["status"] == "pending_team_confirmation"
+    assert official["approval"] == {"approved_by": None, "approved_at": None}
+    assert official["experiment"]["epsilons"] == [0.0, 0.01, 0.03, 0.05]
+    assert 'status: "confirmed"' in experiment
+    assert 'independent_model_and_image_rerun: "not_completed"' in experiment
++
