@@ -1,9 +1,15 @@
 {
   "schema_version": 1,
-  "status": "pending_team_confirmation",
+  "status": "scope_confirmed",
+  "scope_confirmation": {
+    "confirmed_by": "project_owner",
+    "confirmed_at": null,
+    "note": "논문 실험 범위와 FGSM epsilon 집합은 확정됐다. 별도 공식 승인 문서나 독립 재실행 기록이 연결됐다는 의미는 아니다."
+  },
   "approval": {
     "approved_by": null,
-    "approved_at": null
+    "approved_at": null,
+    "note": "별도 공식 실행계약 승인 기록은 연결되지 않았다."
   },
   "source_git_commit": null,
   "experiment": {
@@ -22,10 +28,23 @@
     "norm": "linf",
     "linf_tolerance": 1e-06,
     "asr_denominator": "clean_correct",
-    "epsilons": null
+    "epsilons": [
+      0.0,
+      0.01,
+      0.03,
+      0.05
+    ]
+  },
+  "execution_status": {
+    "scope_implementation": "completed",
+    "recorded_experiments": "completed",
+    "artifact_audits": "completed",
+    "independent_output_recompute": "completed",
+    "independent_model_and_image_rerun": "not_completed"
   },
   "outputs": {
     "root": "results/attacks/official_candidate",
-    "run_id": null
+    "run_id": null,
+    "note": "기존 저장 경로와 provisional/experimental 메타데이터는 이력으로 보존한다. 별도 공식 재실행 run ID는 연결되지 않았다."
   }
 }
