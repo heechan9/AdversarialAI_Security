@@ -16,7 +16,7 @@ Clean·FGSM 결과를 저장소의 기존 평가·감사 파이프라인 **바�
 - `results/audit/` 의 기존 감사 산출물
 - `configs/` 의 실험 설정과 manifest
 
-검증 산출물은 전부 신규 경로(`verification/`, `results/verification/`)에만 쓴다.
+A단계 산출물은 신규 `results/verification/` 경로에 쓴다. B단계는 기존 평가기의 출력 보호 규칙에 따라 checkout 밖의 고유 실행 묶음에 저장한다. [실행 안내](STAGE_B_EXECUTION_CONTRACT.md)를 따른다.
 
 **불일치는 fail-closed로 처리한다.** 재계산값이 커밋된 값과 다르면 기존 파일을
 고치거나 허용오차를 넓히지 않고, 해당 검사를 FAIL로 보고하고 종료 코드 1로 끝낸다.
@@ -155,7 +155,9 @@ python -m pytest tests/test_independent_stage_a.py -q
 
 - 계약: [STAGE_B_EXECUTION_CONTRACT.md](STAGE_B_EXECUTION_CONTRACT.md)
 - 설정: `configs/stage_b_verification_contract.json`
-- 점검: `python verification/stage_b_readiness.py`
+- 외부 계약 생성·점검·실행: [STAGE_B_EXECUTION_CONTRACT.md](STAGE_B_EXECUTION_CONTRACT.md)
+- 실행 진입점: `verification/stage_b_run.py` — 기존 평가기를 별도 환경에서 재실행하고 두 필터의 전달/방어 인지 조건까지 비교한다. 독립 알고리즘 구현은 아니다.
+- 확률 비교는 수행하지 않으며 라벨·요약 지표·L∞를 확인한다.
 - CI의 `--contract-only` 검사는 계약·manifest 구조만 확인하며 실제 재실행 완료를 의미하지 않는다.
 
 **선행 조건 (현재 미충족):**

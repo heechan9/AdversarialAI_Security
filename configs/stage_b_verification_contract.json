@@ -17,14 +17,22 @@
       "id": "cnn_baseline",
       "path": "models/cnn_baseline.h5",
       "sha256": "cb256b1a5d6f605d355334e4e8667257a2bfbd29e08836cc4114869bd7068701",
-      "input_shape": [128, 128, 3],
+      "input_shape": [
+        128,
+        128,
+        3
+      ],
       "normalization": "rescale=1./255"
     },
     {
       "id": "mobilenet",
       "path": "models/mobilenet_finetuned.h5",
       "sha256": "58c4878fa1480035d0bd5a63f8c3e22beac3a03f27f1aada6690b27f167129ae",
-      "input_shape": [224, 224, 3],
+      "input_shape": [
+        224,
+        224,
+        3
+      ],
       "normalization": "rescale=1./255"
     }
   ],
@@ -32,9 +40,20 @@
     "name": "fgsm",
     "objective": "untargeted",
     "steps": 1,
-    "epsilons": [0.0, 0.01, 0.03, 0.05],
-    "input_range": [0, 1],
-    "clip_range": [0, 1],
+    "epsilons": [
+      0.0,
+      0.01,
+      0.03,
+      0.05
+    ],
+    "input_range": [
+      0,
+      1
+    ],
+    "clip_range": [
+      0,
+      1
+    ],
     "norm": "linf"
   },
   "comparison": {
@@ -49,7 +68,44 @@
     "approved_at": null
   },
   "outputs": {
-    "root": "results/verification/stage_b",
+    "root": "external_contract_directory",
     "run_id": null
+  },
+  "defenses": {
+    "methods": [
+      "gaussian",
+      "mean"
+    ],
+    "kernel_size": [
+      3,
+      3
+    ],
+    "padding": "REFLECT",
+    "gaussian_weights": [
+      [
+        1,
+        2,
+        1
+      ],
+      [
+        2,
+        4,
+        2
+      ],
+      [
+        1,
+        2,
+        1
+      ]
+    ],
+    "gaussian_divisor": 16,
+    "mean_divisor": 9,
+    "pipelines": [
+      "clean",
+      "defended_clean",
+      "attacked",
+      "transfer_defended",
+      "adaptive_defended"
+    ]
   }
 }
