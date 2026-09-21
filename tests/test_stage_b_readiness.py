@@ -2,7 +2,7 @@ import hashlib
 import json
 from pathlib import Path
 
-from stage_b_readiness import check_stage_b_readiness
+from verification.stage_b_readiness import check_stage_b_readiness
 
 
 def _sha(data: bytes) -> str:
