@@ -2,7 +2,7 @@ import hashlib
 import json
 from pathlib import Path
 
-from verification.stage_b_readiness import check_stage_b_readiness
+from verification.stage_b_readiness import check_stage_b_readiness, DEFENSE_CONTRACT
 
 
 def _sha(data: bytes) -> str:
@@ -35,7 +35,12 @@ def _case(tmp_path: Path):
         model.write_bytes(payload)
         model_specs.append({"id": model_id, "path": f"models/{filename}", "sha256": _sha(payload),
                             "input_shape": shape, "normalization": "rescale=1./255"})
+    metadata_dir = root / "results/clean"
+    metadata_dir.mkdir(parents=True)
+    for m in model_specs:
+        (metadata_dir / (m["id"] + "_metadata.json")).write_text(json.dumps({"model_sha256": m["sha256"], "model_path": m["path"], "input_size": m["input_shape"], "normalization": m["normalization"]}))
     contract = {
+        "defenses": DEFENSE_CONTRACT,
         "schema_version": 1,
         "status": "draft_assets_required",
         "verification_kind": "independent_original_model_image_rerun",
@@ -50,7 +55,7 @@ def _case(tmp_path: Path):
                        "metric_abs_tolerance": 1e-6, "probability_abs_tolerance_reference_only": 1e-5,
                        "linf_tolerance": 1e-6},
         "review": {"approved_by": None, "approved_at": None},
-        "outputs": {"root": "results/verification/stage_b", "run_id": None},
+        "outputs": {"root": "external_contract_directory", "run_id": None},
     }
     contract_path = root / "configs" / "stage_b_verification_contract.json"
     contract_path.write_text(json.dumps(contract), encoding="utf-8")
@@ -146,3 +151,37 @@ def test_extra_symlink_rejected(tmp_path):
     root, path, _, _ = _case(tmp_path)
     (root / "data/test/extra.jpg").symlink_to(root / "data/test/Class0/image-0.jpg")
     assert "local dataset contains symlinks or junctions" in check_stage_b_readiness(root, path)["blockers"]
+
+
+def test_replacing_model_and_contract_hash_still_fails(tmp_path):
+    root, path, contract, _ = _case(tmp_path)
+    (root / contract['models'][0]['path']).write_bytes(b'replacement')
+    contract['models'][0]['sha256'] = _sha(b'replacement')
+    path.write_text(json.dumps(contract))
+    result = check_stage_b_readiness(root, path, contract_only=True)
+    assert not result['contract_valid']
+    assert any('canonical metadata' in b for b in result['blockers'])
+
+
+def test_missing_adaptive_scope_rejected(tmp_path):
+    root, path, contract, _ = _case(tmp_path)
+    contract['defenses'] = dict(contract['defenses'], pipelines=['clean'])
+    path.write_text(json.dumps(contract))
+    assert not check_stage_b_readiness(root, path, contract_only=True)['contract_valid']
+
+
+def test_external_contract_clean_git_checkout_ready(tmp_path):
+    import subprocess
+    root, original, contract, _ = _case(tmp_path)
+    subprocess.run(['git','init',str(root)],check=True,capture_output=True)
+    subprocess.run(['git','add','configs','results'],cwd=root,check=True)
+    subprocess.run(['git','-c','user.name=Test','-c','user.email=test@example.invalid','commit','-m','fixture'],cwd=root,check=True,capture_output=True)
+    contract['source']['commit_sha']=subprocess.check_output(['git','rev-parse','HEAD'],cwd=root,text=True).strip()
+    contract['status']='ready';contract['comparison']['status']='confirmed'
+    contract['review']={'approved_by':'test fixture','approved_at':'2020-01-01T00:00:00Z'}
+    contract['outputs']['run_id']='test'
+    external=tmp_path/'contract.json';external.write_text(json.dumps(contract))
+    assert check_stage_b_readiness(root,external)['ready']
+    original.write_text(json.dumps(contract))
+    result=check_stage_b_readiness(root,external)
+    assert 'tracked checkout differs from source commit' in result['blockers']
