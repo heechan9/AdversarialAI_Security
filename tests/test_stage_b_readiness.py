@@ -121,4 +121,3 @@ def test_paper_scope_and_formal_run_approval_are_not_conflated():
     assert official["experiment"]["epsilons"] == [0.0, 0.01, 0.03, 0.05]
     assert 'status: "confirmed"' in experiment
     assert 'independent_model_and_image_rerun: "not_completed"' in experiment
-+
