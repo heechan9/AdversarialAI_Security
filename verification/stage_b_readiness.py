@@ -18,6 +18,12 @@ from typing import Any
 EXPECTED_EPSILONS = [0.0, 0.01, 0.03, 0.05]
 SHA256_RE = re.compile(r"[0-9a-f]{64}")
 COMMIT_RE = re.compile(r"[0-9a-f]{40}")
+DEFENSE_CONTRACT = {
+    "methods": ["gaussian", "mean"], "kernel_size": [3, 3],
+    "padding": "REFLECT", "gaussian_weights": [[1, 2, 1], [2, 4, 2], [1, 2, 1]],
+    "gaussian_divisor": 16, "mean_divisor": 9,
+    "pipelines": ["clean", "defended_clean", "attacked", "transfer_defended", "adaptive_defended"],
+}
 
 
 def _unique_object(pairs):
@@ -79,7 +85,7 @@ def _validate_contract_schema(contract: Any) -> list[str]:
     blockers: list[str] = []
     expected_top = {
         "schema_version", "status", "verification_kind", "source",
-        "dataset", "models", "attack", "comparison", "review", "outputs",
+        "dataset", "models", "attack", "comparison", "review", "outputs", "defenses",
     }
     if not isinstance(contract, dict) or set(contract) != expected_top:
         return ["contract top-level schema mismatch"]
@@ -89,6 +95,8 @@ def _validate_contract_schema(contract: Any) -> list[str]:
         blockers.append("verification_kind mismatch")
     if contract["status"] not in ("draft_assets_required", "ready", "executed"):
         blockers.append("unsupported contract status")
+    if json.dumps(contract["defenses"], sort_keys=True) != json.dumps(DEFENSE_CONTRACT, sort_keys=True):
+        blockers.append("defenses differ from fixed Gaussian/mean transfer/adaptive contract")
 
     source = contract["source"]
     if not isinstance(source, dict) or set(source) != {"repository", "commit_sha"}:
@@ -161,7 +169,7 @@ def _validate_contract_schema(contract: Any) -> list[str]:
     outputs = contract["outputs"]
     if not isinstance(outputs, dict) or set(outputs) != {"root", "run_id"}:
         blockers.append("outputs schema mismatch")
-    elif outputs["root"] != "results/verification/stage_b":
+    elif outputs["root"] != "external_contract_directory":
         blockers.append("outputs.root mismatch")
     return blockers
 
@@ -232,11 +240,20 @@ def check_stage_b_readiness(repo_root: Path, contract_path: Path, *, contract_on
         return {"ready": False, "contract_valid": False, "blockers": blockers}
     try:
         blockers.extend(_validate_manifest(root, contract, verify_assets=not contract_only))
+        for model in contract["models"]:
+            metadata = _load_json(root / "results/clean" / (model["id"] + "_metadata.json"))
+            for field, metadata_field in (("sha256", "model_sha256"), ("path", "model_path"),
+                                          ("input_shape", "input_size"), ("normalization", "normalization")):
+                if model[field] != metadata[metadata_field]:
+                    blockers.append(f"model contract differs from canonical metadata: {model['id']}/{field}")
     except (OSError, ValueError, TypeError, KeyError) as exc:
         blockers.append(f"unreadable or malformed manifest/assets: {exc}")
     if contract_only:
         return {"ready": False, "contract_valid": not blockers, "blockers": blockers,
                 "note": "Contract-only validation does not prove Stage-B execution readiness."}
+
+    if contract_path.resolve().is_relative_to(root):
+        blockers.append("execution contract must be an external copy outside the checkout")
 
     if contract["status"] != "ready":
         blockers.append("Stage-B contract status is not ready")
@@ -281,7 +298,7 @@ def check_stage_b_readiness(repo_root: Path, contract_path: Path, *, contract_on
     if not isinstance(run_id, str) or not re.fullmatch(r"[a-z0-9][a-z0-9_-]{0,63}", run_id):
         blockers.append("outputs.run_id must be a safe non-empty identifier")
     else:
-        output = _safe_path(root, f"{contract['outputs']['root']}/{run_id}")
+        output = _safe_path(contract_path.resolve().parent, f"stage-b-{run_id}")
         if output is None:
             blockers.append("Stage-B output path is unsafe")
         elif output.exists():

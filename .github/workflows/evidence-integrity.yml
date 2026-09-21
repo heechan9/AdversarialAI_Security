@@ -24,7 +24,9 @@ jobs:
       - name: Validate Stage B locked contract
         run: python verification/stage_b_readiness.py --contract-only
       - name: Test Stage B fail-closed gate
-        run: python -m pytest tests/test_stage_b_readiness.py -q
+        run: python -m pytest tests/test_stage_b_readiness.py tests/test_stage_b_run.py -q
+      - name: Compare MARIS with canonical research results
+        run: python verification/maris_source_check.py
 
   maris-evidence:
     runs-on: ubuntu-latest
