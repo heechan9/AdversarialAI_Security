@@ -87,7 +87,7 @@ def _validate_contract_schema(contract: Any) -> list[str]:
         blockers.append("schema_version must be integer 1")
     if contract["verification_kind"] != "independent_original_model_image_rerun":
         blockers.append("verification_kind mismatch")
-    if contract["status"] not in {"draft_assets_required", "ready", "executed"}:
+    if contract["status"] not in ("draft_assets_required", "ready", "executed"):
         blockers.append("unsupported contract status")
 
     source = contract["source"]
@@ -104,8 +104,12 @@ def _validate_contract_schema(contract: Any) -> list[str]:
         if dataset["samples"] != 781 or type(dataset["samples"]) is not int:
             blockers.append("dataset.samples must be integer 781")
 
+    if isinstance(dataset, dict):
+        for key, expected in {"manifest_path": "configs/test_manifest.json", "data_root": "data/test"}.items():
+            if dataset.get(key) != expected:
+                blockers.append(f"dataset.{key} mismatch")
     models = contract["models"]
-    if not isinstance(models, list) or [m.get("id") for m in models if isinstance(m, dict)] != ["cnn_baseline", "mobilenet"]:
+    if not isinstance(models, list) or not all(isinstance(m, dict) for m in models) or [m.get("id") for m in models] != ["cnn_baseline", "mobilenet"]:
         blockers.append("models must contain cnn_baseline then mobilenet")
     else:
         for model in models:
@@ -114,6 +118,9 @@ def _validate_contract_schema(contract: Any) -> list[str]:
                 continue
             if not SHA256_RE.fullmatch(str(model["sha256"])):
                 blockers.append(f"invalid model SHA-256: {model['id']}")
+            expected_shape = [128, 128, 3] if model["id"] == "cnn_baseline" else [224, 224, 3]
+            if not _typed_numbers(model["input_shape"], expected_shape):
+                blockers.append(f"input_shape mismatch: {model['id']}")
             if model["normalization"] != "rescale=1./255":
                 blockers.append(f"normalization mismatch: {model['id']}")
 
@@ -138,9 +145,15 @@ def _validate_contract_schema(contract: Any) -> list[str]:
     }
     if not isinstance(comparison, dict) or set(comparison) != expected_comparison:
         blockers.append("comparison schema mismatch")
-    elif comparison["status"] not in {"requires_reviewer_confirmation", "confirmed"}:
+    elif comparison["status"] not in ("requires_reviewer_confirmation", "confirmed"):
         blockers.append("comparison.status mismatch")
 
+    if isinstance(comparison, dict) and set(comparison) == expected_comparison:
+        for key, expected in {"label_match_fraction": 1.0, "metric_abs_tolerance": 1e-6,
+                              "probability_abs_tolerance_reference_only": 1e-5,
+                              "linf_tolerance": 1e-6}.items():
+            if not _typed_numbers([comparison[key]], [expected]):
+                blockers.append(f"comparison.{key} differs from supported tolerance")
     review = contract["review"]
     if not isinstance(review, dict) or set(review) != {"approved_by", "approved_at"}:
         blockers.append("review schema mismatch")
@@ -166,7 +179,7 @@ def _validate_manifest(repo_root: Path, contract: dict, verify_assets: bool) -> 
     except (OSError, UnicodeError, ValueError) as exc:
         return blockers + [f"invalid dataset manifest: {exc}"]
     records = manifest.get("test_files") if isinstance(manifest, dict) else None
-    if manifest.get("test_samples") != 781 or not isinstance(records, list) or len(records) != 781:
+    if not isinstance(manifest, dict) or manifest.get("test_samples") != 781 or not isinstance(records, list) or len(records) != 781:
         return blockers + ["dataset manifest must declare exactly 781 images"]
     paths: list[str] = []
     for index, record in enumerate(records):
@@ -180,10 +193,11 @@ def _validate_manifest(repo_root: Path, contract: dict, verify_assets: bool) -> 
             blockers.append(f"invalid dataset label at index {index}")
         if not SHA256_RE.fullmatch(str(record["sha256"])):
             blockers.append(f"invalid dataset SHA-256 at index {index}")
-        paths.append(relative)
+        if isinstance(relative, str):
+            paths.append(relative)
     if len(set(paths)) != len(paths):
         blockers.append("dataset manifest contains duplicate paths")
-    if not verify_assets:
+    if blockers or not verify_assets:
         return blockers
 
     data_root = _safe_path(repo_root, dataset["data_root"])
@@ -195,6 +209,8 @@ def _validate_manifest(repo_root: Path, contract: dict, verify_assets: bool) -> 
             blockers.append(f"missing or unsafe image: {record['relative_path']}")
         elif _sha256(image) != record["sha256"]:
             blockers.append(f"image SHA-256 mismatch: {record['relative_path']}")
+    if any(p.is_symlink() or getattr(p, "is_junction", lambda: False)() for p in data_root.rglob("*")):
+        blockers.append("local dataset contains symlinks or junctions")
     actual = sorted(
         path.relative_to(data_root).as_posix()
         for path in data_root.rglob("*")
@@ -214,7 +230,10 @@ def check_stage_b_readiness(repo_root: Path, contract_path: Path, *, contract_on
     blockers = _validate_contract_schema(contract)
     if blockers:
         return {"ready": False, "contract_valid": False, "blockers": blockers}
-    blockers.extend(_validate_manifest(root, contract, verify_assets=not contract_only))
+    try:
+        blockers.extend(_validate_manifest(root, contract, verify_assets=not contract_only))
+    except (OSError, ValueError, TypeError, KeyError) as exc:
+        blockers.append(f"unreadable or malformed manifest/assets: {exc}")
     if contract_only:
         return {"ready": False, "contract_valid": not blockers, "blockers": blockers,
                 "note": "Contract-only validation does not prove Stage-B execution readiness."}
@@ -242,6 +261,12 @@ def check_stage_b_readiness(repo_root: Path, contract_path: Path, *, contract_on
                 ["git", "rev-parse", "HEAD"], cwd=root, check=True,
                 capture_output=True, text=True, timeout=5,
             ).stdout.strip()
+            dirty = subprocess.run(
+                ["git", "diff", "--name-only", "HEAD", "--"], cwd=root, check=True,
+                capture_output=True, text=True, timeout=5,
+            ).stdout.strip()
+            if dirty:
+                blockers.append("tracked checkout differs from source commit")
             if actual_sha != source_sha:
                 blockers.append("source.commit_sha differs from checked-out HEAD")
         except (OSError, subprocess.SubprocessError):
@@ -279,3 +304,4 @@ def main(argv: list[str] | None = None) -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
+
