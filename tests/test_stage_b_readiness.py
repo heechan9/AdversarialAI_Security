@@ -121,3 +121,28 @@ def test_paper_scope_and_formal_run_approval_are_not_conflated():
     assert official["experiment"]["epsilons"] == [0.0, 0.01, 0.03, 0.05]
     assert 'status: "confirmed"' in experiment
     assert 'independent_model_and_image_rerun: "not_completed"' in experiment
+
+
+
+import pytest
+
+@pytest.mark.parametrize("value", [-1, True, "1e-6", 1, None])
+def test_invalid_tolerance_rejected(tmp_path, value):
+    root, path, contract, _ = _case(tmp_path)
+    contract["comparison"]["metric_abs_tolerance"] = value
+    path.write_text(json.dumps(contract))
+    assert not check_stage_b_readiness(root, path, contract_only=True)["contract_valid"]
+
+@pytest.mark.parametrize("value", [[], None, 42, {"test_samples": 781, "test_files": [None]*781}])
+def test_malformed_manifest_returns_failure(tmp_path, value):
+    root, path, contract, manifest = _case(tmp_path)
+    manifest.write_text(json.dumps(value))
+    contract["dataset"]["manifest_sha256"] = _sha(manifest.read_bytes())
+    path.write_text(json.dumps(contract))
+    assert check_stage_b_readiness(root, path)["ready"] is False
+
+
+def test_extra_symlink_rejected(tmp_path):
+    root, path, _, _ = _case(tmp_path)
+    (root / "data/test/extra.jpg").symlink_to(root / "data/test/Class0/image-0.jpg")
+    assert "local dataset contains symlinks or junctions" in check_stage_b_readiness(root, path)["blockers"]
