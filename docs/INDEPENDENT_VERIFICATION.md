@@ -151,6 +151,13 @@ python -m pytest tests/test_independent_stage_a.py -q
 `.h5` 모델을 직접 로드해 781장에 대한 예측과 FGSM 공격을 재실행하고, 커밋된 표본별
 예측 자체를 재생성해 대조한다.
 
+실행 전 자산·해시·비교 규약을 고정하는 계약과 fail-closed 점검기를 추가했다.
+
+- 계약: [STAGE_B_EXECUTION_CONTRACT.md](STAGE_B_EXECUTION_CONTRACT.md)
+- 설정: `configs/stage_b_verification_contract.json`
+- 점검: `python verification/stage_b_readiness.py`
+- CI의 `--contract-only` 검사는 계약·manifest 구조만 확인하며 실제 재실행 완료를 의미하지 않는다.
+
 **선행 조건 (현재 미충족):**
 
 - `models/cnn_baseline.h5`, `models/mobilenet_finetuned.h5` (및 필요 시
@@ -183,6 +190,7 @@ TensorFlow/Keras forward pass는 하드웨어·연산 순서에 따라 비트 �
 | --- | --- |
 | A단계 하네스 | 구현·실행 완료 — 2개 모델 28개 검사 전부 PASS |
 | A단계 테스트 | 46건 통과 (mutation test 중심) |
+| B단계 준비 게이트 | 구현·테스트 완료 — 모델·781장·승인·source commit이 없으면 fail-closed |
 | B단계 재실행 | 선행 조건 미충족 — 모델·데이터 미확보, 비교 허용오차 규약 확정 필요 |
 
 ## 5. 검증 대상 커밋
