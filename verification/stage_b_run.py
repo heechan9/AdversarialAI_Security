@@ -106,6 +106,10 @@ def run(root, contract_path):
     try:
         freeze = subprocess.run([sys.executable, "-m", "pip", "freeze"], capture_output=True, text=True, check=True)
         (output/"environment.txt").write_text(freeze.stdout, encoding="utf-8")
+        command = [sys.executable, "-m", "verification.stage_b_preflight", "--contract", str(contract_path)]
+        report["commands"].append(command)
+        with (output/"preflight.log").open("x", encoding="utf-8") as log:
+            subprocess.run(command, cwd=root, env=env, stdout=log, stderr=subprocess.STDOUT, check=True)
         for method, module in METHODS.items():
             command = [sys.executable, "-m", module, "--output", str(output/method)]
             report["commands"].append(command)
@@ -120,6 +124,10 @@ def run(root, contract_path):
         if after["blockers"]:
             raise ValueError(f"post-run integrity check failed: {after}")
         report["status"] = "PASS"
+    except KeyboardInterrupt:
+        report["status"] = "INTERRUPTED"
+        report["error"] = "Execution interrupted by user; partial outputs are not a completed rerun"
+        raise
     except Exception as exc:
         report["status"] = "FAIL"
         report["error"] = str(exc)
