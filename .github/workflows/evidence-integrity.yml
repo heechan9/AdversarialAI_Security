@@ -39,8 +39,6 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: "22.13.0"
-          cache: pnpm
-          cache-dependency-path: web/maris/pnpm-lock.yaml
       - name: Install locked web dependencies
         run: pnpm install --frozen-lockfile
       - name: Verify MARIS evidence and defense exports
