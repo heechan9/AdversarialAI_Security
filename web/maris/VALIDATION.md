@@ -1,10 +1,26 @@
 # MARIS validation
 
-Research source: heechan9/AdversarialAI_Security, main
+## Current provenance note — 2026-09-21
+
+The baseline attack snapshot remains bound to research commit
+`ecce270eafabc5753888dfc5aeddec44a335d999`. The later public defense comparison is
+separately bound to source artifact commit
+`5c0b74a6650742c49deeb98cc72f9fe882916051`, as recorded below. Subsequent UI and
+dependency commits did not regenerate research evidence. These historical source SHAs
+must not be replaced by the latest repository HEAD unless the evidence is re-exported
+and re-audited.
+
+The paper scope and FGSM ε set (`0, 0.01, 0.03, 0.05`) are confirmed. Historical
+`provisional`/`experimental` labels remain provenance metadata; they do not mean
+that the current paper scope is pending. Original-model and 781-image independent
+rerun remains unverified.
+
+Research source for the baseline snapshot: heechan9/AdversarialAI_Security, main
 `ecce270eafabc5753888dfc5aeddec44a335d999`.
 
 This independent presentation does not modify the research repository, run inference,
-generate attacks, promote provisional results, or claim downstream maritime safety.
+generate attacks, claim an independent original-model rerun, or claim downstream
+maritime safety.
 
 ## Data
 

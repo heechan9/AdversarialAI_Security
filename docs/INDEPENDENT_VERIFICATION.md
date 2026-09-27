@@ -16,7 +16,7 @@ Clean·FGSM 결과를 저장소의 기존 평가·감사 파이프라인 **바�
 - `results/audit/` 의 기존 감사 산출물
 - `configs/` 의 실험 설정과 manifest
 
-검증 산출물은 전부 신규 경로(`verification/`, `results/verification/`)에만 쓴다.
+A단계 산출물은 신규 `results/verification/` 경로에 쓴다. B단계는 기존 평가기의 출력 보호 규칙에 따라 checkout 밖의 고유 실행 묶음에 저장한다. [실행 안내](STAGE_B_EXECUTION_CONTRACT.md)를 따른다.
 
 **불일치는 fail-closed로 처리한다.** 재계산값이 커밋된 값과 다르면 기존 파일을
 고치거나 허용오차를 넓히지 않고, 해당 검사를 FAIL로 보고하고 종료 코드 1로 끝낸다.
@@ -99,8 +99,9 @@ Clean 혼동행렬을 재계산하지 않는다.
 검증 범위를 조용히 줄이는 일을 막기 위해서다. 로스터와 실제 산출물이 어긋나면
 (`declared_but_missing` / `present_but_undeclared`) 실행 자체가 실패한다.
 
-ε 목록도 하드코딩하지 않는다. 멘토가 승인할 ε가 현재 예비값과 달라져도 하네스를
-고칠 필요가 없게 하기 위함이다.
+ε 목록도 하드코딩하지 않고 설정에서 읽는다. 현재 논문 조건은
+`0, 0.01, 0.03, 0.05`로 확정됐으며, 검증 하네스는 설정과 실제 산출물의 조건 집합이
+어긋나면 실패해야 한다.
 
 ### 2.4 실행 방법
 
@@ -150,6 +151,15 @@ python -m pytest tests/test_independent_stage_a.py -q
 `.h5` 모델을 직접 로드해 781장에 대한 예측과 FGSM 공격을 재실행하고, 커밋된 표본별
 예측 자체를 재생성해 대조한다.
 
+실행 전 자산·해시·비교 규약을 고정하는 계약과 fail-closed 점검기를 추가했다.
+
+- 계약: [STAGE_B_EXECUTION_CONTRACT.md](STAGE_B_EXECUTION_CONTRACT.md)
+- 설정: `configs/stage_b_verification_contract.json`
+- 외부 계약 생성·점검·실행: [STAGE_B_EXECUTION_CONTRACT.md](STAGE_B_EXECUTION_CONTRACT.md)
+- 실행 진입점: `verification/stage_b_run.py` — 기존 평가기를 별도 환경에서 재실행하고 두 필터의 전달/방어 인지 조건까지 비교한다. 독립 알고리즘 구현은 아니다.
+- 확률 비교는 수행하지 않으며 라벨·요약 지표·L∞를 확인한다.
+- CI의 `--contract-only` 검사는 계약·manifest 구조만 확인하며 실제 재실행 완료를 의미하지 않는다.
+
 **선행 조건 (현재 미충족):**
 
 - `models/cnn_baseline.h5`, `models/mobilenet_finetuned.h5` (및 필요 시
@@ -157,10 +167,10 @@ python -m pytest tests/test_independent_stage_a.py -q
 - `data/test` 781장 — 동일하게 미커밋.
 - 전달된 바이너리의 SHA-256이 `results/*/**_metadata.json` 기록값과 일치해야 한다
   (예: CNN `cb256b1a5d6f605d355334e4e8667257a2bfbd29e08836cc4114869bd7068701`).
-- Clean만 재실행하는 B단계는 epsilon 결정과 무관하며, 동일 이미지·모델과
-  합의된 비교 규약을 확보하면 준비할 수 있다. FGSM B단계는 실행 계약 확정 후 진행한다.
-- 승인 epsilon이 달라져도 기존 canonical/provisional 산출물은 사라지거나 덮어써지지 않는다.
-  새 후보는 독립된 run ID 경로에 저장하고 비교 대상의 source SHA를 기록한다.
+- FGSM ε는 `0, 0.01, 0.03, 0.05`로 확정됐다. B단계는 동일 이미지·모델,
+  고정된 전처리와 비교 규약을 확보한 뒤 진행한다.
+- 기존 canonical/provisional 산출물은 사라지거나 덮어써지지 않는다.
+  독립 재실행 결과는 별도 run ID 경로에 저장하고 비교 대상의 source SHA를 기록한다.
 
 **허용오차 규약 (확정 필요):**
 
@@ -182,7 +192,8 @@ TensorFlow/Keras forward pass는 하드웨어·연산 순서에 따라 비트 �
 | --- | --- |
 | A단계 하네스 | 구현·실행 완료 — 2개 모델 28개 검사 전부 PASS |
 | A단계 테스트 | 46건 통과 (mutation test 중심) |
-| B단계 재실행 | 선행 조건 미충족 — 모델·데이터 미확보, ε 승인 대기 |
+| B단계 준비 게이트 | 구현·테스트 완료 — 모델·781장·승인·source commit이 없으면 fail-closed |
+| B단계 재실행 | 선행 조건 미충족 — 모델·데이터 미확보, 비교 허용오차 규약 확정 필요 |
 
 ## 5. 검증 대상 커밋
 

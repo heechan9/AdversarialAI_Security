@@ -1,5 +1,17 @@
-# Experiment configuration — values marked "proposed" are not yet confirmed
-# against actual code. See docs/EXPERIMENT_CONTRACT.md for definitions.
+# Experiment configuration
+# 논문 범위와 FGSM epsilon 집합은 확정됐다.
+# 학습 코드·seed처럼 직접 확인되지 않은 항목은 별도로 unconfirmed 상태를 유지한다.
+# 정의와 상태 구분은 docs/EXPERIMENT_CONTRACT.md를 따른다.
+
+paper_scope:
+  status: "confirmed"
+  models: [cnn_baseline, mobilenet]
+  attack: "untargeted_1step_fgsm"
+  defenses: [gaussian_3x3, mean_3x3]
+  epsilons: [0.0, 0.01, 0.03, 0.05]
+  test_set_size: 781
+  recorded_experiments: "completed"
+  independent_model_and_image_rerun: "not_completed"
 
 dataset:
   num_classes: 10
@@ -33,21 +45,25 @@ models:
 attacks:
   input_range: [0, 1]   # fixed evaluation/attack threat-model range for both models
   fgsm:
-    epsilon_candidates: [0.0, 0.01, 0.03, 0.05]  # proposed; mentor confirmation pending
+    epsilon_candidates: [0.0, 0.01, 0.03, 0.05]  # confirmed paper conditions
     steps: 1
     targeted: false
     loss: categorical_crossentropy
     clip_range: [0, 1]
+  # 아래 공격은 후속 확장 후보이며 현재 완료된 논문 실험 범위가 아니다.
   bim:
+    paper_scope: false
     epsilon: "proposed"
     alpha: "proposed"
     steps: "proposed"
   pgd:
+    paper_scope: false
     epsilon: "proposed"
     alpha: "proposed"
     steps: "proposed"
     random_start: true
   jsma:
+    paper_scope: false
     scope: "targeted white-box, L0"
     max_perturbed_pixel_ratio: "proposed"
 
@@ -59,4 +75,4 @@ metrics:
   - macro_recall
   - macro_f1
   - untargeted_asr   # denominator = clean-correct samples (confirmed for FGSM)
-  - targeted_asr
+  - targeted_asr     # metric definition retained for future work; outside current paper scope
