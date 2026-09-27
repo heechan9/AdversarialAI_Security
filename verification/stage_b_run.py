@@ -49,6 +49,39 @@ def compare_json(a, b, tolerance, location="summary"):
         raise ValueError(f"{location}: value differs")
 
 
+def collect_json_differences(a, b, tolerance, location, differences):
+    """Like ``compare_json``, but a within-structure numeric metric mismatch
+    is appended to ``differences`` instead of raising.
+
+    Only a normal, comparable metric difference (both sides finite numbers,
+    same structure) is collected. Anything that means the two summaries are
+    not actually comparable -- different keys, different list lengths, a
+    non-numeric value where a number is expected, a type mismatch on a
+    non-numeric field -- still raises immediately, exactly like
+    ``compare_json``. This mirrors the sample-identity vs. prediction split
+    used in ``compare_outputs``: structure/identity problems abort, ordinary
+    metric drift is recorded.
+    """
+    if isinstance(a, dict):
+        if not isinstance(b, dict) or a.keys() != b.keys():
+            raise ValueError(f"{location}: keys differ")
+        for key in a:
+            collect_json_differences(a[key], b[key], tolerance, f"{location}/{key}", differences)
+    elif isinstance(a, list):
+        if not isinstance(b, list) or len(a) != len(b):
+            raise ValueError(f"{location}: coverage differs")
+        for i, (x, y) in enumerate(zip(a, b)):
+            collect_json_differences(x, y, tolerance, f"{location}/{i}", differences)
+    elif type(a) in (int, float):
+        if type(b) not in (int, float) or not math.isfinite(a) or not math.isfinite(b):
+            raise ValueError(f"{location}: non-numeric or non-finite metric value")
+        if abs(a - b) > tolerance:
+            differences.append({"location": location, "reference": a, "actual": b,
+                                 "abs_diff": abs(a - b), "tolerance": tolerance})
+    elif type(a) is not type(b) or a != b:
+        raise ValueError(f"{location}: value differs")
+
+
 def read_rows(path):
     with Path(path).open(encoding="utf-8-sig", newline="") as f:
         reader = csv.DictReader(f)
@@ -58,8 +91,29 @@ def read_rows(path):
 
 
 def compare_outputs(root, output, method, contract):
+    """Compare a rerun's saved outputs against the official reference.
+
+    Two different kinds of mismatch are handled differently:
+
+    - Structural / sample-identity / attack-scope problems (bad columns,
+      wrong row count, a ``relative_path`` or ``true_index`` that doesn't
+      match, an out-of-contract epsilon, an out-of-range perturbation) mean
+      the two runs are not comparing the same data under the same attack, so
+      they raise immediately and abort this comparison.
+    - Ordinary prediction and metric differences (a ``*_pred`` column, or a
+      numeric field in ``summary.json``) are normal, comparable outcomes of
+      an independent rerun. They are collected into ``differences`` instead
+      of raising, so the full set of mismatches is captured in one pass and
+      the caller can still move on to the next defense method.
+
+    The return value's ``status`` is ``"FAIL"`` whenever ``differences`` is
+    non-empty; the caller decides what to do with a FAIL comparison (see
+    ``run``), but this function itself never raises for a label/metric-only
+    mismatch.
+    """
     reference = root / f"results/defenses/experimental/{method}_run_01"
     count = 0
+    differences = []
     for model in ("cnn", "mobilenet"):
         for epsilon in contract["attack"]["epsilons"]:
             name = f"{model}_eps_{epsilon:g}_samples.csv"
@@ -69,19 +123,35 @@ def compare_outputs(root, output, method, contract):
             for index, (left, right) in enumerate(zip(expected, actual)):
                 if left.keys() != right.keys():
                     raise ValueError(f"{method}/{name}: columns differ")
-                for key in ("relative_path", "true_index") + tuple(p+"_pred" for p in PREDICTIONS):
+                # Sample identity and ground truth: these say WHICH sample is
+                # being compared, not how it was classified. A mismatch here
+                # means the two runs disagree about what they even ran on,
+                # so it is never collected -- it aborts immediately.
+                for key in ("relative_path", "true_index"):
                     if left[key].replace("\\", "/") != right[key].replace("\\", "/"):
                         raise ValueError(f"{method}/{name}/{index}/{key}: label/path mismatch")
                 if float(right["epsilon"]) != epsilon:
-                    raise ValueError("epsilon mismatch")
+                    raise ValueError(f"{method}/{name}/{index}: epsilon mismatch")
                 for key in ("original_linf", "adaptive_linf"):
                     value = float(right[key])
                     if not math.isfinite(value) or not 0 <= value <= epsilon + contract["comparison"]["linf_tolerance"]:
                         raise ValueError(f"{method}/{name}/{index}: invalid perturbation")
+                # Predicted labels are the actual comparison outcome: collect
+                # every difference and keep going rather than stopping at
+                # the first one.
+                for pred in PREDICTIONS:
+                    key = pred + "_pred"
+                    if left[key].replace("\\", "/") != right[key].replace("\\", "/"):
+                        differences.append({
+                            "method": method, "file": name, "row_index": index,
+                            "relative_path": left["relative_path"].replace("\\", "/"),
+                            "field": key, "reference": left[key], "actual": right[key],
+                        })
                 count += 1
-    compare_json(_load_json(reference/"summary.json"), _load_json(output/"summary.json"),
-                 contract["comparison"]["metric_abs_tolerance"])
-    return {"method": method, "rows_compared": count, "status": "PASS"}
+    collect_json_differences(_load_json(reference/"summary.json"), _load_json(output/"summary.json"),
+                              contract["comparison"]["metric_abs_tolerance"], "summary", differences)
+    return {"method": method, "rows_compared": count,
+            "status": "FAIL" if differences else "PASS", "differences": differences}
 
 
 def run(root, contract_path):
@@ -110,19 +180,34 @@ def run(root, contract_path):
         report["commands"].append(command)
         with (output/"preflight.log").open("x", encoding="utf-8") as log:
             subprocess.run(command, cwd=root, env=env, stdout=log, stderr=subprocess.STDOUT, check=True)
+        comparison_failed = False
         for method, module in METHODS.items():
             command = [sys.executable, "-m", module, "--output", str(output/method)]
             report["commands"].append(command)
             print(f"Running {method}; log: {output / (method+'.log')}", flush=True)
             with (output/(method+".log")).open("x", encoding="utf-8") as log:
+                # A subprocess failure here (bad exit code) still raises via
+                # check=True and aborts the run immediately -- only a FAIL
+                # *comparison* (label/metric differences, see below) lets the
+                # loop continue to the next defense method.
                 subprocess.run(command, cwd=root, env=env, stdout=log, stderr=subprocess.STDOUT, check=True)
-            report["comparisons"].append(compare_outputs(root, output/method, method, contract))
+            comparison = compare_outputs(root, output/method, method, contract)
+            report["comparisons"].append(comparison)
+            if comparison["status"] != "PASS":
+                comparison_failed = True
         if _sha256(contract_path) != report["contract_sha256"]:
             raise ValueError("external contract changed during execution")
         after = check_stage_b_readiness(root, contract_path)
         after["blockers"] = [b for b in after["blockers"] if b != "Stage-B output path already exists; overwrite is forbidden"]
         if after["blockers"]:
             raise ValueError(f"post-run integrity check failed: {after}")
+        if comparison_failed:
+            # Every defense method still ran and every comparison was
+            # collected (see report["comparisons"]), but any label/metric
+            # difference means this is not a completed, matching
+            # verification: the overall run ends FAIL with a failing exit
+            # code, exactly as before this change.
+            raise ValueError("label/metric differences detected in one or more comparisons; see report['comparisons']")
         report["status"] = "PASS"
     except KeyboardInterrupt:
         report["status"] = "INTERRUPTED"
