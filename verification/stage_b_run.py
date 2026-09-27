@@ -24,6 +24,24 @@ except ImportError:
 METHODS = {"gaussian": "adversarial_ai.evaluation.defense_evaluation",
            "mean": "adversarial_ai.evaluation.mean_defense_evaluation"}
 PREDICTIONS = ("clean", "defended_clean", "attacked", "transfer_defended", "adaptive_defended")
+NUM_CLASSES = 10  # cnn_baseline and mobilenet are both 10-class ship classifiers (see configs/classes.json)
+VALID_CLASS_INDICES = {str(i) for i in range(NUM_CLASSES)}
+
+
+def _validate_class_index(value, method, name, index, field):
+    """Reject anything that isn't a bare 0-9 class-index string.
+
+    This runs BEFORE a *_pred value is compared for a difference: garbage,
+    an empty string, or an out-of-range index (-1, 10, ...) is not a
+    "different prediction" to collect, it is a corrupted/invalid saved
+    output, so it raises immediately -- same severity as a structural
+    mismatch, never folded into the collected differences.
+    """
+    if value not in VALID_CLASS_INDICES:
+        raise ValueError(
+            f"{method}/{name}/{index}/{field}: invalid class index {value!r} "
+            f"(expected an integer string 0-{NUM_CLASSES - 1})"
+        )
 
 
 def write_json(path, value):
@@ -97,14 +115,17 @@ def compare_outputs(root, output, method, contract):
 
     - Structural / sample-identity / attack-scope problems (bad columns,
       wrong row count, a ``relative_path`` or ``true_index`` that doesn't
-      match, an out-of-contract epsilon, an out-of-range perturbation) mean
-      the two runs are not comparing the same data under the same attack, so
-      they raise immediately and abort this comparison.
-    - Ordinary prediction and metric differences (a ``*_pred`` column, or a
-      numeric field in ``summary.json``) are normal, comparable outcomes of
-      an independent rerun. They are collected into ``differences`` instead
-      of raising, so the full set of mismatches is captured in one pass and
-      the caller can still move on to the next defense method.
+      match, an out-of-contract epsilon, an out-of-range perturbation, or a
+      ``*_pred`` value that isn't a well-formed 0-9 class index) mean the
+      two runs are not comparing the same data under the same attack -- or
+      one side's saved output is simply corrupted -- so they raise
+      immediately and abort this comparison.
+    - Ordinary prediction and metric differences (two well-formed but
+      different ``*_pred`` class indices, or a numeric field in
+      ``summary.json``) are normal, comparable outcomes of an independent
+      rerun. They are collected into ``differences`` instead of raising, so
+      the full set of mismatches is captured in one pass and the caller can
+      still move on to the next defense method.
 
     The return value's ``status`` is ``"FAIL"`` whenever ``differences`` is
     non-empty; the caller decides what to do with a FAIL comparison (see
@@ -138,10 +159,14 @@ def compare_outputs(root, output, method, contract):
                         raise ValueError(f"{method}/{name}/{index}: invalid perturbation")
                 # Predicted labels are the actual comparison outcome: collect
                 # every difference and keep going rather than stopping at
-                # the first one.
+                # the first one -- but only once both sides are confirmed to
+                # be well-formed class indices. A garbage/out-of-range value
+                # is not a comparable prediction difference; it aborts.
                 for pred in PREDICTIONS:
                     key = pred + "_pred"
-                    if left[key].replace("\\", "/") != right[key].replace("\\", "/"):
+                    _validate_class_index(left[key], method, name, index, f"reference/{key}")
+                    _validate_class_index(right[key], method, name, index, f"actual/{key}")
+                    if left[key] != right[key]:
                         differences.append({
                             "method": method, "file": name, "row_index": index,
                             "relative_path": left["relative_path"].replace("\\", "/"),

@@ -106,6 +106,88 @@ def test_comparator_corrupted_row_count_still_raises_immediately(tmp_path,method
         runner.compare_outputs(ROOT,output,method,contract)
 
 
+@pytest.mark.parametrize('method',['gaussian','mean'])
+@pytest.mark.parametrize('side',['reference','actual'])
+@pytest.mark.parametrize('bad_value',['garbage','','-1','10'])
+def test_comparator_invalid_class_index_still_raises_immediately(tmp_path,method,side,bad_value):
+    # A *_pred value that isn't a bare 0-9 class index (garbage, empty,
+    # or out of the valid 0-9 range) is a corrupted saved output, not a
+    # comparable prediction difference: it must abort before comparison,
+    # never get folded into result['differences']. Both the reference and
+    # the rerun's own output must be validated.
+    source=ROOT/f'results/defenses/experimental/{method}_run_01'
+    output=tmp_path/'actual'/method
+    output.parent.mkdir(parents=True)
+    shutil.copytree(source,output)
+    contract=json.loads((ROOT/'configs/stage_b_verification_contract.json').read_text())
+
+    if side=='actual':
+        file=output/'cnn_eps_0_samples.csv'
+        rows=runner.read_rows(file)
+        rows[0]['adaptive_defended_pred']=bad_value
+        _write_rows(file, rows)
+        root=ROOT
+    else:
+        # Corrupt a private COPY of the reference under a fake root, so the
+        # real repo's checked-in evidence is never touched.
+        fake_root=tmp_path/'fake_root'
+        ref_dir=fake_root/f'results/defenses/experimental/{method}_run_01'
+        ref_dir.parent.mkdir(parents=True)
+        shutil.copytree(source,ref_dir)
+        file=ref_dir/'cnn_eps_0_samples.csv'
+        rows=runner.read_rows(file)
+        rows[0]['adaptive_defended_pred']=bad_value
+        _write_rows(file, rows)
+        root=fake_root
+
+    with pytest.raises(ValueError,match='invalid class index'):
+        runner.compare_outputs(root,output,method,contract)
+
+
+@pytest.mark.parametrize('bad_value',['garbage','','-1','10'])
+def test_run_stops_before_next_method_on_invalid_class_index(tmp_path,monkeypatch,bad_value):
+    # A corrupted *_pred value is a structural problem (see above), not an
+    # ordinary collected difference -- so unlike a FAIL comparison
+    # (test_run_continues_to_next_method_after_a_fail_comparison), it must
+    # raise out of compare_outputs and stop run() before the second defense
+    # method's subprocess ever starts.
+    monkeypatch.setattr(runner.platform,'platform',lambda:'test platform')
+    root=ROOT  # must contain the real results/defenses/experimental/*_run_01 reference data
+    contract=json.loads((ROOT/'configs/stage_b_verification_contract.json').read_text())
+    contract['outputs']['run_id']='corrupted-pred'
+    path=tmp_path/'contract.json';path.write_text(json.dumps(contract))
+    monkeypatch.setattr(runner,'check_stage_b_readiness',lambda *a:{'ready':True,'blockers':[]})
+
+    seen_methods=[]
+    def fake_run(cmd,**kw):
+        if 'freeze' in cmd:return SimpleNamespace(stdout='mock environment\n')
+        if 'verification.stage_b_preflight' in cmd:return SimpleNamespace(returncode=0)
+        method = 'gaussian' if cmd[-1].endswith('gaussian') else 'mean'
+        seen_methods.append(method)
+        out_dir = Path(cmd[-1]); out_dir.mkdir()
+        source=ROOT/f'results/defenses/experimental/{method}_run_01'
+        for name in source.iterdir():
+            if name.is_file():
+                shutil.copy(name, out_dir/name.name)
+        if method=='gaussian':
+            file=out_dir/'cnn_eps_0_samples.csv'
+            rows=runner.read_rows(file)
+            rows[0]['adaptive_defended_pred']=bad_value
+            _write_rows(file, rows)
+        return SimpleNamespace(returncode=0)
+    monkeypatch.setattr(runner.subprocess,'run',fake_run)
+
+    with pytest.raises(ValueError,match='invalid class index'):
+        runner.run(root,path)
+
+    # gaussian ran and produced the corrupted output; mean's subprocess must
+    # never have been invoked once compare_outputs raised on gaussian.
+    assert seen_methods==['gaussian']
+    report=json.loads((tmp_path/'stage-b-corrupted-pred/rerun-report.json').read_text())
+    assert report['status']=='FAIL'
+    assert report['comparisons']==[]  # gaussian's comparison never completed to be recorded
+
+
 def test_comparator_metric_difference_in_summary_is_collected_not_raised(tmp_path):
     method='gaussian'
     source=ROOT/f'results/defenses/experimental/{method}_run_01'
