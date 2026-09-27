@@ -21,8 +21,9 @@
 ![TensorFlow](https://img.shields.io/badge/TensorFlow-2.21-FF6F00?logo=tensorflow&logoColor=white)
 ![Keras](https://img.shields.io/badge/Keras-3.15-D00000?logo=keras&logoColor=white)
 ![Tests](https://img.shields.io/badge/tests-pytest_verified-2EA44F)
-![Evidence Audit](https://img.shields.io/badge/evidence_audit-PASS-2EA44F)
-![Paper Claims](https://img.shields.io/badge/paper_claims-9%2F9_PASS-2EA44F)
+![Saved Evidence Audit](https://img.shields.io/badge/saved_evidence_audit-PASS-2EA44F)
+![Historical Paper Claims](https://img.shields.io/badge/v1.5_claim_snapshot-9%2F9_PASS-2EA44F)
+[![Stage B](https://img.shields.io/badge/Stage_B-result_mismatch-B42318)](docs/STAGE_B_HYEONSU_01_REVIEW.md)
 ![Data](https://img.shields.io/badge/test_images-781-0054A6)
 
 선박 사진을 인식하는 AI가 미세한 입력 교란에도 안전한지 확인하고,  
@@ -52,8 +53,16 @@
 
 ## 최신 통합 상태
 
-2026-09-19 기준, Clean·FGSM·가우시안·평균 필터 실험과 MARIS 회색 CAD 보기·방어 비교 소스가 반영되어 있습니다.
-문서 반영, 실험 결과의 공식 채택, 최종 논문 검증은 별도로 관리합니다.
+**2026-09-27 기준: 기능 구현·본 실험·보존 기록 감사는 완료됐지만, B단계 독립 재실행의 결과 일치 검증은 아직 FAIL입니다.** 개인 저장소 main에 PR #48~#51의 결과 감사·실제 추론 진단·최초 환경 수집 도구를 반영했습니다. 이 상태는 팀 저장소·배포 웹·최신 원고 전체의 동시 갱신이나 최종 제출 승인을 뜻하지 않습니다.
+
+- **현수 B단계:** 원본 모델과 781장으로 재실행한 결과를 제출했습니다. 가우시안 전체 평가와 별도 평균 필터 진단 실행을 확인했으며, 기존 기록과 일부 예측이 달라 통과로 처리하지 않았습니다. 재실행 수행과 결과 일치 판정은 구분합니다.
+- **후속 확인:** 후속 Linux 실행에서도 가우시안 전체 8조건의 모든 예측이 현수 결과와 일치했습니다. 차이가 있었던 14개 이미지·16개 예측을 선택해 진단했고, oneDNN을 끄면 11개가 기준 예측으로 바뀌었지만 **남은 5개 예측(4장)의 최초 차이 원인은 미확정**입니다. 별도 대조 사례 1개에서는 공격 생성 과정의 수치 민감성을 확인했습니다. 이를 모든 차이의 원인으로 일반화하지 않습니다.
+- **다음 단계:** 최초 Windows/Conda 환경에서 [한 번 실행하는 수집 도구](docs/STAGE_B_ORIGINAL_ENVIRONMENT.md)로 환경·경사·공격 배열을 받아 비교합니다. 도구의 Linux 실행과 테스트는 확인했지만, 해당 PC의 실행은 아직 받지 않았습니다. 첫 전체 on/off 4회 평가도 모두 완료한 것이 아닙니다.
+- **논문·기준 수치:** 아래 표와 canonical 결과는 유지합니다. 결과에 맞춰 허용오차를 넓히거나 검증을 PASS로 바꾸지 않았습니다. 멘토 논문 검토는 이 한계를 명시해 병행할 수 있습니다.
+
+[현수 결과 감사](docs/STAGE_B_HYEONSU_01_REVIEW.md) · [실제 추론 후속 결과](docs/STAGE_B_LOCAL_FOLLOWUP.md) · [경사·공격 배열 추적](docs/STAGE_B_TENSOR_TRACE.md) · [최초 PC 실행 안내](docs/STAGE_B_ORIGINAL_ENVIRONMENT.md)
+
+기존 완료 범위와 보존 이력:
 
 - 고정 3×3 가우시안·평균 필터 전처리, 전달 FGSM 및 방어 인지 FGSM 비교를 구현·실험했습니다.
 - 기존 공격에 전처리를 적용한 개선만으로 방어 성공을 주장하지 않습니다.
@@ -92,6 +101,9 @@
 | FGSM 구현 | ✅ 검증 완료 | 공격 방향·입력 clipping·L∞ 상한·epsilon 0 대조군 |
 | FGSM 성능 수치 | ✅ 실험·기록 감사 완료 | 확정 범위 $\epsilon=0, 0.01, 0.03, 0.05$; 원자료 상태는 아래 설명 참조 |
 | 연구근거 감사 | ✅ 검증 완료 | manifest·모델 해시·CSV·JSON·문서 일관성·시각 검토 감사 |
+| A단계 독립 재계산 | ✅ 완료 | 저장된 Clean 결과 재계산·검사; 원본 모델 재추론과 구분 |
+| B단계 원본 재실행 | ⚠ 수행 확인·일치 검증 FAIL | 현수 결과와 후속 추론 확인; 남은 5개 예측(4장) 원인 미확정 |
+| 최초 환경 추가 비교 | ⏳ PC 실행 대기 | 자동 수집 도구 준비·Linux 실행 확인; 최초 Windows 환경 결과는 미수신 |
 | 논문 Claim 감사 | ✅ 9/9 통과 | 기존 v1.5 claim snapshot 감사; 최신 원고 전체의 검증 완료를 뜻하지 않음 |
 | 가우시안·평균 필터 방어 | ✅ 실험·기록 감사 완료 | 고정 3×3 전처리; 기존 FGSM 입력 및 방어 인지 FGSM 비교·근거 감사 |
 | MARIS 가상 실험실 | ✅ 구현·소스 반영 | 설명용 3D 조작·저장된 이미지 비교·결과 재생; 실시간 추론 아님 |
@@ -125,6 +137,8 @@ MobileNetV2는 CNN보다 109장을 더 맞혔습니다. 다만 두 모델 모두
 - **ASR(Attack Success Rate)**은 공격 전에는 맞혔지만 공격 후 틀린 사진의 비율입니다.
 - MobileNetV2는 Clean 정확도가 더 높았지만 $epsilon=0.01$에서 ASR이 약 84.18%였습니다. 따라서 이번 실험에서는 **높은 일반 정확도가 공격 강건성을 보장하지 않았습니다.**
 - 비단조적인 MobileNetV2 결과의 원인을 FGSM overshoot라고 단정하지 않으며, 추가 실험 전에는 관찰 사실로만 기록합니다.
+
+**재현성 주의:** 이 표는 기존 보존 결과입니다. 현수 및 후속 가우시안 재실행의 MobileNetV2 ε=0.03 원래 공격은 102/781(13.06%)로, 기준 103/781(13.19%)과 달랐습니다. 차이는 별도 진단 기록에 남겼으며 이 표를 재실행 값으로 덮어쓰지 않았습니다.
 
 상세 근거: [Clean 결과](docs/CLEAN_BASELINE_RESULTS.md) · [FGSM 실험 결과](docs/FGSM_PROVISIONAL_RESULTS.md)
 
@@ -182,6 +196,8 @@ flowchart LR
 
 ## 빠른 시작
 
+**남은 B단계 차이를 확인하려는 최초 PC 실행자는 [전용 수집 안내](docs/STAGE_B_ORIGINAL_ENVIRONMENT.md)를 먼저 사용하세요.** 아래 명령은 일반 개발·저장 결과 감사용이며 독립 재실행 PASS를 보장하지 않습니다. 최초 실험 환경을 보존하려면 그 환경에 패키지를 새로 설치하거나 업그레이드하지 않습니다.
+
 ```bash
 pip install -r requirements.txt
 export PYTHONPATH=src
@@ -233,7 +249,10 @@ python scripts\audit_paper_claims.py
 | [논문 Claim 감사](docs/PAPER_CLAIM_AUDIT.md) | 9개 Claim과 canonical 근거 |
 | [통합 검토 기록](docs/INTEGRATION_REVIEW.md) | Draft 통합 범위·검증 결과·남은 로컬 실행 |
 | [공식 후보 준비 절차](docs/FGSM_OFFICIALIZATION_RUNBOOK.md) | 단일 승인 계약·실행 ID·후보 감사 |
-| [독립 Clean 재계산](docs/INDEPENDENT_VERIFICATION.md) | 현수 Stage A와 Codex 후속 검토 |
+| [독립 검증 상태](docs/INDEPENDENT_VERIFICATION.md) | A단계 완료·B단계 재실행 확인·일치 검증 미통과 |
+| [현수 B단계 결과 감사](docs/STAGE_B_HYEONSU_01_REVIEW.md) | 제출 결과의 무결성과 전체 예측 차이 |
+| [경사·공격 배열 추적](docs/STAGE_B_TENSOR_TRACE.md) | 설정 민감성 확인과 남은 5개 차이의 한계 |
+| [최초 환경 수집](docs/STAGE_B_ORIGINAL_ENVIRONMENT.md) | PC에서 한 번 실행 후 결과 ZIP 반환 |
 | [해양 위협모델](docs/THREAT_MODEL.md) | 이미지 분류 실험과 운영 영향의 구분 |
 | [Plymouth 연구 대조](docs/PLYMOUTH_RESEARCH_ALIGNMENT.md) | 관련 연구·즉시 적용·장기 확장 경계 |
 | [시각 검토 감사](docs/VISUAL_REVIEW_AUDIT.md) | 동적 후보 추출과 시각 검토 근거 검증 |
