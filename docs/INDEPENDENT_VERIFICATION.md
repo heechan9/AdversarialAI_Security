@@ -7,6 +7,24 @@ Clean·FGSM 결과를 저장소의 기존 평가·감사 파이프라인 **바�
 > 2026-09-27 수신 결과 감사: [차이·환경 진단 및 다음 실행](STAGE_B_HYEONSU_01_REVIEW.md).
 > 후속 실제 추론: [경사·공격 배열 추적](STAGE_B_TENSOR_TRACE.md). 일부 설정 민감성을 확인했으나 남은 5개 원인은 미확정이며 PASS가 아니다.
 
+## 검토 자료와 현재 해석 범위 (2026-09-27)
+
+현수는 외부 검증 기여자다. 원본 재실행 보고서와 이후 진단 기록의 작성·실행 범위를 구분한다.
+
+| 자료 | 위치와 역할 |
+|---|---|
+| 현수 원본 보고서 | [PR #47](https://github.com/heechan9/AdversarialAI_Security/pull/47)의 변경 파일에서 확인. 이 안내 기준 main에는 `STAGE_B_RERUN_REPORT_HYEONSU_01.md`가 없으므로 main 파일 링크를 사용하지 않는다. |
+| 수신 결과 감사 | [STAGE_B_HYEONSU_01_REVIEW.md](STAGE_B_HYEONSU_01_REVIEW.md) |
+| 후속 실제 추론·oneDNN 비교 | [STAGE_B_LOCAL_FOLLOWUP.md](STAGE_B_LOCAL_FOLLOWUP.md) |
+| 경사·공격 배열 추적·교차 분류 | [STAGE_B_TENSOR_TRACE.md](STAGE_B_TENSOR_TRACE.md) |
+| 최초 PC 보존 환경에서 실행할 절차 | [STAGE_B_ORIGINAL_ENVIRONMENT.md](STAGE_B_ORIGINAL_ENVIRONMENT.md) |
+
+- 최초 차이는 16개 예측값·14장이며, oneDNN OFF에서 11개가 기준 예측과 일치했다. 남은 5개 예측값·4장의 원인은 미확정이다.
+- 계측한 공격 배열과 기존 `generate_fgsm` 출력의 바이트 일치는 계측 충실성의 근거다. 기존 공격 구현 자체의 논리적 정확성을 독립적으로 증명하지 않는다.
+- 고정 공격 배열의 on/off 교차 분류 결과는 검사한 사례와 환경에 한정한다. 대조 사례에서 확인한 공격 생성 단계의 영향을 남은 모든 불일치의 원인으로 일반화하지 않는다.
+- 현재 PC의 패키지 버전이 과거 기록과 같아도 최초 실행 당시 환경 전체가 같다는 증명은 아니다. 최초 PC 진단 전 패키지 업데이트나 수치 연산 설정 변경을 하지 않는다.
+- 추가 코드 리뷰는 실제 원본 추론이나 최초 PC 실행을 대신하지 않는다. 기존 공식 수치·허용오차와 FAIL 판정을 유지한다.
+
 ## 0. 불변 조건 (작업 전체에 적용)
 
 이 작업은 다음을 **한 바이트도 수정하지 않는다.**
@@ -194,7 +212,7 @@ TensorFlow/Keras forward pass는 하드웨어·연산 순서에 따라 비트 �
 | A단계 하네스 | 구현·실행 완료 — 2개 모델 28개 검사 전부 PASS |
 | A단계 테스트 | 46건 통과 (mutation test 중심) |
 | B단계 준비 게이트 | 구현·테스트 완료 — 모델·781장·승인·source commit이 없으면 fail-closed |
-| B단계 재실행 | 현수 원본 실행 및 별도 Mean 진단 결과 수신·감사. MobileNetV2 일부 예측 불일치로 FAIL, 원인 진단 대기 |
+| B단계 재실행 | 현수 원본 실행 및 별도 Mean 진단 결과 수신·감사. MobileNetV2 일부 예측 불일치로 FAIL. 후속 oneDNN·텐서 진단 수행, 남은 5개 예측값·4장 원인 미확정. 최초 PC 환경 진단 대기 |
 
 ## 5. 검증 대상 커밋
 
