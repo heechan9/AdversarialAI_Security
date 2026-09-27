@@ -1,0 +1,48 @@
+{
+  "kind": "original_environment_collector_linux_check",
+  "actual_environment": "Linux Python 3.12; not original Windows environment",
+  "trace_status": "TRACE_COMPLETE_NOT_APPROVED",
+  "input_verification": {
+    "models_verified": 2,
+    "images_verified": 781
+  },
+  "recorded_version_match": false,
+  "stage_b_approved": false,
+  "predictions": [
+    {
+      "key": "gaussian-adaptive_defended-0.03-b13",
+      "reference": "7",
+      "submitted": "6",
+      "observed": 6
+    },
+    {
+      "key": "gaussian-attacked-0.03-b3",
+      "reference": "1",
+      "submitted": "6",
+      "observed": 6
+    },
+    {
+      "key": "mean-adaptive_defended-0.05-b7",
+      "reference": "3",
+      "submitted": "7",
+      "observed": 7
+    },
+    {
+      "key": "mean-attacked-0.03-b3",
+      "reference": "1",
+      "submitted": "6",
+      "observed": 6
+    },
+    {
+      "key": "mean-transfer_defended-0.05-b16",
+      "reference": "1",
+      "submitted": "6",
+      "observed": 6
+    }
+  ],
+  "trace_report_sha256": "277f1984533922f248d249e604b82004db41052ec4c1238adb7f0ad58ed5cae5",
+  "archive_sha256": "bf5034da12d07f603225c01d887d5b80ad84fc4e872a64449230317631777414",
+  "archive_crc_verified": true,
+  "windows_cmd_execution_verified": false,
+  "atomic_archive_repair": "Raw tensor files retained valid hashes; rebuilt archive verified. Original completed trace performed before later checkpoint/archive hardening, which has unit coverage."
+}
