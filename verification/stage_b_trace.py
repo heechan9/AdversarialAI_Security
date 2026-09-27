@@ -50,7 +50,9 @@ def run(args):
     if sha != BASE or dirty:
         raise ValueError('Use unchanged pinned source checkout')
     mode = os.environ.get('TF_ENABLE_ONEDNN_OPTS')
-    if mode not in ('0', '1'):
+    if mode is None and args.native_settings:
+        mode = 'unset/native-default'
+    elif mode not in ('0', '1'):
         raise ValueError('Set TF_ENABLE_ONEDNN_OPTS explicitly before launching')
     groups = selected_groups(args.selection, args.control_row)
     output.mkdir(parents=True, exist_ok=False)
@@ -173,6 +175,7 @@ if __name__ == '__main__':
     p.add_argument('--other',type=Path)
     p.add_argument('--cross-only',action='store_true')
     p.add_argument('--control-row',type=int,help='Trace this previously reported row instead of remaining mismatches')
+    p.add_argument('--native-settings',action='store_true',help='Permit an unset oneDNN variable; preserve inherited runtime settings')
     args=p.parse_args()
     if args.cross_only and not args.other:
         p.error('--cross-only requires --other')

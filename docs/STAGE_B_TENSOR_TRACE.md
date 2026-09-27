@@ -57,3 +57,5 @@ TF_ENABLE_ONEDNN_OPTS=0 TF_NUM_INTRAOP_THREADS=2 TF_NUM_INTEROP_THREADS=2 OMP_NU
 ```
 
 대조 사례만 실행하려면 세 명령에 각각 `--control-row 25`를 추가하고 별도 출력 폴더를 쓴다. Windows Anaconda Prompt에서는 해당 환경변수를 `set NAME=value`로 설정한 뒤 같은 Python 인수를 사용한다. 설정을 기준 라벨에 맞춰 선택하거나 허용오차를 확대하지 않는다. 논문 표와 기존 연구 결론은 이번 진단으로 수정하지 않았다.
+
+최초 환경에서 자동으로 수집하려면 [한 번 실행하는 수집 도구](STAGE_B_ORIGINAL_ENVIRONMENT.md)를 사용한다.
