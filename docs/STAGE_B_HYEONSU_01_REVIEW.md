@@ -58,7 +58,8 @@ C:\Project\stage-b-venv\Scripts\python.exe C:\Project\stage-b-diagnostic-tools\v
 
 기존 출력 폴더가 있으면 새 이름을 사용한다. 덮어쓰기하지 않는다.
 완료 시 `stage-b-hyeonsu-onednn-01` 폴더 전체를 반환한다. 총 4회 전체 평가이며
-원본 `.h5` 두 개와 781장 이미지가 필요하다. 이번 감사 환경에서는 이 진단 추론을 실행하지 않았다.
+원본 `.h5` 두 개와 781장 이미지가 필요하다. PR #48 작성 시점에는 이 진단 추론을 실행하지 않았다. 이후 실제 원본 파일로 수행한
+[로컬 후속 진단](STAGE_B_LOCAL_FOLLOWUP.md)은 가우시안 전체 on 실행과 불일치 배치 on/off 비교이며, 4회 전체 평가 완료는 아니다.
 
 읽기 전용 비교 예시(각 on/off·필터 조합에 반복):
 
