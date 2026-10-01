@@ -22,6 +22,9 @@ def capture(source, destination, repo_root):
         stage.mkdir()
         (stage / 'run.json').write_bytes(report_bytes)
         report = read_json(stage / 'run.json')
+        if 'continuation' in report:
+            if (source/'parent-run.json').is_symlink():raise ValueError('parent report symlink forbidden')
+            (stage/'parent-run.json').write_bytes((source/'parent-run.json').read_bytes())
         for condition in report['conditions']:
             name = condition['csv']
             if Path(name).name != name or '/' in name or '\\' in name or not name.endswith('.csv'):

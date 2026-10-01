@@ -63,6 +63,7 @@ def run(args):
             'environment':{k:os.environ.get(k) for k in ('TF_ENABLE_ONEDNN_OPTS','TF_DETERMINISTIC_OPS','TF_NUM_INTRAOP_THREADS','TF_NUM_INTEROP_THREADS')},
             'scope':{'samples':781,'epsilons':[0,.01,.03,.05],'pipelines':list(PIPELINES)},'conditions':[]}
     report['settings']['data_dir']=str(args.data_dir)
+    if getattr(args,'resume_from',None) is not None:report['settings']['resume_from']=str(args.resume_from)
     if candidate is not None:
         report['settings']['trained_model']=str(candidate)
         report['kind']='followup_trained_model_iterative_evaluation'
@@ -70,7 +71,9 @@ def run(args):
         report['scope']['models']=[candidate_kind]
     else:report['scope']['models']=['cnn','mobilenet']
     def save():
-        (out/'run.json').write_text(json.dumps(report,indent=2,ensure_ascii=False,allow_nan=False)+'\n',encoding='utf-8')
+        temporary=out/'run.json.tmp'
+        temporary.write_text(json.dumps(report,indent=2,ensure_ascii=False,allow_nan=False)+'\n',encoding='utf-8')
+        temporary.replace(out/'run.json')
     save()
     try:
         report['source_commit']=subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip()
@@ -80,6 +83,11 @@ def run(args):
         classes=json.loads((ROOT/'configs/classes.json').read_text())
         names=[classes[str(i)] for i in range(10)]
         report['classes_sha256']=sha256_file(ROOT/'configs/classes.json')
+        completed=set()
+        if getattr(args,'resume_from',None) is not None:
+            from adversarial_ai.evaluation.continuation import carry_forward
+            completed=carry_forward(args.resume_from,out,report,ROOT)
+            save()
         for model_name,filename,size in [('cnn','cnn_baseline.h5',128),('mobilenet','mobilenet_finetuned.h5',224)]:
             if candidate is not None and model_name!=candidate_kind:continue
             generator=tf.keras.preprocessing.image.ImageDataGenerator(rescale=1./255).flow_from_directory(
@@ -96,6 +104,9 @@ def run(args):
             for method,filter_fn,wrapper in [('gaussian',gaussian_tensorflow,GaussianDefendedModel),('mean',mean_tensorflow,MeanDefendedModel)]:
                 defended=wrapper(model)
                 for epsilon in (0.,.01,.03,.05):
+                    if (model_name,method,epsilon) in completed:
+                        print(f'Inherited audited condition: {model_name} {method} eps={epsilon:g}',flush=True)
+                        continue
                     rows=[]
                     for batch in range(len(generator)):
                         x,y=generator[batch]
@@ -137,6 +148,7 @@ def main():
     p.add_argument('--attack',choices=['bim','pgd'],required=True)
     p.add_argument('--steps',type=int,required=True);p.add_argument('--step-size',type=float,required=True)
     p.add_argument('--restarts',type=int,default=1);p.add_argument('--seed',type=int,default=0)
+    p.add_argument('--resume-from',type=Path,help='Audited parent run; writes a new output and records inherited source lineage')
     p.add_argument('--trained-model',type=Path)
     p.add_argument('--trained-model-sha256')
     p.add_argument('--trained-model-kind',choices=['cnn','mobilenet'])
