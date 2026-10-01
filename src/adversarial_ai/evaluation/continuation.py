@@ -19,9 +19,10 @@ def carry_forward(source, out, report, root):
     for key in ('python','platform','tensorflow','keras','numpy','environment','manifest_sha256','classes_sha256'):
         if parent[key] != report[key]:
             raise ValueError('continuation environment/input mismatch: '+key)
-    # Runner bookkeeping can change; every other tracked inference/attack source
-    # must be byte-identical to the parent commit.
-    changed = subprocess.check_output(['git','diff','--name-only',parent['source_commit'],report['source_commit'],'--','src','configs'],cwd=root,text=True).splitlines()
+    # Runner bookkeeping can change; its attack/filter/integrity dependencies
+    # and configuration must be byte-identical to the parent commit.
+    dependencies = ['configs','src/adversarial_ai/attacks/iterative.py','src/adversarial_ai/attacks/fgsm.py','src/adversarial_ai/defenses','src/adversarial_ai/evaluation/integrity.py','src/adversarial_ai/__init__.py','src/adversarial_ai/attacks/__init__.py','src/adversarial_ai/evaluation/__init__.py']
+    changed = subprocess.check_output(['git','diff','--name-only',parent['source_commit'],report['source_commit'],'--',*dependencies],cwd=root,text=True).splitlines()
     allowed = {'src/adversarial_ai/evaluation/iterative_evaluation.py','src/adversarial_ai/evaluation/continuation.py'}
     if set(changed)-allowed:
         raise ValueError('attack/inference source differs from parent')
