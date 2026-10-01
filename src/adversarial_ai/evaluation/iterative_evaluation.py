@@ -40,6 +40,7 @@ def reserve_output(run_id):
 
 
 def run(args):
+    if Path.cwd().resolve()!=ROOT.resolve():raise ValueError("run from the repository root")
     validate_settings(0.05,args.step_size,args.steps,args.restarts,args.seed,args.attack)
     if args.batch_size<1:raise ValueError('positive batch size required')
     import tensorflow as tf
@@ -69,7 +70,7 @@ def run(args):
             generator=tf.keras.preprocessing.image.ImageDataGenerator(rescale=1./255).flow_from_directory(
                 str(args.data_dir),target_size=(size,size),batch_size=args.batch_size,class_mode='categorical',shuffle=False)
             if generator.class_indices!={n:i for i,n in enumerate(names)}:raise ValueError('class order mismatch')
-            model_path=ROOT/'models'/filename
+            model_path=Path('models')/filename
             model_hash=validate_reproducibility_manifest(manifest_path=manifest,model_path=model_path,dataset_filenames=generator.filenames,data_dir=args.data_dir)
             model=tf.keras.models.load_model(model_path,compile=False);logits=infer_from_logits(model)
             weights=[v.numpy().copy() for v in model.weights]
