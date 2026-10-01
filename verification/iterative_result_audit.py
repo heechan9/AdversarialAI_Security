@@ -69,6 +69,14 @@ def audit(run_dir,repo_root):
             if denominator:require(observed['asr'] is not None and math.isfinite(observed['asr']) and abs(observed['asr']-successes/denominator)<=1e-12,'ASR differs')
             else:require(observed['asr'] is None,'zero denominator must be null')
         checked.append({'model':key[0],'method':key[1],'epsilon':key[2],'rows':len(rows)})
+    if 'continuation' in r:
+        lineage=r['continuation'];parent_path=run_dir/'parent-run.json'
+        require(not parent_path.is_symlink(),'parent report symlink forbidden')
+        require(hashlib.sha256(parent_path.read_bytes()).hexdigest()==lineage['parent_report_sha256'],'parent report hash mismatch')
+        parent=read_json(parent_path);n=lineage['inherited_conditions']
+        require(type(n) is int and 0<=n<=len(r['conditions']),'invalid inherited count')
+        require(parent['source_commit']==lineage['parent_source_commit'],'parent source mismatch')
+        require(parent['conditions']==r['conditions'][:n],'inherited conditions differ')
     completed=r['status']=='COMPLETED_NOT_INDEPENDENT_APPROVAL'
     require(r['status'] in ('RUNNING','ERROR','INTERRUPTED','COMPLETED_NOT_INDEPENDENT_APPROVAL'),'unknown run status')
     require(not completed or seen==expected,'completed report missing conditions')

@@ -1,0 +1,12 @@
+{
+  "captured_at": "2026-10-01T15:04:42.785459+00:00",
+  "live_status": false,
+  "independent_verification_approval": false,
+  "source_commit": "514fae90f1e5188babe2f729258dea7e9014fddc",
+  "files": {
+    "SUMMARY.md": "37cdd11343e2e45edf677acbc2c40db51e18eb58269ad891017684bc153b1abb",
+    "audit.json": "57972af4d2be142046eb68e93f339f8eb8baef2aeb6fb89babd86921aa4f9687",
+    "cnn_gaussian_eps_0.csv": "fcdbeacf82a563f1c6b4e4db1f1d63efd8629bd02e4f74ab7f4dae3b0d03bd29",
+    "run.json": "83c4f387bf51b49c7859d0e9fc56fc6ba898bc2dfa91cfe0064ee50524206b4d"
+  }
+}
