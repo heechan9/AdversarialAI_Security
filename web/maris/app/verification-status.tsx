@@ -13,5 +13,9 @@ export default function VerificationStatus() {
       </article>)}
     </div>
     <p>{snapshot.cause_note}</p>
+    {snapshot.discrepancies.map(issue => <details className="record-table" key={issue.id}>
+      <summary>{issue.title} · {issue.label}</summary>
+      <ol>{issue.events.map((event, index) => <li key={index}><p>{event.note}</p></li>)}</ol>
+    </details>)}
   </div>;
 }

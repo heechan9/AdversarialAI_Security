@@ -112,7 +112,12 @@ def build(root):
         cards.append(dict(id=record['id'], title='연구 수행 PC 재현' if status=='LOCAL_PASS' else '외부 독립 재실행',
                           status=status, label=label, detail=detail,
                           evidence_url='https://github.com/heechan9/AdversarialAI_Security/blob/'+record['evidence_revision']+'/'+path))
-    return dict(schema_version=1, registry_sha256=hashlib.sha256(raw).hexdigest(), cards=cards,
+    try:
+        from .issue_lifecycle import build as build_issues
+    except ImportError:
+        from issue_lifecycle import build as build_issues
+    issues = build_issues(root)
+    return dict(schema_version=1, discrepancies=issues, registry_sha256=hashlib.sha256(raw).hexdigest(), cards=cards,
                 cause_status='UNRESOLVED', cause_note='환경 간 차이의 정확한 원인은 미확정입니다. 로컬 일치를 외부 독립 검증 통과로 해석하지 않습니다.')
 
 
@@ -120,7 +125,10 @@ def markdown(snapshot):
     lines=[START, '| 검증 구분 | 상태 | 확인 범위 |', '|---|---|---|']
     for c in snapshot['cards']:
         lines.append(f"| [{c['title']}]({c['evidence_url']}) | {c['status']} | {c['detail']} |")
-    return '\n'.join(lines+['',snapshot['cause_note'],END])
+    lines += ['', snapshot['cause_note'], '', '| 추적 항목 | 처리 상태 | 이력 |', '|---|---|---|']
+    for issue in snapshot['discrepancies']:
+        lines.append(f"| {issue['title']} | {issue['label']} | {issue['event_count']}건 |")
+    return '\n'.join(lines+[END])
 
 
 def sync(root, write=False):

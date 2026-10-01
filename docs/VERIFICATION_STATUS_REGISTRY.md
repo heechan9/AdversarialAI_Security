@@ -35,6 +35,6 @@ CI는 근거 파일 변경, 미생성·오래된 MARIS 데이터, README 자동 
 
 - [법률AI 검증 등록부](https://github.com/heechan9/judicial-ai-safety-lab/blob/25d15f93de0f10dbf6698d5f5fecb7a88a3ca64e/src/judicial_ai_safety_lab/external_audit_registry.py): 검토 범위·대상 커밋·근거와 상태를 함께 기록하는 구조를 참고했다. 법률 도메인 코드나 검토자 2명 조건을 복사하지 않았다.
 - [FabGuard 근거 생성기](https://github.com/heechan9/fabguard-ai/blob/519654ea2362accf2127f4255a4379132402383c/scripts/build_web_evidence.py): 근거 식별값 검증 뒤 표시 데이터 생성, 읽기 전용 stale 검사를 적용했다. 적대적AI에서는 SHA-256과 기존 감사 JSON을 사용한다.
-- TriGuard의 문제 처리 이력 UI, 법률AI의 해시 체인 및 익명 검토 패킷은 이번 변경에 포함하지 않는다. 기존 Git 이력·Stage B 도구와 중복되는 기능을 확대하지 않았다.
+- TriGuard의 조치·재검사·종료·재개방 이력 방식을 [불일치 처리 이력](DISCREPANCY_LIFECYCLE.md)에 적용했다. 법률AI의 해시 체인과 익명 검토 패킷은 포함하지 않는다.
 
 기존 평가 코드·모델·원자료 수치·허용오차·제출 원고는 수정하지 않는다. 웹 소스 반영과 운영 사이트 배포는 별도다. 이 변경만으로 배포 사이트 갱신을 주장하지 않는다.

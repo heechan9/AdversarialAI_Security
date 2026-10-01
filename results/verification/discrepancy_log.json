@@ -1,0 +1,73 @@
+{
+  "schema_version": 1,
+  "issues": [
+    {
+      "id": "cross-environment-01",
+      "title": "환경 간 MobileNetV2 예측 불일치",
+      "state": "open",
+      "scope": {
+        "models": [
+          "cnn",
+          "mobilenet"
+        ],
+        "samples": 781,
+        "epsilons": [
+          0,
+          0.01,
+          0.03,
+          0.05
+        ],
+        "methods": [
+          "gaussian",
+          "mean"
+        ],
+        "pipelines": [
+          "clean",
+          "defended_clean",
+          "attacked",
+          "transfer_defended",
+          "adaptive_defended"
+        ]
+      },
+      "model_sha256": {
+        "cnn": "cb256b1a5d6f605d355334e4e8667257a2bfbd29e08836cc4114869bd7068701",
+        "mobilenet": "58c4878fa1480035d0bd5a63f8c3e22beac3a03f27f1aada6690b27f167129ae"
+      },
+      "manifest_sha256": "36059fea372334509404aca0e66155bf99a8df270beb1cc3bf4865b361ae70a6",
+      "history": [
+        {
+          "seq": 0,
+          "action": "registered",
+          "at": "2026-10-01T15:38:05+09:00",
+          "actor_role": "maintainer",
+          "source_commit": "491b973cd9f4840664044a83c0d62d1ee1bb98e8",
+          "note": "보존된 외부 실행의 14장·16개 예측 차이를 이력 관리 대상으로 등록했다. 이 시각은 등록 시각이며 원래 실험 시각이 아니다.",
+          "evidence": [
+            {
+              "path": "results/verification/stage_b/hyeonsu_01_review/gaussian_differences.json",
+              "sha256": "5cd6be4735d6dd6f3f142893007968ea488bb46d292eea1c65f457b4eebaa224"
+            },
+            {
+              "path": "results/verification/stage_b/hyeonsu_01_review/mean_differences.json",
+              "sha256": "5c5ba89648f0bc3c12f861fe62edee24e2fa7f626e221054204d6715bae00b4a"
+            }
+          ]
+        },
+        {
+          "seq": 1,
+          "action": "observation",
+          "at": "2026-10-01T15:38:05+09:00",
+          "actor_role": "maintainer",
+          "source_commit": "b86f725d8e53132fb04d199eb3e5d61ee605f4a6",
+          "note": "연구 수행 PC에서는 전체 조건이 기준과 일치했다. 외부 환경의 불일치 원인과 독립 재실행 일치는 미해결이므로 종료하지 않는다.",
+          "evidence": [
+            {
+              "path": "results/verification/stage_b/pc_full_20260928/received_audit.json",
+              "sha256": "cf8cc44ad14dd022710235db832ba8dd0a6f33941e23f108547fdf7d1a12c12f"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
