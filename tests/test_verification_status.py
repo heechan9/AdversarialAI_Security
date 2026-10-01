@@ -10,7 +10,7 @@ ROOT=Path(__file__).resolve().parents[1]
 
 @pytest.fixture
 def repo(tmp_path):
-    for name in [REGISTRY,SNAPSHOT,'README.md']:
+    for name in [REGISTRY,SNAPSHOT,'README.md','results/verification/discrepancy_log.json','configs/test_manifest.json','configs/stage_b_verification_contract.json']:
         dest=tmp_path/name;dest.parent.mkdir(parents=True,exist_ok=True)
         shutil.copyfile(ROOT/name,dest)
     registry=json.loads((tmp_path/REGISTRY).read_text())

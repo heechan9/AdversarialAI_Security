@@ -28,7 +28,7 @@ jobs:
       - name: Check scoped verification status and generated displays
         run: |
           python verification/status_registry.py
-          python -m pytest tests/test_verification_status.py -q
+          python -m pytest tests/test_verification_status.py tests/test_issue_lifecycle.py -q
       - name: Compare MARIS with canonical research results
         run: python verification/maris_source_check.py
 

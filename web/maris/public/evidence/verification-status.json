@@ -1,5 +1,27 @@
 {
   "schema_version": 1,
+  "discrepancies": [
+    {
+      "id": "cross-environment-01",
+      "title": "환경 간 MobileNetV2 예측 불일치",
+      "state": "open",
+      "label": "미해결",
+      "last_note": "연구 수행 PC에서는 전체 조건이 기준과 일치했다. 외부 환경의 불일치 원인과 독립 재실행 일치는 미해결이므로 종료하지 않는다.",
+      "event_count": 2,
+      "events": [
+        {
+          "action": "registered",
+          "at": "2026-10-01T15:38:05+09:00",
+          "note": "보존된 외부 실행의 14장·16개 예측 차이를 이력 관리 대상으로 등록했다. 이 시각은 등록 시각이며 원래 실험 시각이 아니다."
+        },
+        {
+          "action": "observation",
+          "at": "2026-10-01T15:38:05+09:00",
+          "note": "연구 수행 PC에서는 전체 조건이 기준과 일치했다. 외부 환경의 불일치 원인과 독립 재실행 일치는 미해결이므로 종료하지 않는다."
+        }
+      ]
+    }
+  ],
   "registry_sha256": "901dbdbd3fa6eaa172fa9fdf20846814937aec0e1ac7691f99b601b0493daec9",
   "cards": [
     {
