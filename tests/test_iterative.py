@@ -60,6 +60,7 @@ def test_asr_pipeline_specific_denominator():
 def test_output_no_overwrite_or_traversal(tmp_path,monkeypatch):
     import adversarial_ai.evaluation.iterative_evaluation as ev
     monkeypatch.setattr(ev,'ROOT',tmp_path)
+    monkeypatch.chdir(tmp_path)
     p=reserve_output('test');(p/'keep').write_text('original')
     with pytest.raises(FileExistsError):reserve_output('test')
     with pytest.raises(ValueError):reserve_output('../canonical')
@@ -80,11 +81,16 @@ def test_runner_synthetic_full_matrix(tmp_path,monkeypatch):
     import argparse,json,tensorflow as tf
     import adversarial_ai.evaluation.iterative_evaluation as ev
     monkeypatch.setattr(ev,'ROOT',tmp_path)
+    monkeypatch.chdir(tmp_path)
     (tmp_path/'configs').mkdir()
     (tmp_path/'configs/classes.json').write_text(json.dumps({str(i):str(i) for i in range(10)}))
     (tmp_path/'configs/test_manifest.json').write_text('{}')
     monkeypatch.setattr(ev.subprocess,'check_output',lambda cmd,**kw:'a'*40 if 'rev-parse' in cmd else '')
-    monkeypatch.setattr(ev,'validate_reproducibility_manifest',lambda **kw:'b'*64)
+    def validate(**kw):
+        assert not kw['model_path'].is_absolute()
+        assert kw['model_path'].as_posix().startswith('models/')
+        return 'b'*64
+    monkeypatch.setattr(ev,'validate_reproducibility_manifest',validate)
     class Generator:
         class_indices={str(i):i for i in range(10)}
         filenames=[f'0/{i}.png' for i in range(781)]
