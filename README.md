@@ -53,7 +53,7 @@
 
 ## 최신 통합 상태
 
-**제출 이후 후속 연구:** [BIM·PGD 확장](docs/ITERATIVE_ATTACK_EXTENSION.md)의 코드와 합성 모델 검사를 추가했습니다. 원본 모델·781장 확장 실험은 미실행이며, [JSMA·적대적 학습 코드](docs/JSMA_AND_ADVERSARIAL_TRAINING.md)도 추가했으며, 선박 적대적 학습은 별도 train/validation 데이터 확보가 필요합니다. 기존 제출 결과와 독립 검증 판정은 유지합니다.
+**제출 이후 후속 연구:** [BIM·PGD 확장](docs/ITERATIVE_ATTACK_EXTENSION.md)의 코드와 합성 모델 검사를 추가했습니다. 원본 모델·781장 BIM·PGD 평가는 실행을 시작했고 [중간 근거](docs/FOLLOWUP_EXECUTION_STATUS.md)를 보존했습니다. 아직 전체 완료 판정은 없으며, [JSMA·적대적 학습 코드](docs/JSMA_AND_ADVERSARIAL_TRAINING.md)도 추가했으며, 선박 적대적 학습은 별도 train/validation 데이터 확보가 필요합니다. 기존 제출 결과와 독립 검증 판정은 유지합니다.
 
 <!-- verification-status:start -->
 | 검증 구분 | 상태 | 확인 범위 |

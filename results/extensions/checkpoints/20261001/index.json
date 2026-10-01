@@ -1,0 +1,21 @@
+{
+  "kind": "point_in_time_followup_checkpoint",
+  "captured_at": "2026-10-01T14:32:38.858874+00:00",
+  "live_status": false,
+  "iterative": [
+    {
+      "name": "bim",
+      "checked_conditions": 3,
+      "expected_conditions": 16,
+      "result": "PARTIAL_OUTPUTS_ONLY"
+    },
+    {
+      "name": "pgd",
+      "checked_conditions": 1,
+      "expected_conditions": 16,
+      "result": "PARTIAL_OUTPUTS_ONLY"
+    }
+  ],
+  "jsma_scope": "CNN one image, one step; step limit, not full evaluation",
+  "training_status": "BLOCKED_NO_TRAIN_VALIDATION_DATA"
+}

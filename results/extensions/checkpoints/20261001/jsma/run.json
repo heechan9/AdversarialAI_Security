@@ -1,0 +1,49 @@
+{
+  "kind": "targeted_jsma_followup",
+  "status": "PARTIAL_COVERAGE_NOT_FULL_EVALUATION",
+  "source_commit": "b3dcbcfe685eb3457a8606d20203cd0d8d5c9e1f",
+  "model_sha256": "cb256b1a5d6f605d355334e4e8667257a2bfbd29e08836cc4114869bd7068701",
+  "manifest_sha256": "36059fea372334509404aca0e66155bf99a8df270beb1cc3bf4865b361ae70a6",
+  "settings": {
+    "model": "cnn",
+    "defense": "none",
+    "theta": 1.0,
+    "gamma": 0.01,
+    "max_steps": 1,
+    "limit": 1,
+    "run_id": "jsma-cnn-original-smoke-20261001",
+    "data_dir": "../extension2/data/test"
+  },
+  "target_policy": "(true_index + 1) % 10",
+  "attack_path": "undefended",
+  "l0_unit": "scalar_channel_feature",
+  "test_inventory": 781,
+  "evaluated": 1,
+  "rows": [
+    {
+      "relative_path": "Aircraft Carrier/Aircraft Carrier_1.jpeg",
+      "true_index": 0,
+      "clean_pred": 5,
+      "adversarial_pred": 5,
+      "target": 1,
+      "target_success": false,
+      "steps": 1,
+      "termination": "step_limit",
+      "changed_features": 2,
+      "total_features": 49152,
+      "l0_fraction": 4.0690104166666664e-05,
+      "budget_features": 491,
+      "variant": "pairwise_probability_jsma",
+      "linf": 0.7764705419540405
+    }
+  ],
+  "tensorflow": "2.21.0",
+  "keras": "3.15.1",
+  "platform": "Linux-6.18.44-x86_64-with-glibc2.39",
+  "started_at": "2026-10-01T14:27:13.252993+00:00",
+  "targeted_asr_clean_correct": null,
+  "asr_denominator": 0,
+  "accuracy": 0.0,
+  "step_limited_samples": 1,
+  "finished_at": "2026-10-01T14:27:21.654551+00:00"
+}

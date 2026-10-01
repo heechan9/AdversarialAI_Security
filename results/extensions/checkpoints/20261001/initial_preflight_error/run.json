@@ -1,0 +1,50 @@
+{
+  "kind": "followup_iterative_evaluation",
+  "status": "ERROR",
+  "independent_verification_approval": false,
+  "started_at": "2026-10-01T14:14:48.065114+00:00",
+  "settings": {
+    "attack": "bim",
+    "steps": 10,
+    "step_size": 0.005,
+    "restarts": 1,
+    "seed": 0,
+    "batch_size": 32,
+    "run_id": "bim-explore-20261001",
+    "data_dir": "/workspace/scratch/1cbb059807e4/extension2/data/test"
+  },
+  "python": "3.12.14",
+  "platform": "Linux-6.18.44-x86_64-with-glibc2.39",
+  "tensorflow": "2.21.0",
+  "keras": "3.15.1",
+  "numpy": "2.3.5",
+  "environment": {
+    "TF_ENABLE_ONEDNN_OPTS": null,
+    "TF_DETERMINISTIC_OPS": null,
+    "TF_NUM_INTRAOP_THREADS": "2",
+    "TF_NUM_INTEROP_THREADS": "1"
+  },
+  "scope": {
+    "samples": 781,
+    "epsilons": [
+      0,
+      0.01,
+      0.03,
+      0.05
+    ],
+    "pipelines": [
+      "clean",
+      "defended_clean",
+      "attacked",
+      "transfer_defended",
+      "adaptive_defended"
+    ]
+  },
+  "conditions": [],
+  "source_commit": "4b6df84fdcc9eba3b0c91ca67bf918093423687b",
+  "source_dirty": false,
+  "manifest_sha256": "36059fea372334509404aca0e66155bf99a8df270beb1cc3bf4865b361ae70a6",
+  "classes_sha256": "4a77ec1ce0aaf7ab9bed20cd1b4be3420a1d0bdf3d88924f3d1ba3ebf6d29d44",
+  "error": "ValueError: Model '/workspace/scratch/1cbb059807e4/extension2/models/cnn_baseline.h5' is absent from the manifest",
+  "finished_at": "2026-10-01T14:14:48.281740+00:00"
+}

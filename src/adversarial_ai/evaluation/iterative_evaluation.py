@@ -123,6 +123,8 @@ def run(args):
                     save()
             if any(not np.array_equal(a,b.numpy()) for a,b in zip(weights,model.weights)):raise ValueError('model mutated')
         report['status']='COMPLETED_NOT_INDEPENDENT_APPROVAL'
+    except KeyboardInterrupt:
+        report['status']='INTERRUPTED';raise
     except Exception as exc:
         report['status']='ERROR';report['error']=f'{type(exc).__name__}: {exc}';raise
     finally:

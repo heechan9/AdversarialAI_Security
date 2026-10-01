@@ -19,3 +19,6 @@ results/defenses/experimental/mean_run_01/* -text whitespace=cr-at-eol
 
 # Preserve exported web evidence hashes across Windows checkouts.
 web/maris/public/evidence/*.json -text
+
+# Preserve hashed follow-up checkpoint evidence across Windows checkout.
+results/extensions/checkpoints/** -text

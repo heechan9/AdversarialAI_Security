@@ -1,0 +1,18 @@
+{
+  "kind": "followup_csv_recalculation",
+  "source_commit": "514fae90f1e5188babe2f729258dea7e9014fddc",
+  "result": "PARTIAL_OUTPUTS_ONLY",
+  "execution_status": "RUNNING",
+  "checked_conditions": 1,
+  "expected_conditions": 16,
+  "conditions": [
+    {
+      "model": "cnn",
+      "method": "gaussian",
+      "epsilon": 0.0,
+      "rows": 781
+    }
+  ],
+  "independent_verification_approval": false,
+  "probabilities_compared": false
+}
