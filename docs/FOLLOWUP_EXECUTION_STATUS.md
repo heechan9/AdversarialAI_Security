@@ -27,3 +27,24 @@ python verification/iterative_result_audit.py results/extensions/checkpoints/202
 ```
 
 계산 비용이 큰 실험이며 CPU 환경에서 상당한 시간이 소요된다. JSMA의 정확한 pair 탐색도 별도 계산 예산이 필요하다. 코드 구현·단위 검사·부분 실행·전체 평가·독립 재현을 구분한다.
+
+## 2026-10-02 00:04 KST 추가 체크포인트
+
+`results/extensions/checkpoints/20261002-0004/`에 원본 실행의 다음 완료 조건을 추가 보존했다. 이전 체크포인트는 유지한다. 정확한 UTC 채취 시각과 파일별 SHA-256은 각 `snapshot.json`에 있다.
+
+- BIM: 7/16 조건, 조건마다 781행. CNN Gaussian 네 epsilon과 Mean 0/0.01/0.03 완료분이다.
+- PGD: 1/16 조건. CNN Gaussian epsilon=0 완료분이며 비영 epsilon 계산은 아직 진행 중이다.
+- 두 묶음 모두 CSV 해시·정답·경로·섭동 범위·정확도·ASR 재계산을 통과했지만 전체 완료 판정은 아니다.
+- 확인한 BIM CNN epsilon=0.03 정확도는 무방어 10.37%, Gaussian 전달 33.29%·방어 인지 5.63%, Mean 전달 37.77%·방어 인지 4.48%다. 공격 설정 10 steps/step-size 0.005에 한정된 관측이다. PGD·MobileNetV2 전체 결과 또는 공격 강도의 최적성을 의미하지 않는다.
+- 이번 계산은 별도 Linux 실행 환경의 후속 실험이다. ACK 제출 수치나 외부 Stage B 판정을 대체하지 않는다.
+- 업로드된 ZIP 목록과 6월 자료의 내부 압축파일까지 확인했으나 선박 train/validation 데이터는 확보하지 못했다. 실제 적대적 학습은 해당 데이터가 필요하다.
+
+### 결과 보존과 표 생성
+
+아래 명령은 실행 중인 보고서를 한 번 읽고, 그 시점에 완료된 CSV만 바이트 그대로 복사한다. 복사본을 감사한 뒤 새 폴더를 게시한다. 기존 폴더 덮어쓰기와 손상 결과 보존은 거부한다. `SUMMARY.md`는 부분 범위·ASR 분모를 표시하며 Clean/필터 Clean의 변화는 공격 성공률로 표시하지 않는다.
+
+```bash
+python -m verification.followup_snapshot <실행결과폴더> <새체크포인트폴더>
+```
+
+프로세스와 저장 공간이 유지되는 동안 계산은 진행될 수 있지만, 이 문서가 무인 실행의 지속이나 자동 Git 게시를 보증하지는 않는다. 후속 확인 때 로그·최종 상태와 전체 CSV를 다시 확인해야 한다.
