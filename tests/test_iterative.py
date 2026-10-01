@@ -108,6 +108,16 @@ def test_runner_synthetic_full_matrix(tmp_path,monkeypatch):
     for c in report['conditions']:
         assert c['samples']==781 and c['metrics']['clean']['accuracy']==1
         assert len((out/c['csv']).read_text().splitlines())==782
+    import hashlib
+    candidate=tmp_path/'best.keras';candidate.write_bytes(b'synthetic loader fixture')
+    args.trained_model=candidate;args.trained_model_sha256=hashlib.sha256(candidate.read_bytes()).hexdigest();args.trained_model_kind='cnn'
+    args.run_id='trained'
+    trained=ev.run(args);trained_report=json.loads((trained/'run.json').read_text())
+    assert len(trained_report['conditions'])==8 and trained_report['scope']['models']==['cnn']
+    assert all(c['model_sha256']==args.trained_model_sha256 for c in trained_report['conditions'])
+    args.run_id='bad-identity';args.trained_model_sha256='0'*64
+    with pytest.raises(ValueError,match='identity'):ev.run(args)
+    args.trained_model=args.trained_model_sha256=args.trained_model_kind=None
     args.run_id='failed'
     monkeypatch.setattr(ev,'validate_reproducibility_manifest',lambda **kw:(_ for _ in ()).throw(ValueError('hash mismatch')))
     with pytest.raises(ValueError,match='hash mismatch'):ev.run(args)
