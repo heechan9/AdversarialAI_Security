@@ -144,6 +144,8 @@ def main():
             save();train.on_epoch_end()
         if sha256_file(path)!=original_hash:raise RuntimeError('source model file changed')
         report['trained_model_sha256']=sha256_file(out/'best.keras');report['status']='TRAINED_NOT_TEST_EVALUATED'
+    except KeyboardInterrupt:
+        report['status']='INTERRUPTED';raise
     except Exception as exc:report['status']='ERROR';report['error']=f'{type(exc).__name__}: {exc}';raise
     finally:report['finished_at']=datetime.now(timezone.utc).isoformat();save()
     print(out)

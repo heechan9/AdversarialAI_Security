@@ -1,0 +1,172 @@
+{
+  "kind": "followup_iterative_evaluation",
+  "status": "RUNNING",
+  "independent_verification_approval": false,
+  "started_at": "2026-10-01T14:17:40.900483+00:00",
+  "settings": {
+    "attack": "bim",
+    "steps": 10,
+    "step_size": 0.005,
+    "restarts": 1,
+    "seed": 0,
+    "batch_size": 32,
+    "run_id": "bim-explore-20261001-r2",
+    "data_dir": "/workspace/scratch/1cbb059807e4/extension2/data/test"
+  },
+  "python": "3.12.14",
+  "platform": "Linux-6.18.44-x86_64-with-glibc2.39",
+  "tensorflow": "2.21.0",
+  "keras": "3.15.1",
+  "numpy": "2.3.5",
+  "environment": {
+    "TF_ENABLE_ONEDNN_OPTS": null,
+    "TF_DETERMINISTIC_OPS": null,
+    "TF_NUM_INTRAOP_THREADS": "2",
+    "TF_NUM_INTEROP_THREADS": "1"
+  },
+  "scope": {
+    "samples": 781,
+    "epsilons": [
+      0,
+      0.01,
+      0.03,
+      0.05
+    ],
+    "pipelines": [
+      "clean",
+      "defended_clean",
+      "attacked",
+      "transfer_defended",
+      "adaptive_defended"
+    ]
+  },
+  "conditions": [
+    {
+      "model": "cnn",
+      "model_sha256": "cb256b1a5d6f605d355334e4e8667257a2bfbd29e08836cc4114869bd7068701",
+      "method": "gaussian",
+      "epsilon": 0.0,
+      "samples": 781,
+      "metrics": {
+        "clean": {
+          "accuracy": 0.645326504481434,
+          "asr": 0.0,
+          "asr_successes": 0,
+          "asr_denominator": 504
+        },
+        "defended_clean": {
+          "accuracy": 0.5697823303457106,
+          "asr": 0.22817460317460317,
+          "asr_successes": 115,
+          "asr_denominator": 504
+        },
+        "attacked": {
+          "accuracy": 0.645326504481434,
+          "asr": 0.0,
+          "asr_successes": 0,
+          "asr_denominator": 504
+        },
+        "transfer_defended": {
+          "accuracy": 0.5697823303457106,
+          "asr": 0.0,
+          "asr_successes": 0,
+          "asr_denominator": 445
+        },
+        "adaptive_defended": {
+          "accuracy": 0.5697823303457106,
+          "asr": 0.0,
+          "asr_successes": 0,
+          "asr_denominator": 445
+        }
+      },
+      "csv": "cnn_gaussian_eps_0.csv",
+      "sha256": "fcdbeacf82a563f1c6b4e4db1f1d63efd8629bd02e4f74ab7f4dae3b0d03bd29"
+    },
+    {
+      "model": "cnn",
+      "model_sha256": "cb256b1a5d6f605d355334e4e8667257a2bfbd29e08836cc4114869bd7068701",
+      "method": "gaussian",
+      "epsilon": 0.01,
+      "samples": 781,
+      "metrics": {
+        "clean": {
+          "accuracy": 0.645326504481434,
+          "asr": 0.0,
+          "asr_successes": 0,
+          "asr_denominator": 504
+        },
+        "defended_clean": {
+          "accuracy": 0.5697823303457106,
+          "asr": 0.22817460317460317,
+          "asr_successes": 115,
+          "asr_denominator": 504
+        },
+        "attacked": {
+          "accuracy": 0.2765685019206146,
+          "asr": 0.5714285714285714,
+          "asr_successes": 288,
+          "asr_denominator": 504
+        },
+        "transfer_defended": {
+          "accuracy": 0.4878361075544174,
+          "asr": 0.14382022471910114,
+          "asr_successes": 64,
+          "asr_denominator": 445
+        },
+        "adaptive_defended": {
+          "accuracy": 0.24199743918053776,
+          "asr": 0.5752808988764045,
+          "asr_successes": 256,
+          "asr_denominator": 445
+        }
+      },
+      "csv": "cnn_gaussian_eps_0.01.csv",
+      "sha256": "12b2d9a183e7ed7c96931fdbafafa1895a6dd2ae5539d76eb4f3ecc1e90f28b8"
+    },
+    {
+      "model": "cnn",
+      "model_sha256": "cb256b1a5d6f605d355334e4e8667257a2bfbd29e08836cc4114869bd7068701",
+      "method": "gaussian",
+      "epsilon": 0.03,
+      "samples": 781,
+      "metrics": {
+        "clean": {
+          "accuracy": 0.645326504481434,
+          "asr": 0.0,
+          "asr_successes": 0,
+          "asr_denominator": 504
+        },
+        "defended_clean": {
+          "accuracy": 0.5697823303457106,
+          "asr": 0.22817460317460317,
+          "asr_successes": 115,
+          "asr_denominator": 504
+        },
+        "attacked": {
+          "accuracy": 0.10371318822023047,
+          "asr": 0.8392857142857143,
+          "asr_successes": 423,
+          "asr_denominator": 504
+        },
+        "transfer_defended": {
+          "accuracy": 0.33290653008962867,
+          "asr": 0.4157303370786517,
+          "asr_successes": 185,
+          "asr_denominator": 445
+        },
+        "adaptive_defended": {
+          "accuracy": 0.056338028169014086,
+          "asr": 0.9011235955056179,
+          "asr_successes": 401,
+          "asr_denominator": 445
+        }
+      },
+      "csv": "cnn_gaussian_eps_0.03.csv",
+      "sha256": "594d966ae1611d7c95834e4a07f560dac45cfc863c0e0f0d87a38ca4a5c6a8d1"
+    }
+  ],
+  "source_commit": "514fae90f1e5188babe2f729258dea7e9014fddc",
+  "source_dirty": false,
+  "manifest_sha256": "36059fea372334509404aca0e66155bf99a8df270beb1cc3bf4865b361ae70a6",
+  "classes_sha256": "4a77ec1ce0aaf7ab9bed20cd1b4be3420a1d0bdf3d88924f3d1ba3ebf6d29d44"
+}

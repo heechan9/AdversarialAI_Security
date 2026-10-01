@@ -63,6 +63,8 @@ def main():
         report['accuracy']=sum(r['adversarial_pred']==r['true_index'] for r in rows)/len(rows)
         report['step_limited_samples']=sum(r['termination']=='step_limit' for r in rows)
         report['status']='FULL_COVERAGE_NOT_ROBUSTNESS_PROOF' if len(rows)==781 else 'PARTIAL_COVERAGE_NOT_FULL_EVALUATION'
+    except KeyboardInterrupt:
+        report['status']='INTERRUPTED';raise
     except Exception as exc:report['status']='ERROR';report['error']=f'{type(exc).__name__}: {exc}';raise
     finally:report['finished_at']=datetime.now(timezone.utc).isoformat();save()
     print(out)
