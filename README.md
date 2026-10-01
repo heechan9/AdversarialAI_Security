@@ -22,7 +22,7 @@
 ![Keras](https://img.shields.io/badge/Keras-3.15-D00000?logo=keras&logoColor=white)
 ![Tests](https://img.shields.io/badge/tests-pytest_verified-2EA44F)
 ![Evidence Audit](https://img.shields.io/badge/evidence_audit-PASS-2EA44F)
-![Paper Claims](https://img.shields.io/badge/paper_claims-9%2F9_PASS-2EA44F)
+![Historical Paper Claims](https://img.shields.io/badge/v1.5_claim_snapshot-9%2F9_PASS-2EA44F)
 ![Data](https://img.shields.io/badge/test_images-781-0054A6)
 
 선박 사진을 인식하는 AI가 미세한 입력 교란에도 안전한지 확인하고,  
@@ -52,12 +52,25 @@
 
 ## 최신 통합 상태
 
+<!-- verification-status:start -->
+| 검증 구분 | 상태 | 확인 범위 |
+|---|---|---|
+| [연구 수행 PC 재현](https://github.com/heechan9/AdversarialAI_Security/blob/e6e575fa3df1247f8e43ac9749a573329f62a910/docs/STAGE_B_PC_FULL_20260928.md) | LOCAL_PASS | 모델 2개·781장·두 필터·ε 4개. 라벨·요약 지표 비교 완료, 확률값 비교 제외. |
+| [외부 독립 재실행](https://github.com/heechan9/AdversarialAI_Security/blob/e6e575fa3df1247f8e43ac9749a573329f62a910/docs/STAGE_B_HYEONSU_01_REVIEW.md) | FAIL | 보존 결과에서 16개 예측 차이. 평균 필터는 보조 진단이며 외부 전체 검증 PASS가 아닙니다. |
+
+환경 간 차이의 정확한 원인은 미확정입니다. 로컬 일치를 외부 독립 검증 통과로 해석하지 않습니다.
+
+| 추적 항목 | 처리 상태 | 이력 |
+|---|---|---|
+| 환경 간 MobileNetV2 예측 불일치 | 미해결 | 2건 |
+<!-- verification-status:end -->
+
 ### 2026-10-01 검증·제출 상태 갱신
 
 - **연구 수행 PC 전체 재실행: LOCAL_PASS.** 9월 28일 17:21 KST 완료, 10월 1일 반환 ZIP 수신·감사. CNN·MobileNetV2 × ε=0, 0.01, 0.03, 0.05 × Gaussian·Mean의 CSV 16개, 각각 781행을 실행 커밋 `b86f725`의 기준과 다시 비교했다. 다섯 경로의 예측 라벨 62,480개 및 요약 지표 비교에서 차이 0건이다. 고유 이미지 수는 781장이며 확률 벡터는 비교하지 않았다.
 - **외부 독립 검증: 기존 FAIL 유지.** 외부 실행의 MobileNetV2 14장·16개 예측 차이는 이번 PC에서 모두 기준과 일치했으나, 환경 간 차이의 단일 원인은 미확정이다. 같은 공격 배열의 환경 간 교차 분류는 추가 작업이다. 로컬 재현을 외부 독립 검증 승인으로 쓰지 않는다.
 - **논문 제출 완료(사용자 확인).** 실제 제출본은 `KIPS 학술벌표대회_김태희팀_0930_멘토검토본.doc`이다. v7.5는 이전 로컬 검토본이다. 제출 파일은 수정하지 않으며 접수증·학회 채택은 별도로 확인한다.
-- 이번 갱신은 상태 문서 동기화다. 개인 저장소의 진단 도구·비교기 개선이 팀 코드에 모두 병합됐다는 뜻은 아니다. 기존 실험 수치·모델·승인 필드·허용오차는 유지한다.
+- PR #21의 상태 문서 동기화에 이어, 개인 저장소의 진단 도구·비교기 개선·검증 등록부·불일치 처리 이력을 코드와 근거 파일로 통합했다. 운영 웹 배포는 별도다. 기존 실험 수치·모델·승인 필드·허용오차는 유지한다.
 
 [전체 PC 수신 감사·환경 비교](https://github.com/heechan9/AdversarialAI_Security/blob/e6e575fa3df1247f8e43ac9749a573329f62a910/docs/STAGE_B_PC_FULL_20260928.md) · [파생 감사 JSON](https://github.com/heechan9/AdversarialAI_Security/blob/e6e575fa3df1247f8e43ac9749a573329f62a910/results/verification/stage_b/pc_full_20260928/received_audit.json) · [제출본 보존 기록](https://github.com/heechan9/AdversarialAI_Security/blob/e6e575fa3df1247f8e43ac9749a573329f62a910/docs/PAPER_RELEASE_STATUS.md)
 

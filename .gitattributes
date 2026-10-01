@@ -1,3 +1,15 @@
+# Preserve the Stage-B dataset manifest byte-for-byte: its SHA-256 is pinned
+# in configs/stage_b_verification_contract.json and checked by
+# verification/stage_b_readiness.py. Without -text, a Windows checkout with
+# core.autocrlf enabled can normalize this file's line endings and make an
+# otherwise-correct external checkout fail readiness on a false CRLF/LF
+# hash mismatch. Note: this does not retroactively change any hash already
+# recorded for a past commit -- .gitattributes is read from the currently
+# checked-out tree, not from history, so a `git checkout <old-sha>` of a
+# commit that predates this line is unaffected, and none of the existing
+# Stage-B evidence or reviewer-approval records are altered by adding it.
+configs/test_manifest.json -text
+
 results/audit/evidence/*.csv -text
 
 # Preserve uploaded experimental defense evidence byte-for-byte.
