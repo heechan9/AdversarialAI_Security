@@ -52,6 +52,17 @@
 
 ## 최신 통합 상태
 
+### 2026-10-01 검증·제출 상태 갱신
+
+- **연구 수행 PC 전체 재실행: LOCAL_PASS.** 9월 28일 17:21 KST 완료, 10월 1일 반환 ZIP 수신·감사. CNN·MobileNetV2 × ε=0, 0.01, 0.03, 0.05 × Gaussian·Mean의 CSV 16개, 각각 781행을 실행 커밋 `b86f725`의 기준과 다시 비교했다. 다섯 경로의 예측 라벨 62,480개 및 요약 지표 비교에서 차이 0건이다. 고유 이미지 수는 781장이며 확률 벡터는 비교하지 않았다.
+- **외부 독립 검증: 기존 FAIL 유지.** 외부 실행의 MobileNetV2 14장·16개 예측 차이는 이번 PC에서 모두 기준과 일치했으나, 환경 간 차이의 단일 원인은 미확정이다. 같은 공격 배열의 환경 간 교차 분류는 추가 작업이다. 로컬 재현을 외부 독립 검증 승인으로 쓰지 않는다.
+- **논문 제출 완료(사용자 확인).** 실제 제출본은 `KIPS 학술벌표대회_김태희팀_0930_멘토검토본.doc`이다. v7.5는 이전 로컬 검토본이다. 제출 파일은 수정하지 않으며 접수증·학회 채택은 별도로 확인한다.
+- 이번 갱신은 상태 문서 동기화다. 개인 저장소의 진단 도구·비교기 개선이 팀 코드에 모두 병합됐다는 뜻은 아니다. 기존 실험 수치·모델·승인 필드·허용오차는 유지한다.
+
+[전체 PC 수신 감사·환경 비교](https://github.com/heechan9/AdversarialAI_Security/blob/e6e575fa3df1247f8e43ac9749a573329f62a910/docs/STAGE_B_PC_FULL_20260928.md) · [파생 감사 JSON](https://github.com/heechan9/AdversarialAI_Security/blob/e6e575fa3df1247f8e43ac9749a573329f62a910/results/verification/stage_b/pc_full_20260928/received_audit.json) · [제출본 보존 기록](https://github.com/heechan9/AdversarialAI_Security/blob/e6e575fa3df1247f8e43ac9749a573329f62a910/docs/PAPER_RELEASE_STATUS.md)
+
+### 9월 19일 통합 이력
+
 2026-09-19 기준, Clean·FGSM·가우시안·평균 필터 실험과 MARIS 회색 CAD 보기·방어 비교 소스가 반영되어 있습니다.
 문서 반영, 실험 결과의 공식 채택, 최종 논문 검증은 별도로 관리합니다.
 

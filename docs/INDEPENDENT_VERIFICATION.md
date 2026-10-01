@@ -1,10 +1,19 @@
 # 독립 검증 (Independent Verification)
 
+## 2026-10-01 검증·제출 상태 갱신
+
+- **연구 수행 PC 전체 재실행: LOCAL_PASS.** 9월 28일 17:21 KST 완료, 10월 1일 반환 ZIP 수신·감사. CNN·MobileNetV2 × ε=0, 0.01, 0.03, 0.05 × Gaussian·Mean의 CSV 16개, 각각 781행을 실행 커밋 `b86f725`의 기준과 다시 비교했다. 다섯 경로의 예측 라벨 62,480개 및 요약 지표 비교에서 차이 0건이다. 고유 이미지 수는 781장이며 확률 벡터는 비교하지 않았다.
+- **외부 독립 검증: 기존 FAIL 유지.** 외부 실행의 MobileNetV2 14장·16개 예측 차이는 이번 PC에서 모두 기준과 일치했으나, 환경 간 차이의 단일 원인은 미확정이다. 같은 공격 배열의 환경 간 교차 분류는 추가 작업이다. 로컬 재현을 외부 독립 검증 승인으로 쓰지 않는다.
+- **논문 제출 완료(사용자 확인).** 실제 제출본은 `KIPS 학술벌표대회_김태희팀_0930_멘토검토본.doc`이다. v7.5는 이전 로컬 검토본이다. 제출 파일은 수정하지 않으며 접수증·학회 채택은 별도로 확인한다.
+- 이번 갱신은 상태 문서 동기화다. 개인 저장소의 진단 도구·비교기 개선이 팀 코드에 모두 병합됐다는 뜻은 아니다. 기존 실험 수치·모델·승인 필드·허용오차는 유지한다.
+
+[전체 PC 수신 감사·환경 비교](https://github.com/heechan9/AdversarialAI_Security/blob/e6e575fa3df1247f8e43ac9749a573329f62a910/docs/STAGE_B_PC_FULL_20260928.md) · [파생 감사 JSON](https://github.com/heechan9/AdversarialAI_Security/blob/e6e575fa3df1247f8e43ac9749a573329f62a910/results/verification/stage_b/pc_full_20260928/received_audit.json) · [제출본 보존 기록](https://github.com/heechan9/AdversarialAI_Security/blob/e6e575fa3df1247f8e43ac9749a573329f62a910/docs/PAPER_RELEASE_STATUS.md)
+
 Clean·FGSM 결과를 저장소의 기존 평가·감사 파이프라인 **바깥에서** 다시 계산해,
 커밋된 수치와 일치하는지 확인하는 별도 검증 작업이다.
 
-> **A단계는 구현·실행됐고, B단계는 선행 조건 미충족으로 보류 중이다.**
-> B단계 수치가 채워지기 전까지 이 문서는 A단계 결과만 주장한다.
+> **A단계 완료. 외부 B단계 재실행은 수행됐으나 결과 일치 판정 FAIL이며, 연구 수행 PC의 전체 재실행은 LOCAL_PASS다.**
+> 실행별 범위·환경과 근거는 상단 갱신 링크를 따른다.
 
 ## 0. 불변 조건 (작업 전체에 적용)
 
@@ -146,7 +155,7 @@ CNN `1.559e-07`, MobileNet `2.209e-07` 로 float32 직렬화 오차 범위 안�
 python -m pytest tests/test_independent_stage_a.py -q
 ```
 
-## 3. B단계 — 모델 재실행 (별도 준비)
+## 3. B단계 — 새 실행 환경의 준비 조건
 
 `.h5` 모델을 직접 로드해 781장에 대한 예측과 FGSM 공격을 재실행하고, 커밋된 표본별
 예측 자체를 재생성해 대조한다.
@@ -160,7 +169,7 @@ python -m pytest tests/test_independent_stage_a.py -q
 - 확률 비교는 수행하지 않으며 라벨·요약 지표·L∞를 확인한다.
 - CI의 `--contract-only` 검사는 계약·manifest 구조만 확인하며 실제 재실행 완료를 의미하지 않는다.
 
-**선행 조건 (현재 미충족):**
+**새 실행 환경에 필요한 선행 조건:** 이미 완료된 실행의 미수행을 뜻하지 않는다.
 
 - `models/cnn_baseline.h5`, `models/mobilenet_finetuned.h5` (및 필요 시
   `mobilenet_stage1.h5`) — `.gitignore` 로 제외돼 저장소에 없다. 전달돼야 한다.
@@ -172,7 +181,7 @@ python -m pytest tests/test_independent_stage_a.py -q
 - 기존 canonical/provisional 산출물은 사라지거나 덮어써지지 않는다.
   독립 재실행 결과는 별도 run ID 경로에 저장하고 비교 대상의 source SHA를 기록한다.
 
-**허용오차 규약 (확정 필요):**
+**허용오차 규약 (실행별 계약 확인):**
 
 TensorFlow/Keras forward pass는 하드웨어·연산 순서에 따라 비트 단위로 재현되지 않는다.
 따라서 B단계는 "완전 일치"가 아니라 명시된 허용오차로 판정한다. 제안 규약:
@@ -184,7 +193,7 @@ TensorFlow/Keras forward pass는 하드웨어·연산 순서에 따라 비트 �
 | 표본별 확률값 | 절대차 ≤ 1e-5 (참고 기록, 판정 미사용) |
 | L∞ | `≤ ε + 1e-6` (기존 계약과 동일) |
 
-이 표는 제안값이며 확정 전까지 판정 기준으로 사용하지 않는다.
+이 표의 라벨·지표·L∞ 기준은 이번 PC 로컬 실행에서 확인·적용했다. 확률값은 판정에 사용하지 않았다. 새 외부 실행의 계약 확인은 별도로 기록하며, 로컬 실행자 확인을 팀 또는 외부 검증자의 승인으로 대체하지 않는다.
 
 ## 4. 현재 상태
 
@@ -193,7 +202,8 @@ TensorFlow/Keras forward pass는 하드웨어·연산 순서에 따라 비트 �
 | A단계 하네스 | 구현·실행 완료 — 2개 모델 28개 검사 전부 PASS |
 | A단계 테스트 | 46건 통과 (mutation test 중심) |
 | B단계 준비 게이트 | 구현·테스트 완료 — 모델·781장·승인·source commit이 없으면 fail-closed |
-| B단계 재실행 | 선행 조건 미충족 — 모델·데이터 미확보, 비교 허용오차 규약 확정 필요 |
+| 외부 B단계 재실행 | 수행 확인, 기준 예측과 일부 불일치하여 기존 FAIL 유지 |
+| 연구 수행 PC 전체 재실행 | LOCAL_PASS; 전체 781장·모든 조건 라벨 및 요약 지표 비교 완료, 외부 독립 승인 아님 |
 
 ## 5. 검증 대상 커밋
 
