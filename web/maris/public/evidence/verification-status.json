@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "registry_sha256": "901dbdbd3fa6eaa172fa9fdf20846814937aec0e1ac7691f99b601b0493daec9",
+  "cards": [
+    {
+      "id": "pc-full-20260928",
+      "title": "연구 수행 PC 재현",
+      "status": "LOCAL_PASS",
+      "label": "전체 조건 기준 일치",
+      "detail": "모델 2개·781장·두 필터·ε 4개. 라벨·요약 지표 비교 완료, 확률값 비교 제외.",
+      "evidence_url": "https://github.com/heechan9/AdversarialAI_Security/blob/e6e575fa3df1247f8e43ac9749a573329f62a910/docs/STAGE_B_PC_FULL_20260928.md"
+    },
+    {
+      "id": "external-01",
+      "title": "외부 독립 재실행",
+      "status": "FAIL",
+      "label": "기준과 일부 불일치",
+      "detail": "보존 결과에서 16개 예측 차이. 평균 필터는 보조 진단이며 외부 전체 검증 PASS가 아닙니다.",
+      "evidence_url": "https://github.com/heechan9/AdversarialAI_Security/blob/e6e575fa3df1247f8e43ac9749a573329f62a910/docs/STAGE_B_HYEONSU_01_REVIEW.md"
+    }
+  ],
+  "cause_status": "UNRESOLVED",
+  "cause_note": "환경 간 차이의 정확한 원인은 미확정입니다. 로컬 일치를 외부 독립 검증 통과로 해석하지 않습니다."
+}
