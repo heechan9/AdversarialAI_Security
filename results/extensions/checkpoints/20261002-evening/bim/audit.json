@@ -1,0 +1,90 @@
+{
+  "kind": "followup_csv_recalculation",
+  "source_commit": "9f2f7836fa0fe2bf4c121b7b7c9c8fef18871edb",
+  "result": "PARTIAL_OUTPUTS_ONLY",
+  "execution_status": "RUNNING",
+  "checked_conditions": 13,
+  "expected_conditions": 16,
+  "conditions": [
+    {
+      "model": "cnn",
+      "method": "gaussian",
+      "epsilon": 0.0,
+      "rows": 781
+    },
+    {
+      "model": "cnn",
+      "method": "gaussian",
+      "epsilon": 0.01,
+      "rows": 781
+    },
+    {
+      "model": "cnn",
+      "method": "gaussian",
+      "epsilon": 0.03,
+      "rows": 781
+    },
+    {
+      "model": "cnn",
+      "method": "gaussian",
+      "epsilon": 0.05,
+      "rows": 781
+    },
+    {
+      "model": "cnn",
+      "method": "mean",
+      "epsilon": 0.0,
+      "rows": 781
+    },
+    {
+      "model": "cnn",
+      "method": "mean",
+      "epsilon": 0.01,
+      "rows": 781
+    },
+    {
+      "model": "cnn",
+      "method": "mean",
+      "epsilon": 0.03,
+      "rows": 781
+    },
+    {
+      "model": "cnn",
+      "method": "mean",
+      "epsilon": 0.05,
+      "rows": 781
+    },
+    {
+      "model": "mobilenet",
+      "method": "gaussian",
+      "epsilon": 0.0,
+      "rows": 781
+    },
+    {
+      "model": "mobilenet",
+      "method": "gaussian",
+      "epsilon": 0.01,
+      "rows": 781
+    },
+    {
+      "model": "mobilenet",
+      "method": "gaussian",
+      "epsilon": 0.03,
+      "rows": 781
+    },
+    {
+      "model": "mobilenet",
+      "method": "gaussian",
+      "epsilon": 0.05,
+      "rows": 781
+    },
+    {
+      "model": "mobilenet",
+      "method": "mean",
+      "epsilon": 0.0,
+      "rows": 781
+    }
+  ],
+  "independent_verification_approval": false,
+  "probabilities_compared": false
+}
