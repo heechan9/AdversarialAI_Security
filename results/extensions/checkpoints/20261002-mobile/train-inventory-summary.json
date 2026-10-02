@@ -1,0 +1,92 @@
+{
+  "date": "2026-10-02",
+  "scope": "source folder metadata only; not proof of downloaded or decoded images",
+  "source_file_count": 8067,
+  "unique_source_file_ids": 8067,
+  "unique_class_and_filename_count": 8054,
+  "class_counts": {
+    "Aircraft Carrier": 792,
+    "Bulkers": 551,
+    "Car Carrier": 1772,
+    "Container Ship": 832,
+    "Cruise": 778,
+    "DDG": 863,
+    "Recreational": 660,
+    "Sailboat": 257,
+    "Submarine": 759,
+    "Tug": 803
+  },
+  "same_filename_groups": [
+    {
+      "class": "Submarine",
+      "name": "Submarine_662.jpeg",
+      "count": 2
+    },
+    {
+      "class": "Submarine",
+      "name": "Submarine_664.jpeg",
+      "count": 2
+    },
+    {
+      "class": "Submarine",
+      "name": "Submarine_665.jpeg",
+      "count": 2
+    },
+    {
+      "class": "Submarine",
+      "name": "Submarine_667.jpeg",
+      "count": 2
+    },
+    {
+      "class": "Submarine",
+      "name": "Submarine_668.jpeg",
+      "count": 2
+    },
+    {
+      "class": "Submarine",
+      "name": "Submarine_669.jpeg",
+      "count": 2
+    },
+    {
+      "class": "Submarine",
+      "name": "Submarine_67.jpeg",
+      "count": 2
+    },
+    {
+      "class": "Submarine",
+      "name": "Submarine_670.jpeg",
+      "count": 2
+    },
+    {
+      "class": "Submarine",
+      "name": "Submarine_671.jpeg",
+      "count": 2
+    },
+    {
+      "class": "Submarine",
+      "name": "Submarine_672.jpeg",
+      "count": 2
+    },
+    {
+      "class": "Submarine",
+      "name": "Submarine_673.jpeg",
+      "count": 2
+    },
+    {
+      "class": "Submarine",
+      "name": "Submarine_674.jpeg",
+      "count": 2
+    },
+    {
+      "class": "Submarine",
+      "name": "Submarine_675.jpeg",
+      "count": 2
+    }
+  ],
+  "collection_method": {
+    "nine_classes": "connected Drive direct-child listing; each returned fewer than the 1000 item limit",
+    "Car Carrier": "browser folder grid; unique file IDs collected through final page, 1772 entries"
+  },
+  "training_ready": false,
+  "near_duplicate_checked": false
+}
