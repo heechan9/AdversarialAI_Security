@@ -41,3 +41,16 @@ experiments sharing the CPU. They are not full-attack speedup estimates or
 robustness results. Exact measurements and gradient hashes are recorded in
 `results/extensions/checkpoints/20261002-mobile/jsma-exact-benchmark.json`.
 New full JSMA evaluations must retain their own source commit and run metadata.
+
+## Gradient-grouped blocks
+
+A second exact optimization groups eligible features by signed target gradient
+before partitioning them into blocks. No eligible feature is discarded. Cross-
+block pairs are canonicalized to the original feature indices, including ties.
+A global minimum new-feature cost also rejects impossible remaining L0 budgets.
+Nonfinite bounds retain the original traversal fallback.
+
+The recorded CNN sample 63, truncated to three attack steps, decreased from
+15.441 s to 0.328 s with identical adversarial bytes and termination metadata.
+This is one probe, not a full-dataset speed or attack-success claim. The probe
+is in `results/extensions/checkpoints/20261002-mobile/jsma-grouped-benchmark.json`.

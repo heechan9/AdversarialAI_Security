@@ -4,6 +4,8 @@ import hashlib
 import json
 from pathlib import Path
 import math
+import shutil
+from adversarial_ai.training.checkpoints import save_snapshot, latest_snapshot
 import numpy as np
 from PIL import Image
 from adversarial_ai.attacks.iterative import generate_iterative, validate_settings
@@ -93,6 +95,7 @@ def main():
     p.add_argument('--epsilon',type=float,required=True);p.add_argument('--step-size',type=float,required=True)
     p.add_argument('--steps',type=int,required=True);p.add_argument('--seed',type=int,default=2026)
     p.add_argument('--batch-size',type=int,default=32);p.add_argument('--learning-rate',type=float,default=1e-5)
+    p.add_argument('--resume',action='store_true',help='Resume the latest complete epoch; unfinished epoch repeats.')
     args=p.parse_args();root=Path(__file__).resolve().parents[3]
     if Path.cwd().resolve()!=root:raise ValueError('run from repository root')
     validate_settings(args.epsilon,args.step_size,args.steps,1,args.seed,'pgd')
@@ -110,23 +113,46 @@ def main():
     if expected['models/'+filename]!=original_hash:raise ValueError('initial model hash mismatch')
     out=root/'results/extensions/adversarial_training'/args.run_id
     if any(p.is_symlink() for p in [out,*out.parents]):raise ValueError('unsafe output path')
-    out.mkdir(parents=True,exist_ok=False)
-    (out/'split-audit.json').write_text(json.dumps(audit,indent=2)+'\n')
+    if args.resume:
+        if not out.is_dir():raise ValueError('resume output missing')
+    else:out.mkdir(parents=True,exist_ok=False)
+    audit_text=json.dumps(audit,indent=2)+'\n'
+    audit_hash=hashlib.sha256(audit_text.encode()).hexdigest()
+    settings={k:str(v) if isinstance(v,Path) else v for k,v in vars(args).items() if k!='resume'}
+    identity=dict(source_commit=source,source_model_sha256=original_hash,split_audit_sha256=audit_hash,settings=settings,tensorflow=tf.__version__,keras=tf.keras.__version__)
+    restored=latest_snapshot(out/'checkpoints',identity) if args.resume else None
+    (out/'split-audit.json').write_text(audit_text)
     report=dict(kind='adversarial_training_followup',status='RUNNING',source_commit=source,source_model_sha256=original_hash,
-        split_audit_sha256=sha256_file(out/'split-audit.json'),settings={k:str(v) if isinstance(v,Path) else v for k,v in vars(args).items()},
+        split_audit_sha256=sha256_file(out/'split-audit.json'),settings=settings,
         tensorflow=tf.__version__,keras=tf.keras.__version__,platform=platform.platform(),epochs=[],started_at=datetime.now(timezone.utc).isoformat())
-    def save():(out/'training.json').write_text(json.dumps(report,indent=2,allow_nan=False)+'\n')
+    def save():
+        temp=out/'training.json.tmp'
+        temp.write_text(json.dumps(report,indent=2,allow_nan=False)+'\n');temp.replace(out/'training.json')
+    if restored:
+        report=restored[1]['report']
+        report['status']='RUNNING';report.pop('finished_at',None);report.pop('error',None)
+        report.setdefault('resumptions',[]).append(datetime.now(timezone.utc).isoformat())
+    report['resume_policy']='completed_epoch_with_optimizer; unfinished epoch repeats; not bitwise equivalence'
     save()
     try:
         tf.keras.utils.set_random_seed(args.seed)
         original=tf.keras.models.load_model(path,compile=False)
-        model=tf.keras.models.clone_model(original);model.set_weights(original.get_weights())
+        model=tf.keras.models.clone_model(original);model.set_weights(original.get_weights());del original
         size=128 if args.model=='cnn' else 224
         def generator(directory,shuffle):
             return tf.keras.preprocessing.image.ImageDataGenerator(rescale=1./255).flow_from_directory(str(directory),classes=names,target_size=(size,size),batch_size=args.batch_size,shuffle=shuffle,seed=args.seed)
         train=generator(args.train_dir,True);val=generator(args.validation_dir,False)
-        optimizer=tf.keras.optimizers.Adam(args.learning_rate);best=-1.
-        for epoch in range(args.epochs):
+        optimizer=tf.keras.optimizers.Adam(args.learning_rate);best=-1.;start_epoch=0
+        model.compile(optimizer=optimizer,loss=tf.keras.losses.CategoricalCrossentropy(from_logits=infer_from_logits(model)))
+        if restored:
+            snapshot,state=restored
+            model=tf.keras.models.load_model(snapshot/'last.keras')
+            optimizer=model.optimizer;best=state['best_score'];start_epoch=state['next_epoch']
+            shutil.copy2(snapshot/'best.keras',out/'best.keras')
+        for epoch in range(start_epoch,args.epochs):
+            # Epoch-addressable ordering avoids generator state depending on prior batches.
+            train.index_array=np.random.default_rng(args.seed+epoch).permutation(train.n)
+            train.total_batches_seen=epoch*len(train)
             losses=[]
             for batch in range(len(train)):
                 x,y=train[batch];losses.append(train_batch(model,optimizer,x,y,epsilon=args.epsilon,step_size=args.step_size,steps=args.steps,seed=(args.seed+epoch*len(train)+batch)%(2**31)))
@@ -141,6 +167,7 @@ def main():
             report['epochs'].append(dict(epoch=epoch+1,mean_batch_loss=float(np.mean(losses)),validation_samples=total,validation_clean_accuracy=clean_correct/total,validation_pgd_accuracy=score))
             if score>best:
                 best=score;model.save(out/'best.keras');report['best_epoch']=epoch+1
+            save_snapshot(out/'checkpoints',model,out/'best.keras',dict(identity=identity,next_epoch=epoch+1,best_score=best,report=report))
             save();train.on_epoch_end()
         if sha256_file(path)!=original_hash:raise RuntimeError('source model file changed')
         report['trained_model_sha256']=sha256_file(out/'best.keras');report['status']='TRAINED_NOT_TEST_EVALUATED'

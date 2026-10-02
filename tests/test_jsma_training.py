@@ -111,11 +111,27 @@ def test_training_cli_writes_separate_model(tmp_path,monkeypatch):
     (root/'configs/test_manifest.json').write_text(json.dumps(dict(test_samples=781,test_files=rows,models=[dict(path='models/cnn_baseline.h5',sha256=original_hash)])))
     import subprocess
     monkeypatch.setattr(subprocess,'check_output',lambda cmd,**kw:'a'*40 if 'rev-parse' in cmd else '')
-    monkeypatch.setattr(sys,'argv',['train','--model','cnn','--train-dir','train','--validation-dir','val','--test-dir','test','--epochs','1','--epsilon','0.01','--step-size','0.005','--steps','1','--batch-size','10','--run-id','synthetic'])
-    tr.main()
+    monkeypatch.setattr(sys,'argv',['train','--model','cnn','--train-dir','train','--validation-dir','val','--test-dir','test','--epochs','2','--epsilon','0.01','--step-size','0.005','--steps','1','--batch-size','10','--run-id','synthetic'])
+    actual_train_batch=tr.train_batch
+    calls=[]
+    def interrupt_second_epoch(*args,**kwargs):
+        calls.append(1)
+        if len(calls)==2:raise KeyboardInterrupt()
+        return actual_train_batch(*args,**kwargs)
+    monkeypatch.setattr(tr,'train_batch',interrupt_second_epoch)
+    with pytest.raises(KeyboardInterrupt):tr.main()
     out=root/'results/extensions/adversarial_training/synthetic'
     report=json.loads((out/'training.json').read_text())
-    assert report['status']=='TRAINED_NOT_TEST_EVALUATED' and report['best_epoch']==1
+    assert report['status']=='INTERRUPTED' and report['best_epoch']==1
     assert hashlib.sha256(original.read_bytes()).hexdigest()==original_hash
     assert (out/'best.keras').is_file() and report['epochs'][0]['validation_samples']==10
     tf.keras.models.load_model(out/'best.keras',compile=False)
+    # Simulate loss of the final report and restore from the completed epoch.
+    before=(out/'best.keras').read_bytes()
+    monkeypatch.setattr(sys,'argv',sys.argv+['--resume'])
+    tr.main()
+    resumed=json.loads((out/'training.json').read_text())
+    assert resumed['status']=='TRAINED_NOT_TEST_EVALUATED'
+    assert len(resumed['epochs'])==2 and len(resumed['resumptions'])==1
+    assert len(calls)==3  # completed first epoch was not retrained
+    assert hashlib.sha256(original.read_bytes()).hexdigest()==original_hash

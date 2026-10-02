@@ -39,6 +39,19 @@ def test_empty_and_no_feasible_pairs():
     assert select_pair([1,2],[1,2],[True,True],1.) is None
 
 
+def test_overflow_keeps_original_block_traversal():
+    a=np.array([-.2,1.,1.,1.])*1e200
+    b=np.array([1.5,-1.,-1.,-3.])*1e200
+    with np.errstate(over='ignore',invalid='ignore'):
+        assert select_pair(a,b,np.ones(4,bool),1.,3)==(1,2)
+
+
+def test_budget_shortcut_still_allows_repeated_features():
+    a=np.array([1.,2.,3.]);b=-a;eligible=np.ones(3,bool)
+    assert select_pair(a,b,eligible,1.,changed=np.zeros(3,bool),remaining=1) is None
+    assert select_pair(a,b,eligible,1.,changed=np.array([False,False,True]),remaining=1)==(1,2)
+
+
 @pytest.mark.parametrize('theta,target,start',[(.2,1,0.),(-.2,0,1.)])
 def test_full_toy_attack_matches_exhaustive(monkeypatch,theta,target,start):
     import tensorflow as tf

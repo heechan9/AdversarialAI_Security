@@ -1,0 +1,22 @@
+{
+  "reference_commit": "b27c9d46d17781be8bea8e1c1b4a7529c5b96810",
+  "scope": "CNN sample index 63, three-step truncated attack; not a full robustness evaluation",
+  "sample": "Bulkers/Bulkers_1003.jpeg",
+  "reference_seconds": 15.440517081999133,
+  "grouped_seconds": 0.32783247100087465,
+  "arrays_identical": true,
+  "metadata_identical": true,
+  "adversarial_sha256": "9a070663904ddc3af8075f1efe43742d1bfc95669516a7681cad8f5e27ce5b01",
+  "metadata": {
+    "target": 2,
+    "target_success": false,
+    "steps": 3,
+    "termination": "step_limit",
+    "changed_features": 6,
+    "total_features": 49152,
+    "l0_fraction": 0.0001220703125,
+    "budget_features": 491,
+    "variant": "pairwise_probability_jsma",
+    "linf": 0.9215686321258545
+  }
+}
