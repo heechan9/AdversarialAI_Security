@@ -1,0 +1,21 @@
+{
+  "captured_at": "2026-10-02T03:35:16.757630+00:00",
+  "live_status": false,
+  "independent_verification_approval": false,
+  "source_commit": "61f16138674bfac44274be18c3b2bb1234afd1cf",
+  "files": {
+    "SUMMARY.md": "86e5c8a5dc264cc1d09d80ab5d17d65f437176117a98a2b5b6b1bc34e4542afd",
+    "audit.json": "b874bc90c8e3069836f0fda46ee86b7c3427171bd45df10b451d7a94f95bdaa3",
+    "cnn_gaussian_eps_0.01.csv": "12b2d9a183e7ed7c96931fdbafafa1895a6dd2ae5539d76eb4f3ecc1e90f28b8",
+    "cnn_gaussian_eps_0.03.csv": "594d966ae1611d7c95834e4a07f560dac45cfc863c0e0f0d87a38ca4a5c6a8d1",
+    "cnn_gaussian_eps_0.05.csv": "5e7bb9b05f25470aece92efb7d090cebe3f84a1edbd2689003758860aff4efaf",
+    "cnn_gaussian_eps_0.csv": "fcdbeacf82a563f1c6b4e4db1f1d63efd8629bd02e4f74ab7f4dae3b0d03bd29",
+    "cnn_mean_eps_0.01.csv": "5a5813c04c6ab7d90117cb891a45d2a488394d39f0c5f27a8335d3ff1132db7a",
+    "cnn_mean_eps_0.03.csv": "1ef75dd9be8a8cd0ed0700f1aca0e82890d058e32b9b77706fcaf1844a761353",
+    "cnn_mean_eps_0.05.csv": "0006c68c3db9b927474791a778b91ccc38fdcb66321f4a167b1049baedc0a43d",
+    "cnn_mean_eps_0.csv": "d4057b0e92d53099d1cc0b960071ec750d8eb922f83e093197f8e716785e26e8",
+    "mobilenet_gaussian_eps_0.csv": "487c541358383f0468bdada1f9f507f970c4736ff29d5a4b6108e2b52db77879",
+    "parent-run.json": "96360eae1088c34133e42ff26b9653ac2ba64ec2d3c679e5ee6fd276aa9bc5be",
+    "run.json": "ecb2645a7460adfede4498e85ff6dd5c8b40eaf6a87e72c927b7024d9d06be23"
+  }
+}
