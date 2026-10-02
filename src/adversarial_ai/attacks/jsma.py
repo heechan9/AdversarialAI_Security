@@ -20,13 +20,18 @@ def select_pair(target_gradient, other_gradient, eligible, theta, block_size=256
     used=np.zeros_like(e) if changed is None else np.asarray(changed,dtype=bool).ravel()
     if used.shape!=e.shape:raise ValueError("changed mask shape mismatch")
     indices=np.flatnonzero(e);best=None;best_score=-np.inf
-    blocks=[indices[start:start+block_size] for start in range(0,len(indices),block_size)]
-    if not blocks:return None
+    if len(indices)<2:return None
+    if remaining is not None and remaining<max(0,2-int(used[indices].sum())):
+        return None  # Even the cheapest eligible pair exceeds the L0 budget.
+    sign=1 if theta>0 else -1
+    ordered=indices[np.argsort(-sign*a[indices],kind='stable')]
+    # Nearby target-gradient values tighten each block's bound. Every feature
+    # remains eligible; this is a partition, not a top-k restriction.
+    blocks=[np.sort(ordered[start:start+block_size]) for start in range(0,len(ordered),block_size)]
     # For theta > 0 every feasible score is alpha * (-beta). The
     # product of the two blockwise maxima is therefore an upper bound,
     # even when those maxima belong to different pairs. Flip both signs
     # for theta < 0. This changes traversal only, never the score/feasibility.
-    sign=1 if theta>0 else -1
     max_alpha=np.array([np.max(sign*a[block]) for block in blocks])
     max_negative_beta=np.array([np.max(-sign*b[block]) for block in blocks])
     first,second=np.triu_indices(len(blocks))
@@ -37,17 +42,26 @@ def select_pair(target_gradient, other_gradient, eligible, theta, block_size=256
     # Round the product outward; retain equal bounds for lexicographic ties.
     bounds=np.nextafter(alpha_bound[possible]*beta_bound[possible],np.inf)
     finite_bounds=np.isfinite(bounds).all()
-    order=np.argsort(-bounds,kind='stable') if finite_bounds else range(len(bounds))
+    if finite_bounds:
+        order=np.argsort(-bounds,kind='stable')
+    else:
+        # Preserve the original traversal for overflow edge cases.
+        blocks=[indices[start:start+block_size] for start in range(0,len(indices),block_size)]
+        first,second=np.triu_indices(len(blocks));order=range(len(first))
     for candidate in order:
         if finite_bounds and bounds[candidate]<best_score:break
         left=blocks[first[candidate]];right=blocks[second[candidate]]
         alpha=a[left,None]+a[right];beta=b[left,None]+b[right]
-        valid=(left[:,None]<right[None,:]) & ((alpha>0)&(beta<0) if theta>0 else (alpha<0)&(beta>0))
+        distinct=left[:,None]<right[None,:] if first[candidate]==second[candidate] else left[:,None]!=right[None,:]
+        valid=distinct & ((alpha>0)&(beta<0) if theta>0 else (alpha<0)&(beta>0))
         if remaining is not None:
             valid &= ((~used[left,None]).astype(int)+(~used[right]).astype(int)<=remaining)
         scores=np.where(valid,-alpha*beta,-np.inf)
-        pos=np.unravel_index(np.argmax(scores),scores.shape)
-        score=scores[pos];pair=(int(left[pos[0]]),int(right[pos[1]]))
+        score=np.max(scores)
+        if np.isneginf(score):continue
+        row,column=np.nonzero(scores==score)
+        low=np.minimum(left[row],right[column]);high=np.maximum(left[row],right[column])
+        minimum=low.min();pair=(int(minimum),int(high[low==minimum].min()))
         if score>best_score or (np.isfinite(score) and score==best_score and (best is None or pair<best)):
             best_score=score;best=pair
     return best
