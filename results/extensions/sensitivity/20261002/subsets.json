@@ -1,0 +1,49 @@
+{
+  "kind": "exact_rgb_sensitivity_subsets",
+  "source_audit_sha256": "6c8cee230aaf9e6feb27d05a032e0a6ac620a141fed327a068ea997cfd4e537a",
+  "test_manifest_sha256": "36059fea372334509404aca0e66155bf99a8df270beb1cc3bf4865b361ae70a6",
+  "source_train_overlap_test_paths": [
+    "Bulkers/Bulkers_1003.jpeg",
+    "Bulkers/Bulkers_1019.jpeg",
+    "Bulkers/Bulkers_1023.jpeg",
+    "Bulkers/Bulkers_1029.jpeg",
+    "Bulkers/Bulkers_1031.jpeg",
+    "Bulkers/Bulkers_1032.jpeg",
+    "Bulkers/Bulkers_1037.jpeg",
+    "Bulkers/Bulkers_1052.jpeg",
+    "Bulkers/Bulkers_1069.jpeg",
+    "Bulkers/Bulkers_1082.jpeg"
+  ],
+  "test_exact_rgb_duplicate_groups": [
+    [
+      "Bulkers/Bulkers_1005.jpeg",
+      "Bulkers/Bulkers_1063.jpeg"
+    ],
+    [
+      "Bulkers/Bulkers_1026.jpeg",
+      "Bulkers/Bulkers_1073.jpeg"
+    ],
+    [
+      "Bulkers/Bulkers_1029.jpeg",
+      "Bulkers/Bulkers_1037.jpeg"
+    ],
+    [
+      "Bulkers/Bulkers_1031.jpeg",
+      "Bulkers/Bulkers_1069.jpeg"
+    ],
+    [
+      "Sailboat/Sailboat_1006.jpeg",
+      "Sailboat/Sailboat_1025.jpeg",
+      "Sailboat/Sailboat_1027.jpeg"
+    ]
+  ],
+  "representative_rule": "lexicographically first test path per exact RGB duplicate group",
+  "subset_counts": {
+    "full_781": 781,
+    "source_train_disjoint": 771,
+    "unique_test_rgb": 775,
+    "source_train_disjoint_unique": 767
+  },
+  "near_duplicates_checked": false,
+  "historical_model_training_membership_verified": false
+}

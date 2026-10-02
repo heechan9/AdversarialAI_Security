@@ -1,0 +1,324 @@
+{
+  "kind": "descriptive_subset_sensitivity",
+  "original_results_unchanged": true,
+  "independent_verification_approval": false,
+  "scope": "PARTIAL_OUTPUTS_ONLY",
+  "run_report_sha256": "aa18ce87e8d21a1bd46f8a44ee8fe4738d2412134d7184f28ef16ec99d508401",
+  "subset_manifest_sha256": "bde638c0c3cbc017b93f9b2de37e32d085301730197697d674de42a7d84d89de",
+  "source_train_is_historical_model_training_proof": false,
+  "near_duplicates_checked": false,
+  "subset_counts": {
+    "full_781": 781,
+    "source_train_disjoint": 771,
+    "unique_test_rgb": 775,
+    "source_train_disjoint_unique": 767
+  },
+  "conditions": [
+    {
+      "model": "cnn",
+      "method": "gaussian",
+      "epsilon": 0.0,
+      "csv": "cnn_gaussian_eps_0.csv",
+      "sha256": "fcdbeacf82a563f1c6b4e4db1f1d63efd8629bd02e4f74ab7f4dae3b0d03bd29",
+      "subsets": {
+        "full_781": {
+          "clean": {
+            "correct": 504,
+            "samples": 781,
+            "accuracy": 0.645326504481434
+          },
+          "defended_clean": {
+            "correct": 445,
+            "samples": 781,
+            "accuracy": 0.5697823303457106
+          },
+          "attacked": {
+            "correct": 504,
+            "samples": 781,
+            "accuracy": 0.645326504481434,
+            "asr_successes": 0,
+            "asr_denominator": 504,
+            "asr": 0.0
+          },
+          "transfer_defended": {
+            "correct": 445,
+            "samples": 781,
+            "accuracy": 0.5697823303457106,
+            "asr_successes": 0,
+            "asr_denominator": 445,
+            "asr": 0.0
+          },
+          "adaptive_defended": {
+            "correct": 445,
+            "samples": 781,
+            "accuracy": 0.5697823303457106,
+            "asr_successes": 0,
+            "asr_denominator": 445,
+            "asr": 0.0
+          }
+        },
+        "source_train_disjoint": {
+          "clean": {
+            "correct": 495,
+            "samples": 771,
+            "accuracy": 0.642023346303502
+          },
+          "defended_clean": {
+            "correct": 441,
+            "samples": 771,
+            "accuracy": 0.5719844357976653
+          },
+          "attacked": {
+            "correct": 495,
+            "samples": 771,
+            "accuracy": 0.642023346303502,
+            "asr_successes": 0,
+            "asr_denominator": 495,
+            "asr": 0.0
+          },
+          "transfer_defended": {
+            "correct": 441,
+            "samples": 771,
+            "accuracy": 0.5719844357976653,
+            "asr_successes": 0,
+            "asr_denominator": 441,
+            "asr": 0.0
+          },
+          "adaptive_defended": {
+            "correct": 441,
+            "samples": 771,
+            "accuracy": 0.5719844357976653,
+            "asr_successes": 0,
+            "asr_denominator": 441,
+            "asr": 0.0
+          }
+        },
+        "unique_test_rgb": {
+          "clean": {
+            "correct": 500,
+            "samples": 775,
+            "accuracy": 0.6451612903225806
+          },
+          "defended_clean": {
+            "correct": 443,
+            "samples": 775,
+            "accuracy": 0.5716129032258065
+          },
+          "attacked": {
+            "correct": 500,
+            "samples": 775,
+            "accuracy": 0.6451612903225806,
+            "asr_successes": 0,
+            "asr_denominator": 500,
+            "asr": 0.0
+          },
+          "transfer_defended": {
+            "correct": 443,
+            "samples": 775,
+            "accuracy": 0.5716129032258065,
+            "asr_successes": 0,
+            "asr_denominator": 443,
+            "asr": 0.0
+          },
+          "adaptive_defended": {
+            "correct": 443,
+            "samples": 775,
+            "accuracy": 0.5716129032258065,
+            "asr_successes": 0,
+            "asr_denominator": 443,
+            "asr": 0.0
+          }
+        },
+        "source_train_disjoint_unique": {
+          "clean": {
+            "correct": 493,
+            "samples": 767,
+            "accuracy": 0.6427640156453716
+          },
+          "defended_clean": {
+            "correct": 440,
+            "samples": 767,
+            "accuracy": 0.5736636245110821
+          },
+          "attacked": {
+            "correct": 493,
+            "samples": 767,
+            "accuracy": 0.6427640156453716,
+            "asr_successes": 0,
+            "asr_denominator": 493,
+            "asr": 0.0
+          },
+          "transfer_defended": {
+            "correct": 440,
+            "samples": 767,
+            "accuracy": 0.5736636245110821,
+            "asr_successes": 0,
+            "asr_denominator": 440,
+            "asr": 0.0
+          },
+          "adaptive_defended": {
+            "correct": 440,
+            "samples": 767,
+            "accuracy": 0.5736636245110821,
+            "asr_successes": 0,
+            "asr_denominator": 440,
+            "asr": 0.0
+          }
+        }
+      }
+    },
+    {
+      "model": "cnn",
+      "method": "gaussian",
+      "epsilon": 0.01,
+      "csv": "cnn_gaussian_eps_0.01.csv",
+      "sha256": "48f151c2e0d18cc5e21c6c5f383144f1d1a010943a4ba3279ab53b878fdcb2d1",
+      "subsets": {
+        "full_781": {
+          "clean": {
+            "correct": 504,
+            "samples": 781,
+            "accuracy": 0.645326504481434
+          },
+          "defended_clean": {
+            "correct": 445,
+            "samples": 781,
+            "accuracy": 0.5697823303457106
+          },
+          "attacked": {
+            "correct": 207,
+            "samples": 781,
+            "accuracy": 0.26504481434058896,
+            "asr_successes": 297,
+            "asr_denominator": 504,
+            "asr": 0.5892857142857143
+          },
+          "transfer_defended": {
+            "correct": 386,
+            "samples": 781,
+            "accuracy": 0.4942381562099872,
+            "asr_successes": 59,
+            "asr_denominator": 445,
+            "asr": 0.13258426966292136
+          },
+          "adaptive_defended": {
+            "correct": 185,
+            "samples": 781,
+            "accuracy": 0.23687580025608196,
+            "asr_successes": 260,
+            "asr_denominator": 445,
+            "asr": 0.5842696629213483
+          }
+        },
+        "source_train_disjoint": {
+          "clean": {
+            "correct": 495,
+            "samples": 771,
+            "accuracy": 0.642023346303502
+          },
+          "defended_clean": {
+            "correct": 441,
+            "samples": 771,
+            "accuracy": 0.5719844357976653
+          },
+          "attacked": {
+            "correct": 204,
+            "samples": 771,
+            "accuracy": 0.26459143968871596,
+            "asr_successes": 291,
+            "asr_denominator": 495,
+            "asr": 0.5878787878787879
+          },
+          "transfer_defended": {
+            "correct": 384,
+            "samples": 771,
+            "accuracy": 0.4980544747081712,
+            "asr_successes": 57,
+            "asr_denominator": 441,
+            "asr": 0.1292517006802721
+          },
+          "adaptive_defended": {
+            "correct": 185,
+            "samples": 771,
+            "accuracy": 0.23994811932555124,
+            "asr_successes": 256,
+            "asr_denominator": 441,
+            "asr": 0.5804988662131519
+          }
+        },
+        "unique_test_rgb": {
+          "clean": {
+            "correct": 500,
+            "samples": 775,
+            "accuracy": 0.6451612903225806
+          },
+          "defended_clean": {
+            "correct": 443,
+            "samples": 775,
+            "accuracy": 0.5716129032258065
+          },
+          "attacked": {
+            "correct": 206,
+            "samples": 775,
+            "accuracy": 0.2658064516129032,
+            "asr_successes": 294,
+            "asr_denominator": 500,
+            "asr": 0.588
+          },
+          "transfer_defended": {
+            "correct": 385,
+            "samples": 775,
+            "accuracy": 0.4967741935483871,
+            "asr_successes": 58,
+            "asr_denominator": 443,
+            "asr": 0.1309255079006772
+          },
+          "adaptive_defended": {
+            "correct": 185,
+            "samples": 775,
+            "accuracy": 0.23870967741935484,
+            "asr_successes": 258,
+            "asr_denominator": 443,
+            "asr": 0.582392776523702
+          }
+        },
+        "source_train_disjoint_unique": {
+          "clean": {
+            "correct": 493,
+            "samples": 767,
+            "accuracy": 0.6427640156453716
+          },
+          "defended_clean": {
+            "correct": 440,
+            "samples": 767,
+            "accuracy": 0.5736636245110821
+          },
+          "attacked": {
+            "correct": 203,
+            "samples": 767,
+            "accuracy": 0.2646675358539765,
+            "asr_successes": 290,
+            "asr_denominator": 493,
+            "asr": 0.5882352941176471
+          },
+          "transfer_defended": {
+            "correct": 383,
+            "samples": 767,
+            "accuracy": 0.49934810951760106,
+            "asr_successes": 57,
+            "asr_denominator": 440,
+            "asr": 0.12954545454545455
+          },
+          "adaptive_defended": {
+            "correct": 185,
+            "samples": 767,
+            "accuracy": 0.24119947848761408,
+            "asr_successes": 255,
+            "asr_denominator": 440,
+            "asr": 0.5795454545454546
+          }
+        }
+      }
+    }
+  ]
+}
