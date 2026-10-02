@@ -1,0 +1,34 @@
+{
+  "reference_commit": "f98fd3c92b580350034079a41569a9ab14de028c",
+  "scope": "first sample, one saliency selection per model; not full attack equivalence or robustness evaluation",
+  "rows": [
+    {
+      "model": "cnn",
+      "sample": "Aircraft Carrier/Aircraft Carrier_1.jpeg",
+      "target": 1,
+      "features": 49152,
+      "pair": [
+        40150,
+        40154
+      ],
+      "reference_seconds": 18.931462066999302,
+      "pruned_seconds": 0.0366911480014096,
+      "identical_pair": true,
+      "gradient_sha256": "66eaab8ee4b72a21681c610029804cf60a3ad841cf9b060fc86410c56eaa4404"
+    },
+    {
+      "model": "mobilenet",
+      "sample": "Aircraft Carrier/Aircraft Carrier_1.jpeg",
+      "target": 1,
+      "features": 150528,
+      "pair": [
+        131281,
+        131953
+      ],
+      "reference_seconds": 137.45059452700116,
+      "pruned_seconds": 0.2557161469994753,
+      "identical_pair": true,
+      "gradient_sha256": "fac1dd35eccd4cede9de1c1caa9de489d6fdd5257940f5f2ba7a41413cc1eddd"
+    }
+  ]
+}
