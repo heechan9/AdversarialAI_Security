@@ -53,7 +53,7 @@
 
 ## 최신 통합 상태
 
-**제출 이후 후속 연구:** [BIM·PGD 확장](docs/ITERATIVE_ATTACK_EXTENSION.md)의 코드와 합성 모델 검사를 추가했습니다. 원본 모델·781장 BIM·PGD 평가는 실행을 시작했고 [중간 근거](docs/FOLLOWUP_EXECUTION_STATUS.md)를 보존했습니다. 아직 전체 완료 판정은 없으며, [JSMA·적대적 학습 코드](docs/JSMA_AND_ADVERSARIAL_TRAINING.md)도 추가했으며, 선박 적대적 학습은 별도 train/validation 데이터 확보가 필요합니다. 기존 제출 결과와 독립 검증 판정은 유지합니다.
+**제출 이후 후속 연구:** [CNN 적대적 학습·테스트 평가](results/extensions/cnn_adversarial_20261002/README.md)를 완료했습니다(2026-10-02). 학습 6,147장·검증 689장, 테스트 781장에서 일반 정확도 64.53%→69.14%, PGD7 정확도 11.14%→18.57%입니다. PGD7·ε=0.03·1 restart·필터 없음에 한정한 결과이며 강한 공격 전체나 외부 독립 검증 완료를 뜻하지 않습니다. [BIM·PGD 중간 근거](docs/FOLLOWUP_EXECUTION_STATUS.md)는 부분 결과로 유지하고 MobileNet 학습·나머지 공격 실험은 보류했습니다. 기존 제출 결과와 Stage B 판정은 유지합니다.
 
 <!-- verification-status:start -->
 | 검증 구분 | 상태 | 확인 범위 |
@@ -295,3 +295,4 @@ python scripts\audit_paper_claims.py
 **재현 가능한 실험, 검증 가능한 수치, 과장하지 않는 결론을 우선합니다.**
 
 </div>
+

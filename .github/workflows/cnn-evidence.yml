@@ -1,0 +1,20 @@
+name: CNN follow-up evidence
+on:
+  pull_request:
+    paths:
+      - 'results/extensions/cnn_adversarial_20261002/**'
+      - 'verification/cnn_pgd7_*.py'
+      - '.github/workflows/cnn-evidence.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python verification/cnn_pgd7_saved_audit.py
+      - run: python -m py_compile verification/cnn_pgd7_test_evaluation.py

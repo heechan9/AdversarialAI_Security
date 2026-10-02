@@ -1,0 +1,39 @@
+{
+  "status": "COMPLETED",
+  "scope": "CNN clean and PGD7; no filters; not comprehensive robustness evaluation",
+  "samples": 781,
+  "epsilon": 0.03,
+  "steps": 7,
+  "step_size": 0.005,
+  "restarts": 1,
+  "seed": 2026,
+  "batch_size": 8,
+  "models": {
+    "original": {
+      "sha256": "cb256b1a5d6f605d355334e4e8667257a2bfbd29e08836cc4114869bd7068701",
+      "samples": 781,
+      "clean_correct": 504,
+      "pgd_correct": 87,
+      "clean_accuracy": 0.645326504481434,
+      "pgd_accuracy": 0.11139564660691421,
+      "attack_success_rate": 0.8273809523809523,
+      "csv_sha256": "38c47674d3ce6b8848d1a086f9768eb222001aa87a7d8a37b3736517a47d1fc0"
+    },
+    "trained": {
+      "sha256": "c1a13cb702aef7e9966ba7a631c13276316aadc1e844471f108db89be51b6bcb",
+      "samples": 781,
+      "clean_correct": 540,
+      "pgd_correct": 145,
+      "clean_accuracy": 0.6914212548015365,
+      "pgd_accuracy": 0.1856594110115237,
+      "attack_success_rate": 0.7314814814814815,
+      "csv_sha256": "9c3dce2fc22db5181c6b951258614d83eb36db56690aa98b9b9b535d0016057b"
+    }
+  },
+  "source_commit": "76fc5e5debfc02269e236d15db5d06325802379a",
+  "tensorflow": "2.21.0",
+  "keras": "3.15.1",
+  "started_at": "2026-10-02T11:05:50.037944+00:00",
+  "test_manifest_sha256": "36059fea372334509404aca0e66155bf99a8df270beb1cc3bf4865b361ae70a6",
+  "finished_at": "2026-10-02T11:08:05.906488+00:00"
+}

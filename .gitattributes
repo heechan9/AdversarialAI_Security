@@ -22,3 +22,8 @@ web/maris/public/evidence/*.json -text
 
 # Preserve hashed follow-up checkpoint evidence across Windows checkout.
 results/extensions/checkpoints/** -text
+
+
+# Preserve CNN follow-up evidence bytes and recorded hashes.
+results/extensions/cnn_adversarial_20261002/*.csv -text
+results/extensions/cnn_adversarial_20261002/*.json -text
