@@ -1,0 +1,52 @@
+{
+  "kind": "adversarial_training_followup",
+  "status": "TRAINED_NOT_TEST_EVALUATED",
+  "source_commit": "76fc5e5debfc02269e236d15db5d06325802379a",
+  "source_model_sha256": "cb256b1a5d6f605d355334e4e8667257a2bfbd29e08836cc4114869bd7068701",
+  "split_audit_sha256": "4928cca78137841bc40bd4fd241f250d744c0433d0183b3d6ea912cf8a45b8cb",
+  "settings": {
+    "model": "cnn",
+    "train_dir": "/content/adversarial_mobile/data/train-prepared/images",
+    "validation_dir": "/content/adversarial_mobile/data/valid",
+    "test_dir": "/content/adversarial_mobile/data/test",
+    "run_id": "gpu-20261002-cnn-01",
+    "epochs": 3,
+    "epsilon": 0.03,
+    "step_size": 0.005,
+    "steps": 7,
+    "seed": 2026,
+    "batch_size": 8,
+    "learning_rate": 1e-05
+  },
+  "tensorflow": "2.21.0",
+  "keras": "3.15.1",
+  "platform": "Linux-6.6.122+-x86_64-with-glibc2.39",
+  "epochs": [
+    {
+      "epoch": 1,
+      "mean_batch_loss": 3.8535645351453316,
+      "validation_samples": 689,
+      "validation_clean_accuracy": 0.9100145137880987,
+      "validation_pgd_accuracy": 0.22496371552975328
+    },
+    {
+      "epoch": 2,
+      "mean_batch_loss": 2.3939459406042904,
+      "validation_samples": 689,
+      "validation_clean_accuracy": 0.9056603773584906,
+      "validation_pgd_accuracy": 0.25834542815674894
+    },
+    {
+      "epoch": 3,
+      "mean_batch_loss": 1.7647716583991702,
+      "validation_samples": 689,
+      "validation_clean_accuracy": 0.9013062409288825,
+      "validation_pgd_accuracy": 0.3164005805515239
+    }
+  ],
+  "started_at": "2026-10-02T10:22:05.928313+00:00",
+  "resume_policy": "completed_epoch_with_optimizer; unfinished epoch repeats; not bitwise equivalence",
+  "best_epoch": 3,
+  "trained_model_sha256": "c1a13cb702aef7e9966ba7a631c13276316aadc1e844471f108db89be51b6bcb",
+  "finished_at": "2026-10-02T10:55:29.767029+00:00"
+}
