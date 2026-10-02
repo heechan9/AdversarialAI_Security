@@ -51,6 +51,10 @@
 
 [실무 활용·평가 기준 대조](docs/MARITIME_PRACTICE_GAP_REVIEW.md): 실제 해상 영상 시스템과의 차이, 배경 참고와 후속 과제. 작은 L∞ 값만으로 사람에게 보이지 않는 교란임을 입증하지는 않습니다.
 
+## 논문 편집 이력
+
+[v2.5 → v3.0 편집 경위](docs/papers/ack2026_v2_5/README.md)와 [현재 논문 관리 현황](docs/PAPER_RELEASE_STATUS.md)을 구분합니다. 이력 문서는 최종 Word·PDF나 v3.5 검증 완료를 뜻하지 않습니다.
+
 ## 최신 통합 상태
 
 **제출 이후 후속 연구:** [CNN 적대적 학습·테스트 평가](results/extensions/cnn_adversarial_20261002/README.md)를 완료했습니다(2026-10-02). 학습 6,147장·검증 689장, 테스트 781장에서 일반 정확도 64.53%→69.14%, PGD7 정확도 11.14%→18.57%입니다. PGD7·ε=0.03·1 restart·필터 없음에 한정한 결과이며 강한 공격 전체나 외부 독립 검증 완료를 뜻하지 않습니다. [BIM·PGD 중간 근거](docs/FOLLOWUP_EXECUTION_STATUS.md)는 부분 결과로 유지하고 MobileNet 학습·나머지 공격 실험은 보류했습니다. 기존 제출 결과와 Stage B 판정은 유지합니다.
