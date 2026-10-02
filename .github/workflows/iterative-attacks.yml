@@ -24,3 +24,5 @@ jobs:
           python verification/iterative_result_audit.py results/extensions/checkpoints/20261001/pgd
           python verification/iterative_result_audit.py results/extensions/checkpoints/20261002-0004/bim
           python verification/iterative_result_audit.py results/extensions/checkpoints/20261002-0004/pgd
+          python verification/iterative_result_audit.py results/extensions/checkpoints/20261002-mobile/bim
+          python verification/iterative_result_audit.py results/extensions/checkpoints/20261002-mobile/pgd
