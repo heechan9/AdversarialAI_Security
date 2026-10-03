@@ -1,0 +1,30 @@
+{
+  "epsilon": 0.03,
+  "samples": 781,
+  "runs": [
+    "cnn_none_full_20261003",
+    "cnn_gaussian_full_20261003"
+  ],
+  "interpretation": "paired descriptive comparison at one attack budget; no deployment safety claim",
+  "clean": {
+    "plain_correct": 504,
+    "defended_correct": 445,
+    "defended_minus_plain_percentage_points": -7.554417413572343,
+    "gained": 56,
+    "lost": 115,
+    "mcnemar_exact_two_sided_p": 7.551730187471966e-06
+  },
+  "attacked": {
+    "plain_correct": 468,
+    "defended_correct": 372,
+    "defended_minus_plain_percentage_points": -12.291933418693983,
+    "gained": 57,
+    "lost": 153,
+    "mcnemar_exact_two_sided_p": 2.4918102556893776e-11
+  },
+  "common_clean_correct": {
+    "samples": 389,
+    "plain_attack_successes": 14,
+    "defended_attack_successes": 66
+  }
+}

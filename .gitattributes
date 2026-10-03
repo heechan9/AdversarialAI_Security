@@ -27,3 +27,6 @@ results/extensions/checkpoints/** -text
 # Preserve CNN follow-up evidence bytes and recorded hashes.
 results/extensions/cnn_adversarial_20261002/*.csv -text
 results/extensions/cnn_adversarial_20261002/*.json -text
+
+# Preserve raw Square Attack evidence and CSV CRLF across platforms.
+results/extensions/square/** -text whitespace=cr-at-eol

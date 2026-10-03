@@ -1,5 +1,7 @@
 # Square Attack 확장 실험
 
+후속 [전체 781장 평가 및 Gaussian 비교](../results/extensions/square/README_FULL_20261003.md)를 완료했다. ε=.03·최대 200회 질의에서 원본 공격 후 정확도 59.92%, Gaussian 47.63%로 방어 개선은 확인하지 못했다. 아래 20장 파일럿 기록은 그대로 보존한다.
+
 안현주 멘토 논문에 등장하는 점수 기반 블랙박스 공격을 선박 분류기에 적용했다. 공식 Square Attack의 Linf 무표적 공격을 NHWC/NumPy + TensorFlow 2.21/Keras 3.15.1에 맞게 이식했다. 학습 또는 방어 성능 개선 기능이 아니라 기존 모델의 취약성을 평가하는 기능이다.
 
 - 원 논문: https://arxiv.org/abs/1912.00049 (ECCV 2020)
