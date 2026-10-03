@@ -6,6 +6,7 @@ on:
       - 'src/adversarial_ai/evaluation/square_evaluation.py'
       - 'tests/test_square.py'
       - 'verification/square_saved_audit.py'
+      - 'verification/square_defense_comparison.py'
       - 'results/extensions/square/**'
       - '.github/workflows/square.yml'
   workflow_dispatch:
@@ -24,3 +25,7 @@ jobs:
         env:
           PYTHONPATH: src
       - run: python verification/square_saved_audit.py
+      - name: Recalculate paired full-test comparison
+        run: |
+          python verification/square_defense_comparison.py results/extensions/square/cnn_none_full_20261003 results/extensions/square/cnn_gaussian_full_20261003 > /tmp/square-comparison.json
+          diff -u results/extensions/square/comparison_full_20261003.json /tmp/square-comparison.json

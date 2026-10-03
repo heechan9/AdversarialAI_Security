@@ -57,6 +57,6 @@ def audit(folder):
 
 
 if __name__=='__main__':
-    folders=[Path(p) for p in sys.argv[1:]] or sorted((ROOT/'results/extensions/square').glob('*pilot_20261003'))
+    folders=[Path(p) for p in sys.argv[1:]] or sorted(p.parent for p in (ROOT/'results/extensions/square').glob('*/run.json'))
     for folder in folders:
         print(f'{folder.name}: PASS ({audit(folder)} rows; saved evidence only)')
