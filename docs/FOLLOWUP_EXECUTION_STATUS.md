@@ -1,5 +1,9 @@
 # 후속 연구 실행 기록 — 2026-10-01 중간 체크포인트
 
+## 2026-10-04 최신 상태
+
+CNN 적대적 학습과 후속 블랙박스 평가를 완료했다. [전체 결과](../results/extensions/blackbox/README_20261003.md), [실험 프로토콜](TRAINED_BLACKBOX.md), [남은 작업과 민감도 분석](FOLLOWUP_CLOSEOUT_20261004.md)을 기준으로 현재 상태를 판단한다. Square 200회 및 1,000회×3 seed, SurFree 200회를 원본/학습 CNN 각각 781장에 실행했다. PR #76은 main에 병합됐고 자동 검증 4개가 통과했다. 아래 날짜별 내용은 당시 기록이며, 적대적 학습을 현재 데이터 대기로 해석하지 않는다. 독립 Stage B FAIL·원인 미확정은 유지한다.
+
 > 2026-10-02 20:08 KST 추가: [CNN GPU 학습 및 781장 테스트 평가 완료](../results/extensions/cnn_adversarial_20261002/README.md). 아래 데이터 대기·실행 상태는 과거 기록이다. MobileNet 및 추가 공격 실험은 보류.
 
 > 최신 점검: [2026-10-02 모바일 후속 감사](MOBILE_FOLLOWUP_20261002.md). BIM 9/16·PGD 1/16조건 보존. 아래 RUNNING 표기는 과거 파일 상태이며 현재 실행을 뜻하지 않는다.
