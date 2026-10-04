@@ -276,6 +276,8 @@ python scripts\audit_paper_claims.py
 | [시각 검토 감사](docs/VISUAL_REVIEW_AUDIT.md) | 동적 후보 추출과 시각 검토 근거 검증 |
 | [인과적 안전성 검증](docs/CAUSAL_SECURITY_VALIDATION.md) | 분류 취약성과 실제 운항 영향의 구분 |
 | [직무 연계](docs/ROLE_ALIGNMENT.md) | 구현 증거·직무 연결·주장 한계 |
+| [CNN 블랙박스 확장 프로토콜](docs/TRAINED_BLACKBOX.md) | Square 다중 seed·공식 SurFree 연결·질의 집계 |
+| [학습 전후 블랙박스 실험](results/extensions/blackbox/README_20261003.md) | 고정 781장 자체 실행 결과와 해석 범위 |
 | [기여 기록](CONTRIBUTIONS.md) | 사람·AI 협업 역할과 검증 원칙 |
 
 ## 현재 한계
@@ -295,4 +297,3 @@ python scripts\audit_paper_claims.py
 **재현 가능한 실험, 검증 가능한 수치, 과장하지 않는 결론을 우선합니다.**
 
 </div>
-

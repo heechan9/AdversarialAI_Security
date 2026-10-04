@@ -75,3 +75,21 @@ def test_asr_excludes_wrong_clean_and_counts_success_queries():
     assert m['asr']==.5 and m['asr_denominator']==2
     assert m['attacked_correct']==1 and m['mean_success_queries']==3
     assert m['success_by_total_queries']=={'1':0,'10':1}
+
+
+def test_trained_checkpoint_must_match_preserved_training_record(tmp_path,monkeypatch):
+    import hashlib,json
+    from types import SimpleNamespace
+    from adversarial_ai.evaluation import square_evaluation as evaluation
+    (tmp_path/'models').mkdir();(tmp_path/'configs').mkdir()
+    (tmp_path/'models/cnn_baseline.h5').write_bytes(b'original')
+    (tmp_path/'configs/classes.json').write_text(json.dumps({str(i):str(i) for i in range(10)}))
+    (tmp_path/'configs/test_manifest.json').write_text(json.dumps({'models':[{
+        'path':'models/cnn_baseline.h5','sha256':hashlib.sha256(b'original').hexdigest()}]}))
+    training=tmp_path/'results/extensions/cnn_adversarial_20261002/training.json'
+    training.parent.mkdir(parents=True)
+    training.write_text(json.dumps({'trained_model_sha256':hashlib.sha256(b'approved').hexdigest()}))
+    wrong=tmp_path/'wrong.keras';wrong.write_bytes(b'unapproved')
+    monkeypatch.setattr(evaluation,'ROOT',tmp_path)
+    args=SimpleNamespace(run_id='reject',per_class=0,batch_size=20,model='cnn',trained_model=wrong)
+    with pytest.raises(ValueError,match='preserved training record'):evaluation.run(args)

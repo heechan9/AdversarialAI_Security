@@ -1,0 +1,310 @@
+{
+  "square": {
+    "original_q200": {
+      "runs": [
+        {
+          "seed": 2026,
+          "run": "cnn_original_q200_s2026_20261003",
+          "metrics": {
+            "samples": 781,
+            "clean_correct": 504,
+            "attacked_correct": 468,
+            "clean_accuracy": 0.645326504481434,
+            "attacked_accuracy": 0.5992317541613317,
+            "asr_successes": 36,
+            "asr_denominator": 504,
+            "asr": 0.07142857142857142,
+            "mean_total_queries": 121.77464788732394,
+            "mean_success_queries": 34.138888888888886,
+            "success_by_total_queries": {
+              "1": 0,
+              "10": 19,
+              "50": 27,
+              "200": 36
+            }
+          }
+        }
+      ],
+      "union_across_seeds": {
+        "samples": 781,
+        "clean_correct": 504,
+        "attacked_correct": 468,
+        "accuracy": 0.5992317541613317,
+        "asr": 0.07142857142857142,
+        "successes": 36,
+        "denominator": 504
+      }
+    },
+    "trained_q200": {
+      "runs": [
+        {
+          "seed": 2026,
+          "run": "cnn_trained_q200_s2026_20261003",
+          "metrics": {
+            "samples": 781,
+            "clean_correct": 540,
+            "attacked_correct": 516,
+            "clean_accuracy": 0.6914212548015365,
+            "attacked_accuracy": 0.6606914212548015,
+            "asr_successes": 24,
+            "asr_denominator": 540,
+            "asr": 0.044444444444444446,
+            "mean_total_queries": 133.9897567221511,
+            "mean_success_queries": 50.208333333333336,
+            "success_by_total_queries": {
+              "1": 0,
+              "10": 14,
+              "50": 15,
+              "200": 24
+            }
+          }
+        }
+      ],
+      "union_across_seeds": {
+        "samples": 781,
+        "clean_correct": 540,
+        "attacked_correct": 516,
+        "accuracy": 0.6606914212548015,
+        "asr": 0.044444444444444446,
+        "successes": 24,
+        "denominator": 540
+      }
+    },
+    "paired_q200": {
+      "common_clean_correct": 486,
+      "original_successes": 25,
+      "trained_successes": 9
+    },
+    "original_q1000": {
+      "runs": [
+        {
+          "seed": 2026,
+          "run": "cnn_original_q1000_s2026_20261003",
+          "metrics": {
+            "samples": 781,
+            "clean_correct": 504,
+            "attacked_correct": 388,
+            "clean_accuracy": 0.645326504481434,
+            "attacked_accuracy": 0.4967989756722151,
+            "asr_successes": 116,
+            "asr_denominator": 504,
+            "asr": 0.23015873015873015,
+            "mean_total_queries": 532.7912932138285,
+            "mean_success_queries": 239.93965517241378,
+            "success_by_total_queries": {
+              "1": 0,
+              "10": 22,
+              "50": 38,
+              "1000": 116
+            }
+          }
+        },
+        {
+          "seed": 2027,
+          "run": "cnn_original_q1000_s2027_20261003",
+          "metrics": {
+            "samples": 781,
+            "clean_correct": 504,
+            "attacked_correct": 384,
+            "clean_accuracy": 0.645326504481434,
+            "attacked_accuracy": 0.49167733674775926,
+            "asr_successes": 120,
+            "asr_denominator": 504,
+            "asr": 0.23809523809523808,
+            "mean_total_queries": 531.7516005121639,
+            "mean_success_queries": 258.5083333333333,
+            "success_by_total_queries": {
+              "1": 0,
+              "10": 26,
+              "50": 42,
+              "1000": 120
+            }
+          }
+        },
+        {
+          "seed": 2028,
+          "run": "cnn_original_q1000_s2028_20261003",
+          "metrics": {
+            "samples": 781,
+            "clean_correct": 504,
+            "attacked_correct": 387,
+            "clean_accuracy": 0.645326504481434,
+            "attacked_accuracy": 0.49551856594110116,
+            "asr_successes": 117,
+            "asr_denominator": 504,
+            "asr": 0.23214285714285715,
+            "mean_total_queries": 535.0640204865557,
+            "mean_success_queries": 261.6068376068376,
+            "success_by_total_queries": {
+              "1": 0,
+              "10": 20,
+              "50": 41,
+              "1000": 117
+            }
+          }
+        }
+      ],
+      "union_across_seeds": {
+        "samples": 781,
+        "clean_correct": 504,
+        "attacked_correct": 374,
+        "accuracy": 0.4788732394366197,
+        "asr": 0.25793650793650796,
+        "successes": 130,
+        "denominator": 504
+      }
+    },
+    "trained_q1000": {
+      "runs": [
+        {
+          "seed": 2026,
+          "run": "cnn_trained_q1000_s2026_20261003",
+          "metrics": {
+            "samples": 781,
+            "clean_correct": 540,
+            "attacked_correct": 458,
+            "clean_accuracy": 0.6914212548015365,
+            "attacked_accuracy": 0.586427656850192,
+            "asr_successes": 82,
+            "asr_denominator": 540,
+            "asr": 0.15185185185185185,
+            "mean_total_queries": 603.842509603073,
+            "mean_success_queries": 162.9268292682927,
+            "success_by_total_queries": {
+              "1": 0,
+              "10": 15,
+              "50": 34,
+              "1000": 82
+            }
+          }
+        },
+        {
+          "seed": 2027,
+          "run": "cnn_trained_q1000_s2027_20261003",
+          "metrics": {
+            "samples": 781,
+            "clean_correct": 540,
+            "attacked_correct": 458,
+            "clean_accuracy": 0.6914212548015365,
+            "attacked_accuracy": 0.586427656850192,
+            "asr_successes": 82,
+            "asr_denominator": 540,
+            "asr": 0.15185185185185185,
+            "mean_total_queries": 606.0614596670935,
+            "mean_success_queries": 184.0609756097561,
+            "success_by_total_queries": {
+              "1": 0,
+              "10": 17,
+              "50": 34,
+              "1000": 82
+            }
+          }
+        },
+        {
+          "seed": 2028,
+          "run": "cnn_trained_q1000_s2028_20261003",
+          "metrics": {
+            "samples": 781,
+            "clean_correct": 540,
+            "attacked_correct": 454,
+            "clean_accuracy": 0.6914212548015365,
+            "attacked_accuracy": 0.5813060179257362,
+            "asr_successes": 86,
+            "asr_denominator": 540,
+            "asr": 0.15925925925925927,
+            "mean_total_queries": 601.7375160051216,
+            "mean_success_queries": 182.74418604651163,
+            "success_by_total_queries": {
+              "1": 0,
+              "10": 17,
+              "50": 33,
+              "1000": 86
+            }
+          }
+        }
+      ],
+      "union_across_seeds": {
+        "samples": 781,
+        "clean_correct": 540,
+        "attacked_correct": 452,
+        "accuracy": 0.5787451984635084,
+        "asr": 0.16296296296296298,
+        "successes": 88,
+        "denominator": 540
+      }
+    },
+    "paired_q1000": {
+      "common_clean_correct": 486,
+      "original_successes": 114,
+      "trained_successes": 51
+    }
+  },
+  "surfree": {
+    "original": {
+      "run": "cnn_original_q200_s2026_20261003",
+      "metrics": {
+        "samples": 781,
+        "clean_correct": 504,
+        "successful_any_distance": 417,
+        "asr_any_distance": 0.8273809523809523,
+        "initialization_failures": 87,
+        "mean_total_queries": 129.41997439180537,
+        "median_success_l2": 13.990753173828125,
+        "median_success_rms": 0.06310597062110901,
+        "thresholds": {
+          "0.01": {
+            "successes": 6,
+            "asr": 0.011904761904761904,
+            "accuracy": 0.6376440460947503
+          },
+          "0.03": {
+            "successes": 54,
+            "asr": 0.10714285714285714,
+            "accuracy": 0.5761843790012804
+          },
+          "0.05": {
+            "successes": 148,
+            "asr": 0.29365079365079366,
+            "accuracy": 0.4558258642765685
+          }
+        }
+      }
+    },
+    "trained": {
+      "run": "cnn_trained_q200_s2026_20261003",
+      "metrics": {
+        "samples": 781,
+        "clean_correct": 540,
+        "successful_any_distance": 459,
+        "asr_any_distance": 0.85,
+        "initialization_failures": 81,
+        "mean_total_queries": 138.59282970550575,
+        "median_success_l2": 23.866079330444336,
+        "median_success_rms": 0.10764903575181961,
+        "thresholds": {
+          "0.01": {
+            "successes": 2,
+            "asr": 0.003703703703703704,
+            "accuracy": 0.6888604353393086
+          },
+          "0.03": {
+            "successes": 15,
+            "asr": 0.027777777777777776,
+            "accuracy": 0.6722151088348272
+          },
+          "0.05": {
+            "successes": 47,
+            "asr": 0.08703703703703704,
+            "accuracy": 0.6312419974391805
+          }
+        }
+      }
+    }
+  },
+  "limitations": [
+    "Square: Linf .03; 1000-query schedules are not prefixes of 200-query schedules.",
+    "SurFree: top-1 L2 search, 200 total queries including initialization; RMS is not Linf.",
+    "Seed union is worst observed per image across 3 runs, not a single 1000-query run.",
+    "No independent model replay, physical maritime safety claim or robustness certificate."
+  ]
+}
