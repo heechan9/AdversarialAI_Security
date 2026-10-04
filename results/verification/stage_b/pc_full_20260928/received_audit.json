@@ -1,0 +1,322 @@
+{
+  "kind": "received_pc_full_saved_output_audit",
+  "received_date_kst": "2026-10-01",
+  "inference_performed_by_this_audit": false,
+  "local_status": "LOCAL_PASS",
+  "independent_operator": false,
+  "historical_external_stage_b_status": "FAIL",
+  "cause_confirmed": false,
+  "source_commit": "b86f725d8e53132fb04d199eb3e5d61ee605f4a6",
+  "zip_sha256": "dc8576cfa7bcd4b70fb43f89e156b704045c337ed0116bd9c52f4b0c76e93124",
+  "zip_crc_ok": true,
+  "bundle_files_hash_verified": 35,
+  "rerun_artifact_hashes_verified": 29,
+  "reference_blobs_verified_at_source_commit": true,
+  "completed_utc": "2026-09-28T08:21:10.363453+00:00",
+  "model_and_image_hash_check": "runner reports 2 models and all 781 images match; binaries not included in returned bundle",
+  "comparisons_recomputed": [
+    {
+      "method": "gaussian",
+      "rows_compared": 6248,
+      "status": "PASS",
+      "differences": []
+    },
+    {
+      "method": "mean",
+      "rows_compared": 6248,
+      "status": "PASS",
+      "differences": []
+    }
+  ],
+  "csv_files": 16,
+  "rows_per_csv": 781,
+  "prediction_fields_per_row": 5,
+  "prediction_cells_compared": 62480,
+  "metric_abs_tolerance": 1e-06,
+  "linf_tolerance": 1e-06,
+  "probabilities_compared": false,
+  "historical_differences_rechecked": [
+    {
+      "method": "gaussian",
+      "file": "mobilenet_eps_0.01_samples.csv",
+      "row_index": 25,
+      "relative_path": "Aircraft Carrier/Aircraft Carrier_19.jpeg",
+      "pipeline": "adaptive_defended",
+      "reference": "7",
+      "actual": "5",
+      "observed_on": 5,
+      "observed_off": 7,
+      "pc_full_prediction": "7",
+      "pc_matches_reference": true
+    },
+    {
+      "method": "gaussian",
+      "file": "mobilenet_eps_0.01_samples.csv",
+      "row_index": 71,
+      "relative_path": "Bulkers/Bulkers_1011.jpeg",
+      "pipeline": "transfer_defended",
+      "reference": "1",
+      "actual": "6",
+      "observed_on": 6,
+      "observed_off": 1,
+      "pc_full_prediction": "1",
+      "pc_matches_reference": true
+    },
+    {
+      "method": "gaussian",
+      "file": "mobilenet_eps_0.03_samples.csv",
+      "row_index": 99,
+      "relative_path": "Bulkers/Bulkers_1039.jpeg",
+      "pipeline": "attacked",
+      "reference": "1",
+      "actual": "6",
+      "observed_on": 6,
+      "observed_off": 6,
+      "pc_full_prediction": "1",
+      "pc_matches_reference": true
+    },
+    {
+      "method": "gaussian",
+      "file": "mobilenet_eps_0.03_samples.csv",
+      "row_index": 167,
+      "relative_path": "Car Carrier/Car Carrier_15.jpeg",
+      "pipeline": "transfer_defended",
+      "reference": "2",
+      "actual": "6",
+      "observed_on": 6,
+      "observed_off": 2,
+      "pc_full_prediction": "2",
+      "pc_matches_reference": true
+    },
+    {
+      "method": "gaussian",
+      "file": "mobilenet_eps_0.03_samples.csv",
+      "row_index": 439,
+      "relative_path": "DDG/DDG_1056.jpeg",
+      "pipeline": "adaptive_defended",
+      "reference": "7",
+      "actual": "6",
+      "observed_on": 6,
+      "observed_off": 6,
+      "pc_full_prediction": "7",
+      "pc_matches_reference": true
+    },
+    {
+      "method": "gaussian",
+      "file": "mobilenet_eps_0.05_samples.csv",
+      "row_index": 152,
+      "relative_path": "Bulkers/Bulkers_6.jpeg",
+      "pipeline": "attacked",
+      "reference": "1",
+      "actual": "8",
+      "observed_on": 8,
+      "observed_off": 1,
+      "pc_full_prediction": "1",
+      "pc_matches_reference": true
+    },
+    {
+      "method": "gaussian",
+      "file": "mobilenet_eps_0.05_samples.csv",
+      "row_index": 234,
+      "relative_path": "Car Carrier/Car Carrier_76.jpeg",
+      "pipeline": "transfer_defended",
+      "reference": "9",
+      "actual": "1",
+      "observed_on": 1,
+      "observed_off": 9,
+      "pc_full_prediction": "9",
+      "pc_matches_reference": true
+    },
+    {
+      "method": "gaussian",
+      "file": "mobilenet_eps_0.05_samples.csv",
+      "row_index": 265,
+      "relative_path": "Container Ship/Container Ship_1013.jpeg",
+      "pipeline": "transfer_defended",
+      "reference": "7",
+      "actual": "1",
+      "observed_on": 1,
+      "observed_off": 7,
+      "pc_full_prediction": "7",
+      "pc_matches_reference": true
+    },
+    {
+      "method": "gaussian",
+      "file": "mobilenet_eps_0.05_samples.csv",
+      "row_index": 581,
+      "relative_path": "Sailboat/Sailboat_1007.jpeg",
+      "pipeline": "adaptive_defended",
+      "reference": "0",
+      "actual": "5",
+      "observed_on": 5,
+      "observed_off": 0,
+      "pc_full_prediction": "0",
+      "pc_matches_reference": true
+    },
+    {
+      "method": "gaussian",
+      "file": "mobilenet_eps_0.05_samples.csv",
+      "row_index": 653,
+      "relative_path": "Submarine/Submarine_1005.jpeg",
+      "pipeline": "transfer_defended",
+      "reference": "6",
+      "actual": "7",
+      "observed_on": 7,
+      "observed_off": 6,
+      "pc_full_prediction": "6",
+      "pc_matches_reference": true
+    },
+    {
+      "method": "mean",
+      "file": "mobilenet_eps_0.03_samples.csv",
+      "row_index": 99,
+      "relative_path": "Bulkers/Bulkers_1039.jpeg",
+      "pipeline": "attacked",
+      "reference": "1",
+      "actual": "6",
+      "observed_on": 6,
+      "observed_off": 6,
+      "pc_full_prediction": "1",
+      "pc_matches_reference": true
+    },
+    {
+      "method": "mean",
+      "file": "mobilenet_eps_0.03_samples.csv",
+      "row_index": 451,
+      "relative_path": "DDG/DDG_18.jpeg",
+      "pipeline": "adaptive_defended",
+      "reference": "9",
+      "actual": "6",
+      "observed_on": 6,
+      "observed_off": 9,
+      "pc_full_prediction": "9",
+      "pc_matches_reference": true
+    },
+    {
+      "method": "mean",
+      "file": "mobilenet_eps_0.03_samples.csv",
+      "row_index": 679,
+      "relative_path": "Submarine/Submarine_13.jpeg",
+      "pipeline": "adaptive_defended",
+      "reference": "7",
+      "actual": "8",
+      "observed_on": 8,
+      "observed_off": 7,
+      "pc_full_prediction": "7",
+      "pc_matches_reference": true
+    },
+    {
+      "method": "mean",
+      "file": "mobilenet_eps_0.05_samples.csv",
+      "row_index": 152,
+      "relative_path": "Bulkers/Bulkers_6.jpeg",
+      "pipeline": "attacked",
+      "reference": "1",
+      "actual": "8",
+      "observed_on": 8,
+      "observed_off": 1,
+      "pc_full_prediction": "1",
+      "pc_matches_reference": true
+    },
+    {
+      "method": "mean",
+      "file": "mobilenet_eps_0.05_samples.csv",
+      "row_index": 241,
+      "relative_path": "Car Carrier/Car Carrier_82.jpeg",
+      "pipeline": "adaptive_defended",
+      "reference": "3",
+      "actual": "7",
+      "observed_on": 7,
+      "observed_off": 7,
+      "pc_full_prediction": "3",
+      "pc_matches_reference": true
+    },
+    {
+      "method": "mean",
+      "file": "mobilenet_eps_0.05_samples.csv",
+      "row_index": 533,
+      "relative_path": "Recreational/Recreational_1048.jpeg",
+      "pipeline": "transfer_defended",
+      "reference": "1",
+      "actual": "6",
+      "observed_on": 6,
+      "observed_off": 6,
+      "pc_full_prediction": "1",
+      "pc_matches_reference": true
+    }
+  ],
+  "environment": {
+    "python": "3.11.15",
+    "platform": "Windows-10-10.0.26200-SP0",
+    "cpu": "13th Gen Intel(R) Core(TM) i5-1335U"
+  },
+  "independence_note": "Generic independence wording in reused rerun-report/contract is overridden by local-run-summary: original project operator, not external independent verification.",
+  "selected_trace_comparison": [
+    {
+      "key": "gaussian-adaptive_defended-0.03-b13",
+      "pc_prediction": 7,
+      "pc_top_two": [
+        7,
+        6
+      ],
+      "pc_margin": 0.05763998627662659,
+      "linux_on_prediction": 6,
+      "linux_on_margin": 0.033792197704315186,
+      "max_probability_difference_distinct_generated_attacks": 0.04841485619544983,
+      "causal_cross_scoring_performed": false
+    },
+    {
+      "key": "gaussian-attacked-0.03-b3",
+      "pc_prediction": 1,
+      "pc_top_two": [
+        1,
+        6
+      ],
+      "pc_margin": 0.0026758909225463867,
+      "linux_on_prediction": 6,
+      "linux_on_margin": 0.0046117305755615234,
+      "max_probability_difference_distinct_generated_attacks": 0.003749072551727295,
+      "causal_cross_scoring_performed": false
+    },
+    {
+      "key": "mean-adaptive_defended-0.05-b7",
+      "pc_prediction": 3,
+      "pc_top_two": [
+        3,
+        7
+      ],
+      "pc_margin": 0.02189922332763672,
+      "linux_on_prediction": 7,
+      "linux_on_margin": 0.011327862739562988,
+      "max_probability_difference_distinct_generated_attacks": 0.01742345094680786,
+      "causal_cross_scoring_performed": false
+    },
+    {
+      "key": "mean-attacked-0.03-b3",
+      "pc_prediction": 1,
+      "pc_top_two": [
+        1,
+        6
+      ],
+      "pc_margin": 0.0026758909225463867,
+      "linux_on_prediction": 6,
+      "linux_on_margin": 0.0046117305755615234,
+      "max_probability_difference_distinct_generated_attacks": 0.003749072551727295,
+      "causal_cross_scoring_performed": false
+    },
+    {
+      "key": "mean-transfer_defended-0.05-b16",
+      "pc_prediction": 1,
+      "pc_top_two": [
+        1,
+        6
+      ],
+      "pc_margin": 0.005253821611404419,
+      "linux_on_prediction": 6,
+      "linux_on_margin": 0.002596557140350342,
+      "max_probability_difference_distinct_generated_attacks": 0.003929793834686279,
+      "causal_cross_scoring_performed": false
+    }
+  ],
+  "remaining_causal_work": "Fixed identical tensor cross-scoring between PC and other environment, after verifying identical preprocessed inputs. Full run CSVs have no tensors/probabilities; Linux raw tensor ZIP not available in this audit. No CPU/oneDNN/thread cause isolated."
+}

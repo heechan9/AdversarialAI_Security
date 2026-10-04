@@ -29,19 +29,194 @@ def test_web_tamper_even_with_updated_export_hash(tmp_path):
         check(tmp_path)
 
 
+def _write_rows(path, rows):
+    import csv
+    with path.open('w', newline='') as f:
+        w = csv.DictWriter(f, fieldnames=list(rows[0]))
+        w.writeheader()
+        w.writerows(rows)
+
+
 @pytest.mark.parametrize('method',['gaussian','mean'])
-def test_comparator_real_saved_rows_and_mutation(tmp_path,method):
+def test_comparator_real_saved_rows_pass(tmp_path,method):
     source=ROOT/f'results/defenses/experimental/{method}_run_01'
     output=tmp_path/method;shutil.copytree(source,output)
     contract=json.loads((ROOT/'configs/stage_b_verification_contract.json').read_text())
-    assert runner.compare_outputs(ROOT,output,method,contract)['rows_compared']==6248
+    result = runner.compare_outputs(ROOT,output,method,contract)
+    assert result['rows_compared']==6248
+    assert result['status']=='PASS'
+    assert result['differences']==[]
+
+
+@pytest.mark.parametrize('method',['gaussian','mean'])
+def test_comparator_collects_multiple_prediction_differences_without_raising(tmp_path,method):
+    # A prediction mismatch (a *_pred column) is an ordinary, comparable
+    # rerun outcome -- unlike relative_path/true_index, it must be collected
+    # rather than aborting the whole comparison at the first one.
+    source=ROOT/f'results/defenses/experimental/{method}_run_01'
+    output=tmp_path/method;shutil.copytree(source,output)
+    contract=json.loads((ROOT/'configs/stage_b_verification_contract.json').read_text())
     file=output/'cnn_eps_0_samples.csv'
-    rows=runner.read_rows(file);rows[0]['adaptive_defended_pred']=str((int(rows[0]['adaptive_defended_pred'])+1)%10)
-    import csv
-    with file.open('w',newline='') as f:
-        w=csv.DictWriter(f,fieldnames=list(rows[0]));w.writeheader();w.writerows(rows)
+    rows=runner.read_rows(file)
+    rows[0]['adaptive_defended_pred']=str((int(rows[0]['adaptive_defended_pred'])+1)%10)
+    rows[1]['clean_pred']=str((int(rows[1]['clean_pred'])+1)%10)
+    _write_rows(file, rows)
+
+    result = runner.compare_outputs(ROOT,output,method,contract)
+
+    assert result['status']=='FAIL'
+    assert result['rows_compared']==6248
+    fields = {(d['row_index'], d['field']) for d in result['differences']}
+    assert (0,'adaptive_defended_pred') in fields
+    assert (1,'clean_pred') in fields
+    assert len(result['differences'])==2
+
+
+@pytest.mark.parametrize('method',['gaussian','mean'])
+@pytest.mark.parametrize('key',['relative_path','true_index'])
+def test_comparator_sample_identity_mismatch_still_raises_immediately(tmp_path,method,key):
+    # relative_path/true_index identify WHICH sample/ground-truth is being
+    # compared, not how it was classified -- these must never be folded
+    # into the collected prediction differences.
+    source=ROOT/f'results/defenses/experimental/{method}_run_01'
+    output=tmp_path/method;shutil.copytree(source,output)
+    contract=json.loads((ROOT/'configs/stage_b_verification_contract.json').read_text())
+    file=output/'cnn_eps_0_samples.csv'
+    rows=runner.read_rows(file)
+    if key=='true_index':
+        rows[0][key]=str((int(rows[0][key])+1)%10)
+    else:
+        rows[0][key]='not/a/real/path.png'
+    _write_rows(file, rows)
+
     with pytest.raises(ValueError,match='label/path mismatch'):
         runner.compare_outputs(ROOT,output,method,contract)
+
+
+@pytest.mark.parametrize('method',['gaussian','mean'])
+def test_comparator_corrupted_row_count_still_raises_immediately(tmp_path,method):
+    source=ROOT/f'results/defenses/experimental/{method}_run_01'
+    output=tmp_path/method;shutil.copytree(source,output)
+    contract=json.loads((ROOT/'configs/stage_b_verification_contract.json').read_text())
+    file=output/'cnn_eps_0_samples.csv'
+    rows=runner.read_rows(file)
+    _write_rows(file, rows[:-1])  # drop a row: 780 instead of 781
+
+    with pytest.raises(ValueError,match='expected 781 rows'):
+        runner.compare_outputs(ROOT,output,method,contract)
+
+
+@pytest.mark.parametrize('method',['gaussian','mean'])
+@pytest.mark.parametrize('side',['reference','actual'])
+@pytest.mark.parametrize('bad_value',['garbage','','-1','10'])
+def test_comparator_invalid_class_index_still_raises_immediately(tmp_path,method,side,bad_value):
+    # A *_pred value that isn't a bare 0-9 class index (garbage, empty,
+    # or out of the valid 0-9 range) is a corrupted saved output, not a
+    # comparable prediction difference: it must abort before comparison,
+    # never get folded into result['differences']. Both the reference and
+    # the rerun's own output must be validated.
+    source=ROOT/f'results/defenses/experimental/{method}_run_01'
+    output=tmp_path/'actual'/method
+    output.parent.mkdir(parents=True)
+    shutil.copytree(source,output)
+    contract=json.loads((ROOT/'configs/stage_b_verification_contract.json').read_text())
+
+    if side=='actual':
+        file=output/'cnn_eps_0_samples.csv'
+        rows=runner.read_rows(file)
+        rows[0]['adaptive_defended_pred']=bad_value
+        _write_rows(file, rows)
+        root=ROOT
+    else:
+        # Corrupt a private COPY of the reference under a fake root, so the
+        # real repo's checked-in evidence is never touched.
+        fake_root=tmp_path/'fake_root'
+        ref_dir=fake_root/f'results/defenses/experimental/{method}_run_01'
+        ref_dir.parent.mkdir(parents=True)
+        shutil.copytree(source,ref_dir)
+        file=ref_dir/'cnn_eps_0_samples.csv'
+        rows=runner.read_rows(file)
+        rows[0]['adaptive_defended_pred']=bad_value
+        _write_rows(file, rows)
+        root=fake_root
+
+    with pytest.raises(ValueError,match='invalid class index'):
+        runner.compare_outputs(root,output,method,contract)
+
+
+@pytest.mark.parametrize('bad_value',['garbage','','-1','10'])
+def test_run_stops_before_next_method_on_invalid_class_index(tmp_path,monkeypatch,bad_value):
+    # A corrupted *_pred value is a structural problem (see above), not an
+    # ordinary collected difference -- so unlike a FAIL comparison
+    # (test_run_continues_to_next_method_after_a_fail_comparison), it must
+    # raise out of compare_outputs and stop run() before the second defense
+    # method's subprocess ever starts.
+    monkeypatch.setattr(runner.platform,'platform',lambda:'test platform')
+    root=ROOT  # must contain the real results/defenses/experimental/*_run_01 reference data
+    contract=json.loads((ROOT/'configs/stage_b_verification_contract.json').read_text())
+    contract['outputs']['run_id']='corrupted-pred'
+    path=tmp_path/'contract.json';path.write_text(json.dumps(contract))
+    monkeypatch.setattr(runner,'check_stage_b_readiness',lambda *a:{'ready':True,'blockers':[]})
+
+    seen_methods=[]
+    def fake_run(cmd,**kw):
+        if 'freeze' in cmd:return SimpleNamespace(stdout='mock environment\n')
+        if 'verification.stage_b_preflight' in cmd:return SimpleNamespace(returncode=0)
+        method = 'gaussian' if cmd[-1].endswith('gaussian') else 'mean'
+        seen_methods.append(method)
+        out_dir = Path(cmd[-1]); out_dir.mkdir()
+        source=ROOT/f'results/defenses/experimental/{method}_run_01'
+        for name in source.iterdir():
+            if name.is_file():
+                shutil.copy(name, out_dir/name.name)
+        if method=='gaussian':
+            file=out_dir/'cnn_eps_0_samples.csv'
+            rows=runner.read_rows(file)
+            rows[0]['adaptive_defended_pred']=bad_value
+            _write_rows(file, rows)
+        return SimpleNamespace(returncode=0)
+    monkeypatch.setattr(runner.subprocess,'run',fake_run)
+
+    with pytest.raises(ValueError,match='invalid class index'):
+        runner.run(root,path)
+
+    # gaussian ran and produced the corrupted output; mean's subprocess must
+    # never have been invoked once compare_outputs raised on gaussian.
+    assert seen_methods==['gaussian']
+    report=json.loads((tmp_path/'stage-b-corrupted-pred/rerun-report.json').read_text())
+    assert report['status']=='FAIL'
+    assert report['comparisons']==[]  # gaussian's comparison never completed to be recorded
+
+
+def test_comparator_metric_difference_in_summary_is_collected_not_raised(tmp_path):
+    method='gaussian'
+    source=ROOT/f'results/defenses/experimental/{method}_run_01'
+    output=tmp_path/method;shutil.copytree(source,output)
+    contract=json.loads((ROOT/'configs/stage_b_verification_contract.json').read_text())
+    summary_path=output/'summary.json'
+    summary=json.loads(summary_path.read_text())
+
+    state = {'done': False}
+    def bump_first_number(node):
+        if state['done']:
+            return node
+        if isinstance(node, dict):
+            return {k: bump_first_number(v) for k, v in node.items()}
+        if isinstance(node, list):
+            return [bump_first_number(v) for v in node]
+        if isinstance(node, (int, float)) and not isinstance(node, bool):
+            state['done'] = True
+            return node + contract['comparison']['metric_abs_tolerance'] * 100
+        return node
+
+    summary = bump_first_number(summary)
+    assert state['done'], 'fixture summary.json must contain a numeric field'
+    summary_path.write_text(json.dumps(summary))
+
+    result = runner.compare_outputs(ROOT,output,method,contract)
+
+    assert result['status']=='FAIL'
+    assert any(d.get('location','').startswith('summary') for d in result['differences'])
 
 
 @pytest.mark.parametrize('fail',[False,True])
@@ -68,6 +243,48 @@ def test_orchestration_report_and_no_overwrite(tmp_path,monkeypatch,fail):
     assert report['status']==('FAIL' if fail else 'PASS')
     assert len(report['commands'])==(1 if fail else 3)
     with pytest.raises(FileExistsError):runner.run(root,path)
+
+
+def test_run_continues_to_next_method_after_a_fail_comparison(tmp_path,monkeypatch):
+    # A FAIL comparison on the first defense method (label/metric
+    # differences, not a structural problem) must not stop the second
+    # method from running: both subprocesses execute, both comparisons are
+    # recorded, and only THEN does the overall run end FAIL with a raise
+    # (i.e. a failing exit code from main()).
+    monkeypatch.setattr(runner.platform,'platform',lambda:'test platform')
+    root=tmp_path/'repo';root.mkdir()
+    contract=json.loads((ROOT/'configs/stage_b_verification_contract.json').read_text())
+    contract['outputs']['run_id']='fail-then-continue'
+    path=tmp_path/'contract.json';path.write_text(json.dumps(contract))
+    monkeypatch.setattr(runner,'check_stage_b_readiness',lambda *a:{'ready':True,'blockers':[]})
+
+    def fake_run(cmd,**kw):
+        if 'freeze' in cmd:return SimpleNamespace(stdout='mock environment\n')
+        if 'verification.stage_b_preflight' in cmd:return SimpleNamespace(returncode=0)
+        Path(cmd[-1]).mkdir()
+        return SimpleNamespace(returncode=0)
+    monkeypatch.setattr(runner.subprocess,'run',fake_run)
+
+    seen_methods=[]
+    def fake_compare(root_,output_dir,method,contract_):
+        seen_methods.append(method)
+        if method=='gaussian':
+            return {'method':method,'rows_compared':6248,'status':'FAIL',
+                     'differences':[{'field':'clean_pred','row_index':0}]}
+        return {'method':method,'rows_compared':6248,'status':'PASS','differences':[]}
+    monkeypatch.setattr(runner,'compare_outputs',fake_compare)
+
+    with pytest.raises(ValueError,match='differences'):
+        runner.run(root,path)
+
+    # Both methods ran -- the FAIL comparison did not abort the loop.
+    assert seen_methods==['gaussian','mean']
+    report=json.loads((tmp_path/'stage-b-fail-then-continue/rerun-report.json').read_text())
+    assert report['status']=='FAIL'
+    assert len(report['commands'])==3  # preflight + gaussian + mean, both defense subprocesses ran
+    assert [c['method'] for c in report['comparisons']]==['gaussian','mean']
+    assert report['comparisons'][0]['status']=='FAIL'
+    assert report['comparisons'][1]['status']=='PASS'
 
 
 def test_not_ready_never_starts_process(tmp_path,monkeypatch):

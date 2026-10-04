@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "records": [
+    {
+      "id": "pc-full-20260928",
+      "operator_role": "research_operator",
+      "status": "LOCAL_PASS",
+      "source_commit": "b86f725d8e53132fb04d199eb3e5d61ee605f4a6",
+      "evidence_revision": "e6e575fa3df1247f8e43ac9749a573329f62a910",
+      "report_path": "docs/STAGE_B_PC_FULL_20260928.md",
+      "evidence": [
+        {
+          "path": "results/verification/stage_b/pc_full_20260928/received_audit.json",
+          "sha256": "cf8cc44ad14dd022710235db832ba8dd0a6f33941e23f108547fdf7d1a12c12f"
+        }
+      ]
+    },
+    {
+      "id": "external-01",
+      "operator_role": "external_operator",
+      "status": "FAIL",
+      "source_commit": "491b973cd9f4840664044a83c0d62d1ee1bb98e8",
+      "evidence_revision": "e6e575fa3df1247f8e43ac9749a573329f62a910",
+      "report_path": "docs/STAGE_B_HYEONSU_01_REVIEW.md",
+      "evidence": [
+        {
+          "path": "results/verification/stage_b/hyeonsu_01_review/gaussian_differences.json",
+          "sha256": "5cd6be4735d6dd6f3f142893007968ea488bb46d292eea1c65f457b4eebaa224"
+        },
+        {
+          "path": "results/verification/stage_b/hyeonsu_01_review/mean_differences.json",
+          "sha256": "5c5ba89648f0bc3c12f861fe62edee24e2fa7f626e221054204d6715bae00b4a"
+        }
+      ]
+    }
+  ]
+}

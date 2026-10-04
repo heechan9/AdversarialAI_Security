@@ -1,0 +1,332 @@
+{
+  "kind": "saved_label_diagnostic_not_stage_b_approval",
+  "inference_performed": false,
+  "conditions": [
+    {
+      "file": "cnn_eps_0_samples.csv",
+      "samples": 781,
+      "pipelines": {
+        "clean": {
+          "label_differences": 0,
+          "reference_correct": 504,
+          "actual_correct": 504
+        },
+        "defended_clean": {
+          "label_differences": 0,
+          "reference_correct": 419,
+          "actual_correct": 419
+        },
+        "attacked": {
+          "label_differences": 0,
+          "reference_correct": 504,
+          "actual_correct": 504
+        },
+        "transfer_defended": {
+          "label_differences": 0,
+          "reference_correct": 419,
+          "actual_correct": 419
+        },
+        "adaptive_defended": {
+          "label_differences": 0,
+          "reference_correct": 419,
+          "actual_correct": 419
+        }
+      }
+    },
+    {
+      "file": "cnn_eps_0.01_samples.csv",
+      "samples": 781,
+      "pipelines": {
+        "clean": {
+          "label_differences": 0,
+          "reference_correct": 504,
+          "actual_correct": 504
+        },
+        "defended_clean": {
+          "label_differences": 0,
+          "reference_correct": 419,
+          "actual_correct": 419
+        },
+        "attacked": {
+          "label_differences": 0,
+          "reference_correct": 325,
+          "actual_correct": 325
+        },
+        "transfer_defended": {
+          "label_differences": 0,
+          "reference_correct": 378,
+          "actual_correct": 378
+        },
+        "adaptive_defended": {
+          "label_differences": 0,
+          "reference_correct": 230,
+          "actual_correct": 230
+        }
+      }
+    },
+    {
+      "file": "cnn_eps_0.03_samples.csv",
+      "samples": 781,
+      "pipelines": {
+        "clean": {
+          "label_differences": 0,
+          "reference_correct": 504,
+          "actual_correct": 504
+        },
+        "defended_clean": {
+          "label_differences": 0,
+          "reference_correct": 419,
+          "actual_correct": 419
+        },
+        "attacked": {
+          "label_differences": 0,
+          "reference_correct": 190,
+          "actual_correct": 190
+        },
+        "transfer_defended": {
+          "label_differences": 0,
+          "reference_correct": 288,
+          "actual_correct": 288
+        },
+        "adaptive_defended": {
+          "label_differences": 0,
+          "reference_correct": 86,
+          "actual_correct": 86
+        }
+      }
+    },
+    {
+      "file": "cnn_eps_0.05_samples.csv",
+      "samples": 781,
+      "pipelines": {
+        "clean": {
+          "label_differences": 0,
+          "reference_correct": 504,
+          "actual_correct": 504
+        },
+        "defended_clean": {
+          "label_differences": 0,
+          "reference_correct": 419,
+          "actual_correct": 419
+        },
+        "attacked": {
+          "label_differences": 0,
+          "reference_correct": 158,
+          "actual_correct": 158
+        },
+        "transfer_defended": {
+          "label_differences": 0,
+          "reference_correct": 239,
+          "actual_correct": 239
+        },
+        "adaptive_defended": {
+          "label_differences": 0,
+          "reference_correct": 52,
+          "actual_correct": 52
+        }
+      }
+    },
+    {
+      "file": "mobilenet_eps_0_samples.csv",
+      "samples": 781,
+      "pipelines": {
+        "clean": {
+          "label_differences": 0,
+          "reference_correct": 613,
+          "actual_correct": 613
+        },
+        "defended_clean": {
+          "label_differences": 0,
+          "reference_correct": 622,
+          "actual_correct": 622
+        },
+        "attacked": {
+          "label_differences": 0,
+          "reference_correct": 613,
+          "actual_correct": 613
+        },
+        "transfer_defended": {
+          "label_differences": 0,
+          "reference_correct": 622,
+          "actual_correct": 622
+        },
+        "adaptive_defended": {
+          "label_differences": 0,
+          "reference_correct": 622,
+          "actual_correct": 622
+        }
+      }
+    },
+    {
+      "file": "mobilenet_eps_0.01_samples.csv",
+      "samples": 781,
+      "pipelines": {
+        "clean": {
+          "label_differences": 0,
+          "reference_correct": 613,
+          "actual_correct": 613
+        },
+        "defended_clean": {
+          "label_differences": 0,
+          "reference_correct": 622,
+          "actual_correct": 622
+        },
+        "attacked": {
+          "label_differences": 0,
+          "reference_correct": 97,
+          "actual_correct": 97
+        },
+        "transfer_defended": {
+          "label_differences": 0,
+          "reference_correct": 409,
+          "actual_correct": 409
+        },
+        "adaptive_defended": {
+          "label_differences": 0,
+          "reference_correct": 82,
+          "actual_correct": 82
+        }
+      }
+    },
+    {
+      "file": "mobilenet_eps_0.03_samples.csv",
+      "samples": 781,
+      "pipelines": {
+        "clean": {
+          "label_differences": 0,
+          "reference_correct": 613,
+          "actual_correct": 613
+        },
+        "defended_clean": {
+          "label_differences": 0,
+          "reference_correct": 622,
+          "actual_correct": 622
+        },
+        "attacked": {
+          "label_differences": 1,
+          "reference_correct": 103,
+          "actual_correct": 102
+        },
+        "transfer_defended": {
+          "label_differences": 0,
+          "reference_correct": 255,
+          "actual_correct": 255
+        },
+        "adaptive_defended": {
+          "label_differences": 2,
+          "reference_correct": 69,
+          "actual_correct": 70
+        }
+      }
+    },
+    {
+      "file": "mobilenet_eps_0.05_samples.csv",
+      "samples": 781,
+      "pipelines": {
+        "clean": {
+          "label_differences": 0,
+          "reference_correct": 613,
+          "actual_correct": 613
+        },
+        "defended_clean": {
+          "label_differences": 0,
+          "reference_correct": 622,
+          "actual_correct": 622
+        },
+        "attacked": {
+          "label_differences": 1,
+          "reference_correct": 126,
+          "actual_correct": 125
+        },
+        "transfer_defended": {
+          "label_differences": 1,
+          "reference_correct": 236,
+          "actual_correct": 237
+        },
+        "adaptive_defended": {
+          "label_differences": 1,
+          "reference_correct": 63,
+          "actual_correct": 63
+        }
+      }
+    }
+  ],
+  "differences": [
+    {
+      "file": "mobilenet_eps_0.03_samples.csv",
+      "row_index": 99,
+      "relative_path": "Bulkers/Bulkers_1039.jpeg",
+      "pipeline": "attacked",
+      "reference": "1",
+      "actual": "6",
+      "true_index": "1"
+    },
+    {
+      "file": "mobilenet_eps_0.03_samples.csv",
+      "row_index": 451,
+      "relative_path": "DDG/DDG_18.jpeg",
+      "pipeline": "adaptive_defended",
+      "reference": "9",
+      "actual": "6",
+      "true_index": "5"
+    },
+    {
+      "file": "mobilenet_eps_0.03_samples.csv",
+      "row_index": 679,
+      "relative_path": "Submarine/Submarine_13.jpeg",
+      "pipeline": "adaptive_defended",
+      "reference": "7",
+      "actual": "8",
+      "true_index": "8"
+    },
+    {
+      "file": "mobilenet_eps_0.05_samples.csv",
+      "row_index": 152,
+      "relative_path": "Bulkers/Bulkers_6.jpeg",
+      "pipeline": "attacked",
+      "reference": "1",
+      "actual": "8",
+      "true_index": "1"
+    },
+    {
+      "file": "mobilenet_eps_0.05_samples.csv",
+      "row_index": 533,
+      "relative_path": "Recreational/Recreational_1048.jpeg",
+      "pipeline": "transfer_defended",
+      "reference": "1",
+      "actual": "6",
+      "true_index": "6"
+    },
+    {
+      "file": "mobilenet_eps_0.05_samples.csv",
+      "row_index": 241,
+      "relative_path": "Car Carrier/Car Carrier_82.jpeg",
+      "pipeline": "adaptive_defended",
+      "reference": "3",
+      "actual": "7",
+      "true_index": "2"
+    }
+  ],
+  "input_sha256": {
+    "reference/cnn_eps_0_samples.csv": "e44838c6ea74b3e499d9d7019f2555f4d58f7b6c1a706ba8c1903cd67d0049ab",
+    "actual/cnn_eps_0_samples.csv": "e44838c6ea74b3e499d9d7019f2555f4d58f7b6c1a706ba8c1903cd67d0049ab",
+    "reference/cnn_eps_0.01_samples.csv": "732c1ef0a9b7df9102639233afcf50291d58dd782960f5f28ea92d39fb4c0283",
+    "actual/cnn_eps_0.01_samples.csv": "732c1ef0a9b7df9102639233afcf50291d58dd782960f5f28ea92d39fb4c0283",
+    "reference/cnn_eps_0.03_samples.csv": "c78c038e1753f05b63b45e86396fb849a8e424f5a6b4cd6abb9726d1373dd080",
+    "actual/cnn_eps_0.03_samples.csv": "c78c038e1753f05b63b45e86396fb849a8e424f5a6b4cd6abb9726d1373dd080",
+    "reference/cnn_eps_0.05_samples.csv": "51968a86783bfcf51125c298980a0080aea77539e8464194005169aef05e1b02",
+    "actual/cnn_eps_0.05_samples.csv": "51968a86783bfcf51125c298980a0080aea77539e8464194005169aef05e1b02",
+    "reference/mobilenet_eps_0_samples.csv": "2fbc4b8b669e6ac5e49f3170aa56caf4c32b3cd323459732622e76fc4ea0008d",
+    "actual/mobilenet_eps_0_samples.csv": "2fbc4b8b669e6ac5e49f3170aa56caf4c32b3cd323459732622e76fc4ea0008d",
+    "reference/mobilenet_eps_0.01_samples.csv": "3d173d3b19b4941d5287bf5482c3a0f400f22edde33d1320121fb143d8f01ef4",
+    "actual/mobilenet_eps_0.01_samples.csv": "3d173d3b19b4941d5287bf5482c3a0f400f22edde33d1320121fb143d8f01ef4",
+    "reference/mobilenet_eps_0.03_samples.csv": "c7e911245483838a9907fe66caadcd9366340363a08d34f99879741292df82a6",
+    "actual/mobilenet_eps_0.03_samples.csv": "f7b86084a14d73ad03172403cefdc9834f0b8047bd7c9d7a5375f4fe074d37d4",
+    "reference/mobilenet_eps_0.05_samples.csv": "57e57090dcb1e5036863495eeb59e0b6c41002a035d2a6f1fb638ba83077c6b4",
+    "actual/mobilenet_eps_0.05_samples.csv": "98fe85c02cd5aa741c4713a412f5b97d562261be9d22d1dc29d52eecefa76982"
+  },
+  "label_status": "MISMATCH",
+  "unique_affected_images": 6,
+  "source_commit": "491b973cd9f4840664044a83c0d62d1ee1bb98e8",
+  "received_zip_sha256": "8a71a67186399abb3d09d1b5de64a7cd4a55eecadbf8cf55d017f01f2a816ba7"
+}

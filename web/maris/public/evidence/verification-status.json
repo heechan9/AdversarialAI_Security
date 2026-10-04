@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "discrepancies": [
+    {
+      "id": "cross-environment-01",
+      "title": "환경 간 MobileNetV2 예측 불일치",
+      "state": "open",
+      "label": "미해결",
+      "last_note": "연구 수행 PC에서는 전체 조건이 기준과 일치했다. 외부 환경의 불일치 원인과 독립 재실행 일치는 미해결이므로 종료하지 않는다.",
+      "event_count": 2,
+      "events": [
+        {
+          "action": "registered",
+          "at": "2026-10-01T15:38:05+09:00",
+          "note": "보존된 외부 실행의 14장·16개 예측 차이를 이력 관리 대상으로 등록했다. 이 시각은 등록 시각이며 원래 실험 시각이 아니다."
+        },
+        {
+          "action": "observation",
+          "at": "2026-10-01T15:38:05+09:00",
+          "note": "연구 수행 PC에서는 전체 조건이 기준과 일치했다. 외부 환경의 불일치 원인과 독립 재실행 일치는 미해결이므로 종료하지 않는다."
+        }
+      ]
+    }
+  ],
+  "registry_sha256": "901dbdbd3fa6eaa172fa9fdf20846814937aec0e1ac7691f99b601b0493daec9",
+  "cards": [
+    {
+      "id": "pc-full-20260928",
+      "title": "연구 수행 PC 재현",
+      "status": "LOCAL_PASS",
+      "label": "전체 조건 기준 일치",
+      "detail": "모델 2개·781장·두 필터·ε 4개. 라벨·요약 지표 비교 완료, 확률값 비교 제외.",
+      "evidence_url": "https://github.com/heechan9/AdversarialAI_Security/blob/e6e575fa3df1247f8e43ac9749a573329f62a910/docs/STAGE_B_PC_FULL_20260928.md"
+    },
+    {
+      "id": "external-01",
+      "title": "외부 독립 재실행",
+      "status": "FAIL",
+      "label": "기준과 일부 불일치",
+      "detail": "보존 결과에서 16개 예측 차이. 평균 필터는 보조 진단이며 외부 전체 검증 PASS가 아닙니다.",
+      "evidence_url": "https://github.com/heechan9/AdversarialAI_Security/blob/e6e575fa3df1247f8e43ac9749a573329f62a910/docs/STAGE_B_HYEONSU_01_REVIEW.md"
+    }
+  ],
+  "cause_status": "UNRESOLVED",
+  "cause_note": "환경 간 차이의 정확한 원인은 미확정입니다. 로컬 일치를 외부 독립 검증 통과로 해석하지 않습니다."
+}
