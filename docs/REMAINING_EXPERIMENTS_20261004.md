@@ -1,0 +1,21 @@
+# 2026-10-04 잔여 실험 실행 설정
+
+사용자가 BIM·PGD 잔여 조건, JSMA 전체 평가, MobileNet 적대적 학습의 실제 실행을 요청했다. 결과는 기존 제출본과 분리한다.
+
+- BIM: 기존 evening 13/16조건을 감사하여 계승. 10 steps, step .005, batch32, 나머지 3조건 실행.
+- PGD: 기존 pc 2/16조건을 감사하여 계승. 20 steps, 5 restarts, step .005, seed2026, batch16, 나머지 14조건 실행.
+- 두 실행 모두 기존 Python 3.12.14/TF2.21.0/Keras3.15.1/NumPy2.3.5 및 CPU intra2/inter1 조건과 manifest를 대조한 뒤 계승한다.
+- JSMA: CNN 무방어 781장, target=(true+1)%10, theta=1, gamma=.01. 49,152채널 원소 중 최대491개 변경; 최대246회 pair 탐색. 전체 pair를 정확 탐색하며 top-k 근사는 사용하지 않는다. 이 조건의 전체 표본 평가이며 MobileNet·필터 조건까지 전체를 실행했다는 뜻이 아니다.
+- MobileNet: manifest의 원본 모델 SHA256 `58c4878fa1480035d0bd5a63f8c3e22beac3a03f27f1aada6690b27f167129ae` 확인. 기존 준비 ZIP에서 train6147/valid689 복원, 고정 test781과 정확 raw/RGB 중복 재검사.
+- 학습: 3 epochs, PGD7 epsilon .03/step .005/1 restart, seed2026, batch8, Adam1e-5, clean/adv loss .5/.5. validation PGD 정확도로 최적 epoch 선택. 기존 모델의 trainable 속성을 유지한다.
+- 테스트: 선택된 MobileNet과 원본에 각각 새 PGD7 공격, test781, batch8, seed2026+batch, 필터 없음. 모델 해시·원본 가중치 불변·Linf 범위를 검증한다. CPU 실행이며 독립 승인으로 취급하지 않는다.
+
+## 실행과 저장
+
+`results/extensions/iterative/bim-complete-20261004` 및 `pgd-complete-20261004`, `results/extensions/jsma/cnn-full-20261004`가 신규 실행 경로다. 기존 근거를 덮어쓰지 않는다.
+
+MobileNet 첫 시도 `mobilenet-pgd7-20261004`는 동시 실행 메모리 압박 때문에 첫 epoch 완료 전에 프로세스를 중지했다. 완료 epoch나 복구 checkpoint는 없다. 원본 training.json의 RUNNING은 종료 핸들러가 기록되지 않은 잔여 상태이므로 현재 실행으로 해석하지 않는다.
+
+`verification/remaining_experiments_queue.py`는 세 평가의 종료를 기다린 뒤 두 반복공격 결과를 감사하고, 별도 `mobilenet-pgd7-20261004-serial`에서 처음부터 학습한다. 이어 `verification/mobilenet_pgd7_test_evaluation.py`로 별도 테스트를 실행한다. 학습은 epoch 단위 모델·optimizer checkpoint를 보존한다. 실패한 의존 작업은 자동으로 완료 처리하지 않는다.
+
+큐가 끝나도 상태는 `COMPLETED_AWAITING_RESULT_AUDIT_AND_PUBLICATION`이다. 사용자에게 완료로 보고하기 전 최종 원자료 감사·GitHub/Drive 반영이 필요하다. 보고서에 RUNNING이 남은 것만으로 프로세스 생존을 단정하지 않는다. 실행 환경 종료 시 자동 지속을 보장하지 않는다.
