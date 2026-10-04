@@ -44,6 +44,15 @@ def run(args):
     expected = next(m['sha256'] for m in manifest['models'] if m['path']==str(model_path.relative_to(ROOT)))
     if model_hash != expected:
         raise ValueError('model hash mismatch')
+    training_path=ROOT/'results/extensions/cnn_adversarial_20261002/training.json'
+    trained=getattr(args,'trained_model',None)
+    if trained is not None:
+        if args.model!='cnn':
+            raise ValueError('preserved trained checkpoint is CNN only')
+        model_path=Path(trained)
+        model_hash=sha256_file(model_path)
+        if model_hash!=json.loads(training_path.read_text())['trained_model_sha256']:
+            raise ValueError('trained checkpoint does not match preserved training record')
     records = []
     for name in names:
         group = [r for r in manifest['test_files'] if r['label']==name]
@@ -91,6 +100,9 @@ def run(args):
         score_space='model_native_output',query_accounting='includes clean query; excludes no extra verification queries',
         pipeline='direct_attack_on_filter_then_model' if args.defense!='none' else 'direct_attack_on_model',
         independent_verification_approval=False,conditions=[])
+    report['model_role']='adversarially_trained' if trained is not None else 'original'
+    if trained is not None:
+        report['training_record_sha256']=sha256_file(training_path)
     def save():
         temp=out/'run.json.tmp'
         temp.write_text(json.dumps(report,indent=2,ensure_ascii=False,allow_nan=False)+'\n')
@@ -134,6 +146,7 @@ def run(args):
 def main():
     p=argparse.ArgumentParser(description=__doc__)
     p.add_argument('--model',choices=['cnn','mobilenet'],default='cnn')
+    p.add_argument('--trained-model',type=Path,help='CNN checkpoint matching preserved training.json')
     p.add_argument('--defense',choices=['none','mean','gaussian'],default='none')
     p.add_argument('--data-dir',type=Path,default=ROOT/'data/test')
     p.add_argument('--per-class',type=int,default=2,help='manifest prefix per class; 0 = all 781')

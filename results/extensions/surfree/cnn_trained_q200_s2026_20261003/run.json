@@ -1,0 +1,93 @@
+{
+  "status": "COMPLETED_NOT_INDEPENDENT_APPROVAL",
+  "kind": "official_surfree_l2_top1_extension",
+  "source_commit": "f94d4d19e6cfac20e13f46556c7e11c2920f08b7",
+  "source_tree": "8b028704077926d6674e8b0f7b657937afc0d970",
+  "upstream_commit": "c9920f2c289a4ad3c2d8d203006bb5964bf71816",
+  "upstream_file_sha256": {
+    "surfree.py": "12251b1cf5104921597ed43d58e5631648c3de494538301771b4b90434c2c946",
+    "utils/attack.py": "f7184b1704a14e5eeb64092f4ec60e42be97bbc51601f419d3f985651d250a99",
+    "utils/dct.py": "6e544171172a21ec430ccd3722e2b08a010388487bcd124dd5862b461f1a3579",
+    "utils/utils.py": "c650df59202c301c53b46c0713ff32c3502f25ee6667661a421ebbf4e4ad02ed"
+  },
+  "settings": {
+    "upstream": "/tmp/surfree-reference",
+    "model_role": "trained",
+    "data_dir": "/workspace/scratch/ddccb3ea1f08/adversarial-ai/data/test",
+    "max_queries": 200,
+    "seed": 2026,
+    "per_class": 0,
+    "run_id": "cnn_trained_q200_s2026_20261003"
+  },
+  "model_sha256": "c1a13cb702aef7e9966ba7a631c13276316aadc1e844471f108db89be51b6bcb",
+  "manifest_sha256": "36059fea372334509404aca0e66155bf99a8df270beb1cc3bf4865b361ae70a6",
+  "classes_sha256": "4a77ec1ce0aaf7ab9bed20cd1b4be3420a1d0bdf3d88924f3d1ba3ebf6d29d44",
+  "training_record_sha256": "3b0aa1cc0551acf4acbd62242fc59715d617284a836630c69c8dce61b583b707",
+  "tensorflow": "2.21.0",
+  "keras": "3.15.1",
+  "torch": "2.14.1+cpu",
+  "numpy": "2.5.3",
+  "python": "3.13.15",
+  "platform": "Linux-6.18.44-x86_64-with-glibc2.39",
+  "environment": {
+    "TF_ENABLE_ONEDNN_OPTS": "0",
+    "TF_NUM_INTRAOP_THREADS": "1",
+    "TF_NUM_INTEROP_THREADS": "1"
+  },
+  "query_accounting": "all actual top1 queries including clean, initialization, duplicate and placeholder queries",
+  "norm": "L2; RMS thresholds are L2/sqrt(128*128*3), not Linf epsilon",
+  "initialization": "clipped x + 0.5 Gaussian noise; at most min(200,budget-1) attempts",
+  "upstream_parameters": {
+    "steps": 200,
+    "BS_gamma": 0.01,
+    "BS_max_iteration": 10,
+    "rho": 0.98,
+    "T": 1,
+    "theta_max": 30,
+    "n_ortho": 10,
+    "with_distance_line_search": false,
+    "with_interpolation": false,
+    "with_alpha_line_search": true,
+    "quantification": false,
+    "final_line_search": true,
+    "basis_type": "dct",
+    "dct_type": "full",
+    "function": "constant",
+    "frequence_range": [
+      0,
+      0.5
+    ]
+  },
+  "independent_verification_approval": false,
+  "started_at": "2026-10-03T11:16:45.479704+00:00",
+  "completed_samples": 781,
+  "metrics": {
+    "samples": 781,
+    "clean_correct": 540,
+    "successful_any_distance": 459,
+    "asr_any_distance": 0.85,
+    "initialization_failures": 81,
+    "mean_total_queries": 138.59282970550575,
+    "median_success_l2": 23.866079330444336,
+    "median_success_rms": 0.10764903575181961,
+    "thresholds": {
+      "0.01": {
+        "successes": 2,
+        "asr": 0.003703703703703704,
+        "accuracy": 0.6888604353393086
+      },
+      "0.03": {
+        "successes": 15,
+        "asr": 0.027777777777777776,
+        "accuracy": 0.6722151088348272
+      },
+      "0.05": {
+        "successes": 47,
+        "asr": 0.08703703703703704,
+        "accuracy": 0.6312419974391805
+      }
+    }
+  },
+  "samples_sha256": "bc5e671abe6f4cbf9def234465f2e9974563f2a748e45c106da6f85f208c3bc3",
+  "finished_at": "2026-10-03T11:36:40.598595+00:00"
+}

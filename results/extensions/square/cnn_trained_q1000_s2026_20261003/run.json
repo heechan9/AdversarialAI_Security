@@ -1,0 +1,95 @@
+{
+  "status": "COMPLETED_NOT_INDEPENDENT_APPROVAL",
+  "kind": "square_linf_extension",
+  "started_at": "2026-10-03T11:10:33.329097+00:00",
+  "source_commit": "e22d27df68c3fa2463df902dc7c3e6786e7254d2",
+  "settings": {
+    "model": "cnn",
+    "trained_model": "models/cnn_adversarial.keras",
+    "defense": "none",
+    "data_dir": "/workspace/scratch/ddccb3ea1f08/adversarial-ai/data/test",
+    "per_class": 0,
+    "epsilons": [
+      0.0,
+      0.03
+    ],
+    "max_queries": 1000,
+    "p_init": 0.05,
+    "seed": 2026,
+    "batch_size": 20,
+    "run_id": "cnn_trained_q1000_s2026_20261003"
+  },
+  "model_sha256": "c1a13cb702aef7e9966ba7a631c13276316aadc1e844471f108db89be51b6bcb",
+  "manifest_sha256": "36059fea372334509404aca0e66155bf99a8df270beb1cc3bf4865b361ae70a6",
+  "classes_sha256": "4a77ec1ce0aaf7ab9bed20cd1b4be3420a1d0bdf3d88924f3d1ba3ebf6d29d44",
+  "scope": "full_781",
+  "tensorflow": "2.21.0",
+  "keras": "3.15.1",
+  "numpy": "2.5.3",
+  "python": "3.13.15",
+  "platform": "Linux-6.18.44-x86_64-with-glibc2.39",
+  "devices": [
+    "CPU"
+  ],
+  "environment": {
+    "TF_ENABLE_ONEDNN_OPTS": "0",
+    "TF_DETERMINISTIC_OPS": null,
+    "TF_NUM_INTRAOP_THREADS": "2",
+    "TF_NUM_INTEROP_THREADS": "1"
+  },
+  "score_space": "model_native_output",
+  "query_accounting": "includes clean query; excludes no extra verification queries",
+  "pipeline": "direct_attack_on_model",
+  "independent_verification_approval": false,
+  "conditions": [
+    {
+      "epsilon": 0.0,
+      "csv": "eps_0.csv",
+      "sha256": "4c5d2d6155e52e415708e7a643028e8a34e744195e6ca915761adbefe8c246f3",
+      "metrics": {
+        "samples": 781,
+        "clean_correct": 540,
+        "attacked_correct": 540,
+        "clean_accuracy": 0.6914212548015365,
+        "attacked_accuracy": 0.6914212548015365,
+        "asr_successes": 0,
+        "asr_denominator": 540,
+        "asr": 0.0,
+        "mean_total_queries": 1.0,
+        "mean_success_queries": null,
+        "success_by_total_queries": {
+          "1": 0,
+          "10": 0,
+          "50": 0,
+          "1000": 0
+        }
+      }
+    },
+    {
+      "epsilon": 0.03,
+      "csv": "eps_0.03.csv",
+      "sha256": "0b54f490b92e3d5f0ca11d9725323fe4f967065ac1e105e82e0b8e8916fcf25a",
+      "metrics": {
+        "samples": 781,
+        "clean_correct": 540,
+        "attacked_correct": 458,
+        "clean_accuracy": 0.6914212548015365,
+        "attacked_accuracy": 0.586427656850192,
+        "asr_successes": 82,
+        "asr_denominator": 540,
+        "asr": 0.15185185185185185,
+        "mean_total_queries": 603.842509603073,
+        "mean_success_queries": 162.9268292682927,
+        "success_by_total_queries": {
+          "1": 0,
+          "10": 15,
+          "50": 34,
+          "1000": 82
+        }
+      }
+    }
+  ],
+  "model_role": "adversarially_trained",
+  "training_record_sha256": "3b0aa1cc0551acf4acbd62242fc59715d617284a836630c69c8dce61b583b707",
+  "finished_at": "2026-10-03T11:39:43.758100+00:00"
+}

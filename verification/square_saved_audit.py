@@ -19,7 +19,12 @@ def audit(folder):
     assert sha256_file(manifest)==report['manifest_sha256']
     assert sha256_file(ROOT/'configs/classes.json')==report['classes_sha256']
     data=json.loads(manifest.read_text())
-    assert report['model_sha256'] in [m['sha256'] for m in data['models']]
+    if report.get('model_role')=='adversarially_trained':
+        training=ROOT/'results/extensions/cnn_adversarial_20261002/training.json'
+        assert report['training_record_sha256']==sha256_file(training)
+        assert report['model_sha256']==json.loads(training.read_text())['trained_model_sha256']
+    else:
+        assert report['model_sha256'] in [m['sha256'] for m in data['models']]
     classes=json.loads((ROOT/'configs/classes.json').read_text())
     selected=[]
     n=report['settings']['per_class']
