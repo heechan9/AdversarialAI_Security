@@ -53,7 +53,7 @@
 
 ## 최신 통합 상태
 
-**제출 이후 후속 연구:** [CNN 적대적 학습·테스트 평가](results/extensions/cnn_adversarial_20261002/README.md)를 완료했습니다(2026-10-02). 학습 6,147장·검증 689장, 테스트 781장에서 일반 정확도 64.53%→69.14%, PGD7 정확도 11.14%→18.57%입니다. PGD7·ε=0.03·1 restart·필터 없음에 한정한 결과이며 강한 공격 전체나 외부 독립 검증 완료를 뜻하지 않습니다. [BIM·PGD 중간 근거](docs/FOLLOWUP_EXECUTION_STATUS.md)는 부분 결과로 유지하고 MobileNet 학습·나머지 공격 실험은 보류했습니다. 기존 제출 결과와 Stage B 판정은 유지합니다.
+**제출 이후 후속 연구:** [CNN 적대적 학습·테스트 평가](results/extensions/cnn_adversarial_20261002/README.md)를 완료했습니다(2026-10-02). 학습 6,147장·검증 689장, 테스트 781장에서 일반 정확도 64.53%→69.14%, PGD7 정확도 11.14%→18.57%입니다. PGD7·ε=0.03·1 restart·필터 없음에 한정한 결과이며 강한 공격 전체나 외부 독립 검증 완료를 뜻하지 않습니다. [BIM·PGD 중간 근거](docs/FOLLOWUP_EXECUTION_STATUS.md)는 부분 결과로 유지하고 [Square·SurFree 블랙박스 평가](results/extensions/blackbox/README_20261003.md)도 완료했습니다. MobileNet 학습·BIM/PGD 잔여 조건·JSMA 전체 평가는 아직 완료되지 않았습니다. 기존 제출 결과와 Stage B 판정은 유지합니다.
 
 <!-- verification-status:start -->
 | 검증 구분 | 상태 | 확인 범위 |

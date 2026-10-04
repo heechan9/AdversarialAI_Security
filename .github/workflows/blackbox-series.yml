@@ -6,6 +6,8 @@ on:
       - 'src/adversarial_ai/evaluation/surfree_evaluation.py'
       - 'src/adversarial_ai/evaluation/square_evaluation.py'
       - 'verification/*blackbox*'
+      - 'verification/subset_sensitivity.py'
+      - 'results/extensions/sensitivity/20261002/subsets.json'
       - 'verification/surfree_saved_audit.py'
       - 'tests/test_surfree_adapter.py'
       - 'tests/test_surfree_evidence.py'
@@ -34,3 +36,6 @@ jobs:
       - run: |
           python verification/blackbox_series_summary.py > /tmp/blackbox-summary.json
           diff -u results/extensions/blackbox/summary_20261003.json /tmp/blackbox-summary.json
+      - run: |
+          python verification/blackbox_subset_sensitivity.py > /tmp/blackbox-subsets.json
+          diff -u results/extensions/blackbox/subset_sensitivity_20261004.json /tmp/blackbox-subsets.json
