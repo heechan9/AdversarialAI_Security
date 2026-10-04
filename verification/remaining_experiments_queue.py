@@ -38,6 +38,10 @@ def main():
    result=audit(path.parent,ROOT)
    if result['result']!='FULL_OUTPUTS_CONSISTENT':raise RuntimeError('incomplete '+name)
    (OUT/(name+'-audit.json')).write_text(json.dumps(result,indent=2)+'\n')
+  from verification.jsma_saved_audit import audit as audit_jsma
+  jsma=audit_jsma(DEPENDENCIES[2][1].parent,ROOT)
+  if jsma['result']!='FULL_SAVED_EVIDENCE_CONSISTENT':raise RuntimeError('incomplete JSMA evidence')
+  (OUT/'jsma-audit.json').write_text(json.dumps(jsma,indent=2)+'\n')
   trained=ROOT/'results/extensions/adversarial_training/mobilenet-pgd7-20261004-serial'
   run('TRAINING',['-m','adversarial_ai.training.adversarial_training','--model','mobilenet',
    '--train-dir','data/train-prepared/images','--validation-dir','data/valid','--test-dir','data/test',

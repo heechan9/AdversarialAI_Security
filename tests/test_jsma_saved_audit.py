@@ -22,3 +22,24 @@ def test_tampered_evidence_rejected(tmp_path,mutation):
     if mutation=='coverage':data['status']='FULL_COVERAGE_NOT_ROBUSTNESS_PROOF'
     (tmp_path/'run.json').write_text(json.dumps(data))
     with pytest.raises(AssertionError):audit(tmp_path)
+
+
+@pytest.mark.parametrize('change',[None,'model_sha256','source_commit','environment','theta'])
+def test_resume_prefix_requires_matching_identity(tmp_path,change):
+    from adversarial_ai.evaluation.jsma_evaluation import inherit_rows
+    parent=tmp_path/'parent';parent.mkdir();data=saved(parent)
+    data.update(environment={},python='test',numpy='test')
+    (parent/'run.json').write_text(json.dumps(data))
+    candidate=json.loads(json.dumps(data))
+    candidate['rows']=[];candidate['evaluated']=0
+    if change=='theta':candidate['settings']['theta']=-data['settings']['theta']
+    elif change:candidate[change]='different'
+    out=tmp_path/'child';out.mkdir()
+    if change:
+        with pytest.raises(ValueError):inherit_rows(parent,out,candidate,SOURCE.parents[5])
+        assert candidate['rows']==[]
+    else:
+        root=Path(__file__).resolve().parents[1]
+        inherit_rows(parent,out,candidate,root)
+        assert candidate['rows']==data['rows']
+        assert (out/'parent-run.json').read_bytes()==(parent/'run.json').read_bytes()
