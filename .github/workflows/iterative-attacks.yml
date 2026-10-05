@@ -19,6 +19,9 @@ jobs:
           PYTHONPATH: src
           TF_CPP_MIN_LOG_LEVEL: '3'
       - name: Recalculate preserved partial checkpoints
+        # Recovery gates run without a GPU; actual execution remains separately audited.
+        run: python -m pytest tests/test_full_extension_audit.py tests/test_recovery_preparation.py -q
+      - name: Recalculate saved checkpoints
         run: |
           python verification/iterative_result_audit.py results/extensions/checkpoints/20261001/bim
           python verification/iterative_result_audit.py results/extensions/checkpoints/20261001/pgd

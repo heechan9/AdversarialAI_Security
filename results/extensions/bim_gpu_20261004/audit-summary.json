@@ -1,0 +1,130 @@
+{
+  "audit": {
+    "kind": "followup_csv_recalculation",
+    "source_commit": "e974c4bb21ac2041dfbb93fdb18c1983dd6e402e",
+    "result": "FULL_OUTPUTS_CONSISTENT",
+    "execution_status": "COMPLETED_NOT_INDEPENDENT_APPROVAL",
+    "checked_conditions": 16,
+    "expected_conditions": 16,
+    "conditions": [
+      {
+        "model": "cnn",
+        "method": "gaussian",
+        "epsilon": 0.0,
+        "rows": 781
+      },
+      {
+        "model": "cnn",
+        "method": "gaussian",
+        "epsilon": 0.01,
+        "rows": 781
+      },
+      {
+        "model": "cnn",
+        "method": "gaussian",
+        "epsilon": 0.03,
+        "rows": 781
+      },
+      {
+        "model": "cnn",
+        "method": "gaussian",
+        "epsilon": 0.05,
+        "rows": 781
+      },
+      {
+        "model": "cnn",
+        "method": "mean",
+        "epsilon": 0.0,
+        "rows": 781
+      },
+      {
+        "model": "cnn",
+        "method": "mean",
+        "epsilon": 0.01,
+        "rows": 781
+      },
+      {
+        "model": "cnn",
+        "method": "mean",
+        "epsilon": 0.03,
+        "rows": 781
+      },
+      {
+        "model": "cnn",
+        "method": "mean",
+        "epsilon": 0.05,
+        "rows": 781
+      },
+      {
+        "model": "mobilenet",
+        "method": "gaussian",
+        "epsilon": 0.0,
+        "rows": 781
+      },
+      {
+        "model": "mobilenet",
+        "method": "gaussian",
+        "epsilon": 0.01,
+        "rows": 781
+      },
+      {
+        "model": "mobilenet",
+        "method": "gaussian",
+        "epsilon": 0.03,
+        "rows": 781
+      },
+      {
+        "model": "mobilenet",
+        "method": "gaussian",
+        "epsilon": 0.05,
+        "rows": 781
+      },
+      {
+        "model": "mobilenet",
+        "method": "mean",
+        "epsilon": 0.0,
+        "rows": 781
+      },
+      {
+        "model": "mobilenet",
+        "method": "mean",
+        "epsilon": 0.01,
+        "rows": 781
+      },
+      {
+        "model": "mobilenet",
+        "method": "mean",
+        "epsilon": 0.03,
+        "rows": 781
+      },
+      {
+        "model": "mobilenet",
+        "method": "mean",
+        "epsilon": 0.05,
+        "rows": 781
+      }
+    ],
+    "independent_verification_approval": false,
+    "probabilities_compared": false
+  },
+  "parent_report_sha256": "bac707da0966b3bb4f4ab546d533dd841c8d4e8787f5d9857777968df93b4e9c",
+  "csv_hashes": {
+    "cnn_gaussian_eps_0.csv": "fcdbeacf82a563f1c6b4e4db1f1d63efd8629bd02e4f74ab7f4dae3b0d03bd29",
+    "cnn_gaussian_eps_0.01.csv": "563f77edd2a9411facb93b5aacd937f898b269f5b18687fee53a90bbd5778afc",
+    "cnn_gaussian_eps_0.03.csv": "2872b218038305814e93effb6ed7199f2b3472cf4c440185adb1505c31fb35af",
+    "cnn_gaussian_eps_0.05.csv": "219b30df2de8e55a245220275f1e790aaf5d3034380f6056cb1dc91c1f993a0e",
+    "cnn_mean_eps_0.csv": "d4057b0e92d53099d1cc0b960071ec750d8eb922f83e093197f8e716785e26e8",
+    "cnn_mean_eps_0.01.csv": "344b2f7991cfdf4cab72c74b4cbc0401c65d800979bfbbe01c30e4cf55766250",
+    "cnn_mean_eps_0.03.csv": "ffeb819d1b322cf0ed0e82109ca846d46892bd050d2b608154da3a474c5fa1ba",
+    "cnn_mean_eps_0.05.csv": "c381e86532a4d55b37d984e6b06490f22d4d8b5a468cb804ac23a881c674fb00",
+    "mobilenet_gaussian_eps_0.csv": "487c541358383f0468bdada1f9f507f970c4736ff29d5a4b6108e2b52db77879",
+    "mobilenet_gaussian_eps_0.01.csv": "b1e5018aeaf16fcd3a80c49b07f0aed377fa4a5834bb986cf90eebed3970ef36",
+    "mobilenet_gaussian_eps_0.03.csv": "89644f261cfea92faf73ec096c50d266023ae3d4e99ecce217289961f68537d2",
+    "mobilenet_gaussian_eps_0.05.csv": "224e152f4dae5b52fb8201fcf6a266a9b556da848d00a00ba4b4c639e15f3a40",
+    "mobilenet_mean_eps_0.csv": "435a0ff153ce4679574aaea53e608a483600469b1f1541bacd695bda89d195ba",
+    "mobilenet_mean_eps_0.01.csv": "abd67eaf28d3579196062192a0876eeb3c372cc555ca1517e315a2331d5dfb9b",
+    "mobilenet_mean_eps_0.03.csv": "8da784a9a325b072f7f37922032087b5953618e0400bdbe3475f2e902ca64df6",
+    "mobilenet_mean_eps_0.05.csv": "d5ca1629f4fb199e4bd9129a9a744abfac68a6911f69e217094af3763a7121f9"
+  },
+  "note": "Aggregate results only; no private images or model weights. Independent approval not performed."
+}
