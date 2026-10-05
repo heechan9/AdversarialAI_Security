@@ -67,3 +67,15 @@ def test_reject_corrupt_evidence(evidence,mutation):
 def test_missing_stages_cannot_pass(tmp_path):
     with pytest.raises((FileNotFoundError,ValueError)):
         audit_all(*([tmp_path]*5))
+
+
+def test_recovery_sources_reject_mixed_or_missing(tmp_path):
+    from verification.full_extension_audit import audit_recovery_sources
+    folders=[]
+    for i,name in enumerate(('run.json','run.json','training.json','evaluation.json')):
+        folder=tmp_path/str(i);folder.mkdir();folders.append(folder)
+        write(folder/name, {'source_commit':'a'*40})
+    assert audit_recovery_sources(*folders)=='a'*40
+    for value in ('b'*40, None, 'main'):
+        write(folders[-1]/'evaluation.json', {'source_commit':value})
+        with pytest.raises(ValueError):audit_recovery_sources(*folders)

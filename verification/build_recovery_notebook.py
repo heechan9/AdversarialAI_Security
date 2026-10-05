@@ -18,10 +18,10 @@ def main():
         '이 노트북은 첫 복구 시도용입니다. 재중단되면 저장 산출물을 다시 감사해야 하며 전체 재실행하지 마세요. '
         'Drive 백업에는 비공개 가중치가 포함됩니다. 폴더를 공개하지 마세요.\n')
     setup = ''.join(original['cells'][1]['source'])
-    setup = setup.replace("COMMIT= 'e974c4bb21ac2041dfbb93fdb18c1983dd6e402e'", "COMMIT= 'e974c4bb21ac2041dfbb93fdb18c1983dd6e402e'")
-    # Resolve once and detach: subsequent branch updates cannot change this session's code.
     setup = setup.replace("COMMIT='e974c4bb21ac2041dfbb93fdb18c1983dd6e402e'",
-        "COMMIT=subprocess.check_output(['git','ls-remote','https://github.com/heechan9/AdversarialAI_Security.git','refs/heads/feat/remaining-experiments-20261004'],text=True).split()[0]\nprint('Pinned recovery source:',COMMIT)")
+        "import re\nCOMMIT=input('Reviewed execution SHA (40 hex): ').strip()\n"
+        "if not re.fullmatch(r'[0-9a-f]{40}',COMMIT): raise ValueError('Explicit reviewed SHA required')\n"
+        "print('Pinned recovery source:',COMMIT)")
     add('code', setup)
     add('code', ''.join(original['cells'][2]['source']).replace('다음 셀은 전체 5단계를 순차 실행합니다.', '다음 셀은 부모 결과를 감사합니다.'))
     add('code', '''os.chdir(REPO)
@@ -39,11 +39,13 @@ assert audit(PGD_PARENT,REPO)['checked_conditions']==11
 RUN='recovery-'+datetime.datetime.now(datetime.timezone.utc).strftime('%Y%m%dT%H%M%S')
 PRIVATE=DEST/RUN
 PRIVATE.mkdir(exist_ok=False)
+(PRIVATE/'execution-source.json').write_text(json.dumps({'source_commit':COMMIT},indent=2))
 PGD=REPO/'results/extensions/iterative'/(RUN+'-pgd')
 JSMA=REPO/'results/extensions/jsma'/(RUN+'-jsma')
 TRAIN=REPO/'results/extensions/adversarial_training'/(RUN+'-train')
 EVAL=REPO/'results/extensions'/(RUN+'-eval')
 def stage(name,out,args):
+    assert subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip()==COMMIT, 'Execution source changed'
     run_logged([PY,'-m','verification.recovery_stage','--output',str(out),'--backup',str(PRIVATE/name),'--',*args],env=ENV)
 print('부모 감사 완료; 복구 ID:',RUN)
 ''')

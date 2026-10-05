@@ -133,7 +133,7 @@
 확장 실험의 [저장 결과 감사·중단 복구 기록](docs/GPU_RECOVERY_20261005.md)을 별도로 관리합니다. 기존 CPU 부분 결과를 GPU 완료 결과에 합산하지 않습니다.
 
 - [BIM GPU 결과표·그래프](results/extensions/bim_gpu_20261004/README.md)
-- [중단 복구 전용 노트북](notebooks/AdversarialAI_Recovery_GPU.ipynb): 첫 복구 시도용, 실제 GPU 복구 실행은 미검증
+- [중단 복구 전용 노트북](notebooks/AdversarialAI_Recovery_GPU.ipynb): 첫 복구 시도용; 3294dcc로 GPU 복구 시작, 전체 완료 미확인
 - [GPU 실행 인계 안내](docs/HYUNSU_GPU_HANDOFF.md)
 - [전체 저장 증거 감사](verification/full_extension_audit.py): private 가중치 해시와 5단계 완료 검사가 필요하며 GPU 실행 로그 검토는 별도
 

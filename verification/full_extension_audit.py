@@ -4,6 +4,7 @@ import csv
 import hashlib
 import json
 import math
+import re
 from pathlib import Path
 from verification.iterative_result_audit import audit as iterative_audit
 from verification.jsma_saved_audit import audit as jsma_audit
@@ -96,7 +97,19 @@ def audit_mobile(training_dir, evaluation_dir, root=ROOT):
             'independent_verification_approval': False, 'private_weights_hash_checked': True}
 
 
+def audit_recovery_sources(pgd, jsma, training, evaluation):
+    reports = [(pgd, 'run.json'), (jsma, 'run.json'),
+               (training, 'training.json'), (evaluation, 'evaluation.json')]
+    sources = [read(Path(folder)/name).get('source_commit') for folder, name in reports]
+    require(all(isinstance(v, str) and re.fullmatch(r'[0-9a-f]{40}', v) for v in sources),
+            'missing or invalid recovery source SHA')
+    require(len(set(sources)) == 1, 'recovery stage source mismatch')
+    # BIM is an immutable parent run; its different source is checked separately.
+    return sources[0]
+
+
 def audit_all(bim, pgd, jsma, training, evaluation, root=ROOT):
+    source = audit_recovery_sources(pgd, jsma, training, evaluation)
     results = {}
     for name, folder, steps, restarts, seed, batch in [('bim', bim, 10, 1, 0, 32), ('pgd', pgd, 20, 5, 2026, 16)]:
         results[name] = iterative_audit(folder, root)
@@ -110,7 +123,7 @@ def audit_all(bim, pgd, jsma, training, evaluation, root=ROOT):
     for key, value in dict(model='cnn', defense='none', theta=1., gamma=.01, max_steps=246, limit=781).items():
         require(settings[key] == value, 'JSMA setting: '+key)
     results['mobilenet'] = audit_mobile(training, evaluation, root)
-    return {'result': 'FULL_SAVED_EVIDENCE_CONSISTENT', 'stages': results,
+    return {'result': 'FULL_SAVED_EVIDENCE_CONSISTENT', 'stages': results, 'recovery_source_commit': source,
             'gpu_execution_proven_by_this_audit': False,
             'note': 'Saved evidence only. Inspect GPU execution logs and source lineage separately before publication.',
             'independent_verification_approval': False}
