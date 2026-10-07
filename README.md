@@ -15,6 +15,10 @@
 위 링크에서 MARIS 가상 실험실을 열 수 있습니다.
 저장 결과를 재생하는 공간이며 실제 자율운항 제어 또는 실시간 모델 추론이 아닙니다.
 
+[![CPU regression](https://github.com/heechan9/AdversarialAI_Security/actions/workflows/iterative-attacks.yml/badge.svg)](https://github.com/heechan9/AdversarialAI_Security/actions/workflows/iterative-attacks.yml)
+
+[CPU CI 실행법·범위·SHA별 교차 검수](docs/CPU_CI_REVIEW.md) — 합성 입력과 공개 저장 결과 검사이며, GPU 전체 실험·비공개 781장 공식 재현·독립 승인을 뜻하지 않습니다.
+
 <br>
 
 ![Python](https://img.shields.io/badge/Python-3.11-3776AB?logo=python&logoColor=white)
