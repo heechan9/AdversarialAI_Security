@@ -18,6 +18,14 @@ def require_executed_tests(path):
         raise RuntimeError(f'Required CPU tests were skipped: {skipped}')
 
 
+def require_preserved_inputs(repo_root=Path('.')):
+    status = subprocess.check_output(
+        ['git', 'status', '--porcelain', '--untracked-files=all', '--',
+         'src', 'configs', 'results'], cwd=repo_root, text=True)
+    if status:
+        raise RuntimeError(f'Protected input files changed or were added:\n{status}')
+
+
 def main():
     out = Path('ci-artifacts')
     out.mkdir(exist_ok=True)
@@ -62,7 +70,7 @@ def main():
     run_full_audit(repo_root=Path('.'), output_report_path=out / 'evidence-audit.json')
     claims = audit_paper_claims(Path('.'))
     (out / 'paper-claims.json').write_text(json.dumps([c.to_dict() for c in claims], indent=2), encoding='utf-8')
-    subprocess.run(['git', 'diff', '--exit-code', '--', 'src', 'configs', 'results'], check=True)
+    require_preserved_inputs()
     return 0
 
 

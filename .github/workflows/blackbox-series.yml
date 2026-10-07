@@ -2,6 +2,9 @@ name: Trained CNN black-box evidence
 on:
   pull_request:
     paths:
+      - 'src/adversarial_ai/attacks/square.py'
+      - 'tests/test_square.py'
+      - 'verification/square_saved_audit.py'
       - 'src/adversarial_ai/attacks/surfree_adapter.py'
       - 'src/adversarial_ai/evaluation/surfree_evaluation.py'
       - 'src/adversarial_ai/evaluation/square_evaluation.py'
@@ -15,6 +18,8 @@ on:
       - 'results/extensions/blackbox/**'
       - 'results/extensions/square/*q*20261003/**'
       - '.github/workflows/blackbox-series.yml'
+  push:
+    branches: [main]
   workflow_dispatch:
 permissions:
   contents: read
