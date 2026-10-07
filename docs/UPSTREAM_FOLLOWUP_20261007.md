@@ -13,7 +13,7 @@ CPU 검사 설정: CUDA_VISIBLE_DEVICES=-1, TF_NUM_INTRAOP_THREADS=2, TF_NUM_INT
 - `python verification/status_registry.py`: exit 0, 저장 근거·표시 일치.
 - 검사 후 원본 worktree git status: 변경 없음.
 
-## 범위와 미완료
+## 검사 당시 범위와 미완료
 공개 CSV/JSON의 내부 정합성과 합성 입력 테스트다. 원본 781장 이미지 내용 및 모델 바이너리 해시 재계산은 **NOT_RUN / UNAVAILABLE**.
 외부 MobileNetV2 14장·16개 예측 차이와 FAIL/open을 그대로 유지한다. 교차 환경 공격 배열 재분류는 수행하지 않았다.
 공식 실행계약의 승인자·승인시각·실행 SHA·run ID를 임의로 채우지 않았다. 팀 확인 및 실제 공식 실행 증거가 필요하다.
@@ -30,3 +30,11 @@ PAPER_CLAIM_AUDIT.md 및 ROLE_ALIGNMENT.md의 ε 범위 승인 대기 표현을 
 원본 대상 PR 생성은 연결의 쓰기 권한 부족(HTTP 403 Resource not accessible by integration)으로 실패했다.
 수정은 개인 포크의 `docs/upstream-epsilon-status` 브랜치에만 보존했다. 원본 main 병합은 수행하지 않았다.
 원본/포크 전체 동기화, #78 GPU 실험, 재학습은 수행하지 않았다.
+
+## 사용자 후속 확인 — 2026-10-07 19:24 KST
+최희찬이 환경 불일치 후속 재검사, 공식 실행 승인, 논문 접수·채택에 대해 “이미 다 잘 된 부분”이라고 확인하고 완료 처리를 요청했다.
+업무 상태는 세 항목 모두 **사용자 확인 완료**로 기록한다. 위 미확인은 이 확인 전 도구로 증빙을 조회한 당시의 상태다.
+이는 사용자 전달 보고이며 Codex의 직접 재추론·접수증 열람·채택 통지 열람 결과가 아니다.
+기존 FAIL/open 원시 검증 기록, 계약의 승인 필드 및 run ID는 해당 증빙과 연결하기 전까지 덮어쓰지 않는다.
+실제 승인 발생시각과 사용자 확인시각을 동일하게 만들지 않으며, 검증 도구의 PASS로 변환하지 않는다.
+문서 수정 후 작성자 추가 검사: 444 passed, 4 warnings, 13 subtests passed(24.85s), 논문 감사 9/9. 테스트 대상은 원본 코드와 두 문서 수정이며 이 후속 보고 문구는 별도 문서 변경이다.
