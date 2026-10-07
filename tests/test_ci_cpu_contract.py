@@ -43,3 +43,30 @@ def test_real_clean_loader_rgb_normalization_order_and_size(tmp_path, monkeypatc
     assert x.dtype == np.float32
     np.testing.assert_allclose(x[:, 0, 0, 0], np.arange(10) * 20 / 255, atol=1e-7)
     np.testing.assert_array_equal(y, np.eye(10))
+
+
+@pytest.mark.parametrize('kind', ['untracked', 'modified', 'staged', 'ignored'])
+def test_ci_rejects_protected_input_changes(tmp_path, kind):
+    import subprocess
+    from verification.ci_cpu import require_preserved_inputs
+    def git(*args):
+        subprocess.run(['git', *args], cwd=tmp_path, check=True, capture_output=True)
+    git('init')
+    (tmp_path / 'results').mkdir()
+    tracked = tmp_path / 'results' / 'saved.csv'
+    tracked.write_text('original')
+    (tmp_path / '.gitignore').write_text('*.pyc\n')
+    git('add', '.')
+    git('-c', 'user.name=Test', '-c', 'user.email=test@example.invalid',
+        'commit', '-m', 'fixture')
+    require_preserved_inputs(tmp_path)
+    if kind == 'ignored':
+        (tmp_path / 'results' / 'zz.pyc').write_bytes(b'unexpected')
+    elif kind == 'untracked':
+        (tmp_path / 'results' / 'extra.csv').write_text('extra')
+    else:
+        tracked.write_text('changed')
+        if kind == 'staged':
+            git('add', '.')
+    with pytest.raises(RuntimeError, match='Protected input'):
+        require_preserved_inputs(tmp_path)
