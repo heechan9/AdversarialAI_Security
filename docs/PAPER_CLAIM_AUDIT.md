@@ -41,8 +41,10 @@ exit code 1을 반환한다.
 
 ## 상태 경계
 
-현재 FGSM 수치는 멘토의 ε 범위 승인 전이므로 `provisional`이어야 한다. 감사기는
-provisional 비교표를 임의로 `official`로 바꾸면 실패한다. 승인 후 공식 재실행을
+`CURRENT_RESEARCH_STATUS.md`는 2026-09-20 사용자 확인으로 ε=0, 0.01, 0.03, 0.05
+범위가 확정되었다고 기록한다. 이는 별도 공식 실행계약의 팀 확인·재실행 기록과 다르다.
+기존 FGSM 원자료의 `provisional` 표기는 이력으로 보존한다. 감사기는
+provisional 비교표를 임의로 `official`로 바꾸면 실패한다. 별도 실행 승인 후 공식 재실행을
 구현할 때는 기존 provisional 경로를 덮어쓰지 않고 별도 official 산출물과 Claim을
 추가한다.
 
