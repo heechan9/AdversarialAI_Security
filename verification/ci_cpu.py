@@ -22,6 +22,11 @@ def require_preserved_inputs(repo_root=Path('.')):
     status = subprocess.check_output(
         ['git', 'status', '--porcelain', '--untracked-files=all', '--',
          'src', 'configs', 'results'], cwd=repo_root, text=True)
+    # Results/configs must remain pristine even when a filename is ignored.
+    ignored = subprocess.check_output(
+        ['git', 'ls-files', '--others', '--ignored', '--exclude-standard', '--',
+         'configs', 'results'], cwd=repo_root, text=True)
+    status += ignored
     if status:
         raise RuntimeError(f'Protected input files changed or were added:\n{status}')
 

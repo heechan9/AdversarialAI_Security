@@ -2,6 +2,8 @@ name: Trained CNN black-box evidence
 on:
   pull_request:
     paths:
+      - 'src/adversarial_ai/evaluation/integrity.py'
+      - 'configs/**'
       - 'src/adversarial_ai/attacks/square.py'
       - 'tests/test_square.py'
       - 'verification/square_saved_audit.py'

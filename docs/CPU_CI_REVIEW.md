@@ -80,3 +80,17 @@ PR #79는 사용자 후속 요청에 따라 2026-10-07 병합되었다. 병합 S
 이 완료는 미완료 GPU 실험 PR #78이나 공식 781장 재추론 완료를 뜻하지 않는다.
 사용자가 전달한 Claude 감사는 이 SHA에서 537 passed/0 skipped 및 낮음 3건을 보고했다.
 이는 Claude 전달 보고이며 Codex 직접 실행과 구분한다. 후속 수정 SHA는 별도 재검토한다.
+
+## PR #80 후속 검수 반영
+
+보호 입력 게이트는 src/configs/results의 tracked 수정·staged 변경·untracked 추가를 거부한다.
+configs/results는 .gitignore 대상 추가 파일도 거부한다. src의 정상 Python import 캐시는
+허용하므로 이 게이트를 저장소 전체의 모든 파일 변조 방지로 해석하지 않는다.
+blackbox-series.yml은 main push와 수동 실행에서도 실행하며, PR 경로 필터는
+Square/SurFree 구현·검사·저장 감사와 공유 integrity.py 및 configs/** 변경을 포함한다.
+
+Claude의 b832fdfce673eef5136bb9cfe199a2294a28de54 재검토는 사용자 전달 보고다.
+540개 CPU 검사와 21개 blackbox 검사, 기존 L1/L2 해결을 보고했으며,
+PyPI torch CUDA 배포판을 CPU로 실행한 환경 차이 및 호스티드 로그 미열람을 명시했다.
+후속 수정은 무시된 결과 파일 반례와 경로 필터·설명 누락을 보완한다.
+이전 head의 검토를 후속 head 승인으로 사용하지 않는다.
