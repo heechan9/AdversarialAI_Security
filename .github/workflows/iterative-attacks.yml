@@ -1,32 +1,69 @@
-name: Follow-up iterative attacks
+name: CPU regression and saved evidence
 on:
+  workflow_dispatch:
   pull_request:
   push:
     branches: [main]
 permissions:
   contents: read
+concurrency:
+  group: cpu-regression-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
 jobs:
   iterative-unit:
     runs-on: ubuntu-latest
+    timeout-minutes: 25
+    env:
+      PYTHONPATH: src:.
+      CUDA_VISIBLE_DEVICES: '-1'
+      TF_NUM_INTRAOP_THREADS: '2'
+      TF_NUM_INTEROP_THREADS: '1'
+      PR_HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-      - run: python -m pip install tensorflow-cpu==2.21.0 pytest pillow
-      - run: python -m pytest tests/test_iterative.py tests/test_jsma_training.py tests/test_jsma_pruning.py tests/test_iterative_result_audit.py tests/test_followup_snapshot.py tests/test_local_split_audit.py tests/test_prepare_training_data.py tests/test_training_pipeline.py tests/test_training_checkpoints.py tests/test_colab_inputs.py tests/test_subset_sensitivity.py -q
-        env:
-          PYTHONPATH: src
-          TF_CPP_MIN_LOG_LEVEL: '3'
-      - name: Recalculate preserved partial checkpoints
+      - name: Install CPU regression dependencies
+        shell: bash
         run: |
-          python verification/iterative_result_audit.py results/extensions/checkpoints/20261001/bim
-          python verification/iterative_result_audit.py results/extensions/checkpoints/20261001/pgd
-          python verification/iterative_result_audit.py results/extensions/checkpoints/20261002-0004/bim
-          python verification/iterative_result_audit.py results/extensions/checkpoints/20261002-0004/pgd
-          python verification/iterative_result_audit.py results/extensions/checkpoints/20261002-mobile/bim
-          python verification/iterative_result_audit.py results/extensions/checkpoints/20261002-mobile/pgd
-          python verification/iterative_result_audit.py results/extensions/checkpoints/20261002-mobile-r2/bim
-          python verification/iterative_result_audit.py results/extensions/checkpoints/20261002-pc/bim
-          python verification/iterative_result_audit.py results/extensions/checkpoints/20261002-pc/pgd
-          python verification/iterative_result_audit.py results/extensions/checkpoints/20261002-evening/bim
+          set -o pipefail
+          mkdir -p ci-artifacts
+          python -m pip install -r requirements-ci.txt 2>&1 | tee ci-artifacts/install.log
+          python -m pip check 2>&1 | tee ci-artifacts/pip-check.log
+      - name: Full CPU regression and public evidence audit
+        shell: bash
+        run: |
+          set -o pipefail
+          python verification/ci_cpu.py 2>&1 | tee ci-artifacts/regression.log
+      - name: Recalculate preserved partial checkpoints
+        shell: bash
+        run: |
+          set -o pipefail
+          {
+            python verification/iterative_result_audit.py results/extensions/checkpoints/20261001/bim
+            python verification/iterative_result_audit.py results/extensions/checkpoints/20261001/pgd
+            python verification/iterative_result_audit.py results/extensions/checkpoints/20261002-0004/bim
+            python verification/iterative_result_audit.py results/extensions/checkpoints/20261002-0004/pgd
+            python verification/iterative_result_audit.py results/extensions/checkpoints/20261002-mobile/bim
+            python verification/iterative_result_audit.py results/extensions/checkpoints/20261002-mobile/pgd
+            python verification/iterative_result_audit.py results/extensions/checkpoints/20261002-mobile-r2/bim
+            python verification/iterative_result_audit.py results/extensions/checkpoints/20261002-pc/bim
+            python verification/iterative_result_audit.py results/extensions/checkpoints/20261002-pc/pgd
+            python verification/iterative_result_audit.py results/extensions/checkpoints/20261002-evening/bim
+          } 2>&1 | tee ci-artifacts/checkpoints.log
+      - name: Capture final environment
+        if: always()
+        run: |
+          mkdir -p ci-artifacts
+          python --version > ci-artifacts/python.txt 2>&1
+          python -m pip freeze > ci-artifacts/final-pip-freeze.txt
+          git rev-parse HEAD > ci-artifacts/checkout-sha.txt
+      - name: Preserve diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cpu-regression-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ci-artifacts/
+          if-no-files-found: error
+          retention-days: 14

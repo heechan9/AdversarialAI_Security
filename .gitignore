@@ -17,3 +17,6 @@ __pycache__/
 /datasets/
 /models/*.h5
 /models/*.keras
+
+# Ephemeral CPU CI diagnostics
+ci-artifacts/
