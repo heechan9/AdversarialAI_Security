@@ -1,10 +1,12 @@
-# 현수 GPU 실행 인계 안내
+# GPU 실행 인계 안내 (현수 배정 아님)
+
+> 현수는 AMD GPU 환경이라 CUDA 실행을 맡지 않는다. 현수의 역할은 CPU로 가능한 독립 검토이며 [검토 묶음](HYUNSU_REVIEW_PACKET.md)을 사용한다. 이 문서는 NVIDIA GPU 접근이 있는 실행자용 절차다.
 
 이 문서는 전달용 초안이며 실제로 메시지를 보내거나 독립검증을 요청한 기록이 아니다.
 
 ## 요청 범위
 
-기존 GPU BIM 16조건과 PGD 11조건의 저장 증거는 감사됐다. 남은 PGD MobileNet Gaussian ε=.05와 Mean ε=0/.01/.03/.05, CNN 무방어 JSMA 781장, MobileNet PGD7 학습 3epoch, 원본/학습 모델 test781 비교를 실행한다.
+기존 GPU BIM 16조건과 PGD 13조건의 저장 증거는 작성자 감사를 통과했다(PGD 13/16은 부분 결과). 남은 PGD MobileNet Mean ε=.01/.03/.05, CNN 무방어 JSMA 781장, MobileNet PGD7 학습 3epoch, 원본/학습 모델 test781 비교를 실행한다.
 
 먼저 GPU 모델·VRAM, OS, Python/TensorFlow/Keras/NumPy 버전을 확인한다. Colab 계정의 할당 제한과 별개로 본인의 사용 가능한 GPU 환경이 필요하다. 유료 계산 자원을 자동 구매하지 않는다.
 

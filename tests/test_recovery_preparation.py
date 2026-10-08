@@ -26,3 +26,22 @@ def test_recovery_notebook_has_no_saved_outputs_and_valid_python():
     source=''.join(''.join(c['source']) for c in notebook['cells'])
     assert '--resume-from' in source
     assert 'audit_all(BIM,PGD,JSMA,TRAIN,EVAL,REPO)' in source
+
+
+def test_recovery_notebook_inherits_13_condition_parent_at_pinned_source():
+    root=Path(__file__).resolve().parents[1]
+    notebook=json.loads((root/'notebooks/AdversarialAI_Recovery_GPU.ipynb').read_text())
+    source=''.join(''.join(c['source']) for c in notebook['cells'])
+    # The earlier 11-condition parent must not be reused.
+    assert "['checked_conditions']==11" not in source
+    assert "locate('full-gpu-20261004T120332-pgd')" not in source
+    assert "recovery-20261005T165652" in source and "'pgd'/'outputs'" in source
+    assert "parent_audit['checked_conditions']==13" in source
+    assert "parent_report['source_commit']==COMMIT" in source
+    # Remaining PGD conditions are exactly MobileNet Mean eps .01/.03/.05.
+    assert "('mobilenet','mean',e) for e in (.01,.03,.05)" in source
+    # Source is pinned explicitly; no dynamic HEAD/branch checkout and no check removal.
+    assert "Explicit reviewed SHA required" in source
+    assert "checkout','--detach',COMMIT" in source
+    assert "origin/HEAD" not in source and "'checkout','main'" not in source
+    assert source.count("--resume-from")==1
