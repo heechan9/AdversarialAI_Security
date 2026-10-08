@@ -129,8 +129,18 @@
 | 논문 Claim 감사 | ✅ 9/9 통과 | 기존 v1.5 claim snapshot 감사; 최신 원고 전체의 검증 완료를 뜻하지 않음 |
 | 가우시안·평균 필터 방어 | ✅ 실험·기록 감사 완료 | 고정 3×3 전처리; 기존 FGSM 입력 및 방어 인지 FGSM 비교·근거 감사 |
 | MARIS 가상 실험실 | ✅ 구현·소스 반영 | 설명용 3D 조작·저장된 이미지 비교·결과 재생; 실시간 추론 아님 |
-| BIM·PGD·JSMA·적대적 학습 | ⚪ 향후 연구 | 현재 검증 완료 범위에 포함하지 않음 |
+| BIM 확장 | ✅ GPU 저장 결과 감사 완료 | 16/16조건, 조건별 781장; 외부 독립검증 승인과 구분 |
+| PGD 확장 | ⚠ GPU 실행 중단·부분 감사 완료 | 13/16조건 저장 결과 감사 통과(작성자 Codex 보고), 나머지 MobileNet Mean 3조건 미완료 |
+| JSMA·MobileNet 적대적 학습 | ⚠ GPU 전체 실행 미완료 | JSMA 781장·PGD7 학습 3 epoch·원본/학습 모델 평가 대기 |
 | VLM/LLM·안전영향 시뮬레이터 | ⚪ 후속 확장 | 전체 프로젝트 로드맵; 현재 논문 실험 범위 밖 |
+
+확장 실험의 [저장 결과 감사·중단 복구 기록](docs/GPU_RECOVERY_20261005.md)을 별도로 관리합니다. 기존 CPU 부분 결과를 GPU 완료 결과에 합산하지 않습니다.
+
+- [BIM GPU 결과표·그래프](results/extensions/bim_gpu_20261004/README.md)
+- [중단 복구 전용 노트북](notebooks/AdversarialAI_Recovery_GPU.ipynb): 첫 복구 시도용; 3294dcc로 GPU 복구 시작, 전체 완료 미확인
+- [GPU 실행 인계 안내](docs/HYUNSU_GPU_HANDOFF.md)
+- [재현 자료 수령·검토 안내](docs/REPRODUCTION_MATERIALS_GUIDE.md): 원시 파일/텍스트 사본, 실행/검토 SHA, 직접 검사/전달 보고 구분
+- [전체 저장 증거 감사](verification/full_extension_audit.py): private 가중치 해시와 5단계 완료 검사가 필요하며 GPU 실행 로그 검토는 별도
 
 ## 핵심 결과를 쉽게 읽으면
 
