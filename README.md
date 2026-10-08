@@ -139,6 +139,7 @@
 - [BIM GPU 결과표·그래프](results/extensions/bim_gpu_20261004/README.md)
 - [중단 복구 전용 노트북](notebooks/AdversarialAI_Recovery_GPU.ipynb): 첫 복구 시도용; 3294dcc로 GPU 복구 시작, 전체 완료 미확인
 - [GPU 실행 인계 안내](docs/HYUNSU_GPU_HANDOFF.md)
+- [재현 자료 수령·검토 안내](docs/REPRODUCTION_MATERIALS_GUIDE.md): 원시 파일/텍스트 사본, 실행/검토 SHA, 직접 검사/전달 보고 구분
 - [전체 저장 증거 감사](verification/full_extension_audit.py): private 가중치 해시와 5단계 완료 검사가 필요하며 GPU 실행 로그 검토는 별도
 
 ## 핵심 결과를 쉽게 읽으면
