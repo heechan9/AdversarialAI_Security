@@ -47,3 +47,24 @@ python -m adversarial_ai.evaluation.iterative_evaluation \
 - 13/16 PGD 부모 `run.json`은 비공개 Drive 원본을 직접 읽어 확인했다: `status=RUNNING`, 조건 13개(CNN 8, MobileNet Gaussian 4, MobileNet Mean ε=0), `source_commit=3294dcc5d6e34330be36b16d950d27e49e7a32ec`, 상속 11조건·부모 소스 e974c4bb. CSV 바이트와 해시 재감사는 이번 세션에서 수행하지 않았다(저장 결과 감사 통과는 작성자 Codex 보고).
 - 이 Drive 폴더에서 2026-10-05 18:57 UTC 이후 갱신된 PGD 산출물과 새 복구 폴더는 확인되지 않았다. GPU 런타임 상태는 이 세션에서 확인할 수 없다.
 - 노트북 재빌드: 13조건 부모를 상속하고 실행 SHA–부모 소스 일치를 강제한다. 이는 코드 준비이며 GPU 실행 완료가 아니다.
+
+## 2026-10-12 후속 대조
+
+PR #78 head e6c9529(기준 main 9b64b8e) 기준이며, 7145ed3 이후 이미 반영된 내용은 반복하지 않는다.
+
+**BIM step-size.** 저장소의 BIM 체크포인트 `run.json` 6개(소스 514fae90·9f2f7836·61f16138)와 Drive의 GPU BIM `run.json` 2개(`full-gpu-20261004T112020-bim` RUNNING, `full-gpu-20261004T120332-bim` COMPLETED)는 모두 steps=10, step_size=0.005, restarts=1, seed=0, batch_size=32다. 0.002를 기록한 BIM 실행은 저장소·확인한 `run.json`에서 찾지 못했다. 0.002가 어느 실행의 값인지는 미확정이며, 별개 실험이라면 해당 `run.json`과 실행 소스를 먼저 제시해야 한다. 설정이 다른 실행은 합산하거나 같은 표에 섞지 않는다.
+
+**CPU 체크포인트와 GPU BIM 수치.** `checkpoints/20261002-evening/bim`(소스 9f2f7836, 13조건)과 GPU BIM(`results/extensions/bim_gpu_20261004/metrics.csv`, 소스 e974c4bb)의 같은 모델·필터·ε·파이프라인 정확도를 비교하면 65개 셀 중 12개가 다르다(1~13장, 최대 MobileNet Gaussian ε=0.01 `transfer_defended` CPU 0.3944 / GPU 0.3777). 예: CNN Gaussian ε=0.03 전달 방어 0.3329 / 0.3278. 두 실행은 실행 소스·하드웨어·플랫폼이 모두 다르므로 차이의 원인은 확인되지 않았다. 환경 때문이라고 확정하지 않으며, 어느 쪽 값도 허용오차로 맞추지 않고 둘 다 보존한다. 이 비교는 `tests/test_bim_cpu_gpu_comparison.py`가 저장 파일에서 다시 계산한다.
+
+**최종 재감사 절차.** 노트북은 실행 소스 3294dcc를 checkout한 상태에서 `audit_all`을 호출한다. 3294dcc의 `full_extension_audit.py`에는 이후 추가된 `audit_recovery_sources`(PGD·JSMA·학습·평가의 `source_commit` 40자리·일치 검사)가 없다. 따라서 실행이 끝나면 비공개 산출물을 읽기 전용 사본으로 두고, 실행 소스가 아니라 PR head 체크아웃에서 최신 감사기를 한 번 더 실행한다.
+
+```bash
+git checkout --detach <PR_HEAD_SHA>   # 실행 소스 3294dcc와 별도 체크아웃
+PYTHONPATH=src:. python verification/full_extension_audit.py \
+  --bim <bim/outputs> --pgd <pgd/outputs> --jsma <jsma/outputs> \
+  --training <training> --evaluation <evaluation>
+```
+
+결과의 `recovery_source_commit`이 3294dcc여야 한다. 이 재감사는 실행 소스나 환경 검사를 바꾸지 않으며 산출물을 수정하지 않는다. 저장 증거 일관성 확인이며 GPU 실행 증명이나 독립 승인이 아니다. PGD 13조건 감사의 해시·조건 근거는 PR #78의 기존 Codex 코멘트에 있으므로 여기서 반복하지 않는다.
+
+**복구 CLI 부모 소스 검사.** `--resume-from`(`continuation.py`)은 부모와 새 실행의 소스가 달라도 공격·방어·무결성 의존 파일과 설정·환경·입력 해시가 같으면 허용하는 설계다. 이번 복구에서는 노트북이 실행 SHA와 부모 `source_commit`의 일치를 별도로 강제하므로 CLI 동작은 변경하지 않았다.

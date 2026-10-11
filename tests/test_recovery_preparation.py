@@ -4,6 +4,8 @@ from pathlib import Path
 import pytest
 from verification.recovery_stage import backup
 
+ROOT=Path(__file__).resolve().parents[1]
+
 
 def test_backup_preserves_bytes_and_rejects_symlink(tmp_path):
     source=tmp_path/'source';target=tmp_path/'backup';source.mkdir()
@@ -45,3 +47,10 @@ def test_recovery_notebook_inherits_13_condition_parent_at_pinned_source():
     assert "checkout','--detach',COMMIT" in source
     assert "origin/HEAD" not in source and "'checkout','main'" not in source
     assert source.count("--resume-from")==1
+
+
+def test_recovery_notebook_points_to_post_run_reaudit_with_head_auditor():
+    source = (ROOT / 'notebooks/AdversarialAI_Recovery_GPU.ipynb').read_text()
+    guide = (ROOT / 'docs/GPU_RECOVERY_20261005.md').read_text()
+    assert '최종 재감사 절차' in source and '## 2026-10-12 후속 대조' in guide
+    assert 'verification/full_extension_audit.py' in guide and 'recovery_source_commit' in guide

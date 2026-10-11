@@ -57,7 +57,14 @@
 
 ## 최신 통합 상태
 
-**제출 이후 후속 연구:** [CNN 적대적 학습·테스트 평가](results/extensions/cnn_adversarial_20261002/README.md)를 완료했습니다(2026-10-02). 학습 6,147장·검증 689장, 테스트 781장에서 일반 정확도 64.53%→69.14%, PGD7 정확도 11.14%→18.57%입니다. PGD7·ε=0.03·1 restart·필터 없음에 한정한 결과이며 강한 공격 전체나 외부 독립 검증 완료를 뜻하지 않습니다. [BIM·PGD 중간 근거](docs/FOLLOWUP_EXECUTION_STATUS.md)는 부분 결과로 유지하고 [Square·SurFree 블랙박스 평가](results/extensions/blackbox/README_20261003.md)도 완료했습니다. MobileNet 학습·BIM/PGD 잔여 조건·JSMA 전체 평가는 아직 완료되지 않았습니다. 기존 제출 결과와 Stage B 판정은 유지합니다.
+**제출 이후 후속 연구 (2026-10-12 기준):** 아래 구분을 먼저 읽어주세요.
+
+- **완료(저장 결과 감사 포함):** [CNN 적대적 학습·테스트 평가](results/extensions/cnn_adversarial_20261002/README.md)(일반 정확도 64.53%→69.14%, PGD7 정확도 11.14%→18.57%; PGD7·ε=0.03·1 restart·필터 없음 한정), [Square·SurFree 블랙박스 평가](results/extensions/blackbox/README_20261003.md), [BIM GPU 16/16조건](results/extensions/bim_gpu_20261004/README.md).
+- **부분 완료:** PGD는 13/16조건(작성자 Codex 보고, 남은 것은 MobileNet Mean ε=0.01/0.03/0.05). [중간 근거](docs/FOLLOWUP_EXECUTION_STATUS.md)와 [복구 기록](docs/GPU_RECOVERY_20261005.md)은 부분 결과로 유지합니다.
+- **미완료(GPU 필요):** PGD 잔여 3조건, JSMA 781장 평가, MobileNet PGD7 적대적 학습과 원본/학습 모델 평가, 통합 감사.
+- **검증 종류:** 위 "완료"는 저장된 결과의 내부 일관성 감사(CSV·해시·manifest·지표 재계산)이며, 외부 독립 재현이나 모델 재추론이 아닙니다. 외부 독립 재실행은 아래 Stage B(FAIL 유지)가 별개로 있으며, 확장 실험의 외부 독립 재현은 아직 없습니다.
+
+기존 제출 결과와 Stage B 판정은 유지합니다.
 
 <!-- verification-status:start -->
 | 검증 구분 | 상태 | 확인 범위 |
@@ -130,6 +137,8 @@
 | 가우시안·평균 필터 방어 | ✅ 실험·기록 감사 완료 | 고정 3×3 전처리; 기존 FGSM 입력 및 방어 인지 FGSM 비교·근거 감사 |
 | MARIS 가상 실험실 | ✅ 구현·소스 반영 | 설명용 3D 조작·저장된 이미지 비교·결과 재생; 실시간 추론 아님 |
 | BIM 확장 | ✅ GPU 저장 결과 감사 완료 | 16/16조건, 조건별 781장; 외부 독립검증 승인과 구분 |
+| CNN 적대적 학습 | ✅ 학습·테스트 평가 완료(저장 결과 감사) | 학습 3 epoch, 테스트 781장 일반/PGD7 비교; PGD7·ε=0.03 한정, 독립 GPU 재실행 아님 |
+| Square·SurFree 블랙박스 | ✅ 781장 평가 완료(저장 결과 감사) | 원본/적대적 학습 CNN; 질의 예산·seed 한정, 독립 재현 아님 |
 | PGD 확장 | ⚠ GPU 실행 중단·부분 감사 완료 | 13/16조건 저장 결과 감사 통과(작성자 Codex 보고), 나머지 MobileNet Mean 3조건 미완료 |
 | JSMA·MobileNet 적대적 학습 | ⚠ GPU 전체 실행 미완료 | JSMA 781장·PGD7 학습 3 epoch·원본/학습 모델 평가 대기 |
 | VLM/LLM·안전영향 시뮬레이터 | ⚪ 후속 확장 | 전체 프로젝트 로드맵; 현재 논문 실험 범위 밖 |
@@ -300,7 +309,7 @@ python scripts\audit_paper_claims.py
 - 두 모델의 입력 해상도는 CNN 128×128, MobileNetV2 224×224로 다릅니다.
 - MobileNetV2의 학습 당시 실제 전처리·분할 비율·random seed는 확정되지 않았습니다.
 - 고정 가우시안·평균 필터 전처리 방어는 구현·실험 및 기록 감사를 완료했습니다. 원자료는 `experimental`로 보존합니다. 기존 공격 입력에서의 회복만으로 방어 성공을 주장하지 않으며, 방어 인지 FGSM과 정상 성능 손실을 함께 평가합니다.
-- BIM·PGD·JSMA·적대적 학습과 모델 간 전이 공격은 현재 검증 완료 범위에 포함하지 않습니다.
+- 제출 논문의 검증 완료 범위는 Clean·FGSM·가우시안/평균 필터입니다. 이후 확장 중 CNN 적대적 학습, Square·SurFree, BIM 16/16은 저장 결과 감사까지 완료했고, PGD(13/16)·JSMA·MobileNet 적대적 학습·모델 간 전이 공격은 완료 범위에 포함하지 않습니다. 확장 실험은 외부 독립 재현을 거치지 않았습니다.
 - 분류 성능 저하가 실제 충돌·항로 이탈 같은 운항 피해를 유발한다는 인과관계는 검증하지 않았습니다.
 - VLM/LLM과 안전영향 시뮬레이터는 향후 목표이며 현재 구현 성과로 주장하지 않습니다.
 

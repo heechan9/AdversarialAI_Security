@@ -73,7 +73,7 @@ from verification.full_extension_audit import audit_all
 result=audit_all(BIM,PGD,JSMA,TRAIN,EVAL,REPO)
 (PRIVATE/'saved-evidence-audit.json').write_text(json.dumps(result,indent=2))
 print(json.dumps(result,indent=2))
-print('저장 증거 감사 완료. GPU 로그·lineage·공개 범위·CI 검토 및 최종 병합은 별도입니다.')
+print('저장 증거 감사 완료(실행 소스 3294dcc의 감사기). PR head의 최신 감사기 재감사(docs/GPU_RECOVERY_20261005.md 최종 재감사 절차), GPU 로그·lineage·공개 범위·CI 검토 및 최종 병합은 별도입니다.')
 ''')
     notebook=dict(nbformat=4,nbformat_minor=5,metadata=original['metadata'],cells=cells)
     for i,cell in enumerate(cells):cell['id']='recovery-'+str(i)
