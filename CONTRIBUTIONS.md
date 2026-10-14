@@ -122,3 +122,10 @@
 - GitHub Actions: PR의 정확한 head에 연결된 기계 검사. 결과는 PR 실행 링크 참조.
 - Claude: 사용자가 전달한 병합 SHA b4b1274 감사에서 537 passed/0 skipped와 낮음 3건 보고. Codex 직접 실행과 구분. Jules: PR #79 감사에서 Python 3.12.13의 537 passed/0 skipped 보고. 전달 공격 표기 오류와 검사 한계는 그대로 승인 근거로 사용하지 않음.
 - 병합: 사용자 후속 요청에 따라 Codex가 PR #79 병합 실행, main b4b1274 및 CI 성공 확인. 구현자 자체 검사를 외부 독립 승인으로 간주하지 않음.
+
+## Iterative 저장 근거 파싱 보강 (2026-10-14)
+
+- 최희찬: PC 없이 가능한 저장소 개선 작업 요청.
+- Codex: 중복 JSON 키·모호한 CSV 파싱 반례 재현, 감사 파서와 합성 회귀 검사 보강,
+  공개 checkpoint 재계산. 원본 모델 추론·GPU 실험·외부 독립 승인은 수행하지 않음.
+- GitHub 연결 도구의 원격 커밋 계정과 구현자를 구분하며, Codex 기여는 커밋 trailer로 기록한다.

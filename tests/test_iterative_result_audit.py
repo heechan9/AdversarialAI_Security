@@ -46,3 +46,86 @@ def test_complete_and_partial_are_distinct(case):
 def test_corruption_rejected(case,change):
     change(case[1])
     with pytest.raises(ValueError):check(case)
+
+
+@pytest.mark.parametrize('original,replacement', [
+    ('"independent_verification_approval": false',
+     '"independent_verification_approval": true, "independent_verification_approval": false'),
+    ('"accuracy": 1.0', '"accuracy": 0.0, "accuracy": 1.0'),
+    ('"status": "RUNNING"', '"status": "ERROR", "status": "RUNNING"'),
+])
+def test_duplicate_json_keys_are_rejected(case, original, replacement):
+    folder, report = case
+    text = json.dumps(report)
+    assert original in text
+    (folder / 'run.json').write_text(text.replace(original, replacement, 1))
+    with pytest.raises(ValueError, match='duplicate JSON key'):
+        audit(folder, ROOT)
+
+
+@pytest.mark.parametrize('mutation', ['duplicate_header', 'extra_header', 'missing_header',
+                                    'extra_value', 'missing_value'])
+def test_ambiguous_csv_is_rejected_even_with_matching_hash(case, mutation):
+    folder, report = case
+    path = folder / 'samples.csv'
+    with path.open(newline='') as stream:
+        rows = list(csv.reader(stream))
+    if mutation == 'duplicate_header':
+        rows[0].append('clean_pred')
+        for row in rows[1:]:
+            row.append(row[2])
+            row[2] = str((int(row[2]) + 1) % 10)
+    elif mutation == 'extra_header':
+        rows[0].append('unreviewed')
+        for row in rows[1:]:
+            row.append('extra')
+    elif mutation == 'missing_header':
+        for row in rows:
+            row.pop()
+    elif mutation == 'extra_value':
+        rows[1].append('unreviewed')
+    else:
+        rows[1].pop()
+    with path.open('w', newline='') as stream:
+        csv.writer(stream).writerows(rows)
+    for condition in report['conditions']:
+        condition['sha256'] = hashlib.sha256(path.read_bytes()).hexdigest()
+    with pytest.raises(ValueError, match='CSV'):
+        check(case)
+
+
+def test_duplicate_parent_json_keys_are_rejected(case):
+    folder, report = case
+    parent = json.dumps(report).replace('"source_dirty": false',
+        '"source_dirty": true, "source_dirty": false', 1)
+    path = folder / 'parent-run.json'
+    path.write_text(parent)
+    report['continuation'] = {
+        'parent_report_sha256': hashlib.sha256(path.read_bytes()).hexdigest(),
+        'parent_source_commit': report['source_commit'],
+        'inherited_conditions': len(report['conditions']),
+    }
+    with pytest.raises(ValueError, match='duplicate JSON key'):
+        check(case)
+
+
+def test_malformed_csv_quoting_is_rejected(tmp_path):
+    from verification.iterative_result_audit import read_samples
+    path = tmp_path / 'malformed.csv'
+    path.write_text('relative_path,true_index,clean_pred,defended_clean_pred,'
+                    'attacked_pred,transfer_defended_pred,adaptive_defended_pred,'
+                    'linf,adaptive_linf\n"unterminated,0,0,0,0,0,0,0,0\n')
+    with pytest.raises(csv.Error):
+        read_samples(path)
+
+
+def test_reordered_valid_csv_columns_remain_supported(case):
+    folder, report = case
+    path = folder / 'samples.csv'
+    with path.open(newline='') as stream:
+        rows = list(csv.reader(stream))
+    with path.open('w', newline='') as stream:
+        csv.writer(stream).writerows([list(reversed(row)) for row in rows])
+    for condition in report['conditions']:
+        condition['sha256'] = hashlib.sha256(path.read_bytes()).hexdigest()
+    assert check(case)['result'] == 'PARTIAL_OUTPUTS_ONLY'
