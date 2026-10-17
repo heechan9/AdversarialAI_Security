@@ -17,7 +17,31 @@ def require(ok,message):
 
 def read_json(path):
     def invalid(value):raise ValueError('nonfinite JSON')
-    return json.loads(Path(path).read_text(),parse_constant=invalid)
+    def unique_pairs(pairs):
+        result={}
+        for key,value in pairs:
+            require(key not in result,'duplicate JSON key: '+key)
+            result[key]=value
+        return result
+    return json.loads(Path(path).read_text(encoding='utf-8'),
+                      parse_constant=invalid,object_pairs_hook=unique_pairs)
+
+
+def read_samples(path):
+    required={'relative_path','true_index','linf','adaptive_linf'} | {
+        pipeline+'_pred' for pipeline in PIPELINES}
+    with Path(path).open(newline='',encoding='utf-8') as stream:
+        reader=csv.DictReader(stream,strict=True)
+        fields=reader.fieldnames
+        require(fields is not None and len(fields)==len(set(fields)),
+                'missing or duplicate CSV header')
+        require(set(fields)==required,'unexpected or missing CSV columns')
+        rows=[]
+        for row in reader:
+            require(None not in row and all(value is not None for value in row.values()),
+                    'CSV row width differs from header')
+            rows.append(row)
+    return rows
 
 
 def audit(run_dir,repo_root):
@@ -47,7 +71,7 @@ def audit(run_dir,repo_root):
         name=condition['csv'];require(Path(name).name==name and name.endswith('.csv'),'unsafe CSV name')
         p=run_dir/name;require(not p.is_symlink(),'CSV symlink forbidden')
         require(hashlib.sha256(p.read_bytes()).hexdigest()==condition['sha256'],'CSV hash mismatch')
-        with p.open(newline='') as f:rows=list(csv.DictReader(f))
+        rows=read_samples(p)
         require(len(rows)==condition['samples']==781,'incomplete condition rows')
         require([v['relative_path'] for v in rows]==expected_paths,'sample order differs')
         for row in rows:
