@@ -129,3 +129,11 @@
 - Codex: 중복 JSON 키·모호한 CSV 파싱 반례 재현, 감사 파서와 합성 회귀 검사 보강,
   공개 checkpoint 재계산. 원본 모델 추론·GPU 실험·외부 독립 승인은 수행하지 않음.
 - GitHub 연결 도구의 원격 커밋 계정과 구현자를 구분하며, Codex 기여는 커밋 trailer로 기록한다.
+
+## MARIS bilingual readability update (2026-10-18 KST)
+
+- 최희찬 (heechan9): requested improved readability/design, English support, collaboration with Claude/Jules, and publication to the existing site after verification.
+- Codex: implemented the bilingual interface, evidence-led navigation/layout, historical-status labeling, regression tests, and source review fixes. Existing evidence JSON, images, scientific metrics and original contributors remain unchanged.
+- Claude: reviewed actual public baseline screenshots and suggested spacing, hierarchy and mobile-oriented layout improvements. Claude did not inspect the rendered candidate; this is design feedback, not independent experimental validation.
+- Browser QA of the updated site and external head-specific review remain pending at this commit. No new model inference or full reproduction is claimed.
+- GitHub connector publication uses the authenticated heechan9 account; actual implementation credit is recorded by the Codex commit trailer and this entry. This does not claim independent human implementation.

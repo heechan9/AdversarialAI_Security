@@ -14,7 +14,7 @@ Three.js의 설명용 해상 장면, 기록된 비교 그림 4개, 두 모델의
 ```bash
 python scripts/export-evidence.py --repo /path/to/AdversarialAI_Security
 node scripts/test-evidence.mjs
-node scripts/test-interactions.mjs
+npm run test:ui
 pnpm dev
 ```
 
@@ -68,3 +68,9 @@ TensorFlow 추론은 필요하지 않습니다. `pnpm-lock.yaml`이 웹 의존�
 화면의 재질과 윤곽만 바꾸며 카메라·원본 geometry·실험 결과를 바꾸지 않습니다.
 실제 CAD 파일, 실선 치수, 내부 설계 또는 공격 시뮬레이션을 제공하지 않습니다.
 참고 자료 검토와 자산 사용 경계는 `CAD_DESIGN_REVIEW.md`에 기록합니다.
+
+## KO / EN interface review candidate (2026-10-18 KST)
+
+The language control switches interface text, accessible labels, chart labels and evidence explanations without changing the selected experiment. Original evidence PNGs and JSON files are preserved.
+
+This candidate improves the guided sequence from image cases to aggregate results, filters, and evidence limits. The verification cards are explicitly historical snapshots; they do not certify a new full rerun. See `UI_REVIEW_20261018.md` for checks and outstanding browser QA. No publication is implied by this source update.

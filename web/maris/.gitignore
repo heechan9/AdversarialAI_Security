@@ -45,3 +45,6 @@ next-env.d.ts
 /.codex/
 /outputs/
 /work/
+
+# Server-render regression artifacts
+/qa/

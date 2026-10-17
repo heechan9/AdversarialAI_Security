@@ -1,4 +1,5 @@
 "use client";
+import {useLocale} from "./locale-provider";
 import {useEffect,useRef,useState} from "react";
 import * as THREE from "three";
 import {SVGRenderer} from "three/addons/renderers/SVGRenderer.js";
@@ -7,16 +8,20 @@ import {createShipControls,resetShipControls,setShipView,type ShipCommand} from 
 import {createCadDisplay,type SceneMode,type CadSelection,type ShipPart} from "@/lib/ship-cad";
 
 export default function Ocean({playing,command,mode,selection,onInteract,onZoom}:{playing:boolean,mode:SceneMode,selection:CadSelection,command:{id:number;kind:ShipCommand},onInteract:()=>void,onZoom:(zoom:number)=>void}){
+ const {t}=useLocale();
+ const translateRef=useRef(t);
+ useEffect(()=>{translateRef.current=t},[t]);
  const displayRef=useRef({mode,selection});
  useEffect(()=>{displayRef.current={mode,selection}},[mode,selection]);
  const host=useRef<HTMLDivElement>(null),active=useRef(playing),commandRef=useRef(command),callbacks=useRef({onInteract,onZoom});const [failed,setFailed]=useState(false);
  useEffect(()=>{active.current=playing},[playing]);useEffect(()=>{commandRef.current=command},[command]);useEffect(()=>{callbacks.current={onInteract,onZoom}},[onInteract,onZoom]);
+ useEffect(()=>{host.current?.querySelector("canvas,svg")?.setAttribute("aria-label",mode==="cad"?t("설명용 선박 CAD 구조 보기. 치수가 없는 모형이며 실제 설계도가 아닙니다."):translateRef.current("설명용 입체 선박과 바다. 드래그 회전, 휠 또는 두 손가락으로 확대·축소."));},[t,mode]);
  useEffect(()=>{
   const el=host.current!;let renderer:THREE.WebGLRenderer|SVGRenderer;let software=false;
   const compact=matchMedia("(max-width:700px), (pointer:coarse)").matches;
   try{renderer=new THREE.WebGLRenderer({antialias:true,alpha:false,powerPreference:"low-power"});renderer.setPixelRatio(Math.min(devicePixelRatio,compact?1.25:1.6));renderer.outputColorSpace=THREE.SRGBColorSpace;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.18;renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFSoftShadowMap;renderer.shadowMap.autoUpdate=false;renderer.shadowMap.needsUpdate=true}catch{renderer=new SVGRenderer();renderer.setPrecision(2);software=true}
   renderer.setClearColor(new THREE.Color(0x0a2233),1);el.appendChild(renderer.domElement);
-  renderer.domElement.setAttribute("aria-label","설명용 입체 선박과 바다. 드래그 회전, 휠 또는 두 손가락으로 확대·축소.");renderer.domElement.setAttribute("role","img");
+  renderer.domElement.setAttribute("aria-label",translateRef.current("설명용 입체 선박과 바다. 드래그 회전, 휠 또는 두 손가락으로 확대·축소."));renderer.domElement.setAttribute("role","img");
   const scene=new THREE.Scene();scene.fog=new THREE.FogExp2(0x0a2333,.007);const camera=new THREE.PerspectiveCamera(37,1,.1,900);
   const hemisphere=new THREE.HemisphereLight(0xc3dfeb,0x172b38,2);scene.add(hemisphere);const cadAmbient=new THREE.AmbientLight(0xffffff,0);scene.add(cadAmbient);const sun=new THREE.DirectionalLight(0xffedcf,3);sun.position.set(15,30,-18);scene.add(sun);const rim=new THREE.DirectionalLight(0x84c6df,1.8);rim.position.set(-22,12,20);scene.add(rim);
   // The model is static. Cache one small shadow map; camera movement needs no shadow rerender.
@@ -114,7 +119,7 @@ export default function Ocean({playing,command,mode,selection,onInteract,onZoom}
     scene.fog=isCad?null:new THREE.FogExp2(0x0a2333,.007);sun.intensity=isCad?1.7:3;rim.intensity=isCad?.65:1.8;sun.color.setHex(isCad?0xffffff:0xffedcf);rim.color.setHex(isCad?0xffffff:0x84c6df);hemisphere.color.setHex(isCad?0xffffff:0xc3dfeb);hemisphere.groundColor.setHex(isCad?0x6b7378:0x172b38);cadAmbient.intensity=isCad?.65:0;
     ocean.visible=!isCad&&!software;waves.forEach(line=>{line.visible=!isCad});guides.forEach(line=>{line.visible=!isCad});
     renderer.setClearColor(new THREE.Color(isCad?0xdde3e6:0x0a2233),1);
-    renderer.domElement.setAttribute("aria-label",isCad?"설명용 선박 CAD 구조 보기. 치수가 없는 모형이며 실제 설계도가 아닙니다.":"설명용 입체 선박과 바다. 드래그 회전, 휠 또는 두 손가락으로 확대·축소.");
+    renderer.domElement.setAttribute("aria-label",isCad?translateRef.current("설명용 선박 CAD 구조 보기. 치수가 없는 모형이며 실제 설계도가 아닙니다."):translateRef.current("설명용 입체 선박과 바다. 드래그 회전, 휠 또는 두 손가락으로 확대·축소."));
     // Materials change but the actual geometry and cached shadow map are untouched.
     lastMode=display.mode;lastSelection=display.selection;needsRender=true;
    }
@@ -122,5 +127,5 @@ export default function Ocean({playing,command,mode,selection,onInteract,onZoom}
    if(active.current&&!document.hidden){time+=dt;water.uniforms.time.value=time;waves.forEach((line,i)=>{line.position.y=Math.sin(time*.35+i*.7)*.08});needsRender=true}if(needsRender){renderer.render(scene,camera);needsRender=false}};frame=requestAnimationFrame(draw);
   return()=>{cancelAnimationFrame(frame);ro.disconnect();controls.removeEventListener("start",start);controls.removeEventListener("change",change);controls.dispose();renderer.domElement.removeEventListener("webglcontextlost",loss);cad.dispose();(Array.isArray(grid.material)?grid.material:[grid.material]).forEach(m=>m.dispose());scene.traverse(o=>{if((o as THREE.Mesh).geometry)(o as THREE.Mesh).geometry.dispose()});materials.forEach(m=>m.dispose());waves.forEach(w=>(w.material as THREE.Material).dispose());water.dispose();sun.shadow.dispose();if(renderer instanceof THREE.WebGLRenderer)renderer.dispose();renderer.domElement.remove()};
  },[]);
- return <div className="ocean-host" ref={host} aria-label="선박 조작 영역">{failed&&<div className="ocean-fallback" role="status">이 기기에서는 3D 장면을 표시할 수 없습니다.<br/>아래 실제 이미지와 결과 비교는 계속 이용할 수 있습니다.</div>}</div>;
+ return <div className="ocean-host" ref={host} aria-label={t("선박 조작 영역")}>{failed&&<div className="ocean-fallback" role="status">{t("이 기기에서는 3D 장면을 표시할 수 없습니다.")}<br/>{t("아래 실제 이미지와 결과 비교는 계속 이용할 수 있습니다.")}</div>}</div>;
 }
