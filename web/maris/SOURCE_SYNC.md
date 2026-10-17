@@ -1,5 +1,7 @@
 # MARIS source synchronization
 
+> Historical synchronization notes below refer to earlier published versions. The 2026-10-18 KST bilingual/readability candidate is local-only and is not a new deployed version. See `UI_REVIEW_20261018.md`.
+
 The initial import preserves the deployed v4 source (Sites commit `689e83c708816a904d60d91141c1a4381efaa8dc`), excluding provider-specific hosting configuration. Existing comparison PNGs were reused without modification.
 
 The current update corresponds to Sites source `7e9a13f9982059acccf2468aa657632fd2eaf148` (saved version 5). It adds settled experiment scope, implementation/experiment progress, and recorded Gaussian defense results. Scope agreement is separate from official result adoption; FGSM remains provisional and defense remains experimental.
