@@ -31,11 +31,40 @@ from adversarial_ai.evaluation.integrity import validate_reproducibility_manifes
 def compute_untargeted_asr(
     y_true: np.ndarray, clean_pred: np.ndarray, adversarial_pred: np.ndarray
 ) -> tuple[float, int, int]:
-    """Return ASR, successes, denominator using clean-correct samples only."""
+    """Return ASR, successes, denominator using clean-correct samples only.
+
+    Inputs must be matching nonempty vectors of nonnegative integer class
+    indices. An absent clean-correct denominator makes ASR undefined and raises
+    ValueError; it must not be reported as a measured zero attack-success rate.
+    Unlike the classwise helper's nullable rates, this aggregate API retains
+    its float return contract and fails explicitly for an undefined rate.
+    """
+    # Reject mixed Python bool/int sequences before NumPy can erase their
+    # boolean identity by promoting them to an integer dtype.
+    for values in (y_true, clean_pred, adversarial_pred):
+        if np.ma.isMaskedArray(values):
+            raise ValueError("ASR does not accept masked arrays; provide explicit unmasked labels")
+        if isinstance(values, (list, tuple)) and any(
+            isinstance(value, (bool, np.bool_)) for value in values
+        ):
+            raise ValueError("ASR requires nonnegative integer class indices, not booleans")
+    y_true = np.asarray(y_true)
+    clean_pred = np.asarray(clean_pred)
+    adversarial_pred = np.asarray(adversarial_pred)
+    if not (y_true.shape == clean_pred.shape == adversarial_pred.shape):
+        raise ValueError("ASR inputs must have identical shapes")
+    for values in (y_true, clean_pred, adversarial_pred):
+        if values.ndim != 1 or not values.size:
+            raise ValueError("ASR requires nonempty one-dimensional labels")
+        if not np.issubdtype(values.dtype, np.integer) or np.any(values < 0):
+            raise ValueError("ASR requires nonnegative integer class indices")
+
     clean_correct = clean_pred == y_true
     denominator = int(clean_correct.sum())
+    if denominator == 0:
+        raise ValueError("ASR is undefined: no clean-correct samples")
     successes = int((clean_correct & (adversarial_pred != y_true)).sum())
-    return (successes / denominator if denominator else 0.0, successes, denominator)
+    return (successes / denominator, successes, denominator)
 
 
 def compute_classwise_untargeted_asr(
@@ -242,7 +271,10 @@ def evaluate_fgsm(
         ):
             raise RuntimeError("Clean sample order or predictions changed between epsilon runs")
 
-        asr, successes, denominator = compute_untargeted_asr(y_true, clean_pred, adversarial_pred)
+        try:
+            asr, successes, denominator = compute_untargeted_asr(y_true, clean_pred, adversarial_pred)
+        except ValueError as exc:
+            raise ValueError(f"Cannot summarize {spec.name} FGSM epsilon={epsilon:g}: {exc}") from exc
         robust_accuracy = accuracy_score(y_true, adversarial_pred)
         summary = {
             "epsilon": float(epsilon),
