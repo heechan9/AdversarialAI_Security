@@ -6,10 +6,30 @@ import json
 from pathlib import Path
 import platform
 import subprocess
+import os
 import numpy as np
 from adversarial_ai.attacks.jsma import generate_jsma
 from adversarial_ai.attacks.fgsm import infer_from_logits
 from adversarial_ai.evaluation.integrity import validate_reproducibility_manifest,sha256_file
+
+
+def inherit_rows(parent_dir, out, report, root):
+    """Freeze and audit a prefix; require identical code, inputs and runtime."""
+    from verification.jsma_saved_audit import audit
+    parent_dir=Path(parent_dir)
+    if parent_dir.is_symlink() or (parent_dir/'run.json').is_symlink():
+        raise ValueError('unsafe parent')
+    raw=(parent_dir/'run.json').read_bytes();parent=json.loads(raw)
+    for key in ('kind','source_commit','model_sha256','manifest_sha256','tensorflow','keras','platform','environment','python','numpy'):
+        if key not in parent or parent[key]!=report[key]:raise ValueError('resume identity mismatch: '+key)
+    for key in ('model','defense','theta','gamma','max_steps','limit'):
+        if parent['settings'][key]!=report['settings'][key]:raise ValueError('resume setting mismatch: '+key)
+    import tempfile,hashlib
+    with tempfile.TemporaryDirectory(dir=out) as temporary:
+        frozen=Path(temporary);(frozen/'run.json').write_bytes(raw);audit(frozen,root)
+    (out/'parent-run.json').write_bytes(raw)
+    report['continuation']={'parent_report_sha256':hashlib.sha256(raw).hexdigest(),'inherited_samples':len(parent['rows'])}
+    report['rows']=parent['rows'];report['evaluated']=len(parent['rows'])
 
 
 def main():
@@ -22,6 +42,7 @@ def main():
     p.add_argument('--theta',type=float,required=True);p.add_argument('--gamma',type=float,required=True)
     p.add_argument('--max-steps',type=int,required=True);p.add_argument('--limit',type=int,default=781)
     p.add_argument('--run-id',required=True);p.add_argument('--data-dir',type=Path,default=Path('data/test'))
+    p.add_argument('--resume-from',type=Path)
     args=p.parse_args();root=Path(__file__).resolve().parents[3]
     if Path.cwd().resolve()!=root:raise ValueError('run from repository root')
     if not 1<=args.limit<=781:raise ValueError('limit in [1,781] required')
@@ -45,11 +66,17 @@ def main():
         manifest_sha256=sha256_file(root/'configs/test_manifest.json'),settings={k:str(v) if isinstance(v,Path) else v for k,v in vars(args).items()},
         target_policy='(true_index + 1) % 10',attack_path='undefended' if args.defense=='none' else 'defense_aware',
         l0_unit='scalar_channel_feature',test_inventory=781,evaluated=0,rows=[],
-        tensorflow=tf.__version__,keras=tf.keras.__version__,platform=platform.platform(),started_at=datetime.now(timezone.utc).isoformat())
-    def save():(out/'run.json').write_text(json.dumps(report,indent=2,allow_nan=False)+'\n')
+        tensorflow=tf.__version__,keras=tf.keras.__version__,platform=platform.platform(),
+        python=platform.python_version(),numpy=np.__version__,
+        environment={k:os.environ.get(k) for k in ('TF_ENABLE_ONEDNN_OPTS','TF_DETERMINISTIC_OPS','TF_NUM_INTRAOP_THREADS','TF_NUM_INTEROP_THREADS')},
+        started_at=datetime.now(timezone.utc).isoformat())
+    def save():
+        temporary=out/'run.json.tmp'
+        temporary.write_text(json.dumps(report,indent=2,allow_nan=False)+'\n');temporary.replace(out/'run.json')
     save()
     try:
-        for i in range(args.limit):
+        if args.resume_from is not None:inherit_rows(args.resume_from,out,report,root);save()
+        for i in range(report['evaluated'],args.limit):
             x,y=gen[i];truth=int(y.argmax(1)[0]);target=(truth+1)%10
             clean=int(np.asarray(attacked(x,training=False)).argmax(1)[0])
             adv,info=generate_jsma(attacked,x,target,theta=args.theta,gamma=args.gamma,max_steps=args.max_steps,from_logits=logits)

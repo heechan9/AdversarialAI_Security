@@ -93,3 +93,12 @@ def test_trained_checkpoint_must_match_preserved_training_record(tmp_path,monkey
     monkeypatch.setattr(evaluation,'ROOT',tmp_path)
     args=SimpleNamespace(run_id='reject',per_class=0,batch_size=20,model='cnn',trained_model=wrong)
     with pytest.raises(ValueError,match='preserved training record'):evaluation.run(args)
+
+
+def test_manifest_model_path_uses_forward_slashes_on_windows_paths():
+    from pathlib import PureWindowsPath
+    from adversarial_ai.evaluation.square_evaluation import manifest_relative_path
+    root=PureWindowsPath('C:/repo')
+    path=root/'models'/'cnn_baseline.h5'
+    assert str(path.relative_to(root))=='models\\cnn_baseline.h5'
+    assert manifest_relative_path(path,root)=='models/cnn_baseline.h5'

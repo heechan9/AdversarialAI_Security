@@ -30,6 +30,11 @@ def summarize(rows, budget):
                     for q in sorted({1, min(10,budget), min(50,budget), budget})})
 
 
+def manifest_relative_path(path,root):
+    # test_manifest.json stores forward-slash paths; str() would use backslashes on Windows.
+    return path.relative_to(root).as_posix()
+
+
 def run(args):
     if not re.fullmatch(r'[A-Za-z0-9][A-Za-z0-9_-]{0,79}',args.run_id):
         raise ValueError('invalid run id')
@@ -41,7 +46,7 @@ def run(args):
     manifest = json.loads(manifest_path.read_text())
     model_path = ROOT/'models'/('cnn_baseline.h5' if args.model=='cnn' else 'mobilenet_finetuned.h5')
     model_hash = sha256_file(model_path)
-    expected = next(m['sha256'] for m in manifest['models'] if m['path']==str(model_path.relative_to(ROOT)))
+    expected = next(m['sha256'] for m in manifest['models'] if m['path']==manifest_relative_path(model_path,ROOT))
     if model_hash != expected:
         raise ValueError('model hash mismatch')
     training_path=ROOT/'results/extensions/cnn_adversarial_20261002/training.json'
