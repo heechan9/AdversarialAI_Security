@@ -7,7 +7,7 @@ for(const ext of ['.ts','.tsx'])require.extensions[ext]=(module,file)=>module._c
 const React=require('react'),{renderToStaticMarkup}=require('react-dom/server');
 const locale=require('../app/locale-provider.tsx');
 const dictionary={...require('../lib/locale-en.ts').english,...require('../lib/page-locale-en.ts').pageEnglish};
-const sourceFiles=['page.tsx','verification-status.tsx','defense-explorer.tsx','image-comparison.tsx','result-charts.tsx','ocean.tsx'];
+const sourceFiles=['page.tsx','verification-status.tsx','defense-explorer.tsx','image-comparison.tsx','result-charts.tsx','ocean.tsx','mission-console.tsx'];
 let count=0;
 for(const name of sourceFiles){const sf=ts.createSourceFile(name,fs.readFileSync(path.join(root,'app',name),'utf8'),ts.ScriptTarget.Latest,true,ts.ScriptKind.TSX);const walk=n=>{if(ts.isCallExpression(n)&&n.expression.getText(sf)==='t'&&n.arguments[0]&&ts.isStringLiteral(n.arguments[0])){const k=n.arguments[0].text;if(/[가-힣]/.test(k)){assert.ok(dictionary[k],`${name}: missing translation ${k}`);assert.deepEqual([...k.matchAll(/\{\w+\}/g)].map(m=>m[0]).sort(),[...dictionary[k].matchAll(/\{\w+\}/g)].map(m=>m[0]).sort(),`placeholder mismatch ${k}`);count++;}}ts.forEachChild(n,walk)};walk(sf)}
 const snapshot=require('../public/evidence/verification-status.json');

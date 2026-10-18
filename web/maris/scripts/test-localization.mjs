@@ -9,7 +9,7 @@ const readDictionary=(file,name)=>{
 const dictionary={...readDictionary('lib/locale-en.ts','english'),...readDictionary('lib/page-locale-en.ts','pageEnglish')};
 const placeholders=text=>[...text.matchAll(/\{(\w+)\}/g)].map(m=>m[1]).sort();
 for(const [key,value] of Object.entries(dictionary))assert.deepEqual(placeholders(key),placeholders(value),`Placeholder mismatch: ${key}`);
-const files=['app/page.tsx','app/verification-status.tsx','app/image-comparison.tsx','app/defense-explorer.tsx','app/result-charts.tsx','app/ocean.tsx'];
+const files=['app/page.tsx','app/verification-status.tsx','app/image-comparison.tsx','app/defense-explorer.tsx','app/result-charts.tsx','app/ocean.tsx','app/mission-console.tsx'];
 let checked=0;const missing=[];
 for(const file of files){
  const ast=ts.createSourceFile(file,fs.readFileSync(file,'utf8'),ts.ScriptTarget.Latest,true,ts.ScriptKind.TSX);

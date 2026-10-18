@@ -13,7 +13,7 @@
     "lint": "eslint . --ignore-pattern dist --ignore-pattern .next",
     "db:generate": "drizzle-kit generate",
     "test:evidence": "node scripts/test-evidence.mjs && node scripts/test-defense-comparison.mjs",
-    "test:ui": "node scripts/test-localization.mjs && node scripts/test-localization.cjs && node scripts/test-interactions.mjs"
+    "test:ui": "node scripts/test-localization.mjs && node scripts/test-localization.cjs && node scripts/test-interactions.mjs && node scripts/test-mission.cjs"
   },
   "dependencies": {
     "@base-ui/react": "^1.7.0",

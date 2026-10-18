@@ -51,8 +51,22 @@ jobs:
           version: 11.25.0
       - uses: actions/setup-node@v4
         with:
-          node-version: "22.13.0"
+          node-version: "24.19.0"
       - name: Install locked web dependencies
         run: pnpm install --frozen-lockfile
       - name: Verify MARIS evidence and defense exports
         run: pnpm run test:evidence
+      - name: Verify bilingual UI, mission states and synthetic controls
+        run: pnpm run test:ui
+      # The real project identity belongs only to the Sites source repository.
+      # This binding-free fixture is for CI compilation and is never deployed.
+      - name: Prepare nondeployable hosting config for CI
+        run: |
+          mkdir -p .openai
+          printf '%s\n' '{"d1":null,"r2":null}' > .openai/hosting.json
+      - name: Typecheck and lint MARIS
+        run: |
+          pnpm exec tsc --noEmit
+          pnpm run lint
+      - name: Build MARIS production bundle
+        run: pnpm run build
