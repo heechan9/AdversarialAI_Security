@@ -88,7 +88,8 @@ def test_invalid_jsma_parameters(theta,gamma,steps):
     with pytest.raises(ValueError):generate_jsma(make_model(),np.zeros((1,2,2,1),np.float32),1,theta=theta,gamma=gamma,max_steps=steps)
 
 
-def test_training_cli_writes_separate_model(tmp_path,monkeypatch):
+@pytest.mark.parametrize('training_mode',['pgd_mixed','clean_only'])
+def test_training_cli_writes_separate_model(tmp_path,monkeypatch,training_mode):
     import argparse,sys,hashlib
     import tensorflow as tf
     from PIL import Image
@@ -112,6 +113,7 @@ def test_training_cli_writes_separate_model(tmp_path,monkeypatch):
     import subprocess
     monkeypatch.setattr(subprocess,'check_output',lambda cmd,**kw:'a'*40 if 'rev-parse' in cmd else '')
     monkeypatch.setattr(sys,'argv',['train','--model','cnn','--train-dir','train','--validation-dir','val','--test-dir','test','--epochs','2','--epsilon','0.01','--step-size','0.005','--steps','1','--batch-size','10','--run-id','synthetic'])
+    if training_mode=='clean_only':monkeypatch.setattr(sys,'argv',sys.argv+['--training-mode','clean_only'])
     actual_train_batch=tr.train_batch
     calls=[]
     def interrupt_second_epoch(*args,**kwargs):
@@ -123,6 +125,8 @@ def test_training_cli_writes_separate_model(tmp_path,monkeypatch):
     out=root/'results/extensions/adversarial_training/synthetic'
     report=json.loads((out/'training.json').read_text())
     assert report['status']=='INTERRUPTED' and report['best_epoch']==1
+    assert report['training_mode']==training_mode
+    assert report['clean_weight']==(1. if training_mode=='clean_only' else .5)
     assert hashlib.sha256(original.read_bytes()).hexdigest()==original_hash
     assert (out/'best.keras').is_file() and report['epochs'][0]['validation_samples']==10
     tf.keras.models.load_model(out/'best.keras',compile=False)
@@ -135,3 +139,37 @@ def test_training_cli_writes_separate_model(tmp_path,monkeypatch):
     assert len(resumed['epochs'])==2 and len(resumed['resumptions'])==1
     assert len(calls)==3  # completed first epoch was not retrained
     assert hashlib.sha256(original.read_bytes()).hexdigest()==original_hash
+    # A resumed run must not follow output-leaf or checkpoint-root symlinks.
+    outside=root/'unrelated';outside.mkdir();sentinel=outside/'sentinel'
+    sentinel.write_bytes(b'preserve unrelated file')
+    saved_report=(out/'training.json').read_bytes()
+    for name in ('split-audit.json','training.json','training.json.tmp','best.keras','checkpoints'):
+        path=out/name;backup=out/('.preserved-'+name)
+        existed=path.exists()
+        if existed:path.rename(backup)
+        path.symlink_to(outside if name=='checkpoints' else sentinel,target_is_directory=name=='checkpoints')
+        with pytest.raises(ValueError,match='symlink'):tr.main()
+        assert sentinel.read_bytes()==b'preserve unrelated file'
+        path.unlink()
+        if existed:backup.rename(path)
+        assert (out/'training.json').read_bytes()==saved_report
+    assert len(calls)==3
+    for name in ('split-audit.json','training.json','training.json.tmp','best.keras'):
+        path=out/name;backup=out/('.preserved-'+name)
+        existed=path.exists()
+        if existed:path.rename(backup)
+        path.hardlink_to(sentinel)
+        with pytest.raises(ValueError,match='hardlink'):tr.main()
+        assert sentinel.read_bytes()==b'preserve unrelated file'
+        path.unlink()
+        if existed:backup.rename(path)
+        assert (out/'training.json').read_bytes()==saved_report
+    assert len(calls)==3
+    # Never resume a checkpoint under the other objective or overwrite its report.
+    saved=(out/'training.json').read_bytes()
+    args=sys.argv[:]
+    if '--training-mode' in args:args[args.index('--training-mode')+1]='pgd_mixed'
+    else:args+=['--training-mode','clean_only']
+    monkeypatch.setattr(sys,'argv',args)
+    with pytest.raises(ValueError,match='No complete'):tr.main()
+    assert (out/'training.json').read_bytes()==saved
