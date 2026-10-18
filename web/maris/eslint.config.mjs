@@ -14,9 +14,9 @@ const eslintConfig = defineConfig([
     "next-env.d.ts",
   ]),
   {
-    files: ["scripts/test-localization.cjs"],
+    files: ["scripts/test-localization.cjs", "scripts/test-mission.cjs"],
     rules: {
-      // This CommonJS SSR harness installs TypeScript and alias loader hooks
+      // These CommonJS SSR harnesses install TypeScript and alias loader hooks
       // before requiring the application modules under test.
       "@typescript-eslint/no-require-imports": "off",
     },

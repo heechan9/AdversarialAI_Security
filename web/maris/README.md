@@ -74,3 +74,24 @@ TensorFlow 추론은 필요하지 않습니다. `pnpm-lock.yaml`이 웹 의존�
 The language control switches interface text, accessible labels, chart labels and evidence explanations without changing the selected experiment. Original evidence PNGs and JSON files are preserved.
 
 This candidate improves the guided sequence from image cases to aggregate results, filters, and evidence limits. The verification cards are explicitly historical snapshots; they do not certify a new full rerun. See `UI_REVIEW_20261018.md` for checks and outstanding browser QA. No publication is implied by this source update.
+
+
+## Recorded-evidence mission candidate (2026-10-18 KST)
+
+The opening screen is a four-step challenge: choose an existing image case, select
+clean or the case's recorded FGSM epsilon, predict whether the class changes, and
+reveal the stored result. The progress indicator, input-condition reticle/scan,
+actual image thumbnail and reveal card respond to these choices. No score,
+navigation physics, collision, new image, or new model prediction is generated.
+
+The four published case images support clean and epsilon 0.03 only. Other epsilon
+values remain available in the existing aggregate results, but are deliberately
+not offered as individual case predictions. The optional post-reveal filter panel
+is explicitly a separate 781-image aggregate evaluation. It does not infer a
+filtered outcome for the selected case. Original images, evidence, research
+appendices, statistics, tables and model controls remain in the page.
+
+Run `npm run test:ui` for localization, existing synthetic controls, and the new
+16-path mission state/evidence/SSR suite. Static layout previews are design
+artifacts, not browser captures. See `MISSION_REPLAY_REVIEW.md` for verification
+limits and outstanding runtime QA. This candidate has not been deployed.

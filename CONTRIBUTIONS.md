@@ -137,3 +137,11 @@
 - Claude: reviewed actual public baseline screenshots and suggested spacing, hierarchy and mobile-oriented layout improvements. Claude did not inspect the rendered candidate; this is design feedback, not independent experimental validation.
 - Browser QA of the updated site and external head-specific review remain pending at this commit. No new model inference or full reproduction is claimed.
 - GitHub connector publication uses the authenticated heechan9 account; actual implementation credit is recorded by the Codex commit trailer and this entry. This does not claim independent human implementation.
+
+## MARIS recorded-evidence mission flow (2026-10-18 KST)
+
+- 최희찬 (heechan9): requested a game-like opening interaction, approved the static design direction, and required preservation of the research content.
+- Codex: implemented the case/condition/prediction/reveal loop, bilingual interaction feedback, replay/reset, separate aggregate-only filter comparison, regression coverage and source review fixes. A second Codex source-only review is not Claude/Jules review or independent experimental validation.
+- Original evidence files, model predictions, scientific metrics and lower research sections are preserved. No new model inference, defended outcome for an individual case, navigation/collision simulation or hardware test is claimed.
+- The two design previews are explicitly static layouts, not browser captures. Candidate browser QA was blocked by the available preview environment and remains a separate release check.
+- GitHub connector publication uses the authenticated heechan9 account; the implementation is credited to Codex in the commit trailer. Existing contributors and history remain unchanged.
