@@ -36,7 +36,8 @@ metrics. New journals additionally check input identity and artifact hashes.
 
 The sample CSVs serialize float32 perturbations, while original summaries use
 pre-serialization float32 reductions. Recalculated `linf_max`/`linf_mean` therefore
-use a the existing saved-evidence audit’s `5e-10` serialization/reduction allowance. Other summary metrics use `1e-12`;
+use the existing saved-evidence audit’s `5e-10` serialization/reduction allowance.
+Other summary metrics use `1e-12`;
 the existing epsilon budget check remains `epsilon + 1e-6`. No frozen result,
 scientific comparison tolerance, or independent approval criterion is changed.
 
