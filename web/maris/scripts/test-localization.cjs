@@ -25,6 +25,10 @@ for(const lang of ['ko','en']){
  assert.ok(html.indexOf('id="results"')<html.indexOf('id="defense"'));
  assert.ok(html.indexOf('id="defense"')<html.indexOf('id="progress"'));
  assert.ok(html.includes('775'));assert.ok(html.includes('781'));
+ assert.ok(html.includes('data-snapshot-date="2026-10-12"'));
+ for(const value of ['504/781 · 64.53%','540/781 · 69.14%','87/781 · 11.14%','145/781 · 18.57%','374/781 · 47.89%','452/781 · 57.87%','114/486','51/486'])assert.ok(html.includes(value),`retained research value missing: ${value}`);
+ for(const url of ['https://github.com/heechan9/AdversarialAI_Security/blob/main/results/extensions/cnn_adversarial_20261002/README.md','https://github.com/heechan9/AdversarialAI_Security/blob/main/results/extensions/blackbox/README_20261003.md','https://github.com/heechan9/AdversarialAI_Security/pull/78'])assert.ok(html.includes(url),`retained evidence URL missing: ${url}`);
+
  assert.ok(!html.includes('[object Object]'));assert.ok(!/\{v\d\}/.test(html));
  if(lang==='en'){
   const text=html.replace(/<[^>]*>/g,'').replaceAll('한국어','');
