@@ -19,9 +19,25 @@ indices, clean-correct/attack-success flags, epsilon, finite perturbation bounds
 epsilon-zero equality, cross-condition clean predictions, and present aggregate
 metrics. New journals additionally check input identity and artifact hashes.
 
-- A partial result exits with code **2**, and lists exactly which requested
-  conditions are missing. `--allow-partial` explicitly permits exit 0 for planning;
-  the JSON still says `PARTIAL_SAVED_SAMPLE_COVERAGE`.
+- Missing rows or saved conditions absent from an available journal require a
+  fresh-directory restart and exit **2**. `--allow-partial` permits exit 0 for
+  planning only; the JSON still reports partial coverage or
+  `SAVED_CONDITIONS_REQUIRE_RERUN`.
+- Any selected model invocation with a recorded `ERROR` returns top-level
+  `RECORDED_EXECUTION_ERROR` and exits **3**, even with `--allow-partial`.
+  Resolve the failure before restarting. Conservatively rerun all selected saved
+  conditions from that error invocation, including previously journaled ones:
+  the audit cannot establish which outputs an input/weight/source failure tainted.
+  Conditions from a different non-error invocation/model are not invalidated.
+- `saved_sample_coverage` and `checked_conditions` describe physically present,
+  consistent sample rows. `missing_conditions` lists absent rows;
+  `rerun_conditions` separately lists present conditions unsafe to omit from a
+  restart. `resume_plan` includes both sets in the requested epsilon order.
+  Thus a complete CSV is not automatically a safely reusable completed condition.
+- For an available journal, `validated_recorded_epsilons` reports checked entries
+  and `unrecorded_saved_epsilons` exposes orphaned sample CSVs. Such a CSV can
+  remain after an error between file writing and journal publication. Error or
+  unrecorded invocations no longer receive the blanket validated-provenance label.
 - A malformed, truncated, duplicated, inconsistent, or altered condition fails.
   Preserve it for investigation. Do not edit it into a passing result.
 - `FULL_REQUESTED_SAVED_SAMPLE_COVERAGE` describes saved-row coverage only.
@@ -41,9 +57,10 @@ Other summary metrics use `1e-12`;
 the existing epsilon budget check remains `epsilon + 1e-6`. No frozen result,
 scientific comparison tolerance, or independent approval criterion is changed.
 
-## Run only the missing conditions into a new folder
+## Run the required restart conditions into a new folder
 
-If the actual audit finds only MobileNet epsilon 0.05 missing:
+If the audit finds only MobileNet epsilon 0.05 missing, no unsafe saved conditions,
+and no recorded execution error:
 
 ```bat
 python -m adversarial_ai.evaluation.evaluate_fgsm_mobilenet --epsilons 0.05 --output C:\path\to\resume_mobilenet_eps005

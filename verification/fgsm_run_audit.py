@@ -145,6 +145,7 @@ def audit(run_dirs, repo_root, models=('cnn', 'mobilenet'), epsilons=DEFAULT_EPS
                 'run directory must exist without symlinks')
     model_hashes = {m: next(r['sha256'] for r in manifest['models'] if r['path'] == MODELS[m]) for m in models}
     conditions, missing, invocations = [], [], []
+    rerun_conditions, execution_errors = [], []
     clean_reference = {}
     for model in models:
         for epsilon in epsilons:
@@ -233,12 +234,27 @@ def audit(run_dirs, repo_root, models=('cnn', 'mobilenet'), epsilons=DEFAULT_EPS
                     clean_reference[model] = clean
                     require(condition['samples'] == 781, 'journal sample count mismatch')
                     compare_metrics(condition['summary'], metrics, name)
+                unrecorded = [v['epsilon'] for v in local if v['epsilon'] not in seen]
+                for item in local:
+                    if journal['status'] == 'ERROR' or item['epsilon'] in unrecorded:
+                        rerun_conditions.append(dict(
+                            model=model, epsilon=item['epsilon'],
+                            reason='RECORDED_EXECUTION_ERROR' if journal['status'] == 'ERROR'
+                                   else 'SAVED_CONDITION_NOT_IN_JOURNAL'))
+                if journal['status'] == 'ERROR':
+                    execution_errors.append(dict(model=model, directory=str(directory),
+                                                 run_id=journal['run_id'], error=journal.get('error')))
                 invocation.update(
+                    validated_recorded_epsilons=seen, unrecorded_saved_epsilons=unrecorded,
                     provenance='RECORDED_JOURNAL_INPUTS_AND_ARTIFACTS_VALIDATED' if recorded else 'JOURNAL_WITHOUT_COMPLETED_CONDITIONS',
                     journal_status=journal['status'], requested_epsilons=scope,
                     run_id=journal['run_id'], source_commit=journal.get('source_commit'), source_dirty=journal.get('source_dirty'),
                     recorded_runtime={key: journal.get(key) for key in
                                       ('python','platform','tensorflow','keras','numpy','numerical_environment')})
+                if journal['status'] == 'ERROR':
+                    invocation['provenance'] = 'RECORDED_ERROR_ARTIFACTS_ONLY'
+                elif unrecorded:
+                    invocation['provenance'] = 'JOURNAL_WITH_UNRECORDED_SAVED_CONDITIONS'
                 if journal['status'] == 'COMPLETED_REQUESTED_SCOPE':
                     require(seen == scope and metadata is not None and metadata['epsilons'] == scope, 'completed journal missing requested conditions/metadata')
                     for key in ('python','tensorflow','keras','input_size'):
@@ -250,15 +266,22 @@ def audit(run_dirs, repo_root, models=('cnn', 'mobilenet'), epsilons=DEFAULT_EPS
                     check_hashes(directory, journal['artifact_sha256'])
                     invocation['completion_record_consistent'] = True
             invocations.append(invocation)
+    saved_coverage = 'PARTIAL_SAVED_SAMPLE_COVERAGE' if missing else 'FULL_REQUESTED_SAVED_SAMPLE_COVERAGE'
+    restart = {(v['model'], v['epsilon']) for v in missing + rerun_conditions}
     return dict(kind='fgsm_saved_output_audit',
-        result='PARTIAL_SAVED_SAMPLE_COVERAGE' if missing else 'FULL_REQUESTED_SAVED_SAMPLE_COVERAGE',
+        result=('RECORDED_EXECUTION_ERROR' if execution_errors else
+                'SAVED_CONDITIONS_REQUIRE_RERUN' if rerun_conditions else saved_coverage),
+        saved_sample_coverage=saved_coverage, execution_errors=execution_errors,
+        rerun_conditions=rerun_conditions, resume_requires_error_resolution=bool(execution_errors),
         expected_conditions=len(models)*len(epsilons), checked_conditions=len(conditions),
         conditions=conditions, missing_conditions=missing, invocations=invocations,
-        resume_plan=[dict(model=model, epsilons=[v['epsilon'] for v in missing if v['model'] == model],
+        resume_plan=[dict(model=model, epsilons=[e for e in epsilons if (model, e) in restart],
                          output_requirement='NEW_DIRECTORY_OUTSIDE_ALL_PRIOR_OUTPUTS') for model in models
-                     if any(v['model'] == model for v in missing)],
+                     if any(m == model for m, e in restart)],
         independent_verification_approval=False, probabilities_compared=False, process_liveness='NOT_CHECKED',
         limitations=[
+            'ERROR journals require investigation; all their selected saved conditions must be rerun after resolving the error.',
+            'A saved condition absent from its journal cannot be omitted from the fresh-directory restart plan.',
             'Saved-row coverage is not proof of execution or an independently approved rerun.',
             'Legacy partial outputs have no authenticated input/environment/source lineage; do not silently append or adopt them.',
             'Each completed journal covers only its requested model and epsilons, never Gaussian/Mean or other conditions.',
@@ -277,7 +300,9 @@ def main():
     args = parser.parse_args()
     result = audit(args.run_dirs, args.repo_root, args.models, args.epsilons)
     print(json.dumps(result, ensure_ascii=False, indent=2, allow_nan=False))
-    return 2 if result['missing_conditions'] and not args.allow_partial else 0
+    if result['execution_errors']:
+        return 3  # --allow-partial cannot override a recorded execution error.
+    return 2 if (result['missing_conditions'] or result['rerun_conditions']) and not args.allow_partial else 0
 
 
 if __name__ == '__main__':

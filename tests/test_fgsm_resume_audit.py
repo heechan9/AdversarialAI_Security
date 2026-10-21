@@ -374,3 +374,45 @@ def test_subset_audit_checks_declared_cross_condition_clean_predictions(tmp_path
             writer.writeheader(); writer.writerows(summaries)
     with pytest.raises(ValueError,match='clean predictions differ between conditions'):
         audit([out],ROOT,['mobilenet'],[.01])
+
+
+def test_real_tf_weight_failure_keeps_unjournaled_condition_in_restart(tmp_path, monkeypatch, synthetic_runtime):
+    model, _ = synthetic_runtime
+    original = evaluation._run_epsilon
+    def mutate_after_condition(*args):
+        result = original(*args)
+        if args[2] == .03:
+            model.weights[0].assign_add(np.ones_like(model.weights[0].numpy()))
+        return result
+    monkeypatch.setattr(evaluation, '_run_epsilon', mutate_after_condition)
+    with pytest.raises(RuntimeError, match='changed model weights'):
+        execute_synthetic(tmp_path, [0., .01, .03, .05])
+    journal = read_json(tmp_path/'fgsm_cnn_execution.json')
+    assert journal['status'] == 'ERROR'
+    assert [c['epsilon'] for c in journal['conditions']] == [0., .01]
+    assert (tmp_path/'fgsm_cnn_eps_0.03_samples.csv').exists()
+    result = audit([tmp_path], ROOT, ['cnn'])
+    assert result['result'] == 'RECORDED_EXECUTION_ERROR'
+    assert result['checked_conditions'] == 3
+    assert result['resume_plan'][0]['epsilons'] == [0., .01, .03, .05]
+    assert result['invocations'][0]['unrecorded_saved_epsilons'] == [.03]
+
+
+def test_real_tf_final_input_check_error_is_not_completion(tmp_path, monkeypatch, synthetic_runtime):
+    _, calls = synthetic_runtime
+    original = evaluation.validate_reproducibility_manifest
+    def final_check_fails(**kwargs):
+        digest = original(**kwargs)
+        if len(calls) == 2:
+            raise RuntimeError('FGSM evaluation inputs changed during execution')
+        return digest
+    monkeypatch.setattr(evaluation, 'validate_reproducibility_manifest', final_check_fails)
+    with pytest.raises(RuntimeError, match='inputs changed'):
+        execute_synthetic(tmp_path, [0., .01, .03, .05])
+    journal = read_json(tmp_path/'fgsm_cnn_execution.json')
+    assert journal['status'] == 'ERROR' and len(journal['conditions']) == 4
+    assert not (tmp_path/'fgsm_cnn_metadata.json').exists()
+    result = audit([tmp_path], ROOT, ['cnn'])
+    assert result['saved_sample_coverage'] == 'FULL_REQUESTED_SAVED_SAMPLE_COVERAGE'
+    assert result['result'] == 'RECORDED_EXECUTION_ERROR'
+    assert result['resume_plan'][0]['epsilons'] == [0., .01, .03, .05]
