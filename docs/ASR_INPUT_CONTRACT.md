@@ -41,3 +41,5 @@ PYTHONPATH=src:. python verification/ci_cpu.py
 
 These check software behavior and public saved evidence, not private image
 inference, GPU experiments or independent human approval.
+
+For interpretation and condition-level review, see the [classwise error and environment checklist](DATA_ANALYSIS_REVIEW_CHECKLIST.md). It adds no experiment or metric implementation.
