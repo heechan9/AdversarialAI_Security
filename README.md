@@ -57,6 +57,12 @@
 
 ## 최신 통합 상태
 
+2026-10-21 확인 기준 main은 `b92ba8f450020479198a8bb03dbfa510044d6c19`입니다. [#88](https://github.com/heechan9/AdversarialAI_Security/pull/88)의 저장 근거 검토 문서 3개가 병합됐습니다. [주장 대조](docs/reviews/20261019/evidence_claim_review.md) · [수치 재계산](docs/reviews/20261019/evidence_calculation_review.md) · [검토 방법](docs/reviews/20261019/evidence_review_method.md). 이재혁의 자료 작성·Claude 도움·Codex 후속 정리와 공개 근거 보완을 구분하며, 자료 작성자의 본인 계정 커밋이나 새 모델 독립 재현을 뜻하지 않습니다.
+
+- **main 검사:** [b92ba8f CPU CI](https://github.com/heechan9/AdversarialAI_Security/actions/runs/39568046992) 780 passed / 18 warnings. 저장 근거·합성 회귀 검사이며 모델 성능 향상이나 외부 독립 재현 PASS의 증거가 아닙니다.
+- **미병합 Draft:** [#86 FGSM 중단·재개 감사](https://github.com/heechan9/AdversarialAI_Security/pull/86)(`e4c54a9`)와 [#87 clean-only 대조 학습·paired 감사](https://github.com/heechan9/AdversarialAI_Security/pull/87)(`db3bfe6`)는 아직 main에 포함되지 않았습니다. 브랜치 검사 통과와 main 통합·새 대조 실험 완료는 구분합니다.
+- **재현 판정 유지:** 연구 수행 PC의 전체 781장 재실행은 LOCAL_PASS이나, 보존된 외부 독립 실행의 FAIL과 최초 환경 차이 원인 미확정은 해소되지 않았습니다. 아래 실험·검토 이력은 각각의 날짜와 범위로 읽어야 합니다.
+
 **제출 이후 후속 연구:** [CNN 적대적 학습·테스트 평가](results/extensions/cnn_adversarial_20261002/README.md)를 완료했습니다(2026-10-02). 학습 6,147장·검증 689장, 테스트 781장에서 일반 정확도 64.53%→69.14%, PGD7 정확도 11.14%→18.57%입니다. PGD7·ε=0.03·1 restart·필터 없음에 한정한 결과이며 강한 공격 전체나 외부 독립 검증 완료를 뜻하지 않습니다. [BIM·PGD 중간 근거](docs/FOLLOWUP_EXECUTION_STATUS.md)는 부분 결과로 유지하고 [Square·SurFree 블랙박스 평가](results/extensions/blackbox/README_20261003.md)도 완료했습니다. MobileNet 학습·BIM/PGD 잔여 조건·JSMA 전체 평가는 아직 완료되지 않았습니다. 기존 제출 결과와 Stage B 판정은 유지합니다.
 
 <!-- verification-status:start -->
@@ -125,11 +131,11 @@
 | 연구근거 감사 | ✅ 검증 완료 | manifest·모델 해시·CSV·JSON·문서 일관성·시각 검토 감사 |
 | A단계 독립 재계산 | ✅ 완료 | 저장된 Clean 결과 재계산·검사; 원본 모델 재추론과 구분 |
 | B단계 원본 재실행 | ⚠ 수행 확인·일치 검증 FAIL | 현수 결과와 후속 추론 확인; 남은 5개 예측(4장) 원인 미확정 |
-| PC 현재 환경 추가 비교 | ✅ 선택 5항목 기준 일치 | 4장·5개 항목 추론 완료; 전체 B단계 PASS 및 과거 환경 동일성 증명과 구분 |
+| 연구 수행 PC 전체 재실행 | ✅ LOCAL_PASS | 781장·모델 2개·두 필터·ε 4개 라벨·요약 대조 일치. 확률값 비교 제외; 외부 독립 PASS와 구분 |
 | 논문 Claim 감사 | ✅ 9/9 통과 | 기존 v1.5 claim snapshot 감사; 최신 원고 전체의 검증 완료를 뜻하지 않음 |
 | 가우시안·평균 필터 방어 | ✅ 실험·기록 감사 완료 | 고정 3×3 전처리; 기존 FGSM 입력 및 방어 인지 FGSM 비교·근거 감사 |
 | MARIS 가상 실험실 | ✅ 구현·소스 반영 | 설명용 3D 조작·저장된 이미지 비교·결과 재생; 실시간 추론 아님 |
-| BIM·PGD·JSMA·적대적 학습 | ⚪ 향후 연구 | 현재 검증 완료 범위에 포함하지 않음 |
+| BIM·PGD·JSMA·적대적 학습 | 🛠 조건별 완료·부분·미완료 구분 | CNN 적대적 학습·지정 PGD7 평가는 완료, BIM/PGD는 부분 결과, MobileNet 학습·잔여 조건·JSMA 전체 평가는 미완료. [현재 범위](docs/FOLLOWUP_EXECUTION_STATUS.md) |
 | VLM/LLM·안전영향 시뮬레이터 | ⚪ 후속 확장 | 전체 프로젝트 로드맵; 현재 논문 실험 범위 밖 |
 
 ## 핵심 결과를 쉽게 읽으면
