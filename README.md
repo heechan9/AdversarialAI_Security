@@ -2,6 +2,8 @@
 
 # 자율운항선박 이미지 분류 모델 적대적 AI 검증
 
+[한국어](README.md) | [English](README.en.md)
+
 ### Clean → FGSM → 전처리 방어 비교 → Evidence Audit 기반 해양 AI 보안 연구
 
 <a href="https://maritime-adversarial-lab.hc24734503.chatgpt.site/">
@@ -307,3 +309,4 @@ python scripts\audit_paper_claims.py
 **재현 가능한 실험, 검증 가능한 수치, 과장하지 않는 결론을 우선합니다.**
 
 </div>
+
