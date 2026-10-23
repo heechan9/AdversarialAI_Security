@@ -183,3 +183,11 @@ html[lang=en] h1{letter-spacing:-.045em;font-size:clamp(36px,4vw,60px);max-width
 
 .mission-defense-records.control{grid-template-columns:repeat(2,minmax(0,1fr))}.mission-loading>.mission-primary{max-width:240px}.mission-primary>svg:first-child{margin-right:0}.mission-primary>svg:last-child{margin-left:0}
 .mission-cases button>span{min-width:0;overflow-wrap:anywhere}.mission-cases b{overflow-wrap:anywhere}
+
+/* Additive saved-evidence paired review, 2026-10-23. */
+.paired-review { margin: 2rem 0; padding: 1.25rem; border: 1px solid #4c6474; border-radius: 12px; }
+.paired-review p, .paired-review details { margin: .8rem 0; line-height: 1.6; }
+.paired-review table { width: 100%; min-width: 540px; border-collapse: collapse; }
+.paired-review th, .paired-review td { text-align: left; padding: .65rem; border-bottom: 1px solid #4c6474; }
+.paired-review select { max-width: 100%; padding: .5rem; color: #132636; background: #f4f8fa; }
+.paired-inference { padding: .8rem; border-left: 3px solid #bd8d36; }
