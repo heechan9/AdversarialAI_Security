@@ -1,0 +1,15 @@
+EXTERNAL REVIEW SCOPE
+Public project: https://github.com/heechan9/AdversarialAI_Security
+Baseline: 75defef0d69c1741025306e0150c770e84b23a30
+These are standalone files, not an already-applied repo patch. Python 3.12 standard library only. No installation needed.
+Run: python -m unittest -v test_worst_class_review
+Run: python worst_class_review.py input-classwise-review.json new-result.json
+Optional source recount: python verify_saved_csv.py <clean public checkout at baseline> input-classwise-review.json
+Input is the exact previously audited 80-row public saved-evidence derivation, with source hashes. It contains no private lectures, credentials, raw images or model weights.
+Review arithmetic, denominator handling, ties, scope claims, malformed-input rejection, overwrite protection, reproducibility and portability. This analysis does not establish safety certification, model improvement, new inference or independent Stage-B approval.
+Prior internal checks: 8 unit tests PASS, all 80 counts independently recounted from saved CSV, altered input rejected, existing output unchanged, regenerated output byte-identical. Red behavioral logs came from stub def summarize(rows): return {} before implementation; fixed test hash is in manifest.
+Do not run external URLs, change repository state, train models or infer hidden data. Please report confirmed blockers separately from suggestions and state exactly which checks you actually ran.
+
+V2 narrow correction: all verification asserts in verify_saved_csv.py replaced with explicit SystemExit failures, UTF-8 JSON/CSV and newline='' CSV reads. Analyzer, original analyzer tests, input and results byte-identical. New test_verify_saved_csv.py proves valid80row pass and N=999 rejection under both ordinary Python and python -O.
+Run regression: ADVERSARIAL_CHECKOUT=<public pristine baseline checkout> python -m unittest -v test_worst_class_review test_verify_saved_csv
+The raw saved CSV integration tests need the public checkout; no model or private artifacts are needed.
