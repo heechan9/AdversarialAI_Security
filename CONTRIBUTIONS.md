@@ -145,3 +145,12 @@
 - Original evidence files, model predictions, scientific metrics and lower research sections are preserved. No new model inference, defended outcome for an individual case, navigation/collision simulation or hardware test is claimed.
 - The two design previews are explicitly static layouts, not browser captures. Candidate browser QA was blocked by the available preview environment and remains a separate release check.
 - GitHub connector publication uses the authenticated heechan9 account; the implementation is credited to Codex in the commit trailer. Existing contributors and history remain unchanged.
+
+## 김태희 고정 baseline CPU 재실행 인계 (2026-10-23 KST)
+
+- 김태희: 고정 baseline `9b64b8e33a2a1ff2cda1d51386cfb9360b09aebf`의 CPU 회귀·공개 저장 증거 검사 자료를 제출했다. r2 인계요약에서 반환 ZIP을 직접 열어 로그·종료코드를 확인했다고 보고했다. PR81 웹·기존 CI 원문·CI 아티팩트 비교는 본인이 직접 하지 않았다고 구분했다.
+- Claude/Cowork: 제출 자료에 따르면 클라우드 Linux에서 prepare/run 실행, Git 기록 비교와 양식 초안 작성에 사용됐다. 태희 PC에서의 직접 실행이나 새 781장 모델 추론으로 기록하지 않는다.
+- Codex: 수신 ZIP의 경로·CRC·22개 내부 해시, 요약 변경, JUnit 541개 및 기존 CI 552개·수신 당시 main CI 780개 원본 아티팩트를 읽기 전용으로 대조했다. 새 모델·CPU 실험은 실행하지 않았다.
+- 최희찬 (heechan9): 수정본의 Git·공유 Drive 반영 범위를 지정하고 r2 완료 자료를 전달했다. 기여는 ‘고정 버전 CPU 재실행 자료 제출·확인’이며 2차 작업 전체 완료나 독립 모델 재현 성공을 뜻하지 않는다.
+- [수신 검산 및 검증 경계](docs/reviews/20261023/taehee_cpu_handoff_review.md)를 함께 보존한다. 원본 ZIP·개인 작업경로·비공개 자료는 Git에 추가하지 않는다. 원격 게시 계정과 실제 문서 작성자를 구분하며 Codex의 문서 정리는 커밋 trailer로 기록한다.
+
