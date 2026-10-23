@@ -1,0 +1,11 @@
+{
+  "unchanged_from_reviewed_bundle": {
+    "worst_class_review.py": true,
+    "test_worst_class_review.py": true,
+    "input-classwise-review.json": true,
+    "worst-class-review.json": true
+  },
+  "regression_before": "4 tests, one failure: optimized tampered input falsely PASS",
+  "regression_after": "12 tests PASS including valid and tampered input in normal and optimized Python",
+  "new_model_inference": "NOT_RUN"
+}
