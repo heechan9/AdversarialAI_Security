@@ -59,6 +59,8 @@
 
 ## 최신 통합 상태
 
+**2026-10-24 별도 후속 실험:** [CNN 정상 추가학습 대조 결과](results/extensions/matched_cnn_20261024/README.md)는 seed 2026, 테스트 781장씩의 내부 평가입니다. 정상 추가학습 대비 PGD 혼합학습은 PGD7 +7.43%p, PGD50·5회 재시작 +0.90%p(정답 순증 7장)이며, 강한 공격 정확도는 6.15%입니다. 계획한 3개 seed 중 1개만 실행했습니다. 기존 논문 수치·외부 Stage B FAIL과 분리하며, 독립 재현 승인이나 전반적 방어 성능 입증을 뜻하지 않습니다. 실행 소스는 미병합 Draft #87의 고정 커밋입니다.
+
 2026-10-21 확인 기준 main은 `b92ba8f450020479198a8bb03dbfa510044d6c19`입니다. [#88](https://github.com/heechan9/AdversarialAI_Security/pull/88)의 저장 근거 검토 문서 3개가 병합됐습니다. [주장 대조](docs/reviews/20261019/evidence_claim_review.md) · [수치 재계산](docs/reviews/20261019/evidence_calculation_review.md) · [검토 방법](docs/reviews/20261019/evidence_review_method.md). 이재혁의 자료 작성·Claude 도움·Codex 후속 정리와 공개 근거 보완을 구분하며, 자료 작성자의 본인 계정 커밋이나 새 모델 독립 재현을 뜻하지 않습니다.
 
 - **main 검사:** [b92ba8f CPU CI](https://github.com/heechan9/AdversarialAI_Security/actions/runs/39568046992) 780 passed / 18 warnings. 저장 근거·합성 회귀 검사이며 모델 성능 향상이나 외부 독립 재현 PASS의 증거가 아닙니다.

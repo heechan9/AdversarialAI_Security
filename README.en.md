@@ -45,6 +45,8 @@ Small L∞ alone does not prove human imperceptibility. See the [maritime-practi
 
 ## Current research and integration status
 
+**October 24, 2026 — separate follow-up:** The [matched CNN result package](results/extensions/matched_cnn_20261024/README.md) records one seed (2026), 781 test images per model. Mixed training versus clean-only improves PGD7 by 7.43 pp and PGD50/5 restarts by 0.90 pp (7 net correct); strong-attack accuracy remains 6.15%. Only one of three planned training seeds has run. These results are separate from historical paper metrics and the external Stage B FAIL; they are not independent reproduction approval or general defense validation. Executed training code is pinned to unmerged Draft #87.
+
 Checked on October 23, 2026: main is [`362bfbd768d71eed4a07f535bd50ebb697174ce2`](https://github.com/heechan9/AdversarialAI_Security/commit/362bfbd768d71eed4a07f535bd50ebb697174ce2), after [#93](https://github.com/heechan9/AdversarialAI_Security/pull/93). This README preparation does not rerun models, publish a deployment, or establish completion of the whole project or final report.
 
 - **Paired defense review on main:** #93 adds descriptive analysis of the existing predictions and its MARIS panel. The 16 model/epsilon/filter conditions and 160 class groups reuse the same 781 image identities. They are not independent new samples or new model-performance experiments. [Method and limits](research/paired_defense_review/README.md).

@@ -154,3 +154,10 @@
 - 최희찬 (heechan9): 수정본의 Git·공유 Drive 반영 범위를 지정하고 r2 완료 자료를 전달했다. 기여는 ‘고정 버전 CPU 재실행 자료 제출·확인’이며 2차 작업 전체 완료나 독립 모델 재현 성공을 뜻하지 않는다.
 - [수신 검산 및 검증 경계](docs/reviews/20261023/taehee_cpu_handoff_review.md)를 함께 보존한다. 원본 ZIP·개인 작업경로·비공개 자료는 Git에 추가하지 않는다. 원격 게시 계정과 실제 문서 작성자를 구분하며 Codex의 문서 정리는 커밋 trailer로 기록한다.
 
+## Matched CNN follow-up result package (2026-10-24 KST)
+
+- 최희찬 (heechan9): authorized the separate Colab experiment, completion check and publication of reviewable results; required review before merge and preservation of historical failures.
+- Codex assistance: prepared and operated the authorized Colab workflow, implemented the separately pinned evaluator, recalculated saved CSVs, documented protocol deviations and limitations, and prepared the review PR with a standard-library auditor and mutation checks.
+- The retained batch records one training seed and three model evaluations of 781 images each. This publication review does not run models again or confer independent experimental approval. Existing teammate credits, paper results and external Stage B FAIL remain unchanged.
+- Source and evidence: [one-seed matched CNN follow-up](results/extensions/matched_cnn_20261024/README.md). GitHub connector commits use the authenticated account; the Codex trailer identifies implementation/documentation assistance rather than independent human authorship.
+
