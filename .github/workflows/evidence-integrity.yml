@@ -50,6 +50,9 @@ jobs:
         working-directory: web/maris
     steps:
       - uses: actions/checkout@v4
+        with:
+          # Compare the preserved panel/export to the pinned #95 merge commit.
+          fetch-depth: 0
       - uses: pnpm/action-setup@v4
         with:
           version: 11.25.0

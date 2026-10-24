@@ -1,4 +1,7 @@
 export const pageEnglish: Record<string,string> = {
+  "후속 탐색 실험": "Follow-up study",
+  "기존 FGSM 패널의 범위": "Scope of the original FGSM panel",
+  "기존 FGSM·전처리 패널은 고정 필터의 저장 기록을 재생하며 모델 재학습이 없습니다. 이 안내는 해당 기존 패널에만 적용됩니다. 10월 24일 후속 실험은 두 군을 실제로 추가학습한 기록입니다.": "The original FGSM/preprocessing panel replays fixed-filter records without model retraining. This notice applies only to that original panel. The October 24 follow-up records actual additional training of two arms.",
   "정상 입력 · 필터 없음": "Clean input \u00b7 no filter",
   "정상 입력 + 필터": "Clean input + filter",
   "ε {epsilon} 공격 기록 비교": "Inspect the \u03b5 {epsilon} attack record",

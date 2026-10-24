@@ -91,6 +91,27 @@ is explicitly a separate 781-image aggregate evaluation. It does not infer a
 filtered outcome for the selected case. Original images, evidence, research
 appendices, statistics, tables and model controls remain in the page.
 
+## One-seed matched CNN follow-up (October 24, 2026)
+
+The separate `#followup` panel compares the baseline, clean-only and PGD-mixed
+checkpoints under identical recorded clean/PGD7/PGD50 conditions. Its selector
+does not change the existing FGSM image/model/filter controls. PGD50 accuracy
+remains 6.15%, with 28 newly correct minus 21 newly incorrect = 7 net correct.
+Training seeds 2027/2028 and independent replay remain incomplete; existing
+Stage B FAIL remains. The October 12 panel and its numeric records are unchanged.
+
+`python web/maris/scripts/export-matched-followup.py` from the repository root
+checks the published #95 source bytes and runs the standard-library saved-result
+auditor before exporting the compact public JSON. It uses no model binaries,
+private Drive resources, image generation or new inference. The full source
+history containing pinned commit `13d92a1` is needed for this export and the
+historical-panel comparison. `pnpm run test:evidence` includes its consistency,
+deterministic-export and eight condition/language rendering checks.
+
+See [candidate verification](../../docs/reviews/20261024/matched_followup_ui_review.md)
+for browser checks and screenshots. This candidate requires review before merge
+or deployment.
+
 Run `npm run test:ui` for localization, existing synthetic controls, and the new
 16-path mission state/evidence/SSR suite. Static layout previews are design
 artifacts, not browser captures. See `MISSION_REPLAY_REVIEW.md` for verification
