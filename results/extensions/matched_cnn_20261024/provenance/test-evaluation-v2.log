@@ -1,0 +1,412 @@
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1792779630.986643   17925 cpu_feature_guard.cc:227] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: AVX2 AVX512F FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+Found 781 images belonging to 10 classes.
+W0000 00:00:1792779635.029215   17925 gpu_bfc_allocator.cc:47] Overriding orig_value setting because the TF_FORCE_GPU_ALLOW_GROWTH environment variable is set. Original config value was false.
+I0000 00:00:1792779635.031058   17925 gpu_device.cc:2043] Created device /job:localhost/replica:0/task:0/device:GPU:0 with 13757 MB memory:  -> device: 0, name: Tesla T4, pci bus id: 0000:00:04.0, compute capability: 7.5
+I0000 00:00:1792779636.564407   17925 cuda_dnn.cc:461] Loaded cuDNN version 92700
+TEST baseline batch 1/98 PGD7 + PGD50/5 restarts
+TEST baseline batch 2/98 PGD7 + PGD50/5 restarts
+TEST baseline batch 3/98 PGD7 + PGD50/5 restarts
+TEST baseline batch 4/98 PGD7 + PGD50/5 restarts
+TEST baseline batch 5/98 PGD7 + PGD50/5 restarts
+TEST baseline batch 6/98 PGD7 + PGD50/5 restarts
+TEST baseline batch 7/98 PGD7 + PGD50/5 restarts
+TEST baseline batch 8/98 PGD7 + PGD50/5 restarts
+TEST baseline batch 9/98 PGD7 + PGD50/5 restarts
+TEST baseline batch 10/98 PGD7 + PGD50/5 restarts
+TEST baseline batch 11/98 PGD7 + PGD50/5 restarts
+TEST baseline batch 12/98 PGD7 + PGD50/5 restarts
+TEST baseline batch 13/98 PGD7 + PGD50/5 restarts
+TEST baseline batch 14/98 PGD7 + PGD50/5 restarts
+TEST baseline batch 15/98 PGD7 + PGD50/5 restarts
+TEST baseline batch 16/98 PGD7 + PGD50/5 restarts
+TEST baseline batch 17/98 PGD7 + PGD50/5 restarts
+TEST baseline batch 18/98 PGD7 + PGD50/5 restarts
+TEST baseline batch 19/98 PGD7 + PGD50/5 restarts
+TEST baseline batch 20/98 PGD7 + PGD50/5 restarts
+TEST baseline batch 21/98 PGD7 + PGD50/5 restarts
+TEST baseline batch 22/98 PGD7 + PGD50/5 restarts
+TEST baseline batch 23/98 PGD7 + PGD50/5 restarts
+TEST baseline batch 24/98 PGD7 + PGD50/5 restarts
+TEST baseline batch 25/98 PGD7 + PGD50/5 restarts
+TEST baseline batch 26/98 PGD7 + PGD50/5 restarts
+TEST baseline batch 27/98 PGD7 + PGD50/5 restarts
+TEST baseline batch 28/98 PGD7 + PGD50/5 restarts
+TEST baseline batch 29/98 PGD7 + PGD50/5 restarts
+TEST baseline batch 30/98 PGD7 + PGD50/5 restarts
+TEST baseline batch 31/98 PGD7 + PGD50/5 restarts
+TEST baseline batch 32/98 PGD7 + PGD50/5 restarts
+TEST baseline batch 33/98 PGD7 + PGD50/5 restarts
+TEST baseline batch 34/98 PGD7 + PGD50/5 restarts
+TEST baseline batch 35/98 PGD7 + PGD50/5 restarts
+TEST baseline batch 36/98 PGD7 + PGD50/5 restarts
+TEST baseline batch 37/98 PGD7 + PGD50/5 restarts
+TEST baseline batch 38/98 PGD7 + PGD50/5 restarts
+TEST baseline batch 39/98 PGD7 + PGD50/5 restarts
+TEST baseline batch 40/98 PGD7 + PGD50/5 restarts
+TEST baseline batch 41/98 PGD7 + PGD50/5 restarts
+TEST baseline batch 42/98 PGD7 + PGD50/5 restarts
+TEST baseline batch 43/98 PGD7 + PGD50/5 restarts
+TEST baseline batch 44/98 PGD7 + PGD50/5 restarts
+TEST baseline batch 45/98 PGD7 + PGD50/5 restarts
+TEST baseline batch 46/98 PGD7 + PGD50/5 restarts
+TEST baseline batch 47/98 PGD7 + PGD50/5 restarts
+TEST baseline batch 48/98 PGD7 + PGD50/5 restarts
+TEST baseline batch 49/98 PGD7 + PGD50/5 restarts
+TEST baseline batch 50/98 PGD7 + PGD50/5 restarts
+TEST baseline batch 51/98 PGD7 + PGD50/5 restarts
+TEST baseline batch 52/98 PGD7 + PGD50/5 restarts
+TEST baseline batch 53/98 PGD7 + PGD50/5 restarts
+TEST baseline batch 54/98 PGD7 + PGD50/5 restarts
+TEST baseline batch 55/98 PGD7 + PGD50/5 restarts
+TEST baseline batch 56/98 PGD7 + PGD50/5 restarts
+TEST baseline batch 57/98 PGD7 + PGD50/5 restarts
+TEST baseline batch 58/98 PGD7 + PGD50/5 restarts
+TEST baseline batch 59/98 PGD7 + PGD50/5 restarts
+TEST baseline batch 60/98 PGD7 + PGD50/5 restarts
+TEST baseline batch 61/98 PGD7 + PGD50/5 restarts
+TEST baseline batch 62/98 PGD7 + PGD50/5 restarts
+TEST baseline batch 63/98 PGD7 + PGD50/5 restarts
+TEST baseline batch 64/98 PGD7 + PGD50/5 restarts
+TEST baseline batch 65/98 PGD7 + PGD50/5 restarts
+TEST baseline batch 66/98 PGD7 + PGD50/5 restarts
+TEST baseline batch 67/98 PGD7 + PGD50/5 restarts
+TEST baseline batch 68/98 PGD7 + PGD50/5 restarts
+TEST baseline batch 69/98 PGD7 + PGD50/5 restarts
+TEST baseline batch 70/98 PGD7 + PGD50/5 restarts
+TEST baseline batch 71/98 PGD7 + PGD50/5 restarts
+TEST baseline batch 72/98 PGD7 + PGD50/5 restarts
+TEST baseline batch 73/98 PGD7 + PGD50/5 restarts
+TEST baseline batch 74/98 PGD7 + PGD50/5 restarts
+TEST baseline batch 75/98 PGD7 + PGD50/5 restarts
+TEST baseline batch 76/98 PGD7 + PGD50/5 restarts
+TEST baseline batch 77/98 PGD7 + PGD50/5 restarts
+TEST baseline batch 78/98 PGD7 + PGD50/5 restarts
+TEST baseline batch 79/98 PGD7 + PGD50/5 restarts
+TEST baseline batch 80/98 PGD7 + PGD50/5 restarts
+TEST baseline batch 81/98 PGD7 + PGD50/5 restarts
+TEST baseline batch 82/98 PGD7 + PGD50/5 restarts
+TEST baseline batch 83/98 PGD7 + PGD50/5 restarts
+TEST baseline batch 84/98 PGD7 + PGD50/5 restarts
+TEST baseline batch 85/98 PGD7 + PGD50/5 restarts
+TEST baseline batch 86/98 PGD7 + PGD50/5 restarts
+TEST baseline batch 87/98 PGD7 + PGD50/5 restarts
+TEST baseline batch 88/98 PGD7 + PGD50/5 restarts
+TEST baseline batch 89/98 PGD7 + PGD50/5 restarts
+TEST baseline batch 90/98 PGD7 + PGD50/5 restarts
+TEST baseline batch 91/98 PGD7 + PGD50/5 restarts
+TEST baseline batch 92/98 PGD7 + PGD50/5 restarts
+TEST baseline batch 93/98 PGD7 + PGD50/5 restarts
+TEST baseline batch 94/98 PGD7 + PGD50/5 restarts
+TEST baseline batch 95/98 PGD7 + PGD50/5 restarts
+TEST baseline batch 96/98 PGD7 + PGD50/5 restarts
+TEST baseline batch 97/98 PGD7 + PGD50/5 restarts
+TEST baseline batch 98/98 PGD7 + PGD50/5 restarts
+TEST clean_only batch 1/98 PGD7 + PGD50/5 restarts
+TEST clean_only batch 2/98 PGD7 + PGD50/5 restarts
+TEST clean_only batch 3/98 PGD7 + PGD50/5 restarts
+TEST clean_only batch 4/98 PGD7 + PGD50/5 restarts
+TEST clean_only batch 5/98 PGD7 + PGD50/5 restarts
+TEST clean_only batch 6/98 PGD7 + PGD50/5 restarts
+TEST clean_only batch 7/98 PGD7 + PGD50/5 restarts
+TEST clean_only batch 8/98 PGD7 + PGD50/5 restarts
+TEST clean_only batch 9/98 PGD7 + PGD50/5 restarts
+TEST clean_only batch 10/98 PGD7 + PGD50/5 restarts
+TEST clean_only batch 11/98 PGD7 + PGD50/5 restarts
+TEST clean_only batch 12/98 PGD7 + PGD50/5 restarts
+TEST clean_only batch 13/98 PGD7 + PGD50/5 restarts
+TEST clean_only batch 14/98 PGD7 + PGD50/5 restarts
+TEST clean_only batch 15/98 PGD7 + PGD50/5 restarts
+TEST clean_only batch 16/98 PGD7 + PGD50/5 restarts
+TEST clean_only batch 17/98 PGD7 + PGD50/5 restarts
+TEST clean_only batch 18/98 PGD7 + PGD50/5 restarts
+TEST clean_only batch 19/98 PGD7 + PGD50/5 restarts
+TEST clean_only batch 20/98 PGD7 + PGD50/5 restarts
+TEST clean_only batch 21/98 PGD7 + PGD50/5 restarts
+TEST clean_only batch 22/98 PGD7 + PGD50/5 restarts
+TEST clean_only batch 23/98 PGD7 + PGD50/5 restarts
+TEST clean_only batch 24/98 PGD7 + PGD50/5 restarts
+TEST clean_only batch 25/98 PGD7 + PGD50/5 restarts
+TEST clean_only batch 26/98 PGD7 + PGD50/5 restarts
+TEST clean_only batch 27/98 PGD7 + PGD50/5 restarts
+TEST clean_only batch 28/98 PGD7 + PGD50/5 restarts
+TEST clean_only batch 29/98 PGD7 + PGD50/5 restarts
+TEST clean_only batch 30/98 PGD7 + PGD50/5 restarts
+TEST clean_only batch 31/98 PGD7 + PGD50/5 restarts
+TEST clean_only batch 32/98 PGD7 + PGD50/5 restarts
+TEST clean_only batch 33/98 PGD7 + PGD50/5 restarts
+TEST clean_only batch 34/98 PGD7 + PGD50/5 restarts
+TEST clean_only batch 35/98 PGD7 + PGD50/5 restarts
+TEST clean_only batch 36/98 PGD7 + PGD50/5 restarts
+TEST clean_only batch 37/98 PGD7 + PGD50/5 restarts
+TEST clean_only batch 38/98 PGD7 + PGD50/5 restarts
+TEST clean_only batch 39/98 PGD7 + PGD50/5 restarts
+TEST clean_only batch 40/98 PGD7 + PGD50/5 restarts
+TEST clean_only batch 41/98 PGD7 + PGD50/5 restarts
+TEST clean_only batch 42/98 PGD7 + PGD50/5 restarts
+TEST clean_only batch 43/98 PGD7 + PGD50/5 restarts
+TEST clean_only batch 44/98 PGD7 + PGD50/5 restarts
+TEST clean_only batch 45/98 PGD7 + PGD50/5 restarts
+TEST clean_only batch 46/98 PGD7 + PGD50/5 restarts
+TEST clean_only batch 47/98 PGD7 + PGD50/5 restarts
+TEST clean_only batch 48/98 PGD7 + PGD50/5 restarts
+TEST clean_only batch 49/98 PGD7 + PGD50/5 restarts
+TEST clean_only batch 50/98 PGD7 + PGD50/5 restarts
+TEST clean_only batch 51/98 PGD7 + PGD50/5 restarts
+TEST clean_only batch 52/98 PGD7 + PGD50/5 restarts
+TEST clean_only batch 53/98 PGD7 + PGD50/5 restarts
+TEST clean_only batch 54/98 PGD7 + PGD50/5 restarts
+TEST clean_only batch 55/98 PGD7 + PGD50/5 restarts
+TEST clean_only batch 56/98 PGD7 + PGD50/5 restarts
+TEST clean_only batch 57/98 PGD7 + PGD50/5 restarts
+TEST clean_only batch 58/98 PGD7 + PGD50/5 restarts
+TEST clean_only batch 59/98 PGD7 + PGD50/5 restarts
+TEST clean_only batch 60/98 PGD7 + PGD50/5 restarts
+TEST clean_only batch 61/98 PGD7 + PGD50/5 restarts
+TEST clean_only batch 62/98 PGD7 + PGD50/5 restarts
+TEST clean_only batch 63/98 PGD7 + PGD50/5 restarts
+TEST clean_only batch 64/98 PGD7 + PGD50/5 restarts
+TEST clean_only batch 65/98 PGD7 + PGD50/5 restarts
+TEST clean_only batch 66/98 PGD7 + PGD50/5 restarts
+TEST clean_only batch 67/98 PGD7 + PGD50/5 restarts
+TEST clean_only batch 68/98 PGD7 + PGD50/5 restarts
+TEST clean_only batch 69/98 PGD7 + PGD50/5 restarts
+TEST clean_only batch 70/98 PGD7 + PGD50/5 restarts
+TEST clean_only batch 71/98 PGD7 + PGD50/5 restarts
+TEST clean_only batch 72/98 PGD7 + PGD50/5 restarts
+TEST clean_only batch 73/98 PGD7 + PGD50/5 restarts
+TEST clean_only batch 74/98 PGD7 + PGD50/5 restarts
+TEST clean_only batch 75/98 PGD7 + PGD50/5 restarts
+TEST clean_only batch 76/98 PGD7 + PGD50/5 restarts
+TEST clean_only batch 77/98 PGD7 + PGD50/5 restarts
+TEST clean_only batch 78/98 PGD7 + PGD50/5 restarts
+TEST clean_only batch 79/98 PGD7 + PGD50/5 restarts
+TEST clean_only batch 80/98 PGD7 + PGD50/5 restarts
+TEST clean_only batch 81/98 PGD7 + PGD50/5 restarts
+TEST clean_only batch 82/98 PGD7 + PGD50/5 restarts
+TEST clean_only batch 83/98 PGD7 + PGD50/5 restarts
+TEST clean_only batch 84/98 PGD7 + PGD50/5 restarts
+TEST clean_only batch 85/98 PGD7 + PGD50/5 restarts
+TEST clean_only batch 86/98 PGD7 + PGD50/5 restarts
+TEST clean_only batch 87/98 PGD7 + PGD50/5 restarts
+TEST clean_only batch 88/98 PGD7 + PGD50/5 restarts
+TEST clean_only batch 89/98 PGD7 + PGD50/5 restarts
+TEST clean_only batch 90/98 PGD7 + PGD50/5 restarts
+TEST clean_only batch 91/98 PGD7 + PGD50/5 restarts
+TEST clean_only batch 92/98 PGD7 + PGD50/5 restarts
+TEST clean_only batch 93/98 PGD7 + PGD50/5 restarts
+TEST clean_only batch 94/98 PGD7 + PGD50/5 restarts
+TEST clean_only batch 95/98 PGD7 + PGD50/5 restarts
+TEST clean_only batch 96/98 PGD7 + PGD50/5 restarts
+TEST clean_only batch 97/98 PGD7 + PGD50/5 restarts
+TEST clean_only batch 98/98 PGD7 + PGD50/5 restarts
+TEST pgd_mixed batch 1/98 PGD7 + PGD50/5 restarts
+TEST pgd_mixed batch 2/98 PGD7 + PGD50/5 restarts
+TEST pgd_mixed batch 3/98 PGD7 + PGD50/5 restarts
+TEST pgd_mixed batch 4/98 PGD7 + PGD50/5 restarts
+TEST pgd_mixed batch 5/98 PGD7 + PGD50/5 restarts
+TEST pgd_mixed batch 6/98 PGD7 + PGD50/5 restarts
+TEST pgd_mixed batch 7/98 PGD7 + PGD50/5 restarts
+TEST pgd_mixed batch 8/98 PGD7 + PGD50/5 restarts
+TEST pgd_mixed batch 9/98 PGD7 + PGD50/5 restarts
+TEST pgd_mixed batch 10/98 PGD7 + PGD50/5 restarts
+TEST pgd_mixed batch 11/98 PGD7 + PGD50/5 restarts
+TEST pgd_mixed batch 12/98 PGD7 + PGD50/5 restarts
+TEST pgd_mixed batch 13/98 PGD7 + PGD50/5 restarts
+TEST pgd_mixed batch 14/98 PGD7 + PGD50/5 restarts
+TEST pgd_mixed batch 15/98 PGD7 + PGD50/5 restarts
+TEST pgd_mixed batch 16/98 PGD7 + PGD50/5 restarts
+TEST pgd_mixed batch 17/98 PGD7 + PGD50/5 restarts
+TEST pgd_mixed batch 18/98 PGD7 + PGD50/5 restarts
+TEST pgd_mixed batch 19/98 PGD7 + PGD50/5 restarts
+TEST pgd_mixed batch 20/98 PGD7 + PGD50/5 restarts
+TEST pgd_mixed batch 21/98 PGD7 + PGD50/5 restarts
+TEST pgd_mixed batch 22/98 PGD7 + PGD50/5 restarts
+TEST pgd_mixed batch 23/98 PGD7 + PGD50/5 restarts
+TEST pgd_mixed batch 24/98 PGD7 + PGD50/5 restarts
+TEST pgd_mixed batch 25/98 PGD7 + PGD50/5 restarts
+TEST pgd_mixed batch 26/98 PGD7 + PGD50/5 restarts
+TEST pgd_mixed batch 27/98 PGD7 + PGD50/5 restarts
+TEST pgd_mixed batch 28/98 PGD7 + PGD50/5 restarts
+TEST pgd_mixed batch 29/98 PGD7 + PGD50/5 restarts
+TEST pgd_mixed batch 30/98 PGD7 + PGD50/5 restarts
+TEST pgd_mixed batch 31/98 PGD7 + PGD50/5 restarts
+TEST pgd_mixed batch 32/98 PGD7 + PGD50/5 restarts
+TEST pgd_mixed batch 33/98 PGD7 + PGD50/5 restarts
+TEST pgd_mixed batch 34/98 PGD7 + PGD50/5 restarts
+TEST pgd_mixed batch 35/98 PGD7 + PGD50/5 restarts
+TEST pgd_mixed batch 36/98 PGD7 + PGD50/5 restarts
+TEST pgd_mixed batch 37/98 PGD7 + PGD50/5 restarts
+TEST pgd_mixed batch 38/98 PGD7 + PGD50/5 restarts
+TEST pgd_mixed batch 39/98 PGD7 + PGD50/5 restarts
+TEST pgd_mixed batch 40/98 PGD7 + PGD50/5 restarts
+TEST pgd_mixed batch 41/98 PGD7 + PGD50/5 restarts
+TEST pgd_mixed batch 42/98 PGD7 + PGD50/5 restarts
+TEST pgd_mixed batch 43/98 PGD7 + PGD50/5 restarts
+TEST pgd_mixed batch 44/98 PGD7 + PGD50/5 restarts
+TEST pgd_mixed batch 45/98 PGD7 + PGD50/5 restarts
+TEST pgd_mixed batch 46/98 PGD7 + PGD50/5 restarts
+TEST pgd_mixed batch 47/98 PGD7 + PGD50/5 restarts
+TEST pgd_mixed batch 48/98 PGD7 + PGD50/5 restarts
+TEST pgd_mixed batch 49/98 PGD7 + PGD50/5 restarts
+TEST pgd_mixed batch 50/98 PGD7 + PGD50/5 restarts
+TEST pgd_mixed batch 51/98 PGD7 + PGD50/5 restarts
+TEST pgd_mixed batch 52/98 PGD7 + PGD50/5 restarts
+TEST pgd_mixed batch 53/98 PGD7 + PGD50/5 restarts
+TEST pgd_mixed batch 54/98 PGD7 + PGD50/5 restarts
+TEST pgd_mixed batch 55/98 PGD7 + PGD50/5 restarts
+TEST pgd_mixed batch 56/98 PGD7 + PGD50/5 restarts
+TEST pgd_mixed batch 57/98 PGD7 + PGD50/5 restarts
+TEST pgd_mixed batch 58/98 PGD7 + PGD50/5 restarts
+TEST pgd_mixed batch 59/98 PGD7 + PGD50/5 restarts
+TEST pgd_mixed batch 60/98 PGD7 + PGD50/5 restarts
+TEST pgd_mixed batch 61/98 PGD7 + PGD50/5 restarts
+TEST pgd_mixed batch 62/98 PGD7 + PGD50/5 restarts
+TEST pgd_mixed batch 63/98 PGD7 + PGD50/5 restarts
+TEST pgd_mixed batch 64/98 PGD7 + PGD50/5 restarts
+TEST pgd_mixed batch 65/98 PGD7 + PGD50/5 restarts
+TEST pgd_mixed batch 66/98 PGD7 + PGD50/5 restarts
+TEST pgd_mixed batch 67/98 PGD7 + PGD50/5 restarts
+TEST pgd_mixed batch 68/98 PGD7 + PGD50/5 restarts
+TEST pgd_mixed batch 69/98 PGD7 + PGD50/5 restarts
+TEST pgd_mixed batch 70/98 PGD7 + PGD50/5 restarts
+TEST pgd_mixed batch 71/98 PGD7 + PGD50/5 restarts
+TEST pgd_mixed batch 72/98 PGD7 + PGD50/5 restarts
+TEST pgd_mixed batch 73/98 PGD7 + PGD50/5 restarts
+TEST pgd_mixed batch 74/98 PGD7 + PGD50/5 restarts
+TEST pgd_mixed batch 75/98 PGD7 + PGD50/5 restarts
+TEST pgd_mixed batch 76/98 PGD7 + PGD50/5 restarts
+TEST pgd_mixed batch 77/98 PGD7 + PGD50/5 restarts
+TEST pgd_mixed batch 78/98 PGD7 + PGD50/5 restarts
+TEST pgd_mixed batch 79/98 PGD7 + PGD50/5 restarts
+TEST pgd_mixed batch 80/98 PGD7 + PGD50/5 restarts
+TEST pgd_mixed batch 81/98 PGD7 + PGD50/5 restarts
+TEST pgd_mixed batch 82/98 PGD7 + PGD50/5 restarts
+TEST pgd_mixed batch 83/98 PGD7 + PGD50/5 restarts
+TEST pgd_mixed batch 84/98 PGD7 + PGD50/5 restarts
+TEST pgd_mixed batch 85/98 PGD7 + PGD50/5 restarts
+TEST pgd_mixed batch 86/98 PGD7 + PGD50/5 restarts
+TEST pgd_mixed batch 87/98 PGD7 + PGD50/5 restarts
+TEST pgd_mixed batch 88/98 PGD7 + PGD50/5 restarts
+TEST pgd_mixed batch 89/98 PGD7 + PGD50/5 restarts
+TEST pgd_mixed batch 90/98 PGD7 + PGD50/5 restarts
+TEST pgd_mixed batch 91/98 PGD7 + PGD50/5 restarts
+TEST pgd_mixed batch 92/98 PGD7 + PGD50/5 restarts
+TEST pgd_mixed batch 93/98 PGD7 + PGD50/5 restarts
+TEST pgd_mixed batch 94/98 PGD7 + PGD50/5 restarts
+TEST pgd_mixed batch 95/98 PGD7 + PGD50/5 restarts
+TEST pgd_mixed batch 96/98 PGD7 + PGD50/5 restarts
+TEST pgd_mixed batch 97/98 PGD7 + PGD50/5 restarts
+TEST pgd_mixed batch 98/98 PGD7 + PGD50/5 restarts
+{
+  "status": "COMPLETED_NOT_INDEPENDENT_APPROVAL",
+  "scope": "CNN unfiltered canonical test split, one matched seed",
+  "started_at": "2026-10-23T18:20:34.778460+00:00",
+  "source_commit": "db3bfe6b79d3cecb2ef57aeaaf29ab9d89b5d9bf",
+  "evaluator_sha256": "38f96878ed8a41bf3a1833b50db1c47f4b935dcc91c0173ba4b9e575e4e58b8f",
+  "paired_audit": {
+    "result": "PAIRED_RECORDED_PROTOCOL_AND_CHECKPOINTS_CONSISTENT",
+    "comparison_protocol_sha256": "8dee4bb84261c652c5676288b907c02b3d2fe61b210dbc781b3f05a4ccd56187",
+    "model_sha256": {
+      "clean_only": "e3b02315482c432ec5a2b5828696f611ad9f167f847d273d746df8c98677d353",
+      "pgd_mixed": "38767ddb3eb00463e7324ba4371c184c0eed01a87819b4766a66415d69538708"
+    },
+    "independent_verification_approval": false,
+    "test_evaluation_complete": false,
+    "limitations": [
+      "No inference or execution authentication is performed.",
+      "Matching configuration does not prove identical hardware or stochastic trajectories.",
+      "This is not evidence of an adversarial-training benefit or leakage-free generalization."
+    ]
+  },
+  "test_manifest_sha256": "36059fea372334509404aca0e66155bf99a8df270beb1cc3bf4865b361ae70a6",
+  "baseline_sha256": "cb256b1a5d6f605d355334e4e8667257a2bfbd29e08836cc4114869bd7068701",
+  "settings": {
+    "seed": 2026,
+    "batch_size": 8,
+    "epsilon": 0.03,
+    "step_size": 0.005,
+    "pgd7": {
+      "steps": 7,
+      "restarts": 1
+    },
+    "pgd50": {
+      "steps": 50,
+      "restarts": 5
+    }
+  },
+  "models": {
+    "baseline": {
+      "model_sha256": "cb256b1a5d6f605d355334e4e8667257a2bfbd29e08836cc4114869bd7068701",
+      "samples": 781,
+      "clean_accuracy": 0.645326504481434,
+      "attacks": {
+        "pgd7": {
+          "accuracy": 0.11139564660691421,
+          "asr": 0.8273809523809523,
+          "asr_successes": 417,
+          "asr_denominator": 504
+        },
+        "pgd50": {
+          "accuracy": 0.04737516005121639,
+          "asr": 0.9265873015873016,
+          "asr_successes": 467,
+          "asr_denominator": 504
+        }
+      },
+      "csv": "baseline.csv",
+      "csv_sha256": "91a04ab3cb3643639f31b90ad31d5a34a5dfa34be2146063ec13dcce66a035fd"
+    },
+    "clean_only": {
+      "model_sha256": "e3b02315482c432ec5a2b5828696f611ad9f167f847d273d746df8c98677d353",
+      "samples": 781,
+      "clean_accuracy": 0.6901408450704225,
+      "attacks": {
+        "pgd7": {
+          "accuracy": 0.11523687580025609,
+          "asr": 0.8330241187384044,
+          "asr_successes": 449,
+          "asr_denominator": 539
+        },
+        "pgd50": {
+          "accuracy": 0.052496798975672214,
+          "asr": 0.9239332096474954,
+          "asr_successes": 498,
+          "asr_denominator": 539
+        }
+      },
+      "csv": "clean_only.csv",
+      "csv_sha256": "d61cb35d7b21e21cbe534d0fa046657a77b7f2fee8a49643f4c74a1dd5256312"
+    },
+    "pgd_mixed": {
+      "model_sha256": "38767ddb3eb00463e7324ba4371c184c0eed01a87819b4766a66415d69538708",
+      "samples": 781,
+      "clean_accuracy": 0.6914212548015365,
+      "attacks": {
+        "pgd7": {
+          "accuracy": 0.18950064020486557,
+          "asr": 0.725925925925926,
+          "asr_successes": 392,
+          "asr_denominator": 540
+        },
+        "pgd50": {
+          "accuracy": 0.06145966709346991,
+          "asr": 0.9111111111111111,
+          "asr_successes": 492,
+          "asr_denominator": 540
+        }
+      },
+      "csv": "pgd_mixed.csv",
+      "csv_sha256": "cf1ffaeed43b576e8a15eb3e8adb13cbd8b21b50b79b00b547eff9768a9633e6"
+    }
+  },
+  "independent_verification_approval": false,
+  "limitations": [
+    "One seed only; no independent reproduction or external data.",
+    "Exact split overlap checks do not establish vessel/scene independence.",
+    "Historical baseline training exposure is unresolved.",
+    "No preprocessing defenses, AutoAttack, or certified robustness evaluation."
+  ],
+  "updated_at": "2026-10-23T19:38:39.220199+00:00"
+}

@@ -1,0 +1,105 @@
+{
+  "kind": "adversarial_training_followup",
+  "status": "TRAINED_NOT_TEST_EVALUATED",
+  "source_commit": "db3bfe6b79d3cecb2ef57aeaaf29ab9d89b5d9bf",
+  "source_model_sha256": "cb256b1a5d6f605d355334e4e8667257a2bfbd29e08836cc4114869bd7068701",
+  "split_audit_sha256": "4928cca78137841bc40bd4fd241f250d744c0433d0183b3d6ea912cf8a45b8cb",
+  "settings": {
+    "model": "cnn",
+    "train_dir": "/content/intl_matched/data/train-prepared/images",
+    "validation_dir": "/content/intl_matched/data/valid",
+    "test_dir": "/content/intl_matched/data/test",
+    "run_id": "intl_20261023T172139_clean_only_s2026",
+    "epochs": 3,
+    "epsilon": 0.03,
+    "step_size": 0.005,
+    "steps": 7,
+    "seed": 2026,
+    "batch_size": 8,
+    "learning_rate": 1e-05,
+    "training_mode": "clean_only"
+  },
+  "tensorflow": "2.21.0",
+  "keras": "3.15.1",
+  "platform": "Linux-6.6.122+-x86_64-with-glibc2.39",
+  "runtime": {
+    "python": "3.13.16",
+    "numpy": "2.3.5",
+    "platform": "Linux-6.6.122+-x86_64-with-glibc2.39",
+    "numerical_environment": {
+      "TF_ENABLE_ONEDNN_OPTS": null,
+      "TF_DETERMINISTIC_OPS": null,
+      "TF_NUM_INTRAOP_THREADS": "2",
+      "TF_NUM_INTEROP_THREADS": "1",
+      "OMP_NUM_THREADS": null,
+      "CUDA_VISIBLE_DEVICES": null
+    }
+  },
+  "epochs": [
+    {
+      "epoch": 1,
+      "mean_batch_loss": 0.20853178473289008,
+      "validation_samples": 689,
+      "validation_clean_accuracy": 0.9317851959361393,
+      "validation_pgd_accuracy": 0.20754716981132076
+    },
+    {
+      "epoch": 2,
+      "mean_batch_loss": 0.18397750048060965,
+      "validation_samples": 689,
+      "validation_clean_accuracy": 0.9288824383164006,
+      "validation_pgd_accuracy": 0.204644412191582
+    },
+    {
+      "epoch": 3,
+      "mean_batch_loss": 0.16733047289114578,
+      "validation_samples": 689,
+      "validation_clean_accuracy": 0.9274310595065312,
+      "validation_pgd_accuracy": 0.20319303338171263
+    }
+  ],
+  "started_at": "2026-10-23T17:36:41.781640+00:00",
+  "training_mode": "clean_only",
+  "clean_weight": 1.0,
+  "comparison_protocol": {
+    "schema_version": 1,
+    "source_commit": "db3bfe6b79d3cecb2ef57aeaaf29ab9d89b5d9bf",
+    "source_model_sha256": "cb256b1a5d6f605d355334e4e8667257a2bfbd29e08836cc4114869bd7068701",
+    "split_audit_sha256": "4928cca78137841bc40bd4fd241f250d744c0433d0183b3d6ea912cf8a45b8cb",
+    "settings": {
+      "model": "cnn",
+      "epochs": 3,
+      "epsilon": 0.03,
+      "step_size": 0.005,
+      "steps": 7,
+      "seed": 2026,
+      "batch_size": 8,
+      "learning_rate": 1e-05
+    },
+    "tensorflow": "2.21.0",
+    "keras": "3.15.1",
+    "runtime": {
+      "python": "3.13.16",
+      "numpy": "2.3.5",
+      "platform": "Linux-6.6.122+-x86_64-with-glibc2.39",
+      "numerical_environment": {
+        "TF_ENABLE_ONEDNN_OPTS": null,
+        "TF_DETERMINISTIC_OPS": null,
+        "TF_NUM_INTRAOP_THREADS": "2",
+        "TF_NUM_INTEROP_THREADS": "1",
+        "OMP_NUM_THREADS": null,
+        "CUDA_VISIBLE_DEVICES": null
+      }
+    },
+    "optimizer": "Adam",
+    "training_order": "default_rng(seed + epoch).permutation(train.n)",
+    "selection": "highest validation PGD accuracy; earliest epoch wins ties",
+    "validation_attack": "PGD; training epsilon/step_size/steps; one restart; seed + batch",
+    "comparison": "same initialization/data/configuration; clean_only versus 50:50 clean/PGD loss"
+  },
+  "comparison_protocol_sha256": "8dee4bb84261c652c5676288b907c02b3d2fe61b210dbc781b3f05a4ccd56187",
+  "resume_policy": "completed_epoch_with_optimizer; unfinished epoch repeats; not bitwise equivalence",
+  "best_epoch": 1,
+  "trained_model_sha256": "e3b02315482c432ec5a2b5828696f611ad9f167f847d273d746df8c98677d353",
+  "finished_at": "2026-10-23T17:46:53.825925+00:00"
+}
