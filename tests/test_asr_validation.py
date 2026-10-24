@@ -2,6 +2,7 @@
 import csv
 from pathlib import Path
 from types import SimpleNamespace
+import json
 
 import numpy as np
 import pytest
@@ -87,11 +88,15 @@ def test_runner_reports_condition_and_emits_no_false_summary(tmp_path, monkeypat
     monkeypatch.setattr(ev, '_run_epsilon', lambda *args: dict(
         y_true=np.array([0, 1]), clean_probabilities=np.array([[0., 1.], [1., 0.]]),
         adversarial_probabilities=np.array([[0., 1.], [1., 0.]]), linf=np.zeros(2)))
+    (tmp_path / 'classes.json').write_text(json.dumps({'0':'A','1':'B'}))
     out = tmp_path / 'output'
     with pytest.raises(ValueError, match='Cannot summarize cnn FGSM epsilon=0.03: ASR is undefined'):
         ev.evaluate_fgsm(ev.EvaluationSpec('cnn', tmp_path / 'model.h5', (1, 1)),
                          tmp_path / 'data', tmp_path / 'classes.json', out, [.03])
-    assert not list(out.glob('fgsm_*'))
+    assert sorted(p.name for p in out.glob('fgsm_*')) == ['fgsm_cnn_execution.json']
+    journal = json.loads((out / 'fgsm_cnn_execution.json').read_text())
+    assert journal['status'] == 'ERROR' and journal['conditions'] == []
+    assert 'ASR is undefined' in journal['error']
 
 
 @pytest.mark.parametrize('factory', [list, tuple])

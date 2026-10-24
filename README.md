@@ -274,6 +274,7 @@ python scripts\audit_paper_claims.py
 | [실험 계약](docs/EXPERIMENT_CONTRACT.md) | 입력·FGSM·지표·재현 기준 |
 | [Clean 결과](docs/CLEAN_BASELINE_RESULTS.md) | 모델별 기준 성능과 클래스별 한계 |
 | [FGSM 실험 결과](docs/FGSM_PROVISIONAL_RESULTS.md) | epsilon별 결과와 해석 제한 |
+| [FGSM 중단·완전성·재개](docs/FGSM_INTERRUPTED_RUNS.md) | 보존 CSV 검사·누락 ε 별도 실행·덮어쓰기 방지 |
 | [재현성 안내](docs/REPRODUCIBILITY.md) | 데이터·모델 배치와 실행 방법 |
 | [연구근거 감사](docs/RESEARCH_EVIDENCE_AUDIT.md) | 감사 범위·상태·CLI |
 | [논문 Claim 감사](docs/PAPER_CLAIM_AUDIT.md) | 9개 Claim과 canonical 근거 |
