@@ -12,7 +12,7 @@
     "start": "node --import ./scripts/sites-env.mjs ./node_modules/wrangler/bin/wrangler.js dev --config dist/server/wrangler.json --local --persist-to .wrangler/state --ip 127.0.0.1 --inspector-port 0",
     "lint": "eslint . --ignore-pattern dist --ignore-pattern .next",
     "db:generate": "drizzle-kit generate",
-    "test:evidence": "node scripts/test-evidence.mjs && node scripts/test-defense-comparison.mjs",
+    "test:evidence": "node scripts/test-evidence.mjs && node scripts/test-defense-comparison.mjs && node scripts/test-matched-followup.cjs",
     "test:ui": "node scripts/test-localization.mjs && node scripts/test-localization.cjs && node scripts/test-interactions.mjs && node scripts/test-mission.cjs && npm run test:paired",
     "test:paired": "node scripts/test-paired-review.cjs"
   },

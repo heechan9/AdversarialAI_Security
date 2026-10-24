@@ -191,3 +191,41 @@ html[lang=en] h1{letter-spacing:-.045em;font-size:clamp(36px,4vw,60px);max-width
 .paired-review th, .paired-review td { text-align: left; padding: .65rem; border-bottom: 1px solid #4c6474; }
 .paired-review select { max-width: 100%; padding: .5rem; color: #132636; background: #f4f8fa; }
 .paired-inference { padding: .8rem; border-left: 3px solid #bd8d36; }
+
+/* Separate matched-training follow-up; existing research panels retain their data. */
+.matched-followup { border-top: 1px solid #3b5363; margin-top: 3rem; }
+.matched-followup .section-heading { align-items: start; }
+.matched-badge { color: #b2ddd2; border: 1px solid #42685f; border-radius: 6px; padding: .5rem .75rem; font-size: .8rem; }
+.matched-intro, .matched-training { max-width: 84ch; color: #b8cbd5; margin: 1rem 0; }
+.matched-scope { color: #d4f4eb; font-size: .9rem; background: #142d37; padding: .75rem 1rem; border-radius: 6px; }
+.matched-controls { display: flex; flex-wrap: wrap; align-items: center; gap: .75rem 1.25rem; margin: 1.5rem 0; }
+.matched-controls label { font-weight: 600; }
+.matched-controls select { color: #edf5f6; background: #142a38; padding: .65rem; border: 1px solid #638395; border-radius: 5px; min-height: 44px; max-width: 100%; }
+.matched-controls p { flex-basis: 100%; color: #a5bdca; font-size: .85rem; }
+.matched-comparisons { display: grid; grid-template-columns: repeat(auto-fit,minmax(min(100%,270px),1fr)); gap: 1rem; }
+.matched-condition-card { min-width: 0; border: 1px solid #3d5969; border-radius: 9px; background: #0e222f; padding: 1.15rem; }
+.matched-condition-card h3 { color: #dae9ee; font-size: 1rem; font-weight: 650; }
+.matched-condition-card dl { margin: 1rem 0; }
+.matched-condition-card dl>div { display: flex; align-items: center; justify-content: space-between; gap: .75rem; padding: .9rem 0; border-bottom: 1px solid #2c4351; }
+.matched-condition-card dt { color: #bfd0da; max-width: 54%; overflow-wrap: anywhere; }
+.matched-condition-card dd { text-align: right; margin: 0; }
+.matched-condition-card dd strong { display: block; color: #edf5f6; font-size: 1.5rem; font-weight: 600; line-height: 1.3; }
+.matched-condition-card dd small { color: #a7bdca; }
+.matched-mixed dd strong { color: #9ae8d5; }
+.matched-difference { color: #b9cdd8; font-size: .85rem; }
+.matched-difference b { font-size: 1.1rem; color: #bce8dc; }
+.matched-caution { margin: 1.5rem 0; border: 1px solid #8c6e4a; border-left: 4px solid #e3bc84; padding: 1.15rem 1.3rem; border-radius: 7px; background: #2a2823; }
+.matched-caution h3 { font-size: 1.1rem; color: #ffe0b2; }
+.matched-caution p { margin-top: .65rem; color: #e2d1ba; }
+.matched-limits { margin: 1.5rem 0; color: #b5cad6; }
+.matched-limits h3 { color: #dde9ee; font-size: 1.1rem; }
+.matched-limits ul { padding-left: 1.25rem; }
+.matched-limits li { margin: .6rem 0; }
+.matched-protocol { padding: 1rem; border: 1px solid #3d5666; border-radius: 6px; }
+.matched-protocol summary { cursor: pointer; color: #d4e5ed; min-height: 30px; }
+.matched-protocol summary:focus-visible { outline: 2px solid #a2fff0; outline-offset: 4px; }
+.matched-protocol p { margin: .85rem 0; color: #b1c6d3; overflow-wrap: anywhere; }
+.matched-sources { display: flex; flex-wrap: wrap; gap: .65rem 1.1rem; margin: 1.25rem 0; font-size: .85rem; }
+.matched-sources a { color: #b8e5db; text-decoration: underline; text-underline-offset: 4px; padding: .5rem 0; overflow-wrap: anywhere; }
+@media(max-width:700px) { .matched-followup .section-heading { display: block; } .matched-badge { display: inline-block; margin-top: .75rem; } .matched-controls { display: block; } .matched-controls label { display: block; margin-bottom: .5rem; } .matched-controls select { width: 100%; } .matched-controls p { margin-top: .75rem; } .matched-caution { padding: 1rem; } }
+@media(max-width:420px) { .flow-strip { flex-wrap: wrap; } .flow-strip>a { flex: 1 1 28%; min-width: 0; overflow-wrap: anywhere; } }

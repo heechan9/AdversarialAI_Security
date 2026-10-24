@@ -1,0 +1,55 @@
+const assert = require('node:assert/strict');
+const fs = require('node:fs');
+const path = require('node:path');
+const crypto = require('node:crypto');
+const ts = require('typescript');
+const Module = require('node:module');
+const {execFileSync} = require('node:child_process');
+const root = path.resolve(__dirname, '..'), repo = path.resolve(root, '../..');
+const resolve = Module._resolveFilename;
+Module._resolveFilename = function(request, parent, ...rest) { return resolve.call(this, request.startsWith('@/') ? path.join(root, request.slice(2)) : request, parent, ...rest); };
+for (const ext of ['.ts', '.tsx']) require.extensions[ext] = (module, file) => module._compile(ts.transpileModule(fs.readFileSync(file, 'utf8'), {compilerOptions: {module: ts.ModuleKind.CommonJS, jsx: ts.JsxEmit.ReactJSX, esModuleInterop: true, target: ts.ScriptTarget.ES2022}}).outputText, file);
+const React = require('react'), {renderToStaticMarkup} = require('react-dom/server');
+const locale = require('../app/locale-provider.tsx');
+const Panel = require('../app/matched-cnn-followup.tsx').default;
+const report = require('../public/evidence/matched-cnn-followup.json');
+const saved = JSON.parse(execFileSync('python', ['verification/matched_cnn_saved_audit.py'], {cwd: repo, encoding: 'utf8'}));
+assert.equal(report.sourceCommit, '13d92a15c3b8953e24b5d44326cd2327973a7a25');
+assert.equal(report.status, 'COMPLETED_NOT_INDEPENDENT_APPROVAL');
+assert.equal(report.independentVerificationApproval, false);
+assert.deepEqual(report.completedTrainingSeeds, [2026]);
+assert.deepEqual(report.unrunTrainingSeeds, [2027, 2028]);
+assert.equal(report.scope.existingExternalStageB, 'FAIL');
+assert.equal(report.scope.independentReproductionComplete, false);
+assert.deepEqual(report.mixedMinusCleanOnly, saved.mixed_minus_clean_only);
+for (const [file, hash] of Object.entries(report.sourceSha256)) {
+ assert.equal(crypto.createHash('sha256').update(fs.readFileSync(path.join(repo, file))).digest('hex'), hash, file);
+}
+for (const model of ['baseline', 'clean_only', 'pgd_mixed']) for (const condition of ['clean', 'pgd7', 'pgd50']) assert.deepEqual(report.models[model][condition], saved.models[model][condition]);
+const oldState = React.useState, oldLocale = locale.useLocale;
+let count = 0;
+for (const language of ['ko', 'en']) for (const selected of ['all', 'clean', 'pgd7', 'pgd50']) {
+ React.useState = () => [selected, () => {}]; locale.useLocale = () => ({locale: language});
+ const html = renderToStaticMarkup(React.createElement(Panel));
+ assert.equal((html.match(/class="matched-condition-card"/g) || []).length, selected === 'all' ? 3 : 1);
+ assert.ok(html.includes('6.15%')); assert.ok(html.includes('28')); assert.ok(html.includes('21'));
+ assert.ok(html.includes('2027')); assert.ok(html.includes('2028')); assert.ok(html.includes('Stage B FAIL'));
+ assert.ok(html.includes('id="matched-condition"')); assert.ok(html.includes('aria-describedby="matched-controls-note"'));
+ assert.ok(html.includes('role="status"')); assert.ok(html.includes('<details'));
+ if (language === 'en') assert.ok(!/[가-힣]/.test(html));
+ const renderedConditions = selected === 'all' ? ['clean', 'pgd7', 'pgd50'] : [selected];
+ for (const c of renderedConditions) for (const model of ['baseline', 'clean_only', 'pgd_mixed']) assert.ok(html.includes(`${(saved.models[model][c].accuracy * 100).toFixed(2)}%`));
+ assert.ok(!/drive\.google|colab\.research|<img|NaN|undefined/.test(html));
+ count++;
+}
+React.useState = oldState; locale.useLocale = oldLocale;
+const page = fs.readFileSync(path.join(root, 'app/page.tsx'), 'utf8');
+const historical = source => source.match(/<div className="retained-research-progress"[\s\S]*?<VerificationStatus \/>/)[0];
+const original = execFileSync('git', ['show', `${report.sourceCommit}:web/maris/app/page.tsx`], {cwd: repo, encoding: 'utf8'});
+assert.equal(historical(page), historical(original), 'October 12 panel changed');
+assert.ok(page.indexOf('<MatchedCnnFollowup />') < page.indexOf('id="progress"'));
+assert.ok(page.includes('이 안내는 해당 기존 패널에만 적용됩니다.'));
+const before = fs.readFileSync(path.join(root, 'public/evidence/matched-cnn-followup.json'));
+execFileSync('python', ['web/maris/scripts/export-matched-followup.py'], {cwd: repo});
+assert.deepEqual(fs.readFileSync(path.join(root, 'public/evidence/matched-cnn-followup.json')), before, 'Export must reproduce exactly');
+console.log(`PASS: ${count} condition/language renders; audited source hashes and metrics; deterministic export; unchanged October 12 panel; scoped retraining notice. Not browser or independent model reproduction.`);
