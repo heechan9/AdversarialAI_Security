@@ -10,10 +10,26 @@ type Selection = "all" | Condition;
 const source = `https://github.com/heechan9/AdversarialAI_Security/blob/${report.sourceCommit}`;
 const evidence = `${source}/results/extensions/matched_cnn_20261024`;
 
+const signed = (value: number) => `${value > 0 ? "+" : ""}${value.toFixed(2)}`;
+function comparison(condition: Condition) {
+ const mixed = report.models.pgd_mixed[condition];
+ const clean = report.models.clean_only[condition];
+ const paired = report.mixedMinusCleanOnly[condition];
+ return {
+  accuracy: (mixed.correct / mixed.samples * 100).toFixed(2),
+  gained: paired.newly_correct,
+  lost: paired.newly_incorrect,
+  net: paired.newly_correct - paired.newly_incorrect,
+  difference: signed((mixed.correct / mixed.samples - clean.correct / clean.samples) * 100),
+ };
+}
+
 export default function MatchedCnnFollowup() {
  const {locale} = useLocale();
  const en = locale === "en";
  const [selected, setSelected] = useState<Selection>("all");
+ const pgd7 = comparison("pgd7"), pgd50 = comparison("pgd50");
+ const restarts = report.settings.pgd50.restarts;
  const labels = en ? {
   title: "Follow-up exploratory experiment",
   intro: "October 24, 2026 · A separate one-seed CNN study. These saved test results do not replace the original paper or October 12 panels.",
@@ -26,8 +42,8 @@ export default function MatchedCnnFollowup() {
   training: "Both new arms received 3 epochs of additional training from the same original CNN: clean-only loss versus 50:50 clean/PGD loss. Best checkpoints were selected on 689 validation images; every accuracy below uses the 781-image test set.",
   difference: "Mixed minus clean-only", net: "net correct",
   callout: "Strong attacks still expose a substantial weakness",
-  strong: "PGD-mixed accuracy under PGD50 / 5 restarts is 6.15%. Compared with clean-only: 28 newly correct − 21 newly incorrect = 7 net correct (+0.90 percentage points).",
-  interpretation: "PGD7 improves by 7.43 percentage points; the gain shrinks under PGD50. One seed does not establish stable or general defense effectiveness, statistical significance or maritime safety.",
+  strong: `PGD-mixed accuracy under PGD50 / ${restarts} restarts is ${pgd50.accuracy}%. Compared with clean-only: ${pgd50.gained} newly correct − ${pgd50.lost} newly incorrect = ${pgd50.net} net correct (${pgd50.difference} percentage points).`,
+  interpretation: `Mixed minus clean-only: PGD7 ${pgd7.difference} percentage points; PGD50 ${pgd50.difference} percentage points. One seed does not establish stable or general defense effectiveness, statistical significance or maritime safety.`,
   limits: "What remains unverified",
   seeds: "Only training seed 2026 is complete. Planned seeds 2027 and 2028 have not run.",
   reproduction: "Independent replay of the new trained models is incomplete. The original preprocessing study's external Stage B FAIL remains unresolved. Saved-file recalculation is not independent model reproduction.",
@@ -48,8 +64,8 @@ export default function MatchedCnnFollowup() {
   training: "동일 원본 CNN에서 두 군을 각각 3 epoch 추가학습했습니다. 정상 손실만 사용한 군과 정상·PGD 손실을 50:50으로 섞은 군입니다. 검증셋 689장으로 최적 체크포인트를 골랐으며, 아래 정확도는 모두 테스트 781장 기준입니다.",
   difference: "혼합학습 − 정상 추가학습", net: "정답 순증",
   callout: "강한 공격에는 여전히 취약합니다",
-  strong: "PGD50·5회 재시작에서 PGD 혼합학습의 정확도는 6.15%입니다. 정상 추가학습 대비 새 정답 28장 − 새 오답 21장 = 정답 순증 7장(+0.90%p)입니다.",
-  interpretation: "PGD7에서는 +7.43%p 개선됐지만 PGD50에서는 개선 폭이 작아졌습니다. 단일 seed로 안정적·전반적인 방어 성능, 통계적 유의성이나 실제 해양 안전을 입증하지 않습니다.",
+  strong: `PGD50·${restarts}회 재시작에서 PGD 혼합학습의 정확도는 ${pgd50.accuracy}%입니다. 정상 추가학습 대비 새 정답 ${pgd50.gained}장 − 새 오답 ${pgd50.lost}장 = 정답 ${pgd50.net < 0 ? "순감" : "순증"} ${Math.abs(pgd50.net)}장(${pgd50.difference}%p)입니다.`,
+  interpretation: `정상 추가학습 대비 혼합학습의 정확도 차이는 PGD7 ${pgd7.difference}%p, PGD50 ${pgd50.difference}%p입니다. 단일 seed로 안정적·전반적인 방어 성능, 통계적 유의성이나 실제 해양 안전을 입증하지 않습니다.`,
   limits: "남은 검증",
   seeds: "학습 seed 2026만 완료됐습니다. 계획한 2027·2028은 미실행입니다.",
   reproduction: "새 학습 모델의 독립 재실행은 미완료입니다. 기존 전처리 연구의 외부 Stage B FAIL도 원인 미확정 상태로 유지합니다. 저장 파일 검산은 독립 모델 재현이 아닙니다.",
@@ -68,12 +84,12 @@ export default function MatchedCnnFollowup() {
   <div className="matched-controls"><label htmlFor="matched-condition">{labels.filter}</label><select id="matched-condition" value={selected} onChange={event=>setSelected(event.target.value as Selection)} aria-describedby="matched-controls-note"><option value="all">{labels.all}</option>{conditions.map(condition=><option key={condition} value={condition}>{labels.conditions[condition]}</option>)}</select><p id="matched-controls-note">{labels.control}</p></div>
   <p className="sr-only" role="status">{selected === "all" ? labels.all : labels.conditions[selected]}</p>
   <div className="matched-comparisons">{visible.map(condition=>{
-   const difference = report.mixedMinusCleanOnly[condition];
+   const difference = comparison(condition);
    return <article className="matched-condition-card" key={condition} aria-label={labels.conditions[condition]}>
     <h3>{labels.conditions[condition]}</h3><dl>{models.map(model=>{
      const metric = report.models[model][condition];
-     return <div key={model} className={model === "pgd_mixed" ? "matched-mixed" : ""}><dt>{labels.models[model]}</dt><dd><strong>{(metric.accuracy * 100).toFixed(2)}%</strong><small>{metric.correct} / {metric.samples}</small><span className="sr-only">{labels.recorded}</span></dd></div>;
-    })}</dl><p className="matched-difference">{labels.difference}<br/><b>+{difference.percentage_points.toFixed(2)} {en ? "pp" : "%p"}</b> · {labels.net} {difference.net_correct}{!en && "장"}</p>
+     return <div key={model} className={model === "pgd_mixed" ? "matched-mixed" : ""}><dt>{labels.models[model]}</dt><dd><strong>{(metric.correct / metric.samples * 100).toFixed(2)}%</strong><small>{metric.correct} / {metric.samples}</small><span className="sr-only">{labels.recorded}</span></dd></div>;
+    })}</dl><p className="matched-difference">{labels.difference}<br/><b>{difference.difference} {en ? "pp" : "%p"}</b> · {en ? `${labels.net} ${difference.net}` : `정답 ${difference.net < 0 ? "순감" : "순증"} ${Math.abs(difference.net)}장`}</p>
    </article>;
   })}</div>
   <aside className="matched-caution" aria-labelledby="matched-caution-heading"><h3 id="matched-caution-heading">{labels.callout}</h3><p>{labels.strong}</p><p>{labels.interpretation}</p></aside>
