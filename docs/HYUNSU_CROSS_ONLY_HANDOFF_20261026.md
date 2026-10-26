@@ -58,7 +58,12 @@ selection_sha256`에서 중단된다. 이는 모델 성능이나 환경 차이�
 
 **수신 측 보존본 확보와 현수의 접근권한/로컬 자산 확보는 별개다.** 기존 승인된
 비공개 전달 경로를 확인하며 공개 Git에 NPZ·모델·원본 이미지를 올리지 않는다.
-현재 현수 환경의 자산 점검 JSON과 이번 cross-only 반환 결과는 확인되지 않았다.
+10/26 반환 `hyunsu-assets-01.json`은 `ASSETS_MATCH`, 모델 2개·이미지 781개,
+`model_inference_performed=false`다. 수신 측에서 JSON의 783개 경로·기대/실제
+해시를 고정 manifest와 대조했다. [수신 범위와 원본 해시](reviews/20261026/final_submission_integration.md#현수-1026-반환-자산-점검만-확인)를 참조한다.
+제출 보고에 따르면 두 배열은 현수 PC에 없어 cross-only 분류는 미수행이며
+지원 판정은 `INCOMPLETE`다. 수신 측 보존본의 해시 확인을 현수에게 전달 완료나
+실행 완료로 바꾸지 않는다.
 
 ## 준비와 최소 실행 명령
 
@@ -157,7 +162,7 @@ oneDNN/intra/inter/OMP/deterministic 값 또는 unset을 연결한다. 공개용
 이번 패킷으로 공식 Stage B PASS를 부여하지 않는다. 기존 연구 PC
 `LOCAL_PASS`와 외부 환경 `FAIL`·원인 미확정은 함께 유지한다.
 
-현재 반환이 필요한 항목: 현수 자산 점검, PC/Linux 접근 확인, cross-only
-report/log/명령/환경/차이표. 두 원본 배열 ZIP은 수신 측에 확보됐으므로
+자산 점검 JSON은 수신했다. 다음 반환이 필요한 항목: PC/Linux 배열의 비공개
+전달·현수 접근 확인, cross-only report/log/명령/환경/차이표. 두 원본 배열 ZIP은 수신 측에 확보됐으므로
 ‘원본이 존재하지 않는다’고 적지 않는다. 현수의 로컬 접근이 막히면 해당
 자산 이름·예상 해시·접근 문제를 구체적으로 누락 목록에 적는다.
