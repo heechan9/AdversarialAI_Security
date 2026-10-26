@@ -68,6 +68,21 @@ selection_sha256`에서 중단된다. 이는 모델 성능이나 환경 차이�
 고정 평가 checkout을 가리킨다. Git 이력이 없는 복사본이나 shallow clone에
 고정 객체가 없으면 준비를 중단하고 보고한다.
 
+`adversarial-integration-review`는 평가 checkout과 다른 **도구 보관 폴더**다.
+#98의 도구가 검토·승인된 뒤 아래처럼 확보하고 HEAD를 기록한다. 이 명령은
+이번 제출 전 사용 점검에서 추가한 누락 단계이며, 기존 패킷·#98 head는 바꾸지 않는다.
+
+```bat
+git -c core.autocrlf=false clone --branch fix/submission-integration-hyunsu-inputs-20261026 https://github.com/heechan9/AdversarialAI_Security.git C:\Project\adversarial-integration-review
+git -C C:\Project\adversarial-integration-review checkout --detach 76849fcf69731676f869e7054fa12c9ef0d1a1a7
+git -C C:\Project\adversarial-integration-review rev-parse HEAD
+```
+
+위 SHA는 #98에서 검사한 준비 도구 버전이다. 평가 SHA `491b973`이나 실제 진단
+도구 출처 `b92ba8`을 대신하지 않는다. 원본 지원 ZIP과 PC/Linux 배열은 기존
+비공개 전달 경로에서 별도로 확보한다. 이 clone 명령으로 배열 접근권한이 생기는
+것은 아니며, 접근이 막히면 소유자에게 필요한 파일명·해시를 알려 확인받는다.
+
 ```bat
 git -c core.autocrlf=false clone https://github.com/heechan9/AdversarialAI_Security.git C:\Project\adversarial-hyunsu-baseline-20261026
 git -C C:\Project\adversarial-hyunsu-baseline-20261026 checkout --detach 491b973cd9f4840664044a83c0d62d1ee1bb98e8
@@ -97,6 +112,17 @@ python C:\Project\hyunsu-inputs-20261026-01\asset_check.py --repo C:\Project\adv
 python C:\Project\hyunsu-inputs-20261026-01\stage_b_trace_b92ba8.py --repo-root C:\Project\adversarial-hyunsu-baseline-20261026 --selection C:\Project\hyunsu-inputs-20261026-01\selection.json --other C:\Project\evidence\pc\native-trace --cross-only --control-row 99 --native-settings --output C:\Project\hyunsu-cross-pc-row99-01 > C:\Project\hyunsu-cross-pc-row99-01.log 2>&1
 echo %ERRORLEVEL%
 ```
+
+명령 직후 다른 명령을 실행하기 전에 종료코드를 반환 파일로 남기려면 위
+`echo` 대신 다음 두 줄을 쓴다. 실행별로 새 파일명을 사용한다.
+
+```bat
+set "HYUNSU_CROSS_EXIT=%ERRORLEVEL%"
+> C:\Project\hyunsu-cross-pc-row99-01.exit-code.txt echo %HYUNSU_CROSS_EXIT%
+```
+
+사전 검사에서 중단돼 `report.json`이 없더라도 실행 명령·로그·종료코드와
+중단 단계를 반환한다. 보고서 부재를 선택 표본 불일치로 기록하지 않는다.
 
 같은 설정으로 `--other`만 Linux `trace-on`/`trace-off-02`의 실제 해제 위치로
 바꾸고 출력·로그에는 각각 새 이름을 쓴다. 원래 32장 배치를 유지한다.
