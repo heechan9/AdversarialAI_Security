@@ -73,11 +73,14 @@ selection_sha256`에서 중단된다. 이는 모델 성능이나 환경 차이�
 이번 제출 전 사용 점검에서 추가한 누락 단계이며, 기존 패킷·#98 head는 바꾸지 않는다.
 
 ```bat
-git -c core.autocrlf=false clone --branch fix/submission-integration-hyunsu-inputs-20261026 https://github.com/heechan9/AdversarialAI_Security.git C:\Project\adversarial-integration-review
+git -c core.autocrlf=false clone https://github.com/heechan9/AdversarialAI_Security.git C:\Project\adversarial-integration-review
+git -C C:\Project\adversarial-integration-review fetch origin 76849fcf69731676f869e7054fa12c9ef0d1a1a7
 git -C C:\Project\adversarial-integration-review checkout --detach 76849fcf69731676f869e7054fa12c9ef0d1a1a7
 git -C C:\Project\adversarial-integration-review rev-parse HEAD
 ```
 
+브랜치 이름에 의존하지 않고 고정 SHA를 가져온다. fetch 또는 checkout이 실패하거나
+출력 HEAD가 아래 SHA와 다르면 중단하고 보고하며 최신 브랜치로 임의 대체하지 않는다.
 위 SHA는 #98에서 검사한 준비 도구 버전이다. 평가 SHA `491b973`이나 실제 진단
 도구 출처 `b92ba8`을 대신하지 않는다. 원본 지원 ZIP과 PC/Linux 배열은 기존
 비공개 전달 경로에서 별도로 확보한다. 이 clone 명령으로 배열 접근권한이 생기는
