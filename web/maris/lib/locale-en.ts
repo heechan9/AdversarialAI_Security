@@ -132,3 +132,38 @@ export const english: Record<string,string> = {
   "이미지별 상대 크기이며, 흰색이 공격 성공이나 AI의 주목 영역을 뜻하지 않습니다. 원본 배열이 없어 실제 최대 차이와 수치 배율은 복원하지 않았습니다. 위 {zoom}×는 화면 확대 배율일 뿐, 교란 배율이 아닙니다.": "This scale is relative to each image. White does not indicate attack success or where the AI is looking. Without the original arrays, the actual maximum difference and numeric amplification could not be recovered. The {zoom}× above is only display zoom, not perturbation amplification."
   ,"설명용 선박 CAD 구조 보기. 치수가 없는 모형이며 실제 설계도가 아닙니다.":"Illustrative ship CAD structure view. This model has no dimensions and is not an actual engineering drawing."
 };
+
+Object.assign(english, {
+  "원본 사진": "Original photo",
+  "변화를 주기 전의 선박 분류 결과": "Ship classifications before changes",
+  "분류를 흔들도록 작은 변화를 준 사진": "Photos with small changes designed to disrupt classification",
+  "같은 공격 사진에 필터를 적용한 분류 결과": "Classifications after filtering the same attacked photos",
+  "사진에 필터를 적용하면": "After filtering photos,",
+  "AI의 선박 분류는 달라질까요?": "does AI classify ships differently?",
+  "선박 사진에 작은 변화를 주어 AI가 선박 종류를 다르게 분류하도록 시도한 실험입니다. 원본 → 공격 사진 → 필터 적용 후의 분류 결과를 비교해 보세요. 필터가 항상 정답을 되찾아 주는 것은 아닙니다.": "This experiment adds small changes to ship photos to try to change the model’s ship classification. Compare original photos → attacked photos → classifications after filtering. A filter does not always restore the correct answer.",
+  "결과를 비교할 필터": "Filter to compare",
+  "위 단일 이미지 사례와 독립적으로 조건을 선택합니다. 선택한 조건으로 미리 계산해 둔 결과이며, 이 화면에서 새 사진 생성이나 AI 분석을 실행하지 않습니다.": "Choose conditions independently of the single image example above. These results were calculated in advance for each condition; this screen does not generate new photos or run AI analysis.",
+  "작은 변화를 준 사진": "Photo with small changes",
+  "분류를 흔들도록 바꾼 사진": "Photo changed to disrupt classification",
+  "이 사진에 기록된 분류 결과": "Recorded classifications for this photo",
+  "필터 적용 후 전체 분류 결과 보기": "View classifications across all photos after filtering",
+  "사진이 조금 달라지면 AI의 답도 바뀔까요?": "Will a small photo change alter the model’s answer?",
+  "선박 사진을 고르고 작은 변화가 분류에 미친 영향을 예상해 보세요. 저장된 실험 결과로 답을 확인합니다.": "Choose a ship photo and predict how small changes affected its classification. Check your answer against saved experiment results.",
+  "ε {epsilon} · 분류를 흔들도록 준 작은 변화": "ε {epsilon} · small changes designed to disrupt classification"
+});
+
+Object.assign(english, {
+  "작은 변화를 준 사진": "Photos with small changes",
+  "공격 사진 + 필터": "Attacked photos + filter",
+  "필터를 고려한 공격 + 필터": "Filter-aware attack + filter",
+  "사진을 바꾸는 이유와 필터의 역할 알아보기": "Why change photos, and what does a filter do?",
+  "사진에 왜 작은 변화를 주나요?": "Why add small changes to a photo?",
+  "공격은 사진 속 배를 바꾸는 대신, 사진을 이루는 작은 색 점인 픽셀 값을 바꿔 AI의 분류를 흔드는 실험입니다. 여기서는 FGSM이라는 방법을 썼습니다. ε는 허용한 변화의 최대 크기이며, 0은 변화를 주지 않은 비교 조건입니다. 변화가 눈에 잘 안 보일 수도 있지만, 모든 사진에서 안 보인다는 뜻은 아닙니다.": "An attack changes pixel values—the tiny colored dots in a photo—to disrupt classification rather than changing the ship itself. This experiment uses FGSM. ε is the maximum allowed change; 0 is the unchanged control. Changes may be hard to see, but that does not mean they are invisible in every photo.",
+  "필터는 무엇을 하나요?": "What does a filter do?",
+  "평균·가우시안 필터는 주변 픽셀 값을 섞어 작은 변화를 줄이려는 처리입니다. 배의 윤곽 같은 세부 정보도 함께 줄어들 수 있어, 원본에서 맞히던 사진을 틀릴 수도 있습니다. 공격을 없애거나 정답을 복원한다고 보장하지 않습니다.": "Mean and Gaussian filters blend neighboring pixel values to try to reduce small changes. They can also remove details such as ship outlines and turn a correct classification into an incorrect one. They do not guarantee removal of the attack or restoration of the correct answer.",
+  "세 번째와 네 번째 카드는 어떻게 다른가요?": "How do the third and fourth cards differ?",
+  "세 번째는 두 번째와 같은 공격 사진에 필터만 적용한 결과입니다. 네 번째는 필터 사용까지 고려해 새로 만든 공격 사진을 필터에 통과시킨 결과입니다. 더 어려운 조건에서도 효과가 있는지 따로 보는 것이며, 한 사진에 처리를 계속 더한 네 단계는 아닙니다.": "The third card filters the same attacked photos as the second. The fourth filters new attacked photos made with the filter in mind. It tests a separate, harder condition; the four cards are not successive edits of one photo.",
+  "결과는 어떻게 읽나요?": "How should I read the results?",
+  "정확도는 전체 {n}장 중 선박 종류를 맞힌 비율입니다. 한 사진의 정답 확률이 아닙니다. 카드 아래 정답 수를 함께 보세요. 이 선박 이미지 분류 실험은 실제 선박의 충돌 방지나 자율운항 안전을 입증하지 않습니다.": "Accuracy is the fraction of all {n} photos for which the ship type was correct, not the probability that one photo is correct. Read the correct counts below each card. This image classification experiment does not demonstrate real-ship collision avoidance or autonomous navigation safety.",
+  "정확도: 전체 {n}장 중 선박 종류를 맞힌 비율 · 한 사진의 정답 확률이 아닙니다.": "Accuracy: the fraction of all {n} photos with the correct ship type, not the probability that one photo is correct."
+});
