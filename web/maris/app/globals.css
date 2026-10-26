@@ -229,3 +229,12 @@ html[lang=en] h1{letter-spacing:-.045em;font-size:clamp(36px,4vw,60px);max-width
 .matched-sources a { color: #b8e5db; text-decoration: underline; text-underline-offset: 4px; padding: .5rem 0; overflow-wrap: anywhere; }
 @media(max-width:700px) { .matched-followup .section-heading { display: block; } .matched-badge { display: inline-block; margin-top: .75rem; } .matched-controls { display: block; } .matched-controls label { display: block; margin-bottom: .5rem; } .matched-controls select { width: 100%; } .matched-controls p { margin-top: .75rem; } .matched-caution { padding: 1rem; } }
 @media(max-width:420px) { .flow-strip { flex-wrap: wrap; } .flow-strip>a { flex: 1 1 28%; min-width: 0; overflow-wrap: anywhere; } }
+
+/* Keep the optional plain-language guide readable at narrow widths. */
+.photo-guide{margin-top:18px;max-width:90ch;overflow-wrap:anywhere}
+.photo-guide h3{font-size:1rem;margin:18px 0 6px}
+.photo-guide p{color:#c5d7e2;line-height:1.9}
+.photo-guide summary{cursor:pointer;min-height:44px}
+.photo-guide summary:focus-visible{outline:2px solid #a2fff0;outline-offset:4px}
+.defense-stage h3,.view-tabs button{overflow-wrap:anywhere}
+@media(max-width:600px){.view-tabs{height:auto}.view-tabs button{white-space:normal;height:auto;line-height:1.5;padding:8px 6px}.section-heading h2{overflow-wrap:anywhere}}
