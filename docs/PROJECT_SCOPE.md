@@ -45,3 +45,16 @@
 - 코드 병합이나 기록 감사 통과를 공식 결과 채택·독립 모델 추론·최종 논문 검증으로 간주하지 않는다
 
 최신 수치와 논문 준비 상태는 [현재 연구 상태](CURRENT_RESEARCH_STATUS.md) 및 [논문 관리 현황](PAPER_RELEASE_STATUS.md)을 따른다.
+
+## Bounded international research roadmap — 2026-10-30
+
+These are **candidate issue scopes**, not issued assignments, scheduled experiments, completed results or a promise of journal acceptance. The October 31 international-research transition is a planning goal. The historical roadmap above is preserved; latest recorded extensions are linked from [current research status](CURRENT_RESEARCH_STATUS.md). Reuse existing issues/PRs before opening duplicates.
+
+| Candidate issue | Bounded question and dependencies | Required completion evidence / stop boundary |
+|---|---|---|
+| R1: independent reproduction and mismatch diagnosis | Can an independent environment reproduce the fixed reference under the existing Stage B contract? Start with the selected cross-only handoff; authorized private input access is required. | Source/input hashes, actual execution logs and outputs, unchanged comparison criteria, discrepancy report. Asset-only checks or missing arrays remain INCOMPLETE; stop at the agreed diagnostic scope, not a forced PASS. |
+| R2: matched-training control across seeds | Do the one-seed observations persist under the predeclared matched protocol? Coordinate with open #87 and the separately saved October 24 package. | Separately approved compute/data plan, matched initialization/training exposure, seed-specific records, clean/robust results and uncertainty with justified sampling assumptions. One seed and 6.15% PGD50 accuracy are not general defense validation. |
+| R3: additional attack/defense evaluation | Which bounded adaptive/iterative or black-box condition adds evidence beyond FGSM? Inspect unfinished #78 and #86 before choosing one condition. | Agreed threat model, epsilon/steps/restarts/query budget, adaptive defense handling, clean cost and ASR cohort definitions, preserved failures, independent review of exact SHA. Do not silently pool own-clean denominators or overwrite baseline metrics. |
+| R4: international manuscript evidence package | Which claims are supported by the fixed baseline versus separately approved extensions? | Claim-to-file/SHA mapping, limitations, licensing/access statement and contributor review. Venue selection, authorship agreement and submission require separate human decisions; no private files or contact details published by default. |
+
+[VLM/LLM and maritime operational integration](THREAT_MODEL.md) remain outside demonstrated capabilities. New datasets, physical attacks, sensor/control experiments, compute expenditure and model execution require separately agreed scope and authorization. [Collaboration entry](INTERNATIONAL_COLLABORATION.md) explains the existing code/artifacts and a small first contribution.

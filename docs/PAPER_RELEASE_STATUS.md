@@ -39,3 +39,15 @@ MARIS는 설명용 3D 및 저장 결과 재생 공간이다. 실제 제어·실�
 - 안현주(Hyun-Joo An): 리안기술사사무소(LeeAhn Professional Engineer's Office)
 
 사용자가 제공한 이메일은 Word 저자란에 반영했다. 교신저자는 임의 지정하지 않았다. 본문 검토 절차에는 개인 실명을 쓰지 않고 두 검토자의 31장·32장 분담으로 기술한다. 다른 논문의 연구 내용·수치는 옮기지 않는다. 적대적AI의 멘토 피드백에 따른 구성·문체 수정은 v7.5에 반영했다. 병커시유 참고 원고의 후속 v12.5 피드백에서 추가로 적용할 작성 원칙은 별도로 검토한다. 2026-10-01 PC 전체 재실행 반환 ZIP을 수신해 LOCAL_PASS를 확인했다. [추가 검증 기록](STAGE_B_PC_FULL_20260928.md)으로 관리하며 제출한 0930 원고의 내용·파일은 수정하지 않는다. 외부 독립 검증의 기존 FAIL은 유지한다.
+
+## Preserved source and submission boundary — 2026-10-30
+
+This index pins a **submission-facing repository evidence snapshot**, not a verified reconstruction of the submitted report or a new release:
+
+- Source snapshot: [`08b33ae04248798de76cebba2e7d242d134d28c7`](https://github.com/heechan9/AdversarialAI_Security/tree/08b33ae04248798de76cebba2e7d242d134d28c7), main inspected on October 30.
+- Frozen [test/model manifest](https://github.com/heechan9/AdversarialAI_Security/blob/08b33ae04248798de76cebba2e7d242d134d28c7/configs/test_manifest.json), [evidence audit guide](https://github.com/heechan9/AdversarialAI_Security/blob/08b33ae04248798de76cebba2e7d242d134d28c7/docs/RESEARCH_EVIDENCE_AUDIT.md), and [October 26 integration record](https://github.com/heechan9/AdversarialAI_Security/blob/08b33ae04248798de76cebba2e7d242d134d28c7/docs/reviews/20261026/final_submission_integration.md).
+- Historical ACK2026 manuscript: the original file and SHA-256 recorded above remain unchanged. Its October 1 user-reported submission is distinct from the maritime mentoring final report.
+- Maritime mentoring final report: Taehee was reported to have submitted it on October 28. This is a reported submission status, **not an inspected receipt, verified final-report file/hash, or proof that every later repository change appears in that report**. No private manuscript or receipt is published here.
+- Later asset-check documentation remains in Draft [#101](https://github.com/heechan9/AdversarialAI_Security/pull/101), exact head [`f65d0398a1967a2f3ed763f02de12f0405acb1eb`](https://github.com/heechan9/AdversarialAI_Security/tree/f65d0398a1967a2f3ed763f02de12f0405acb1eb). It records 783 matched asset entries and `model_inference_performed=false`; selected cross-only work is INCOMPLETE. This is not merged evidence in the pinned main snapshot or new inference verification.
+
+The snapshot already contains separately labeled follow-up studies; its presence does not make every extension a submitted-paper result. Preserve original reference CSV/JSON, manuscript hashes, failures and contributor attribution. Future international-journal work follows the [bounded roadmap](PROJECT_SCOPE.md#bounded-international-research-roadmap--2026-10-30) in new scoped changes. No tag, Release, merge, deployment, journal submission or acceptance is created by this documentation update.
