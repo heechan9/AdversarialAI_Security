@@ -1,4 +1,6 @@
-# AdversarialAI Security
+# PaulGuard — Maritime AI Security Research
+
+**Historical project name: AdversarialAI Security. Submitted title: 자율운항선박 이미지 분류 모델 적대적 AI 검증.**
 
 [한국어](README.md) | **English**
 
@@ -44,6 +46,15 @@ A model can classify an unmodified ship photograph correctly and change its pred
 Small L∞ alone does not prove human imperceptibility. See the [maritime-practice comparison](docs/MARITIME_PRACTICE_GAP_REVIEW.md) for the gap between this experiment and operational maritime video systems.
 
 ## Current research and integration status
+
+**Main checked October 30, 2026:** [`08b33ae04248798de76cebba2e7d242d134d28c7`](https://github.com/heechan9/AdversarialAI_Security/commit/08b33ae04248798de76cebba2e7d242d134d28c7). The public display name is **PaulGuard**; the submitted title, team contributions, repository URL and MARIS interface name are preserved. Older main SHAs and test counts below are dated historical records.
+
+- **Submission preparation on main:** [#99](https://github.com/heechan9/AdversarialAI_Security/pull/99) integrated pre-submission use checks, screenshot evidence and Hyeonsu's cross-only handoff preparation. Comparing 72 display conditions on the then-deployed v16 checked saved-result presentation, not new model experiments. This does not establish final submission, physical-phone validation or independent model reproduction.
+- **Later support receipt remains a separate Draft:** [#101](https://github.com/heechan9/AdversarialAI_Security/pull/101), head `f65d0398a1967a2f3ed763f02de12f0405acb1eb`, records 783 matching submitted-JSON asset entries for two models and 781 images. `model_inference_performed=false`; selected cross-only remains **INCOMPLETE**. “Return unavailable” below describes the earlier checkpoint in main's integration record, not absence of that subsequent asset-check receipt. Asset matching is not full reproduction PASS. Research-PC LOCAL_PASS, external FAIL and the unresolved cause are retained.
+- **Documentation awaiting review:** [#102](https://github.com/heechan9/AdversarialAI_Security/pull/102), head `1815bb159f7ffa3a75b85086fa3e666ca1692183`, covers controlled comparison/review handoff; [#103](https://github.com/heechan9/AdversarialAI_Security/pull/103), head `9063a29229855cdc5f35af59adb204a8d61b721b`, covers international collaboration. Both are separate open Drafts. Updating this README's display name does not merge those documents or establish a partnership or independent review.
+- **Use and interpretation:** compare **saved results** by model, epsilon and filter in [MARIS](https://maritime-adversarial-lab.hc24734503.chatgpt.site/), then follow [Quick start](#quick-start) for reproduction scope. Keep FGSM, separate PGD/training experiments and different clean-correct ASR denominators apart. One seed's **6.15%** PGD50/5-restart accuracy and **+0.90 pp** over clean-only continued training describe that internal condition, not general defense guarantees or real-vessel safety.
+
+### Dated integration and experiment history
 
 **October 26, 2026 — submission preparation:** The [code/evidence integration record](docs/reviews/20261026/final_submission_integration.md) confirms the existing Taehee October 23 handoff (#92) and Jaehyeok saved-evidence review (#88), and connects Giho's October 24 presentation review. Hyeonsu's October 21 selected cross-only support return is not available (`INCOMPLETE`). A [byte-exact input preparation correction and handoff](docs/HYUNSU_CROSS_ONLY_HANDOFF_20261026.md) address the packet's selection-hash mismatch. This is not fresh inference, full reproduction approval, or confirmation that the final report has been updated. Dated records and the external FAIL remain intact.
 
@@ -274,3 +285,4 @@ The research-evidence auditor checks available data/model evidence, Clean/FGSM r
 Read [CONTRIBUTIONS.md](CONTRIBUTIONS.md). Preserve original outputs, distinguish source execution from saved-output recalculation, report exact commits and denominators, and state limitations alongside results. Do not add private input images, model binaries, original handoff archives, or manuscript files as part of this README work.
 
 **Reproducible experiments, traceable numbers, and conclusions that do not overclaim.**
+
