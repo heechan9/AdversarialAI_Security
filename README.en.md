@@ -275,7 +275,7 @@ The research-evidence auditor checks available data/model evidence, Clean/FGSM r
 - CNN uses 128×128 inputs; MobileNetV2 uses 224×224. MobileNetV2's original training preprocessing, split ratio, and random seed remain unconfirmed.
 - Filter recovery on transferred attacks is not generalized robustness. Report defense-aware attacks and clean-performance changes together.
 - Later training and iterative/black-box studies have their own conditions. Do not claim the entire BIM/PGD/JSMA/training/transfer-attack program is complete.
-- The same 781 images recur across conditions. Hashes do not establish scene/vessel/session independence or leakage-free generalization.
+- Exact Train/Val/Test duplicate checking for the submitted baseline models was not performed: the [reproducibility record](docs/REPRODUCIBILITY.md) reports that only the test split was available at that review. This is an unverified overlap question, not evidence of leakage. The same 781 images recur across conditions; hashes do not establish scene/vessel/session independence or leakage-free generalization.
 - Classification degradation has not been causally linked here to collision, route deviation, or other operational harm.
 - VLM/LLM evaluation and safety-impact simulation remain future goals, not current implementation achievements.
 - Paper submission, latest manuscript review, team-work integration, and final-report completion are separate states. The [paper release record](docs/PAPER_RELEASE_STATUS.md) distinguishes them. The user confirmed submission on October 1; a receipt/submission identifier was not independently verified. Manuscript binaries are not published here.
