@@ -1,8 +1,16 @@
 <div align="center">
 
-# 자율운항선박 이미지 분류 모델 적대적 AI 검증
+# PaulGuard — Maritime AI Security Research
+
+**제출 프로젝트명: 자율운항선박 이미지 분류 모델 적대적 AI 검증**
 
 [한국어](README.md) | [English](README.en.md)
+
+**2026-11-01 협업 검토 안내:** [조건별 완료·부분·미실행 및 공유 경계](docs/INTERNATIONAL_COLLABORATION.md) ·
+[영문 재현 단계와 첫 공개 검토 과제](docs/REPRODUCIBILITY.md#english-reproduction-navigation).
+기준 source는 `2ed69b00faa3dce098a6a78888032746b6b35d43`이며 기존 Draft #103을 재사용한 문서 검토본입니다.
+공식 결과 승격·모델 독립 재현 승인·자료 재배포 허락을 뜻하지 않습니다.
+
 
 ### Clean → FGSM → 전처리 방어 비교 → Evidence Audit 기반 해양 AI 보안 연구
 
@@ -41,25 +49,6 @@
 
 </div>
 
-## 국제 연구·협업 진입점 (2026-10-30)
-
-대외 연구명은 **PaulGuard — Maritime AI Security Research (폴가드)**입니다. 저장소 주소·기존 프로젝트/제출 제목·팀 기여는 유지합니다. **MARIS**는 기존 저장 근거 재생 가상 실험실의 이름으로 유지하며, 이번 문서 변경은 UI 개명이나 실제 보호 제품 출시를 뜻하지 않습니다.
-
-기존 이미지·결과·기여 기록을 보존하면서, 제출 관련 근거와 앞으로의 연구를 분리합니다.
-[English research entry](README.en.md#research-entry-point-preserved-evidence-and-next-collaborations) ·
-[고정 source/evidence와 제출 확인 범위](docs/PAPER_RELEASE_STATUS.md#preserved-source-and-submission-boundary--2026-10-30) ·
-[재현 단계 안내](docs/REPRODUCIBILITY.md#english-reproduction-navigation) ·
-[국제 협업 안내](docs/INTERNATIONAL_COLLABORATION.md) ·
-[후속 issue 단위 로드맵](docs/PROJECT_SCOPE.md#bounded-international-research-roadmap--2026-10-30).
-
-아래 날짜별 기록은 보존합니다. main 기준은 `08b33ae04248798de76cebba2e7d242d134d28c7`이며,
-[#101](https://github.com/heechan9/AdversarialAI_Security/pull/101)의 현수 자산 점검 갱신은 아직 Draft입니다.
-고정 head `f65d0398a1967a2f3ed763f02de12f0405acb1eb`의 모델 2개·이미지 781개 해시 대조는
-`model_inference_performed=false`인 자산 확인이며 실제 추론 검증이 아닙니다.
-선택 cross-only **INCOMPLETE**, 연구 PC **LOCAL_PASS**, 외부 **FAIL·원인 미확정**을 유지합니다.
-
-
-
 ---
 
 ## 30초 요약
@@ -77,6 +66,15 @@
 [실무 활용·평가 기준 대조](docs/MARITIME_PRACTICE_GAP_REVIEW.md): 실제 해상 영상 시스템과의 차이, 배경 참고와 후속 과제. 작은 L∞ 값만으로 사람에게 보이지 않는 교란임을 입증하지는 않습니다.
 
 ## 최신 통합 상태
+
+**2026-10-30 기준 main:** [`08b33ae04248798de76cebba2e7d242d134d28c7`](https://github.com/heechan9/AdversarialAI_Security/commit/08b33ae04248798de76cebba2e7d242d134d28c7). 공개 표시명은 **PaulGuard**이며, 기존 제출 제목·팀 기여·저장소 URL과 MARIS 화면 이름은 유지합니다. 아래 과거 main SHA와 검사 수는 해당 날짜의 기록입니다.
+
+- **main에 반영된 제출 준비:** [#99](https://github.com/heechan9/AdversarialAI_Security/pull/99)에서 제출 전 사용 점검·화면 근거·현수 cross-only 인계 준비를 통합했습니다. 당시 배포 v16의 72개 표시 조건 대조는 저장 결과 표시 검사이며 새 모델 실험이 아닙니다. 최종 제출·실제 휴대전화 검수·모델 독립 재현 완료를 뜻하지 않습니다.
+- **팀 지원의 후속 수신 기록은 별도 Draft:** [#101](https://github.com/heechan9/AdversarialAI_Security/pull/101), head `f65d0398a1967a2f3ed763f02de12f0405acb1eb`에는 제출 JSON의 모델 2개·이미지 781개 자산 항목 783개 일치가 기록돼 있습니다. `model_inference_performed=false`이며 선택 cross-only는 **INCOMPLETE**입니다. 아래 ‘반환 미확보’는 main 통합 문서의 이전 시점 기록이고, 자산 점검 수신을 전체 재현 PASS로 바꾸지 않습니다. 연구 PC LOCAL_PASS·외부 FAIL·원인 미확정은 유지합니다.
+- **문서 검토 대기:** [#102](https://github.com/heechan9/AdversarialAI_Security/pull/102), head `1815bb159f7ffa3a75b85086fa3e666ca1692183`의 통제 비교·검토 인계와 [#103](https://github.com/heechan9/AdversarialAI_Security/pull/103), head `9063a29229855cdc5f35af59adb204a8d61b721b`의 국제 협업 문서는 별도 open Draft입니다. 이 README의 표시명 갱신이 해당 문서의 병합이나 실제 국제 협력·독립 검토 성립을 뜻하지 않습니다.
+- **사용과 해석:** [MARIS](https://maritime-adversarial-lab.hc24734503.chatgpt.site/)에서 모델·공격 강도·필터별 **저장 결과**를 비교하고 아래 [빠른 시작](#빠른-시작)으로 재현 범위를 확인합니다. FGSM과 별도 PGD/학습 실험, 서로 다른 clean-correct ASR 분모는 합치지 않습니다. 한 seed의 PGD50·5회 재시작 정확도 **6.15%**와 정상 추가학습 대비 **+0.90%p**는 그 조건의 내부 결과일 뿐, 일반적인 방어 보장이나 실선 안전성 입증이 아닙니다.
+
+### 날짜별 통합·실험 이력
 
 **2026-10-26 제출 준비 점검:** [코드·검증 근거 통합 기록](docs/reviews/20261026/final_submission_integration.md)은 태희 10/23 인계(#92)·재혁 저장 근거 검토(#88)의 기존 반영과 기호 10/24 발표 검토를 연결합니다. 현수 10/21 선택 지원의 반환 결과는 미확보(INCOMPLETE)이며, [입력 포장 보완과 cross-only 인계](docs/HYUNSU_CROSS_ONLY_HANDOFF_20261026.md)를 준비했습니다. 새 추론·전체 재현 PASS·최종 보고서 반영 완료를 뜻하지 않습니다. 아래 날짜별 이력과 외부 FAIL은 유지합니다.
 
@@ -320,8 +318,9 @@ python scripts\audit_paper_claims.py
 - FGSM 실험과 기록 감사는 완료되었습니다. 원자료의 `provisional` 상태와 별도 공식 실행계약의 미연결 승인·재실행 기록은 보존하며, 확정된 ε 범위와 구분합니다.
 - 두 모델의 입력 해상도는 CNN 128×128, MobileNetV2 224×224로 다릅니다.
 - MobileNetV2의 학습 당시 실제 전처리·분할 비율·random seed는 확정되지 않았습니다.
+- 제출 기준 모델의 최초 학습 노출 이력은 미확인입니다. 이후 보관된 후속 6,147/689/781 분할의 정확 raw/RGB 교차 중복은 0이지만 유사 이미지 후보가 남아 선박·장면 독립성을 보장하지 않습니다. 누락된 원천 ID·staged 원본 두 목록을 재구성 파일로 대체하지 않습니다. [자료 계보 한계](docs/REPRODUCIBILITY.md#data-provenance-update--november-1-2026)를 구분합니다.
 - 고정 가우시안·평균 필터 전처리 방어는 구현·실험 및 기록 감사를 완료했습니다. 원자료는 `experimental`로 보존합니다. 기존 공격 입력에서의 회복만으로 방어 성공을 주장하지 않으며, 방어 인지 FGSM과 정상 성능 손실을 함께 평가합니다.
-- BIM·PGD·JSMA·적대적 학습과 모델 간 전이 공격은 현재 검증 완료 범위에 포함하지 않습니다.
+- CNN 적대적 학습·지정 PGD7 평가는 해당 조건에서 완료됐고, BIM/PGD는 부분 결과이며 MobileNet 학습·잔여 조건·JSMA 전체 평가는 미완료입니다. 전체 공격·학습·모델 간 전이 연구의 완료, 일반적인 방어 효과 또는 외부 독립 재현을 뜻하지 않습니다.
 - 분류 성능 저하가 실제 충돌·항로 이탈 같은 운항 피해를 유발한다는 인과관계는 검증하지 않았습니다.
 - VLM/LLM과 안전영향 시뮬레이터는 향후 목표이며 현재 구현 성과로 주장하지 않습니다.
 
@@ -332,4 +331,5 @@ python scripts\audit_paper_claims.py
 **재현 가능한 실험, 검증 가능한 수치, 과장하지 않는 결론을 우선합니다.**
 
 </div>
+
 

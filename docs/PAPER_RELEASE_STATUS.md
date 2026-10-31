@@ -51,3 +51,12 @@ This index pins a **submission-facing repository evidence snapshot**, not a veri
 - Later asset-check documentation remains in Draft [#101](https://github.com/heechan9/AdversarialAI_Security/pull/101), exact head [`f65d0398a1967a2f3ed763f02de12f0405acb1eb`](https://github.com/heechan9/AdversarialAI_Security/tree/f65d0398a1967a2f3ed763f02de12f0405acb1eb). It records 783 matched asset entries and `model_inference_performed=false`; selected cross-only work is INCOMPLETE. This is not merged evidence in the pinned main snapshot or new inference verification.
 
 The snapshot already contains separately labeled follow-up studies; its presence does not make every extension a submitted-paper result. Preserve original reference CSV/JSON, manuscript hashes, failures and contributor attribution. Future international-journal work follows the [bounded roadmap](PROJECT_SCOPE.md#bounded-international-research-roadmap--2026-10-30) in new scoped changes. No tag, Release, merge, deployment, journal submission or acceptance is created by this documentation update.
+
+## Collaboration documentation refresh — November 1, 2026
+
+The collaboration/navigation candidate reuses existing Draft #103 and main
+`2ed69b00faa3dce098a6a78888032746b6b35d43`. It updates review/access instructions,
+not manuscript/report bytes, submission receipts, historical result labels or
+team contribution records. October31 P0–P4/dot diagnostics are later evidence
+with their own execution scopes; they are not retrospectively part of a submitted
+paper. No new inference, journal submission, merge or deployment is claimed.

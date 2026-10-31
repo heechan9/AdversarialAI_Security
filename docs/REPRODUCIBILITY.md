@@ -11,16 +11,49 @@ Choose a level before running anything. The older setup notes below are historic
 | Original-model rerun | [Independent verification](INDEPENDENT_VERIFICATION.md), [Stage B contract](STAGE_B_EXECUTION_CONTRACT.md) | Requires separately authorized models/images and agreed comparison criteria; retain failures |
 | Existing mismatch diagnosis | [External FAIL](STAGE_B_HYEONSU_01_REVIEW.md), [research-PC LOCAL_PASS](STAGE_B_PC_FULL_20260928.md), [selected cross-only handoff](HYUNSU_CROSS_ONLY_HANDOFF_20261026.md) | A bounded diagnosis, not automatic resolution of the external FAIL |
 
-Minimal public-only check of the **separate extension**, from repository root (Python standard library; no model loading/training/inference):
+First collaboration task: public-only check of the **separate extension**, from repository root (Python standard library; no model loading/training/inference):
 
 ```bash
 git rev-parse HEAD
+python --version
 python verification/matched_cnn_saved_audit.py
 ```
+
+Expected result and the exact return checklist are in the [first external review](INTERNATIONAL_COLLABORATION.md#first-external-review-one-saved-result-audit-no-private-assets). The auditor does not require the missing historical train manifests.
 
 The full public CPU regression environment and command are maintained in [CPU_CI_REVIEW.md](CPU_CI_REVIEW.md) and [.github/workflows/iterative-attacks.yml](../.github/workflows/iterative-attacks.yml), rather than duplicated here. Follow their dependency setup; do not interpret CI success as private-model inference. The Stage B contract owns model execution commands, output isolation, approvals and comparison thresholds; do not relax them after observing a mismatch.
 
 Return the full source SHA, environment, exact commands, stdout/stderr and exit codes, input/output hashes, comparison scope and discrepancies. Label **direct execution**, **reported evidence**, and **not checked** separately. Do not publish private assets, personal filesystem paths or access links. A 783-entry asset hash match with `model_inference_performed=false` must remain an asset check.
+
+## Data provenance update — November 1, 2026
+
+The notes below preserve an earlier test-only availability checkpoint. They must
+not be read as a current claim that no follow-up train/validation data were ever
+checked. P2 inspected a preserved follow-up packet: train6,147/validation689/test781,
+raw/RGB cross-split exact matches0; P3 retained the original preparation receipt
+recording8067−1912−8=6147. These are later data audits, not proof of the original
+baseline models' training membership or an independent neural-network replay.
+Related-image candidates, data rights and vessel/scene grouping remain unresolved.
+
+The original `train-inventory.json` and `train-staged-manifest.json` remain missing;
+their expected hashes, current26-file candidate evidence, historical17-ID limitation
+and verified380MB packet scope are maintained in the
+[existing collaboration guide](INTERNATIONAL_COLLABORATION.md#rights-access-and-missing-source-lineage).
+Do not manufacture replacement historical manifests or re-run collection already
+completed. Missing provenance is a limit on source history, not a reason to
+relabel independently auditable saved CSVs as absent.
+
+Original evaluation preprocessing is RGB/255; original **training** preprocessing
+and full split/seed provenance, especially MobileNet's, remain unverified. The
+October24 extension's seed/runtime/split records must not fill these baseline gaps.
+Keep PC LOCAL_PASS, external FAIL/cause unresolved and Hyunsu INCOMPLETE separate.
+
+## Historical setup notes — preserved, not an instruction to overwrite evidence
+
+The commands below include output-writing tools and require separately agreed
+private inputs/scope. The first collaboration task is the read-only saved audit
+above. Never regenerate `configs/test_manifest.json` in the canonical checkout or
+overwrite historical results as part of that task.
 
 ## 모델·데이터는 Git에 커밋하지 않는다
 이유: 데이터 출처·라이선스 미확정 / Git 저장소 용량 증가 / 모델 정본 관리 문제.

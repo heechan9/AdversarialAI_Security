@@ -1,19 +1,19 @@
-# AdversarialAI Security
+# PaulGuard — Maritime AI Security Research
 
-## Research entry point: preserved evidence and next collaborations
-
-**PaulGuard — Maritime AI Security Research** is the public-facing research name. The repository URL, historical project/submission titles and team attribution remain unchanged. **MARIS** remains the name of the existing recorded-evidence virtual lab; this naming update does not rename its interface or imply a deployed protection product.
-
-We study **adversarial robustness of ten-class ship-image classification**, using CNN and MobileNetV2 on a fixed 781-image test set. The recorded baseline covers clean inputs, untargeted FGSM, and fixed Gaussian/mean preprocessing under transfer and defense-aware attacks. It does not establish operational maritime safety or general defense robustness.
-
-- **Preserved submission-facing source:** [exact source/evidence snapshot and submission limits](docs/PAPER_RELEASE_STATUS.md#preserved-source-and-submission-boundary--2026-10-30). A repository snapshot is not proof of which files were submitted.
-- **Reproduce at the right level:** [English reproduction navigation](docs/REPRODUCIBILITY.md#english-reproduction-navigation), from public saved-record checks to separately authorized model reruns.
-- **Work with us:** [international collaboration guide](docs/INTERNATIONAL_COLLABORATION.md), focused on independent reproduction and bounded additional attack/defense evaluation.
-- **Future work, not new results:** [issue-sized research roadmap](docs/PROJECT_SCOPE.md#bounded-international-research-roadmap--2026-10-30).
-
-This entry was checked against main `08b33ae04248798de76cebba2e7d242d134d28c7` on October 30, 2026. The dated sections below remain historical records. Draft [#101](https://github.com/heechan9/AdversarialAI_Security/pull/101), head `f65d0398a1967a2f3ed763f02de12f0405acb1eb`, documents a later 783-entry asset check (two models + 781 images), **`model_inference_performed=false`**; it is not merged into this base. Selected cross-only classification remains **INCOMPLETE**, research-PC **LOCAL_PASS** and external **FAIL** remain distinct, and the mismatch cause is unresolved. Asset agreement is not inference verification.
+**Historical project name: AdversarialAI Security. Submitted title: 자율운항선박 이미지 분류 모델 적대적 AI 검증.**
 
 [한국어](README.md) | **English**
+
+
+## Collaboration review entry — November 1, 2026
+
+Start with the [condition/status and sharing guide](docs/INTERNATIONAL_COLLABORATION.md),
+then the [reproduction levels and smallest public task](docs/REPRODUCIBILITY.md#english-reproduction-navigation).
+The source reviewed is `2ed69b00faa3dce098a6a78888032746b6b35d43`.
+This documentation refresh reuses Draft #103; a review snapshot is not a merge,
+independent model replay, publication approval or permission to redistribute assets.
+The historical submitted title, team credit, repository URL and MARIS remain unchanged.
+
 
 **A reproducible research project on adversarial robustness in ship-image classification.** CNN and MobileNetV2 are evaluated on clean images, bounded FGSM perturbations, and fixed preprocessing filters, with traceable saved evidence and explicit reproduction limits.
 
@@ -57,6 +57,15 @@ A model can classify an unmodified ship photograph correctly and change its pred
 Small L∞ alone does not prove human imperceptibility. See the [maritime-practice comparison](docs/MARITIME_PRACTICE_GAP_REVIEW.md) for the gap between this experiment and operational maritime video systems.
 
 ## Current research and integration status
+
+**Main checked October 30, 2026:** [`08b33ae04248798de76cebba2e7d242d134d28c7`](https://github.com/heechan9/AdversarialAI_Security/commit/08b33ae04248798de76cebba2e7d242d134d28c7). The public display name is **PaulGuard**; the submitted title, team contributions, repository URL and MARIS interface name are preserved. Older main SHAs and test counts below are dated historical records.
+
+- **Submission preparation on main:** [#99](https://github.com/heechan9/AdversarialAI_Security/pull/99) integrated pre-submission use checks, screenshot evidence and Hyeonsu's cross-only handoff preparation. Comparing 72 display conditions on the then-deployed v16 checked saved-result presentation, not new model experiments. This does not establish final submission, physical-phone validation or independent model reproduction.
+- **Later support receipt remains a separate Draft:** [#101](https://github.com/heechan9/AdversarialAI_Security/pull/101), head `f65d0398a1967a2f3ed763f02de12f0405acb1eb`, records 783 matching submitted-JSON asset entries for two models and 781 images. `model_inference_performed=false`; selected cross-only remains **INCOMPLETE**. “Return unavailable” below describes the earlier checkpoint in main's integration record, not absence of that subsequent asset-check receipt. Asset matching is not full reproduction PASS. Research-PC LOCAL_PASS, external FAIL and the unresolved cause are retained.
+- **Documentation awaiting review:** [#102](https://github.com/heechan9/AdversarialAI_Security/pull/102), head `1815bb159f7ffa3a75b85086fa3e666ca1692183`, covers controlled comparison/review handoff; [#103](https://github.com/heechan9/AdversarialAI_Security/pull/103), head `9063a29229855cdc5f35af59adb204a8d61b721b`, covers international collaboration. Both are separate open Drafts. Updating this README's display name does not merge those documents or establish a partnership or independent review.
+- **Use and interpretation:** compare **saved results** by model, epsilon and filter in [MARIS](https://maritime-adversarial-lab.hc24734503.chatgpt.site/), then follow [Quick start](#quick-start) for reproduction scope. Keep FGSM, separate PGD/training experiments and different clean-correct ASR denominators apart. One seed's **6.15%** PGD50/5-restart accuracy and **+0.90 pp** over clean-only continued training describe that internal condition, not general defense guarantees or real-vessel safety.
+
+### Dated integration and experiment history
 
 **October 26, 2026 — submission preparation:** The [code/evidence integration record](docs/reviews/20261026/final_submission_integration.md) confirms the existing Taehee October 23 handoff (#92) and Jaehyeok saved-evidence review (#88), and connects Giho's October 24 presentation review. Hyeonsu's October 21 selected cross-only support return is not available (`INCOMPLETE`). A [byte-exact input preparation correction and handoff](docs/HYUNSU_CROSS_ONLY_HANDOFF_20261026.md) address the packet's selection-hash mismatch. This is not fresh inference, full reproduction approval, or confirmation that the final report has been updated. Dated records and the external FAIL remain intact.
 
@@ -277,7 +286,7 @@ The research-evidence auditor checks available data/model evidence, Clean/FGSM r
 - CNN uses 128×128 inputs; MobileNetV2 uses 224×224. MobileNetV2's original training preprocessing, split ratio, and random seed remain unconfirmed.
 - Filter recovery on transferred attacks is not generalized robustness. Report defense-aware attacks and clean-performance changes together.
 - Later training and iterative/black-box studies have their own conditions. Do not claim the entire BIM/PGD/JSMA/training/transfer-attack program is complete.
-- The same 781 images recur across conditions. Hashes do not establish scene/vessel/session independence or leakage-free generalization.
+- The original baseline models' full training exposure remains unverified. Later checks of the preserved 6,147/689/781 follow-up packet found no exact cross-split raw/RGB overlap, but related-image candidates remain and do not establish vessel/scene independence. The missing historical source-ID/staged manifests must not be replaced by reconstructed files. See [data provenance limits](docs/REPRODUCIBILITY.md#data-provenance-update--november-1-2026).
 - Classification degradation has not been causally linked here to collision, route deviation, or other operational harm.
 - VLM/LLM evaluation and safety-impact simulation remain future goals, not current implementation achievements.
 - Paper submission, latest manuscript review, team-work integration, and final-report completion are separate states. The [paper release record](docs/PAPER_RELEASE_STATUS.md) distinguishes them. The user confirmed submission on October 1; a receipt/submission identifier was not independently verified. Manuscript binaries are not published here.
@@ -287,3 +296,4 @@ The research-evidence auditor checks available data/model evidence, Clean/FGSM r
 Read [CONTRIBUTIONS.md](CONTRIBUTIONS.md). Preserve original outputs, distinguish source execution from saved-output recalculation, report exact commits and denominators, and state limitations alongside results. Do not add private input images, model binaries, original handoff archives, or manuscript files as part of this README work.
 
 **Reproducible experiments, traceable numbers, and conclusions that do not overclaim.**
+
