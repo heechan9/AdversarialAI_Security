@@ -2,6 +2,19 @@
 
 **Historical project name: AdversarialAI Security. Submitted title: 자율운항선박 이미지 분류 모델 적대적 AI 검증.**
 
+## Research entry point: preserved evidence and next collaborations
+
+**PaulGuard — Maritime AI Security Research** is the public-facing research name. The repository URL, historical project/submission titles and team attribution remain unchanged. **MARIS** remains the name of the existing recorded-evidence virtual lab; this naming update does not rename its interface or imply a deployed protection product.
+
+We study **adversarial robustness of ten-class ship-image classification**, using CNN and MobileNetV2 on a fixed 781-image test set. The recorded baseline covers clean inputs, untargeted FGSM, and fixed Gaussian/mean preprocessing under transfer and defense-aware attacks. It does not establish operational maritime safety or general defense robustness.
+
+- **Preserved submission-facing source:** [exact source/evidence snapshot and submission limits](docs/PAPER_RELEASE_STATUS.md#preserved-source-and-submission-boundary--2026-10-30). A repository snapshot is not proof of which files were submitted.
+- **Reproduce at the right level:** [English reproduction navigation](docs/REPRODUCIBILITY.md#english-reproduction-navigation), from public saved-record checks to separately authorized model reruns.
+- **Work with us:** [international collaboration guide](docs/INTERNATIONAL_COLLABORATION.md), focused on independent reproduction and bounded additional attack/defense evaluation.
+- **Future work, not new results:** [issue-sized research roadmap](docs/PROJECT_SCOPE.md#bounded-international-research-roadmap--2026-10-30).
+
+This entry was checked against main `08b33ae04248798de76cebba2e7d242d134d28c7` on October 30, 2026. The dated sections below remain historical records. Draft [#101](https://github.com/heechan9/AdversarialAI_Security/pull/101), head `f65d0398a1967a2f3ed763f02de12f0405acb1eb`, documents a later 783-entry asset check (two models + 781 images), **`model_inference_performed=false`**; it is not merged into this base. Selected cross-only classification remains **INCOMPLETE**, research-PC **LOCAL_PASS** and external **FAIL** remain distinct, and the mismatch cause is unresolved. Asset agreement is not inference verification.
+
 [한국어](README.md) | **English**
 
 **A reproducible research project on adversarial robustness in ship-image classification.** CNN and MobileNetV2 are evaluated on clean images, bounded FGSM perturbations, and fixed preprocessing filters, with traceable saved evidence and explicit reproduction limits.

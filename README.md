@@ -43,6 +43,25 @@
 
 </div>
 
+## 국제 연구·협업 진입점 (2026-10-30)
+
+대외 연구명은 **PaulGuard — Maritime AI Security Research (폴가드)**입니다. 저장소 주소·기존 프로젝트/제출 제목·팀 기여는 유지합니다. **MARIS**는 기존 저장 근거 재생 가상 실험실의 이름으로 유지하며, 이번 문서 변경은 UI 개명이나 실제 보호 제품 출시를 뜻하지 않습니다.
+
+기존 이미지·결과·기여 기록을 보존하면서, 제출 관련 근거와 앞으로의 연구를 분리합니다.
+[English research entry](README.en.md#research-entry-point-preserved-evidence-and-next-collaborations) ·
+[고정 source/evidence와 제출 확인 범위](docs/PAPER_RELEASE_STATUS.md#preserved-source-and-submission-boundary--2026-10-30) ·
+[재현 단계 안내](docs/REPRODUCIBILITY.md#english-reproduction-navigation) ·
+[국제 협업 안내](docs/INTERNATIONAL_COLLABORATION.md) ·
+[후속 issue 단위 로드맵](docs/PROJECT_SCOPE.md#bounded-international-research-roadmap--2026-10-30).
+
+아래 날짜별 기록은 보존합니다. main 기준은 `08b33ae04248798de76cebba2e7d242d134d28c7`이며,
+[#101](https://github.com/heechan9/AdversarialAI_Security/pull/101)의 현수 자산 점검 갱신은 아직 Draft입니다.
+고정 head `f65d0398a1967a2f3ed763f02de12f0405acb1eb`의 모델 2개·이미지 781개 해시 대조는
+`model_inference_performed=false`인 자산 확인이며 실제 추론 검증이 아닙니다.
+선택 cross-only **INCOMPLETE**, 연구 PC **LOCAL_PASS**, 외부 **FAIL·원인 미확정**을 유지합니다.
+
+
+
 ---
 
 ## 30초 요약
