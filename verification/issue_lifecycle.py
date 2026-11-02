@@ -1,4 +1,10 @@
-"""Evidence-linked discrepancy history; never changes an experiment verdict."""
+"""Evidence-linked discrepancy history; never changes an experiment verdict.
+
+Retest reports must name ``corrective_action_seq`` and the source commit of the
+current action_recorded event. Observations do not change that binding. A reopened
+issue needs a new action and retest report; old PASS evidence cannot close it.
+These reviewed declarations are not operator authentication or proof of causality.
+"""
 import argparse
 from copy import deepcopy
 from datetime import datetime
@@ -29,12 +35,20 @@ def nonempty(value):
     require(isinstance(value,str) and 0<len(value.strip())<=2000,'nonempty bounded text required')
 
 
-def retest(root,event,issue):
+def retest(root,event,issue,corrective_action):
     require(len(event['evidence'])==1,'one retest report required')
     report=read_evidence(root,event['evidence'][0])
     require(report.get('kind')=='cross_environment_retest','local or unrelated evidence cannot close discrepancy')
     require(report.get('issue_id')==issue['id'],'wrong issue evidence')
     require(report.get('source_commit')==event['source_commit'],'retest commit mismatch')
+    # A self-consistent report/event pair must also test this correction cycle.
+    # A previous PASS is not evidence that a later action was effective.
+    require(corrective_action is not None,'corrective action required')
+    require(event['source_commit']==corrective_action['source_commit'],
+            'retest does not verify corrective action source')
+    action_seq=report.get('corrective_action_seq')
+    require(type(action_seq) is int and action_seq==corrective_action['seq'],
+            'retest does not verify current corrective action')
     require(report.get('scope')==issue['scope'],'retest scope differs')
     require(report.get('model_sha256')==issue['model_sha256'] and report.get('manifest_sha256')==issue['manifest_sha256'],'retest asset identity differs')
     require(report.get('operator_role')=='external_operator' and report.get('independent_operator') is True,'external operator evidence required')
@@ -63,7 +77,7 @@ def validate_issue(root,issue):
     import hashlib
     require(hashlib.sha256((root/'configs/test_manifest.json').read_bytes()).hexdigest()==issue['manifest_sha256'],'manifest hash differs')
     history=issue['history'];require(isinstance(history,list) and 1<=len(history)<=100,'history required')
-    state=None;previous=None
+    state=None;previous=None;corrective_action=None
     for index,event in enumerate(history):
         nonempty(event['note']);nonempty(event['actor_role'])
         require(re.fullmatch('[0-9a-f]{40}',event['source_commit']) is not None,'invalid source commit')
@@ -75,7 +89,9 @@ def validate_issue(root,issue):
             require(event['action']=='registered','registration must be first');state='open'
         else:
             action=event['action'];require(action in TRANSITIONS[state],'invalid state transition')
-            if action in ('retest_pass','retest_fail'):retest(root,event,issue)
+            if action=='action_recorded':corrective_action=event
+            if action in ('retest_pass','retest_fail'):
+                retest(root,event,issue,corrective_action)
             state=TRANSITIONS[state][action]
     require(issue['state']==state,'declared state contradicts history')
     return {'id':issue['id'],'title':issue['title'],'state':state,'label':LABELS[state],
