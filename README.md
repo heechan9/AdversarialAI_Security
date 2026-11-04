@@ -6,6 +6,8 @@
 
 [한국어](README.md) | [English](README.en.md)
 
+**코드 라이선스:** [목록에 명시된 자체 코드](LICENSED_CODE.txt)에만 Apache 2.0을 적용합니다. [적용 범위·제3자 조건](LICENSE_SCOPE.md)을 확인하세요. 데이터·이미지·모델 등 목록 밖 자료는 포함하지 않습니다.
+
 ### Clean → FGSM → 전처리 방어 비교 → Evidence Audit 기반 해양 AI 보안 연구
 
 <a href="https://maritime-adversarial-lab.hc24734503.chatgpt.site/">
