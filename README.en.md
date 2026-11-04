@@ -4,6 +4,8 @@
 
 [한국어](README.md) | **English**
 
+**Code license:** Apache 2.0 applies only to original project-owned code in [LICENSED_CODE.txt](LICENSED_CODE.txt). See [scope and preserved third-party terms](LICENSE_SCOPE.md); data, images, models and other unlisted material are not included.
+
 **A reproducible research project on adversarial robustness in ship-image classification.** CNN and MobileNetV2 are evaluated on clean images, bounded FGSM perturbations, and fixed preprocessing filters, with traceable saved evidence and explicit reproduction limits.
 
 [MARIS virtual lab](https://maritime-adversarial-lab.hc24734503.chatgpt.site/) · [Repository](https://github.com/heechan9/AdversarialAI_Security) · [Quick start](#quick-start) · [Evidence and results](#evidence-and-results) · [Research boundaries](#research-boundaries)
