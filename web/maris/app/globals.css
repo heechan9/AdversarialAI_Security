@@ -278,3 +278,12 @@ html[lang=en] h1{letter-spacing:-.045em;font-size:clamp(36px,4vw,60px);max-width
 .diagnostic-verdicts{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px}
 .diagnostic-verdicts span{font-size:.8125rem;border:1px solid #607080;border-radius:4px;padding:5px 9px;color:#d9dfde;background:#28343e}
 @media(max-width:700px){.diagnostic-panel{padding:16px}.diagnostic-filters,.diagnostic-triage-filters{grid-template-columns:1fr}.diagnostic-metrics>div{padding:14px 10px}.diagnostic-metrics strong{font-size:1.75rem}.diagnostic-metrics span{font-size:.8125rem}.diagnostic-switch{flex-direction:column}.diagnostic-switch button{text-align:left;font-size:.9375rem}.diagnostic-downloads{width:100%}.diagnostic-downloads button{flex:1 1 140px}.research-diagnostics .section-heading{display:block}.diagnostic-details{padding:12px}.diagnostic-intro{font-size:.9375rem}.diagnostic-list-heading{gap:0}}
+
+/* Keep the optional plain-language guide readable at narrow widths. */
+.photo-guide{margin-top:18px;max-width:90ch;overflow-wrap:anywhere}
+.photo-guide h3{font-size:1rem;margin:18px 0 6px}
+.photo-guide p{color:#c5d7e2;line-height:1.9}
+.photo-guide summary{cursor:pointer;min-height:44px}
+.photo-guide summary:focus-visible{outline:2px solid #a2fff0;outline-offset:4px}
+.defense-stage h3,.view-tabs button{overflow-wrap:anywhere}
+@media(max-width:600px){.view-tabs{height:auto}.view-tabs button{white-space:normal;height:auto;line-height:1.5;padding:8px 6px}.section-heading h2{overflow-wrap:anywhere}}
