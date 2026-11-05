@@ -4,6 +4,34 @@ This workflow preserves the completed output files of a stopped run. It does not
 promote research results, approve Stage B, or replace the historical September
 2026 PC rerun record. Different run dates and configurations remain distinct.
 
+## Review the audit report in the web demo
+
+The web demo's **Run records / 실행 기록** section reads this auditor's JSON.
+It shows saved versus missing conditions, unsafe saved conditions, invocation
+statuses and a fresh-directory restart plan. Create the report locally:
+
+```bat
+python verification/fgsm_run_audit.py "PATH_TO_SAVED_OUTPUT" > fgsm-audit.json
+```
+
+Open `fgsm-audit.json` in that section (maximum 2 MB). Partial/restart-required
+reports exit 2; recorded execution errors exit 3, but both still print JSON.
+Malformed or corrupted inputs can fail before producing JSON and must be resolved
+first. The browser reconciles the report's structure, counts, error state and plan;
+it does not reopen or hash the source CSVs, authenticate the report, or run models.
+Selected files remain in the current browser tab without server upload or storage.
+
+Public mode shows a deterministic snapshot produced by the same Python auditor
+from the existing 8-condition public saved outputs. It does not represent a new
+experiment. Model filters affect the table only; counts and downloads retain the
+whole report scope. A complete requested subset does not establish the full grid.
+
+Download the report or restart-plan JSON. Command templates are available only
+when there are restart conditions and no recorded execution error. Replace each
+template output path with a new empty directory outside prior outputs; the web
+demo never starts, stops or resumes a real process. Resolve errors and obtain a
+new audit report before using generated commands.
+
 ## Audit before restarting
 
 The audit is standard-library-only; it does not load TensorFlow or private
