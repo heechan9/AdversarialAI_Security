@@ -32,3 +32,8 @@ results/extensions/cnn_adversarial_20261002/*.json -text
 results/extensions/square/** -text whitespace=cr-at-eol
 results/extensions/surfree/** -text
 results/extensions/blackbox/** -text
+
+# Preserve matched follow-up CSV/JSON, executed code and log bytes.
+results/extensions/matched_cnn_20261024/** -text whitespace=cr-at-eol
+# NVIDIA's timestamp has trailing spaces; retain the original hashed snapshot.
+results/extensions/matched_cnn_20261024/provenance/nvidia-smi.txt -text whitespace=-blank-at-eol,cr-at-eol

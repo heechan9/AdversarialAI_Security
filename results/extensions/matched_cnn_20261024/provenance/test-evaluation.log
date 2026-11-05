@@ -1,0 +1,14 @@
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1792779562.339739   17599 cpu_feature_guard.cc:227] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: AVX2 AVX512F FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+Found 781 images belonging to 10 classes.
+Traceback (most recent call last):
+  File "/content/intl_matched/evaluate_matched_pair.py", line 133, in <module>
+    main()
+    ~~~~^^
+  File "/content/intl_matched/evaluate_matched_pair.py", line 58, in main
+    baseline_hash = validate_reproducibility_manifest(manifest_path=root/'configs/test_manifest.json',
+        model_path=original,dataset_filenames=gen.filenames,data_dir=args.test_dir)
+  File "/content/intl_matched/repo/src/adversarial_ai/evaluation/integrity.py", line 157, in validate_reproducibility_manifest
+    raise ValueError(f"Model {model_key!r} is absent from the manifest")
+ValueError: Model '/content/intl_matched/repo/models/cnn_baseline.h5' is absent from the manifest

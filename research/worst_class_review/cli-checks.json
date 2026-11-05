@@ -1,0 +1,8 @@
+{
+  "tampered_input_exit": 1,
+  "tampered_input_output_absent": true,
+  "existing_output_exit": 1,
+  "existing_output_unchanged": true,
+  "new_output_exit": 0,
+  "deterministic_output_bytes_match": true
+}

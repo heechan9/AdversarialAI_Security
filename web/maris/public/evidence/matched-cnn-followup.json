@@ -1,0 +1,171 @@
+{
+  "schema": "maris-matched-cnn/v1",
+  "sourceCommit": "13d92a15c3b8953e24b5d44326cd2327973a7a25",
+  "trainingSourceCommit": "db3bfe6b79d3cecb2ef57aeaaf29ab9d89b5d9bf",
+  "status": "COMPLETED_NOT_INDEPENDENT_APPROVAL",
+  "completedAt": "2026-10-23T19:38:39.220199+00:00",
+  "samplesPerModel": 781,
+  "settings": {
+    "seed": 2026,
+    "batch_size": 8,
+    "epsilon": 0.03,
+    "step_size": 0.005,
+    "pgd7": {
+      "steps": 7,
+      "restarts": 1
+    },
+    "pgd50": {
+      "steps": 50,
+      "restarts": 5
+    }
+  },
+  "models": {
+    "baseline": {
+      "clean": {
+        "correct": 504,
+        "samples": 781,
+        "accuracy": 0.645326504481434
+      },
+      "pgd7": {
+        "correct": 87,
+        "samples": 781,
+        "accuracy": 0.11139564660691421,
+        "asr_successes": 417,
+        "asr_denominator": 504
+      },
+      "pgd50": {
+        "correct": 37,
+        "samples": 781,
+        "accuracy": 0.04737516005121639,
+        "asr_successes": 467,
+        "asr_denominator": 504
+      },
+      "modelSha256": "cb256b1a5d6f605d355334e4e8667257a2bfbd29e08836cc4114869bd7068701",
+      "csvSha256": "91a04ab3cb3643639f31b90ad31d5a34a5dfa34be2146063ec13dcce66a035fd"
+    },
+    "clean_only": {
+      "clean": {
+        "correct": 539,
+        "samples": 781,
+        "accuracy": 0.6901408450704225
+      },
+      "pgd7": {
+        "correct": 90,
+        "samples": 781,
+        "accuracy": 0.11523687580025609,
+        "asr_successes": 449,
+        "asr_denominator": 539
+      },
+      "pgd50": {
+        "correct": 41,
+        "samples": 781,
+        "accuracy": 0.052496798975672214,
+        "asr_successes": 498,
+        "asr_denominator": 539
+      },
+      "modelSha256": "e3b02315482c432ec5a2b5828696f611ad9f167f847d273d746df8c98677d353",
+      "csvSha256": "d61cb35d7b21e21cbe534d0fa046657a77b7f2fee8a49643f4c74a1dd5256312"
+    },
+    "pgd_mixed": {
+      "clean": {
+        "correct": 540,
+        "samples": 781,
+        "accuracy": 0.6914212548015365
+      },
+      "pgd7": {
+        "correct": 148,
+        "samples": 781,
+        "accuracy": 0.18950064020486557,
+        "asr_successes": 392,
+        "asr_denominator": 540
+      },
+      "pgd50": {
+        "correct": 48,
+        "samples": 781,
+        "accuracy": 0.06145966709346991,
+        "asr_successes": 492,
+        "asr_denominator": 540
+      },
+      "modelSha256": "38767ddb3eb00463e7324ba4371c184c0eed01a87819b4766a66415d69538708",
+      "csvSha256": "cf1ffaeed43b576e8a15eb3e8adb13cbd8b21b50b79b00b547eff9768a9633e6"
+    }
+  },
+  "mixedMinusCleanOnly": {
+    "clean": {
+      "newly_correct": 22,
+      "newly_incorrect": 21,
+      "net_correct": 1,
+      "percentage_points": 0.12804097311139565
+    },
+    "pgd7": {
+      "newly_correct": 80,
+      "newly_incorrect": 22,
+      "net_correct": 58,
+      "percentage_points": 7.426376440460948
+    },
+    "pgd50": {
+      "newly_correct": 28,
+      "newly_incorrect": 21,
+      "net_correct": 7,
+      "percentage_points": 0.8962868117797695
+    }
+  },
+  "plannedTrainingSeeds": [
+    2026,
+    2027,
+    2028
+  ],
+  "completedTrainingSeeds": [
+    2026
+  ],
+  "unrunTrainingSeeds": [
+    2027,
+    2028
+  ],
+  "scope": {
+    "model": "CNN",
+    "preprocessing": "none",
+    "split": "historical canonical test",
+    "independentReproductionComplete": false,
+    "existingExternalStageB": "FAIL"
+  },
+  "pairedAudit": {
+    "result": "PAIRED_RECORDED_PROTOCOL_AND_CHECKPOINTS_CONSISTENT",
+    "comparison_protocol_sha256": "8dee4bb84261c652c5676288b907c02b3d2fe61b210dbc781b3f05a4ccd56187",
+    "model_sha256": {
+      "clean_only": "e3b02315482c432ec5a2b5828696f611ad9f167f847d273d746df8c98677d353",
+      "pgd_mixed": "38767ddb3eb00463e7324ba4371c184c0eed01a87819b4766a66415d69538708"
+    },
+    "independent_verification_approval": false,
+    "test_evaluation_complete": false,
+    "limitations": [
+      "No inference or execution authentication is performed.",
+      "Matching configuration does not prove identical hardware or stochastic trajectories.",
+      "This is not evidence of an adversarial-training benefit or leakage-free generalization."
+    ]
+  },
+  "sourceSha256": {
+    "results/extensions/matched_cnn_20261024/evaluation.json": "ed702570ddf07f75b609ba9c6607ae0d1ce760d07ea92561fdcd6bd322f70c06",
+    "results/extensions/matched_cnn_20261024/paired-audit.json": "25aa60cad7f697c31b4360c7457edce87d963ea4216e6dbeedf63b0df2e8f49c",
+    "results/extensions/matched_cnn_20261024/baseline.csv": "91a04ab3cb3643639f31b90ad31d5a34a5dfa34be2146063ec13dcce66a035fd",
+    "results/extensions/matched_cnn_20261024/clean_only.csv": "d61cb35d7b21e21cbe534d0fa046657a77b7f2fee8a49643f4c74a1dd5256312",
+    "results/extensions/matched_cnn_20261024/pgd_mixed.csv": "cf1ffaeed43b576e8a15eb3e8adb13cbd8b21b50b79b00b547eff9768a9633e6",
+    "results/extensions/matched_cnn_20261024/provenance/training-clean_only.json": "299d392d405d1a269e316f7bfe655b9974acda8465bba5fc6fbc456dc80d5e8d",
+    "results/extensions/matched_cnn_20261024/provenance/training-pgd_mixed.json": "7f1abdf92945b829db2beb60cdaec68623fed740a41417eda7e84f229fd0562a",
+    "results/extensions/matched_cnn_20261024/provenance/executed-evaluator-v2.py": "38f96878ed8a41bf3a1833b50db1c47f4b935dcc91c0173ba4b9e575e4e58b8f",
+    "results/extensions/matched_cnn_20261024/provenance/executed-evaluator-v1.py": "1f0e524df79ecb71cb7613ec9669d3d459bc03bece6ed305cce7bfec211ef60d",
+    "results/extensions/matched_cnn_20261024/provenance/environment.txt": "3d4e1ef659b0906c37b827218671f8a60d97086ab108491e5d5c8e33d0f9ffde",
+    "results/extensions/matched_cnn_20261024/provenance/test-evaluation-v2-command.json": "592d1a198defb65306676884f7d29b714495f5094f7801fa44a52badfebb79b3",
+    "results/extensions/matched_cnn_20261024/provenance/clean_only-command.json": "9e00e807e249f3031ded8cd73d0b71bd260cb2a44309ef80ae12666e293f91bf",
+    "results/extensions/matched_cnn_20261024/provenance/pgd_mixed-command.json": "8658d8fe7d0f0a3a472564d004ed2881828002d0fafd4a8a2a1858432df69705",
+    "results/extensions/matched_cnn_20261024/provenance/nvidia-smi.txt": "8a4b53be35c9c7d3c09b64337ce94f1f41bf33fa5fd9e9179d6aa476f7cf70eb",
+    "results/extensions/matched_cnn_20261024/provenance/test-evaluation.log": "792c575a2b09fde98880220040259f16fa8fc6db6b5a39c114730a438c291d8e",
+    "results/extensions/matched_cnn_20261024/provenance/test-evaluation-v2.log": "9e040cd732d4a849d2733db2344a63b8bc1f7d21236af87afe8d612c4bd67c51",
+    "results/extensions/matched_cnn_20261024/provenance/colab-setup-cell.json": "1ecb066abd9c0a6f490bebfcca1937a450d2e080be8abb1d9038487834ac1bb8",
+    "results/extensions/matched_cnn_20261024/planning-snapshot.md": "4898e950ec444298c4638ffc6ac34ed42b42f76536b8edac1e65ece25e456836",
+    "results/extensions/matched_cnn_20261024/evidence-index.json": "3e2b2c5660be2d438aef4f2831b08d33b712f2c2ca98812c3a2bc224b64e9d88",
+    "verification/matched_cnn_saved_audit.py": "f6a5204b033362a5b3d265360356bfbb0271526164f9081945657ebaa85da338"
+  },
+  "savedVerification": "SAVED_EVIDENCE_CONSISTENT_NOT_INDEPENDENT_REPRODUCTION",
+  "independentVerificationApproval": false
+}

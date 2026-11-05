@@ -1,0 +1,373 @@
+{
+  "source_commit": "75defef0d69c1741025306e0150c770e84b23a30",
+  "input_sha256": "e5b6a44b7e4906bba933de7573181c05a6893b5d473afa9664a2d4ed24a4793b",
+  "conditions": [
+    {
+      "model": "cnn",
+      "epsilon": 0.0,
+      "minimum_clean_accuracy": {
+        "value": 0.12162162162162163,
+        "classes": [
+          "Sailboat"
+        ]
+      },
+      "minimum_attacked_accuracy": {
+        "value": 0.12162162162162163,
+        "classes": [
+          "Sailboat"
+        ]
+      },
+      "maximum_conditional_ASR": {
+        "value": 0.0,
+        "classes": [
+          "Aircraft Carrier",
+          "Bulkers",
+          "Car Carrier",
+          "Container Ship",
+          "Cruise",
+          "DDG",
+          "Recreational",
+          "Sailboat",
+          "Submarine",
+          "Tug"
+        ]
+      },
+      "undefined_ASR_classes": [],
+      "worst_attacked_details": [
+        {
+          "class_name": "Sailboat",
+          "N": 74,
+          "D": 9,
+          "B": 65,
+          "S": 0,
+          "ASR": 0.0,
+          "attacked_correct": 9,
+          "clean_wrong_to_attacked_correct": 0
+        }
+      ]
+    },
+    {
+      "model": "cnn",
+      "epsilon": 0.01,
+      "minimum_clean_accuracy": {
+        "value": 0.12162162162162163,
+        "classes": [
+          "Sailboat"
+        ]
+      },
+      "minimum_attacked_accuracy": {
+        "value": 0.04054054054054054,
+        "classes": [
+          "Sailboat"
+        ]
+      },
+      "maximum_conditional_ASR": {
+        "value": 0.7368421052631579,
+        "classes": [
+          "DDG"
+        ]
+      },
+      "undefined_ASR_classes": [],
+      "worst_attacked_details": [
+        {
+          "class_name": "Sailboat",
+          "N": 74,
+          "D": 9,
+          "B": 65,
+          "S": 6,
+          "ASR": 0.6666666666666666,
+          "attacked_correct": 3,
+          "clean_wrong_to_attacked_correct": 0
+        }
+      ]
+    },
+    {
+      "model": "cnn",
+      "epsilon": 0.03,
+      "minimum_clean_accuracy": {
+        "value": 0.12162162162162163,
+        "classes": [
+          "Sailboat"
+        ]
+      },
+      "minimum_attacked_accuracy": {
+        "value": 0.0,
+        "classes": [
+          "DDG",
+          "Sailboat"
+        ]
+      },
+      "maximum_conditional_ASR": {
+        "value": 1.0,
+        "classes": [
+          "DDG",
+          "Sailboat"
+        ]
+      },
+      "undefined_ASR_classes": [],
+      "worst_attacked_details": [
+        {
+          "class_name": "DDG",
+          "N": 102,
+          "D": 38,
+          "B": 64,
+          "S": 38,
+          "ASR": 1.0,
+          "attacked_correct": 0,
+          "clean_wrong_to_attacked_correct": 0
+        },
+        {
+          "class_name": "Sailboat",
+          "N": 74,
+          "D": 9,
+          "B": 65,
+          "S": 9,
+          "ASR": 1.0,
+          "attacked_correct": 0,
+          "clean_wrong_to_attacked_correct": 0
+        }
+      ]
+    },
+    {
+      "model": "cnn",
+      "epsilon": 0.05,
+      "minimum_clean_accuracy": {
+        "value": 0.12162162162162163,
+        "classes": [
+          "Sailboat"
+        ]
+      },
+      "minimum_attacked_accuracy": {
+        "value": 0.0,
+        "classes": [
+          "DDG",
+          "Sailboat"
+        ]
+      },
+      "maximum_conditional_ASR": {
+        "value": 1.0,
+        "classes": [
+          "DDG",
+          "Sailboat"
+        ]
+      },
+      "undefined_ASR_classes": [],
+      "worst_attacked_details": [
+        {
+          "class_name": "DDG",
+          "N": 102,
+          "D": 38,
+          "B": 64,
+          "S": 38,
+          "ASR": 1.0,
+          "attacked_correct": 0,
+          "clean_wrong_to_attacked_correct": 0
+        },
+        {
+          "class_name": "Sailboat",
+          "N": 74,
+          "D": 9,
+          "B": 65,
+          "S": 9,
+          "ASR": 1.0,
+          "attacked_correct": 0,
+          "clean_wrong_to_attacked_correct": 0
+        }
+      ]
+    },
+    {
+      "model": "mobilenet",
+      "epsilon": 0.0,
+      "minimum_clean_accuracy": {
+        "value": 0.3108108108108108,
+        "classes": [
+          "Sailboat"
+        ]
+      },
+      "minimum_attacked_accuracy": {
+        "value": 0.3108108108108108,
+        "classes": [
+          "Sailboat"
+        ]
+      },
+      "maximum_conditional_ASR": {
+        "value": 0.0,
+        "classes": [
+          "Aircraft Carrier",
+          "Bulkers",
+          "Car Carrier",
+          "Container Ship",
+          "Cruise",
+          "DDG",
+          "Recreational",
+          "Sailboat",
+          "Submarine",
+          "Tug"
+        ]
+      },
+      "undefined_ASR_classes": [],
+      "worst_attacked_details": [
+        {
+          "class_name": "Sailboat",
+          "N": 74,
+          "D": 23,
+          "B": 51,
+          "S": 0,
+          "ASR": 0.0,
+          "attacked_correct": 23,
+          "clean_wrong_to_attacked_correct": 0
+        }
+      ]
+    },
+    {
+      "model": "mobilenet",
+      "epsilon": 0.01,
+      "minimum_clean_accuracy": {
+        "value": 0.3108108108108108,
+        "classes": [
+          "Sailboat"
+        ]
+      },
+      "minimum_attacked_accuracy": {
+        "value": 0.0,
+        "classes": [
+          "DDG",
+          "Tug"
+        ]
+      },
+      "maximum_conditional_ASR": {
+        "value": 1.0,
+        "classes": [
+          "DDG",
+          "Tug"
+        ]
+      },
+      "undefined_ASR_classes": [],
+      "worst_attacked_details": [
+        {
+          "class_name": "DDG",
+          "N": 102,
+          "D": 51,
+          "B": 51,
+          "S": 51,
+          "ASR": 1.0,
+          "attacked_correct": 0,
+          "clean_wrong_to_attacked_correct": 0
+        },
+        {
+          "class_name": "Tug",
+          "N": 68,
+          "D": 44,
+          "B": 24,
+          "S": 44,
+          "ASR": 1.0,
+          "attacked_correct": 0,
+          "clean_wrong_to_attacked_correct": 0
+        }
+      ]
+    },
+    {
+      "model": "mobilenet",
+      "epsilon": 0.03,
+      "minimum_clean_accuracy": {
+        "value": 0.3108108108108108,
+        "classes": [
+          "Sailboat"
+        ]
+      },
+      "minimum_attacked_accuracy": {
+        "value": 0.0,
+        "classes": [
+          "DDG",
+          "Sailboat",
+          "Tug"
+        ]
+      },
+      "maximum_conditional_ASR": {
+        "value": 1.0,
+        "classes": [
+          "DDG",
+          "Sailboat",
+          "Tug"
+        ]
+      },
+      "undefined_ASR_classes": [],
+      "worst_attacked_details": [
+        {
+          "class_name": "DDG",
+          "N": 102,
+          "D": 51,
+          "B": 51,
+          "S": 51,
+          "ASR": 1.0,
+          "attacked_correct": 0,
+          "clean_wrong_to_attacked_correct": 0
+        },
+        {
+          "class_name": "Sailboat",
+          "N": 74,
+          "D": 23,
+          "B": 51,
+          "S": 23,
+          "ASR": 1.0,
+          "attacked_correct": 0,
+          "clean_wrong_to_attacked_correct": 0
+        },
+        {
+          "class_name": "Tug",
+          "N": 68,
+          "D": 44,
+          "B": 24,
+          "S": 44,
+          "ASR": 1.0,
+          "attacked_correct": 0,
+          "clean_wrong_to_attacked_correct": 0
+        }
+      ]
+    },
+    {
+      "model": "mobilenet",
+      "epsilon": 0.05,
+      "minimum_clean_accuracy": {
+        "value": 0.3108108108108108,
+        "classes": [
+          "Sailboat"
+        ]
+      },
+      "minimum_attacked_accuracy": {
+        "value": 0.0,
+        "classes": [
+          "DDG"
+        ]
+      },
+      "maximum_conditional_ASR": {
+        "value": 1.0,
+        "classes": [
+          "DDG"
+        ]
+      },
+      "undefined_ASR_classes": [],
+      "worst_attacked_details": [
+        {
+          "class_name": "DDG",
+          "N": 102,
+          "D": 51,
+          "B": 51,
+          "S": 51,
+          "ASR": 1.0,
+          "attacked_correct": 0,
+          "clean_wrong_to_attacked_correct": 0
+        }
+      ]
+    }
+  ],
+  "evidence_scope": "Descriptive saved-row worst-class screening only; not safety certification or independent inference.",
+  "limitations": [
+    "No model inference, retraining, image-hash recomputation, or independent Stage B approval.",
+    "ASR denominators differ across models; no paired model superiority claim.",
+    "Ranking uses counts within one model/epsilon, never sums repeated images across epsilons.",
+    "Count concentration is review priority, not causal evidence; small denominators remain visible.",
+    "No new clean-only versus PGD training comparison was executed.",
+    "No operational acceptance threshold, cost weighting, statistical worst-case guarantee, or causal explanation is inferred."
+  ]
+}

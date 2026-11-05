@@ -1,0 +1,14 @@
+[
+  "/content/intl_matched/venv/bin/python",
+  "/content/intl_matched/evaluate_matched_pair_v2.py",
+  "--repo",
+  "/content/intl_matched/repo",
+  "--backup",
+  "/content/drive/MyDrive/AdversarialAI_international_private/intl_20261023T172139",
+  "--test-dir",
+  "/content/intl_matched/data/test",
+  "--batch-id",
+  "intl_20261023T172139",
+  "--seed",
+  "2026"
+]

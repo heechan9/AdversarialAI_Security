@@ -1,0 +1,111 @@
+{
+  "status": "COMPLETED_NOT_INDEPENDENT_APPROVAL",
+  "scope": "CNN unfiltered canonical test split, one matched seed",
+  "started_at": "2026-10-23T18:20:34.778460+00:00",
+  "source_commit": "db3bfe6b79d3cecb2ef57aeaaf29ab9d89b5d9bf",
+  "evaluator_sha256": "38f96878ed8a41bf3a1833b50db1c47f4b935dcc91c0173ba4b9e575e4e58b8f",
+  "paired_audit": {
+    "result": "PAIRED_RECORDED_PROTOCOL_AND_CHECKPOINTS_CONSISTENT",
+    "comparison_protocol_sha256": "8dee4bb84261c652c5676288b907c02b3d2fe61b210dbc781b3f05a4ccd56187",
+    "model_sha256": {
+      "clean_only": "e3b02315482c432ec5a2b5828696f611ad9f167f847d273d746df8c98677d353",
+      "pgd_mixed": "38767ddb3eb00463e7324ba4371c184c0eed01a87819b4766a66415d69538708"
+    },
+    "independent_verification_approval": false,
+    "test_evaluation_complete": false,
+    "limitations": [
+      "No inference or execution authentication is performed.",
+      "Matching configuration does not prove identical hardware or stochastic trajectories.",
+      "This is not evidence of an adversarial-training benefit or leakage-free generalization."
+    ]
+  },
+  "test_manifest_sha256": "36059fea372334509404aca0e66155bf99a8df270beb1cc3bf4865b361ae70a6",
+  "baseline_sha256": "cb256b1a5d6f605d355334e4e8667257a2bfbd29e08836cc4114869bd7068701",
+  "settings": {
+    "seed": 2026,
+    "batch_size": 8,
+    "epsilon": 0.03,
+    "step_size": 0.005,
+    "pgd7": {
+      "steps": 7,
+      "restarts": 1
+    },
+    "pgd50": {
+      "steps": 50,
+      "restarts": 5
+    }
+  },
+  "models": {
+    "baseline": {
+      "model_sha256": "cb256b1a5d6f605d355334e4e8667257a2bfbd29e08836cc4114869bd7068701",
+      "samples": 781,
+      "clean_accuracy": 0.645326504481434,
+      "attacks": {
+        "pgd7": {
+          "accuracy": 0.11139564660691421,
+          "asr": 0.8273809523809523,
+          "asr_successes": 417,
+          "asr_denominator": 504
+        },
+        "pgd50": {
+          "accuracy": 0.04737516005121639,
+          "asr": 0.9265873015873016,
+          "asr_successes": 467,
+          "asr_denominator": 504
+        }
+      },
+      "csv": "baseline.csv",
+      "csv_sha256": "91a04ab3cb3643639f31b90ad31d5a34a5dfa34be2146063ec13dcce66a035fd"
+    },
+    "clean_only": {
+      "model_sha256": "e3b02315482c432ec5a2b5828696f611ad9f167f847d273d746df8c98677d353",
+      "samples": 781,
+      "clean_accuracy": 0.6901408450704225,
+      "attacks": {
+        "pgd7": {
+          "accuracy": 0.11523687580025609,
+          "asr": 0.8330241187384044,
+          "asr_successes": 449,
+          "asr_denominator": 539
+        },
+        "pgd50": {
+          "accuracy": 0.052496798975672214,
+          "asr": 0.9239332096474954,
+          "asr_successes": 498,
+          "asr_denominator": 539
+        }
+      },
+      "csv": "clean_only.csv",
+      "csv_sha256": "d61cb35d7b21e21cbe534d0fa046657a77b7f2fee8a49643f4c74a1dd5256312"
+    },
+    "pgd_mixed": {
+      "model_sha256": "38767ddb3eb00463e7324ba4371c184c0eed01a87819b4766a66415d69538708",
+      "samples": 781,
+      "clean_accuracy": 0.6914212548015365,
+      "attacks": {
+        "pgd7": {
+          "accuracy": 0.18950064020486557,
+          "asr": 0.725925925925926,
+          "asr_successes": 392,
+          "asr_denominator": 540
+        },
+        "pgd50": {
+          "accuracy": 0.06145966709346991,
+          "asr": 0.9111111111111111,
+          "asr_successes": 492,
+          "asr_denominator": 540
+        }
+      },
+      "csv": "pgd_mixed.csv",
+      "csv_sha256": "cf1ffaeed43b576e8a15eb3e8adb13cbd8b21b50b79b00b547eff9768a9633e6"
+    }
+  },
+  "independent_verification_approval": false,
+  "limitations": [
+    "One seed only; no independent reproduction or external data.",
+    "Exact split overlap checks do not establish vessel/scene independence.",
+    "Historical baseline training exposure is unresolved.",
+    "No preprocessing defenses, AutoAttack, or certified robustness evaluation."
+  ],
+  "updated_at": "2026-10-23T19:38:39.220199+00:00"
+}

@@ -1,0 +1,163 @@
+{
+  "schema_version": 1,
+  "scope": "Retained saved evidence and recorded identities; not execution authentication or independent reproduction.",
+  "source_commit": "db3bfe6b79d3cecb2ef57aeaaf29ab9d89b5d9bf",
+  "batch_id": "intl_20261023T172139",
+  "files": {
+    "evaluation.json": {
+      "sha256": "ed702570ddf07f75b609ba9c6607ae0d1ce760d07ea92561fdcd6bd322f70c06",
+      "bytes": 3951,
+      "source_drive_file_id": "1yMlhLPml0izaSwRjQSQMFjeG4o1NBJdn",
+      "original_name": "evaluation.json",
+      "source_url": "https://drive.google.com/file/d/1yMlhLPml0izaSwRjQSQMFjeG4o1NBJdn/view?usp=drivesdk",
+      "retention": "original bytes"
+    },
+    "paired-audit.json": {
+      "sha256": "25aa60cad7f697c31b4360c7457edce87d963ea4216e6dbeedf63b0df2e8f49c",
+      "bytes": 720,
+      "source_drive_file_id": "17sZSdNONnFxvsGsXab3qm2h3yG_nVjc7",
+      "original_name": "paired-audit.json",
+      "source_url": "https://drive.google.com/file/d/17sZSdNONnFxvsGsXab3qm2h3yG_nVjc7/view?usp=drivesdk",
+      "retention": "original bytes"
+    },
+    "baseline.csv": {
+      "sha256": "91a04ab3cb3643639f31b90ad31d5a34a5dfa34be2146063ec13dcce66a035fd",
+      "bytes": 60474,
+      "source_drive_file_id": "1pkigsvrqD8LC2Cg8JWs_w-p75m2AlVQS",
+      "original_name": "baseline.csv",
+      "source_url": "https://drive.google.com/file/d/1pkigsvrqD8LC2Cg8JWs_w-p75m2AlVQS/view?usp=drivesdk",
+      "retention": "original bytes"
+    },
+    "clean_only.csv": {
+      "sha256": "d61cb35d7b21e21cbe534d0fa046657a77b7f2fee8a49643f4c74a1dd5256312",
+      "bytes": 60287,
+      "source_drive_file_id": "1d5cSQw_SWisla9Dbrx5QhP7ScaEFxiYk",
+      "original_name": "clean_only.csv",
+      "source_url": "https://drive.google.com/file/d/1d5cSQw_SWisla9Dbrx5QhP7ScaEFxiYk/view?usp=drivesdk",
+      "retention": "original bytes"
+    },
+    "pgd_mixed.csv": {
+      "sha256": "cf1ffaeed43b576e8a15eb3e8adb13cbd8b21b50b79b00b547eff9768a9633e6",
+      "bytes": 61239,
+      "source_drive_file_id": "1sVCTI9Pys8_7xknVPJsPnVwpaSlS7fap",
+      "original_name": "pgd_mixed.csv",
+      "source_url": "https://drive.google.com/file/d/1sVCTI9Pys8_7xknVPJsPnVwpaSlS7fap/view?usp=drivesdk",
+      "retention": "original bytes"
+    },
+    "provenance/training-clean_only.json": {
+      "sha256": "299d392d405d1a269e316f7bfe655b9974acda8465bba5fc6fbc456dc80d5e8d",
+      "bytes": 3744,
+      "source_drive_file_id": "1fNQUq9ptFVHO6At1QXqCFN4CzgMl2N3F",
+      "original_name": "training.json",
+      "source_url": "https://drive.google.com/file/d/1fNQUq9ptFVHO6At1QXqCFN4CzgMl2N3F/view?usp=drivesdk",
+      "retention": "original bytes"
+    },
+    "provenance/training-pgd_mixed.json": {
+      "sha256": "7f1abdf92945b829db2beb60cdaec68623fed740a41417eda7e84f229fd0562a",
+      "bytes": 3737,
+      "source_drive_file_id": "1yPOhnvBmnTCbA8Nm5S8JFwk5hb7Uqlp9",
+      "original_name": "training.json",
+      "source_url": "https://drive.google.com/file/d/1yPOhnvBmnTCbA8Nm5S8JFwk5hb7Uqlp9/view?usp=drivesdk",
+      "retention": "original bytes"
+    },
+    "provenance/executed-evaluator-v2.py": {
+      "sha256": "38f96878ed8a41bf3a1833b50db1c47f4b935dcc91c0173ba4b9e575e4e58b8f",
+      "bytes": 7735,
+      "source_drive_file_id": "1x1Y2U3D-_sNdH4iGgjbS50G7am9EOHhG",
+      "original_name": "executed-evaluator-v2.py",
+      "source_url": "https://drive.google.com/file/d/1x1Y2U3D-_sNdH4iGgjbS50G7am9EOHhG/view?usp=drivesdk",
+      "retention": "original bytes"
+    },
+    "provenance/executed-evaluator-v1.py": {
+      "sha256": "1f0e524df79ecb71cb7613ec9669d3d459bc03bece6ed305cce7bfec211ef60d",
+      "bytes": 7710,
+      "source_drive_file_id": "1JETCzrf4FqQ1puPvQkvAK3fh8uLIfuUl",
+      "original_name": "executed-evaluator.py",
+      "source_url": "https://drive.google.com/file/d/1JETCzrf4FqQ1puPvQkvAK3fh8uLIfuUl/view?usp=drivesdk",
+      "retention": "original bytes"
+    },
+    "provenance/environment.txt": {
+      "sha256": "3d4e1ef659b0906c37b827218671f8a60d97086ab108491e5d5c8e33d0f9ffde",
+      "bytes": 1187,
+      "source_drive_file_id": "1SqfcOA44mmprtdOvtMLSbHAkWWdGIen9",
+      "original_name": "environment.txt",
+      "source_url": "https://drive.google.com/file/d/1SqfcOA44mmprtdOvtMLSbHAkWWdGIen9/view?usp=drivesdk",
+      "retention": "original bytes"
+    },
+    "provenance/test-evaluation-v2-command.json": {
+      "sha256": "592d1a198defb65306676884f7d29b714495f5094f7801fa44a52badfebb79b3",
+      "bytes": 360,
+      "source_drive_file_id": "1ZgdX0bGE3eDM-Voy2-SmGnjLVIC_GQTR",
+      "original_name": "test-evaluation-v2-command.json",
+      "source_url": "https://drive.google.com/file/d/1ZgdX0bGE3eDM-Voy2-SmGnjLVIC_GQTR/view?usp=drivesdk",
+      "retention": "original bytes"
+    },
+    "provenance/clean_only-command.json": {
+      "sha256": "9e00e807e249f3031ded8cd73d0b71bd260cb2a44309ef80ae12666e293f91bf",
+      "bytes": 573,
+      "source_drive_file_id": "1wJDH-Ty3AbVZID2RV_b6eQ0ywJb7gQCL",
+      "original_name": "intl_20261023T172139_clean_only_s2026-command.json",
+      "source_url": "https://drive.google.com/file/d/1wJDH-Ty3AbVZID2RV_b6eQ0ywJb7gQCL/view?usp=drivesdk",
+      "retention": "original bytes"
+    },
+    "provenance/pgd_mixed-command.json": {
+      "sha256": "8658d8fe7d0f0a3a472564d004ed2881828002d0fafd4a8a2a1858432df69705",
+      "bytes": 571,
+      "source_drive_file_id": "1eMB4auQFcYh6L_Q63R75Y-ooQMzGhIec",
+      "original_name": "intl_20261023T172139_pgd_mixed_s2026-command.json",
+      "source_url": "https://drive.google.com/file/d/1eMB4auQFcYh6L_Q63R75Y-ooQMzGhIec/view?usp=drivesdk",
+      "retention": "original bytes"
+    },
+    "provenance/nvidia-smi.txt": {
+      "sha256": "8a4b53be35c9c7d3c09b64337ce94f1f41bf33fa5fd9e9179d6aa476f7cf70eb",
+      "bytes": 1689,
+      "source_drive_file_id": "19jQjic1tIg_wxuC1GdGMW00GSbrzaC7p",
+      "original_name": "nvidia-smi.txt",
+      "source_url": "https://drive.google.com/file/d/19jQjic1tIg_wxuC1GdGMW00GSbrzaC7p/view?usp=drivesdk",
+      "retention": "original bytes"
+    },
+    "provenance/test-evaluation.log": {
+      "sha256": "792c575a2b09fde98880220040259f16fa8fc6db6b5a39c114730a438c291d8e",
+      "bytes": 1127,
+      "source_drive_file_id": "1GzFz142GrE-M4bM8VX9M4RCYRfhCLv9T",
+      "original_name": "test-evaluation.log",
+      "source_url": "https://drive.google.com/file/d/1GzFz142GrE-M4bM8VX9M4RCYRfhCLv9T/view?usp=drivesdk",
+      "retention": "original bytes"
+    },
+    "provenance/test-evaluation-v2.log": {
+      "sha256": "9e040cd732d4a849d2733db2344a63b8bc1f7d21236af87afe8d612c4bd67c51",
+      "bytes": 19846,
+      "source_drive_file_id": "19wML8vckm5-207gLJR77Lj86_P2ihZhA",
+      "original_name": "test-evaluation-v2.log",
+      "source_url": "https://drive.google.com/file/d/19wML8vckm5-207gLJR77Lj86_P2ihZhA/view?usp=drivesdk",
+      "retention": "original bytes"
+    },
+    "provenance/colab-setup-cell.json": {
+      "sha256": "1ecb066abd9c0a6f490bebfcca1937a450d2e080be8abb1d9038487834ac1bb8",
+      "bytes": 1161,
+      "source_description": "Extracted setup cell and stdout from saved Colab notebook 1N1__4xbeGlx0SwQ_5tLxpVoW09qbp1r2; derived record.",
+      "retention": "derived/excerpt"
+    },
+    "planning-snapshot.md": {
+      "sha256": "4898e950ec444298c4638ffc6ac34ed42b42f76536b8edac1e65ece25e456836",
+      "bytes": 5625,
+      "source_description": "Pre-execution planning draft retained from local foundation branch cf5614d; historical proposal, not actual executed settings.",
+      "retention": "historical planning snapshot"
+    }
+  },
+  "pinned_source_file_sha256": {
+    "src/adversarial_ai/training/adversarial_training.py": "5ffb85ac37810e03266546f8d2d6a60173399bcb94c3926860ddcfa7db194380",
+    "src/adversarial_ai/training/controls.py": "74fd7c8af4c7fe32db652d85a158effdda0ba26918e2ac1710ff1a8de79fca11",
+    "src/adversarial_ai/attacks/iterative.py": "016cdb874c5d02f0636c454f17e1a79fe9b0b7942a1108c6a1489b402e59ab2e",
+    "verification/training_control_audit.py": "37e7bacef7365c440dfd3ec5440fbdb1cd14ae9d47adefa7d30919ed046e3858",
+    "configs/test_manifest.json": "36059fea372334509404aca0e66155bf99a8df270beb1cc3bf4865b361ae70a6",
+    "configs/classes.json": "4a77ec1ce0aaf7ab9bed20cd1b4be3420a1d0bdf3d88924f3d1ba3ebf6d29d44"
+  },
+  "private_artifacts_not_published": [
+    "original or trained model binaries",
+    "image bytes",
+    "full split audits",
+    "full notebook and training logs"
+  ],
+  "independent_verification_approval": false
+}

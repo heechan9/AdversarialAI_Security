@@ -1,0 +1,21 @@
+test_tampered_normal (test_verify_saved_csv.CsvVerifierTests.test_tampered_normal) ... ok
+test_tampered_optimized (test_verify_saved_csv.CsvVerifierTests.test_tampered_optimized) ... FAIL
+test_valid_normal (test_verify_saved_csv.CsvVerifierTests.test_valid_normal) ... ok
+test_valid_optimized (test_verify_saved_csv.CsvVerifierTests.test_valid_optimized) ... ok
+
+======================================================================
+FAIL: test_tampered_optimized (test_verify_saved_csv.CsvVerifierTests.test_tampered_optimized)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "test_verify_saved_csv.py", line 25, in test_tampered_optimized
+    def test_tampered_optimized(self):self.check_tampered(True)
+                                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "test_verify_saved_csv.py", line 32, in check_tampered
+    self.assertNotEqual(result.returncode,0,result.stdout)
+AssertionError: 0 == 0 : {"class_rows_recounted_from_saved_predictions": 80, "conditions": 8, "status": "PASS", "model_inference": "NOT_RUN"}
+
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.387s
+
+FAILED (failures=1)

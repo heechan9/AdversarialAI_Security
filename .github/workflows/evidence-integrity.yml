@@ -25,6 +25,14 @@ jobs:
           cache: pip
       - name: Install test runner
         run: python -m pip install pytest
+      - name: Verify saved CNN diagnostic exports
+        run: |
+          python -m unittest discover -s tests -p 'test_matched_cnn_diagnostics.py' -v
+          python verification/matched_cnn_diagnostics.py --output-dir "$RUNNER_TEMP/paulguard-cnn-diagnostics"
+      - name: Verify paired defense descriptive research
+        run: |
+          python -m unittest discover -s research/paired_defense_review -v
+          python -O -m unittest discover -s research/paired_defense_review -v
       - name: Recompute independent Stage A evidence
         run: python verification/stage_a_clean_recompute.py
       - name: Validate Stage B locked contract
@@ -34,7 +42,8 @@ jobs:
       - name: Check scoped verification status and generated displays
         run: |
           python verification/status_registry.py
-          python -m pytest tests/test_verification_status.py tests/test_issue_lifecycle.py -q
+          python -m pytest tests/test_verification_status.py tests/test_issue_lifecycle.py tests/test_discrepancy_triage.py -q
+          python web/maris/scripts/export-research-diagnostics.py --check
       - name: Compare MARIS with canonical research results
         run: python verification/maris_source_check.py
 
@@ -46,6 +55,9 @@ jobs:
         working-directory: web/maris
     steps:
       - uses: actions/checkout@v4
+        with:
+          # Compare the preserved panel/export to the pinned #95 merge commit.
+          fetch-depth: 0
       - uses: pnpm/action-setup@v4
         with:
           version: 11.25.0

@@ -1,0 +1,109 @@
+{
+  "source_head": "9507e14a551fc697d9466e3257a1249d4579dc3d",
+  "files": [
+    {
+      "path": "configs/classes.json",
+      "git_blob_sha1": "f20909f7f3d79138a7130845f5929cc84d988824"
+    },
+    {
+      "path": "configs/test_manifest.json",
+      "git_blob_sha1": "f4d97dfb7f711f482f97a92d472c59ab6fae1dfa"
+    },
+    {
+      "path": "results/attacks/provisional/fgsm_cnn_eps_0.01_samples.csv",
+      "git_blob_sha1": "acc18ef768c508e96dccb99ed782e50b7754f246"
+    },
+    {
+      "path": "results/attacks/provisional/fgsm_cnn_eps_0.03_samples.csv",
+      "git_blob_sha1": "98754f17ce4d70c7b7e41cb392f53c2c4c79592c"
+    },
+    {
+      "path": "results/attacks/provisional/fgsm_cnn_eps_0.05_samples.csv",
+      "git_blob_sha1": "1f8c3401bd1c1f406ac90fa2ac48da5babab6eb8"
+    },
+    {
+      "path": "results/attacks/provisional/fgsm_cnn_eps_0_samples.csv",
+      "git_blob_sha1": "fae9c39321dceddcdec674ffa9b9a8ff6282f67b"
+    },
+    {
+      "path": "results/attacks/provisional/fgsm_mobilenet_eps_0.01_samples.csv",
+      "git_blob_sha1": "d67da7a9cd1358b36a936fcadb53f66b4935b2c5"
+    },
+    {
+      "path": "results/attacks/provisional/fgsm_mobilenet_eps_0.03_samples.csv",
+      "git_blob_sha1": "fce8948ff4934b41cdcffca69287e9aa5b18883d"
+    },
+    {
+      "path": "results/attacks/provisional/fgsm_mobilenet_eps_0.05_samples.csv",
+      "git_blob_sha1": "c4eef2ca40a1c424d205f84394beb4c8e2006e08"
+    },
+    {
+      "path": "results/attacks/provisional/fgsm_mobilenet_eps_0_samples.csv",
+      "git_blob_sha1": "2d8fc15ba1f644a9b04df3ecac522a14268f442a"
+    },
+    {
+      "path": "results/defenses/experimental/gaussian_run_01/cnn_eps_0.01_samples.csv",
+      "git_blob_sha1": "d6c647433b65ebd5f2ed981bc5e61f0b9df50cfb"
+    },
+    {
+      "path": "results/defenses/experimental/gaussian_run_01/cnn_eps_0.03_samples.csv",
+      "git_blob_sha1": "9416d9cbccbc19f0027fac5f23eb0a59ca03c694"
+    },
+    {
+      "path": "results/defenses/experimental/gaussian_run_01/cnn_eps_0.05_samples.csv",
+      "git_blob_sha1": "9c4694db7f2e2399b31d765de2bc8706a82e5d1a"
+    },
+    {
+      "path": "results/defenses/experimental/gaussian_run_01/cnn_eps_0_samples.csv",
+      "git_blob_sha1": "1454cc42ea8f293acc3dc329071dc4552b4eb644"
+    },
+    {
+      "path": "results/defenses/experimental/gaussian_run_01/mobilenet_eps_0.01_samples.csv",
+      "git_blob_sha1": "01082a2e9de0c8e496c419293c25225dec6c682d"
+    },
+    {
+      "path": "results/defenses/experimental/gaussian_run_01/mobilenet_eps_0.03_samples.csv",
+      "git_blob_sha1": "9118e8c79a7a34182aa5122059e98a744c968eef"
+    },
+    {
+      "path": "results/defenses/experimental/gaussian_run_01/mobilenet_eps_0.05_samples.csv",
+      "git_blob_sha1": "74bbe664b97c6151794733a8f340f1d76199761e"
+    },
+    {
+      "path": "results/defenses/experimental/gaussian_run_01/mobilenet_eps_0_samples.csv",
+      "git_blob_sha1": "1cdd0aa87a07dc7c3339dfb0baac6070c79d7fae"
+    },
+    {
+      "path": "results/defenses/experimental/mean_run_01/cnn_eps_0.01_samples.csv",
+      "git_blob_sha1": "68e0df77556cf8a70954bcef61a4038358f4f2e9"
+    },
+    {
+      "path": "results/defenses/experimental/mean_run_01/cnn_eps_0.03_samples.csv",
+      "git_blob_sha1": "0fef0e1e8c1b51f051d2c8e0bbdd4a67b13a4635"
+    },
+    {
+      "path": "results/defenses/experimental/mean_run_01/cnn_eps_0.05_samples.csv",
+      "git_blob_sha1": "9b57498704a79016744ddb9cc25b9ae11704e7b4"
+    },
+    {
+      "path": "results/defenses/experimental/mean_run_01/cnn_eps_0_samples.csv",
+      "git_blob_sha1": "276b8763701cb3841283c8c3f36dd952e3ae6e5c"
+    },
+    {
+      "path": "results/defenses/experimental/mean_run_01/mobilenet_eps_0.01_samples.csv",
+      "git_blob_sha1": "ac4d8f8ab11c636cd7c94cf4e4283ae7cc0e54f9"
+    },
+    {
+      "path": "results/defenses/experimental/mean_run_01/mobilenet_eps_0.03_samples.csv",
+      "git_blob_sha1": "e84d2282dde8a136ea5f7e8f26520e66a555ba12"
+    },
+    {
+      "path": "results/defenses/experimental/mean_run_01/mobilenet_eps_0.05_samples.csv",
+      "git_blob_sha1": "16709c05addd1c9e2398158a3072a7cbbb9a6788"
+    },
+    {
+      "path": "results/defenses/experimental/mean_run_01/mobilenet_eps_0_samples.csv",
+      "git_blob_sha1": "fde0ef92ecfffd3bfa26bdfa88e144fb943dfaf6"
+    }
+  ]
+}

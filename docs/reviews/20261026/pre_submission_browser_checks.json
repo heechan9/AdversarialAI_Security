@@ -1,0 +1,167 @@
+{
+  "date_kst": "2026-10-26",
+  "scope": "Production v16 recorded-result UI display checks; no model inference",
+  "live_url": "https://maritime-adversarial-lab.hc24734503.chatgpt.site/",
+  "site_source_sha": "af9a492ddac2dc16401d622d992b6ea53c8462f1",
+  "github_main_sha": "d81e816457d0231d0ee8b886890a658011fb1387",
+  "surfaces": [
+    {
+      "name": "desktop",
+      "content_width": 1348,
+      "height": 936
+    },
+    {
+      "name": "360px iframe",
+      "content_width": 345
+    },
+    {
+      "name": "390px iframe",
+      "content_width": 375
+    }
+  ],
+  "physical_device_test": false,
+  "touch_emulation": false,
+  "screen_reader_test": false,
+  "checks": [
+    {"surface":"desktop","kind":"results","requested":{"model":"CNN","epsilon":"0 · 대조군"},"values":["64.53%","64.53%","0.00%"],"selected_epsilon":["0 · 대조군"]},
+    {"surface":"desktop","kind":"results","requested":{"model":"CNN","epsilon":"0.01"},"values":["64.53%","41.61%","35.52%"],"selected_epsilon":["0.01"]},
+    {"surface":"desktop","kind":"results","requested":{"model":"CNN","epsilon":"0.03"},"values":["64.53%","24.33%","62.30%"],"selected_epsilon":["0.03"]},
+    {"surface":"desktop","kind":"results","requested":{"model":"CNN","epsilon":"0.05"},"values":["64.53%","20.23%","68.85%"],"selected_epsilon":["0.05"]},
+    {"surface":"desktop","kind":"results","requested":{"model":"MobileNetV2","epsilon":"0 · 대조군"},"values":["78.49%","78.49%","0.00%"],"selected_epsilon":["0 · 대조군"]},
+    {"surface":"desktop","kind":"results","requested":{"model":"MobileNetV2","epsilon":"0.01"},"values":["78.49%","12.42%","84.18%"],"selected_epsilon":["0.01"]},
+    {"surface":"desktop","kind":"results","requested":{"model":"MobileNetV2","epsilon":"0.03"},"values":["78.49%","13.19%","83.20%"],"selected_epsilon":["0.03"]},
+    {"surface":"desktop","kind":"results","requested":{"model":"MobileNetV2","epsilon":"0.05"},"values":["78.49%","16.13%","79.45%"],"selected_epsilon":["0.05"]},
+    {"surface":"desktop","kind":"defense","requested":{"model":"CNN","method":"가우시안 필터","epsilon":"0 · 대조군"},"values":["64.53%","64.53%","56.98%","56.98%"],"selected_epsilon":["0 · 대조군"]},
+    {"surface":"desktop","kind":"defense","requested":{"model":"CNN","method":"가우시안 필터","epsilon":"0.01"},"values":["64.53%","41.61%","50.45%","31.37%"],"selected_epsilon":["0.01"]},
+    {"surface":"desktop","kind":"defense","requested":{"model":"CNN","method":"가우시안 필터","epsilon":"0.03"},"values":["64.53%","24.33%","34.70%","12.55%"],"selected_epsilon":["0.03"]},
+    {"surface":"desktop","kind":"defense","requested":{"model":"CNN","method":"가우시안 필터","epsilon":"0.05"},"values":["64.53%","20.23%","27.66%","8.32%"],"selected_epsilon":["0.05"]},
+    {"surface":"desktop","kind":"defense","requested":{"model":"CNN","method":"평균 필터","epsilon":"0 · 대조군"},"values":["64.53%","64.53%","53.65%","53.65%"],"selected_epsilon":["0 · 대조군"]},
+    {"surface":"desktop","kind":"defense","requested":{"model":"CNN","method":"평균 필터","epsilon":"0.01"},"values":["64.53%","41.61%","48.40%","29.45%"],"selected_epsilon":["0.01"]},
+    {"surface":"desktop","kind":"defense","requested":{"model":"CNN","method":"평균 필터","epsilon":"0.03"},"values":["64.53%","24.33%","36.88%","11.01%"],"selected_epsilon":["0.03"]},
+    {"surface":"desktop","kind":"defense","requested":{"model":"CNN","method":"평균 필터","epsilon":"0.05"},"values":["64.53%","20.23%","30.60%","6.66%"],"selected_epsilon":["0.05"]},
+    {"surface":"desktop","kind":"defense","requested":{"model":"MobileNetV2","method":"가우시안 필터","epsilon":"0 · 대조군"},"values":["78.49%","78.49%","82.97%","82.97%"],"selected_epsilon":["0 · 대조군"]},
+    {"surface":"desktop","kind":"defense","requested":{"model":"MobileNetV2","method":"가우시안 필터","epsilon":"0.01"},"values":["78.49%","12.42%","43.66%","9.48%"],"selected_epsilon":["0.01"]},
+    {"surface":"desktop","kind":"defense","requested":{"model":"MobileNetV2","method":"가우시안 필터","epsilon":"0.03"},"values":["78.49%","13.19%","26.63%","7.17%"],"selected_epsilon":["0.03"]},
+    {"surface":"desktop","kind":"defense","requested":{"model":"MobileNetV2","method":"가우시안 필터","epsilon":"0.05"},"values":["78.49%","16.13%","25.10%","8.71%"],"selected_epsilon":["0.05"]},
+    {"surface":"desktop","kind":"defense","requested":{"model":"MobileNetV2","method":"평균 필터","epsilon":"0 · 대조군"},"values":["78.49%","78.49%","79.64%","79.64%"],"selected_epsilon":["0 · 대조군"]},
+    {"surface":"desktop","kind":"defense","requested":{"model":"MobileNetV2","method":"평균 필터","epsilon":"0.01"},"values":["78.49%","12.42%","52.37%","10.50%"],"selected_epsilon":["0.01"]},
+    {"surface":"desktop","kind":"defense","requested":{"model":"MobileNetV2","method":"평균 필터","epsilon":"0.03"},"values":["78.49%","13.19%","32.65%","8.83%"],"selected_epsilon":["0.03"]},
+    {"surface":"desktop","kind":"defense","requested":{"model":"MobileNetV2","method":"평균 필터","epsilon":"0.05"},"values":["78.49%","16.13%","30.22%","8.07%"],"selected_epsilon":["0.05"]},
+    {"surface":"360px","kind":"results","requested":{"model":"CNN","epsilon":"0 · 대조군"},"values":["64.53%","64.53%","0.00%"],"selected_epsilon":["0 · 대조군"]},
+    {"surface":"360px","kind":"results","requested":{"model":"CNN","epsilon":"0.01"},"values":["64.53%","41.61%","35.52%"],"selected_epsilon":["0.01"]},
+    {"surface":"360px","kind":"results","requested":{"model":"CNN","epsilon":"0.03"},"values":["64.53%","24.33%","62.30%"],"selected_epsilon":["0.03"]},
+    {"surface":"360px","kind":"results","requested":{"model":"CNN","epsilon":"0.05"},"values":["64.53%","20.23%","68.85%"],"selected_epsilon":["0.05"]},
+    {"surface":"360px","kind":"results","requested":{"model":"MobileNetV2","epsilon":"0 · 대조군"},"values":["78.49%","78.49%","0.00%"],"selected_epsilon":["0 · 대조군"]},
+    {"surface":"360px","kind":"results","requested":{"model":"MobileNetV2","epsilon":"0.01"},"values":["78.49%","12.42%","84.18%"],"selected_epsilon":["0.01"]},
+    {"surface":"360px","kind":"results","requested":{"model":"MobileNetV2","epsilon":"0.03"},"values":["78.49%","13.19%","83.20%"],"selected_epsilon":["0.03"]},
+    {"surface":"360px","kind":"results","requested":{"model":"MobileNetV2","epsilon":"0.05"},"values":["78.49%","16.13%","79.45%"],"selected_epsilon":["0.05"]},
+    {"surface":"390px","kind":"results","requested":{"model":"CNN","epsilon":"0 · 대조군"},"values":["64.53%","64.53%","0.00%"],"selected_epsilon":["0 · 대조군"]},
+    {"surface":"390px","kind":"results","requested":{"model":"CNN","epsilon":"0.01"},"values":["64.53%","41.61%","35.52%"],"selected_epsilon":["0.01"]},
+    {"surface":"390px","kind":"results","requested":{"model":"CNN","epsilon":"0.03"},"values":["64.53%","24.33%","62.30%"],"selected_epsilon":["0.03"]},
+    {"surface":"390px","kind":"results","requested":{"model":"CNN","epsilon":"0.05"},"values":["64.53%","20.23%","68.85%"],"selected_epsilon":["0.05"]},
+    {"surface":"390px","kind":"results","requested":{"model":"MobileNetV2","epsilon":"0 · 대조군"},"values":["78.49%","78.49%","0.00%"],"selected_epsilon":["0 · 대조군"]},
+    {"surface":"390px","kind":"results","requested":{"model":"MobileNetV2","epsilon":"0.01"},"values":["78.49%","12.42%","84.18%"],"selected_epsilon":["0.01"]},
+    {"surface":"390px","kind":"results","requested":{"model":"MobileNetV2","epsilon":"0.03"},"values":["78.49%","13.19%","83.20%"],"selected_epsilon":["0.03"]},
+    {"surface":"390px","kind":"results","requested":{"model":"MobileNetV2","epsilon":"0.05"},"values":["78.49%","16.13%","79.45%"],"selected_epsilon":["0.05"]},
+    {"surface":"360px","kind":"defense","requested":{"model":"CNN","method":"가우시안 필터","epsilon":"0 · 대조군"},"values":["64.53%","64.53%","56.98%","56.98%"],"selected_epsilon":["0 · 대조군"]},
+    {"surface":"360px","kind":"defense","requested":{"model":"CNN","method":"가우시안 필터","epsilon":"0.01"},"values":["64.53%","41.61%","50.45%","31.37%"],"selected_epsilon":["0.01"]},
+    {"surface":"360px","kind":"defense","requested":{"model":"CNN","method":"가우시안 필터","epsilon":"0.03"},"values":["64.53%","24.33%","34.70%","12.55%"],"selected_epsilon":["0.03"]},
+    {"surface":"360px","kind":"defense","requested":{"model":"CNN","method":"가우시안 필터","epsilon":"0.05"},"values":["64.53%","20.23%","27.66%","8.32%"],"selected_epsilon":["0.05"]},
+    {"surface":"360px","kind":"defense","requested":{"model":"CNN","method":"평균 필터","epsilon":"0 · 대조군"},"values":["64.53%","64.53%","53.65%","53.65%"],"selected_epsilon":["0 · 대조군"]},
+    {"surface":"360px","kind":"defense","requested":{"model":"CNN","method":"평균 필터","epsilon":"0.01"},"values":["64.53%","41.61%","48.40%","29.45%"],"selected_epsilon":["0.01"]},
+    {"surface":"360px","kind":"defense","requested":{"model":"CNN","method":"평균 필터","epsilon":"0.03"},"values":["64.53%","24.33%","36.88%","11.01%"],"selected_epsilon":["0.03"]},
+    {"surface":"360px","kind":"defense","requested":{"model":"CNN","method":"평균 필터","epsilon":"0.05"},"values":["64.53%","20.23%","30.60%","6.66%"],"selected_epsilon":["0.05"]},
+    {"surface":"360px","kind":"defense","requested":{"model":"MobileNetV2","method":"가우시안 필터","epsilon":"0 · 대조군"},"values":["78.49%","78.49%","82.97%","82.97%"],"selected_epsilon":["0 · 대조군"]},
+    {"surface":"360px","kind":"defense","requested":{"model":"MobileNetV2","method":"가우시안 필터","epsilon":"0.01"},"values":["78.49%","12.42%","43.66%","9.48%"],"selected_epsilon":["0.01"]},
+    {"surface":"360px","kind":"defense","requested":{"model":"MobileNetV2","method":"가우시안 필터","epsilon":"0.03"},"values":["78.49%","13.19%","26.63%","7.17%"],"selected_epsilon":["0.03"]},
+    {"surface":"360px","kind":"defense","requested":{"model":"MobileNetV2","method":"가우시안 필터","epsilon":"0.05"},"values":["78.49%","16.13%","25.10%","8.71%"],"selected_epsilon":["0.05"]},
+    {"surface":"360px","kind":"defense","requested":{"model":"MobileNetV2","method":"평균 필터","epsilon":"0 · 대조군"},"values":["78.49%","78.49%","79.64%","79.64%"],"selected_epsilon":["0 · 대조군"]},
+    {"surface":"360px","kind":"defense","requested":{"model":"MobileNetV2","method":"평균 필터","epsilon":"0.01"},"values":["78.49%","12.42%","52.37%","10.50%"],"selected_epsilon":["0.01"]},
+    {"surface":"360px","kind":"defense","requested":{"model":"MobileNetV2","method":"평균 필터","epsilon":"0.03"},"values":["78.49%","13.19%","32.65%","8.83%"],"selected_epsilon":["0.03"]},
+    {"surface":"360px","kind":"defense","requested":{"model":"MobileNetV2","method":"평균 필터","epsilon":"0.05"},"values":["78.49%","16.13%","30.22%","8.07%"],"selected_epsilon":["0.05"]},
+    {"surface":"390px","kind":"defense","requested":{"model":"CNN","method":"가우시안 필터","epsilon":"0 · 대조군"},"values":["64.53%","64.53%","56.98%","56.98%"],"selected_epsilon":["0 · 대조군"]},
+    {"surface":"390px","kind":"defense","requested":{"model":"CNN","method":"가우시안 필터","epsilon":"0.01"},"values":["64.53%","41.61%","50.45%","31.37%"],"selected_epsilon":["0.01"]},
+    {"surface":"390px","kind":"defense","requested":{"model":"CNN","method":"가우시안 필터","epsilon":"0.03"},"values":["64.53%","24.33%","34.70%","12.55%"],"selected_epsilon":["0.03"]},
+    {"surface":"390px","kind":"defense","requested":{"model":"CNN","method":"가우시안 필터","epsilon":"0.05"},"values":["64.53%","20.23%","27.66%","8.32%"],"selected_epsilon":["0.05"]},
+    {"surface":"390px","kind":"defense","requested":{"model":"CNN","method":"평균 필터","epsilon":"0 · 대조군"},"values":["64.53%","64.53%","53.65%","53.65%"],"selected_epsilon":["0 · 대조군"]},
+    {"surface":"390px","kind":"defense","requested":{"model":"CNN","method":"평균 필터","epsilon":"0.01"},"values":["64.53%","41.61%","48.40%","29.45%"],"selected_epsilon":["0.01"]},
+    {"surface":"390px","kind":"defense","requested":{"model":"CNN","method":"평균 필터","epsilon":"0.03"},"values":["64.53%","24.33%","36.88%","11.01%"],"selected_epsilon":["0.03"]},
+    {"surface":"390px","kind":"defense","requested":{"model":"CNN","method":"평균 필터","epsilon":"0.05"},"values":["64.53%","20.23%","30.60%","6.66%"],"selected_epsilon":["0.05"]},
+    {"surface":"390px","kind":"defense","requested":{"model":"MobileNetV2","method":"가우시안 필터","epsilon":"0 · 대조군"},"values":["78.49%","78.49%","82.97%","82.97%"],"selected_epsilon":["0 · 대조군"]},
+    {"surface":"390px","kind":"defense","requested":{"model":"MobileNetV2","method":"가우시안 필터","epsilon":"0.01"},"values":["78.49%","12.42%","43.66%","9.48%"],"selected_epsilon":["0.01"]},
+    {"surface":"390px","kind":"defense","requested":{"model":"MobileNetV2","method":"가우시안 필터","epsilon":"0.03"},"values":["78.49%","13.19%","26.63%","7.17%"],"selected_epsilon":["0.03"]},
+    {"surface":"390px","kind":"defense","requested":{"model":"MobileNetV2","method":"가우시안 필터","epsilon":"0.05"},"values":["78.49%","16.13%","25.10%","8.71%"],"selected_epsilon":["0.05"]},
+    {"surface":"390px","kind":"defense","requested":{"model":"MobileNetV2","method":"평균 필터","epsilon":"0 · 대조군"},"values":["78.49%","78.49%","79.64%","79.64%"],"selected_epsilon":["0 · 대조군"]},
+    {"surface":"390px","kind":"defense","requested":{"model":"MobileNetV2","method":"평균 필터","epsilon":"0.01"},"values":["78.49%","12.42%","52.37%","10.50%"],"selected_epsilon":["0.01"]},
+    {"surface":"390px","kind":"defense","requested":{"model":"MobileNetV2","method":"평균 필터","epsilon":"0.03"},"values":["78.49%","13.19%","32.65%","8.83%"],"selected_epsilon":["0.03"]},
+    {"surface":"390px","kind":"defense","requested":{"model":"MobileNetV2","method":"평균 필터","epsilon":"0.05"},"values":["78.49%","16.13%","30.22%","8.07%"],"selected_epsilon":["0.05"]}
+  ],
+  "comparison": {
+    "checked": 72,
+    "mismatches": [],
+    "basis": "d81e816 web/maris/public/evidence/data.json and defense-comparison.json; display values only"
+  },
+  "links": {
+    "missing_anchor_targets": 0,
+    "same_origin_jsons_read": [
+      "/evidence/paired-defense-review.json",
+      "/evidence/worst-class-review.json",
+      "/evidence/defense-comparison-provenance.json",
+      "/evidence/provenance.json"
+    ],
+    "github_text_directory_pr_reads": 11,
+    "original_png": "Git blob existence checked; source PNG web page not browser-opened"
+  },
+  "source_json_sha256": {
+    "data.json": "20d2c4b7ec28b20c32c6c7f05b5b113e716ede611ea454335065ea2d8be682ae",
+    "defense-comparison.json": "650664277a0fad868c2f0776dff27331717c2ff8cbcc1d1fae47668707139453"
+  },
+  "case_checks": [
+    {
+      "broken": [],
+      "outcomes": [
+        "실험 이미지 선택",
+        "항공모함  자동차 운반선"
+      ],
+      "selected": [
+        "CASE 02 · MobileNetV2항공모함공격 성공 · 오답 전환"
+      ]
+    },
+    {
+      "broken": [],
+      "outcomes": [
+        "실험 이미지 선택",
+        "항공모함  항공모함"
+      ],
+      "selected": [
+        "CASE 03 · CNN항공모함공격 실패 · 정답 유지"
+      ]
+    },
+    {
+      "broken": [],
+      "outcomes": [
+        "실험 이미지 선택",
+        "항공모함  항공모함"
+      ],
+      "selected": [
+        "CASE 04 · MobileNetV2항공모함공격 실패 · 정답 유지"
+      ]
+    },
+    {
+      "broken": [],
+      "outcomes": [
+        "실험 이미지 선택",
+        "항공모함  레저선"
+      ],
+      "selected": [
+        "CASE 01 · CNN항공모함공격 성공 · 오답 전환"
+      ]
+    }
+  ],
+  "limits": [
+    "CSS frame testing, not physical mobile testing",
+    "Display comparison against preserved JSON, not new experiments",
+    "Latest main matched panel absent from production v16",
+    "No merge/deployment/submission or video production"
+  ]
+}

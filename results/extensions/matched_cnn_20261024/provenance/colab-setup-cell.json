@@ -1,0 +1,29 @@
+{
+  "description": "Exact setup cell source extracted from the saved Colab notebook; not an executed-notebook export or a complete notebook.",
+  "source_notebook_id": "1N1__4xbeGlx0SwQ_5tLxpVoW09qbp1r2",
+  "cell_index": 2,
+  "cell_id": "intl-2",
+  "execution_count": null,
+  "source": [
+    "from pathlib import Path\n",
+    "import subprocess, sys, os, json, hashlib, shutil, datetime, zipfile, stat\n",
+    "subprocess.run(['nvidia-smi'], check=True)\n",
+    "PIN='db3bfe6b79d3cecb2ef57aeaaf29ab9d89b5d9bf'\n",
+    "WORK=Path('/content/intl_matched'); WORK.mkdir(exist_ok=True)\n",
+    "REPO=WORK/'repo'\n",
+    "SEEDS=[2026]\n",
+    "EPOCHS=3\n",
+    "# 이 노트북을 다시 실행할 때 새 실행 묶음을 사용합니다. 기존 결과를 덮어쓰지 않습니다.\n",
+    "BATCH_ID='intl_'+datetime.datetime.now(datetime.timezone.utc).strftime('%Y%m%dT%H%M%S')\n",
+    "print('Prepared batch:', BATCH_ID, 'seeds:', SEEDS, 'no training started')\n"
+  ],
+  "outputs": [
+    {
+      "output_type": "stream",
+      "name": "stdout",
+      "text": [
+        "Prepared batch: intl_20261023T172139 seeds: [2026] no training started\n"
+      ]
+    }
+  ]
+}

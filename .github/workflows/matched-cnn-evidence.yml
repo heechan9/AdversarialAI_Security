@@ -1,0 +1,27 @@
+name: Matched CNN saved evidence
+on:
+  pull_request:
+    paths:
+      - 'results/extensions/matched_cnn_20261024/**'
+      - 'verification/matched_cnn_saved_audit.py'
+      - 'tests/test_matched_cnn_saved_audit.py'
+      - '.github/workflows/matched-cnn-evidence.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  saved-evidence:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Recalculate stored results without inference
+        run: |
+          python verification/matched_cnn_saved_audit.py
+          python -O verification/matched_cnn_saved_audit.py
+          python -m py_compile results/extensions/matched_cnn_20261024/provenance/executed-evaluator-v2.py
+          python -m unittest discover -s tests -p 'test_matched_cnn_saved_audit.py' -v
+          python -O -m unittest discover -s tests -p 'test_matched_cnn_saved_audit.py' -v

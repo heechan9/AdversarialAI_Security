@@ -1,6 +1,12 @@
 <div align="center">
 
-# 자율운항선박 이미지 분류 모델 적대적 AI 검증
+# PaulGuard — Maritime AI Security Research
+
+**제출 프로젝트명: 자율운항선박 이미지 분류 모델 적대적 AI 검증**
+
+[한국어](README.md) | [English](README.en.md)
+
+**코드 라이선스:** [목록에 명시된 자체 코드](LICENSED_CODE.txt)에만 Apache 2.0을 적용합니다. [적용 범위·제3자 조건](LICENSE_SCOPE.md)을 확인하세요. 데이터·이미지·모델 등 목록 밖 자료는 포함하지 않습니다.
 
 ### Clean → FGSM → 전처리 방어 비교 → Evidence Audit 기반 해양 AI 보안 연구
 
@@ -56,6 +62,36 @@
 [실무 활용·평가 기준 대조](docs/MARITIME_PRACTICE_GAP_REVIEW.md): 실제 해상 영상 시스템과의 차이, 배경 참고와 후속 과제. 작은 L∞ 값만으로 사람에게 보이지 않는 교란임을 입증하지는 않습니다.
 
 ## 최신 통합 상태
+
+**2026-11-05:** [MARIS 오류 분석](https://maritime-adversarial-lab.hc24734503.chatgpt.site/#diagnostics)에서 선종·정오 변화별 표본과 외부 재현 불일치를 조회하고 CSV·JSON으로 내려받을 수 있습니다. 운영 웹은 버전 20입니다.
+
+- **분석 기능:** [#112](https://github.com/heechan9/AdversarialAI_Security/pull/112)의 저장 CNN 진단·불일치 추적·재검사 연결 검증과 [#100](https://github.com/heechan9/AdversarialAI_Security/pull/100)의 쉬운 사진·필터 안내가 main에 반영됐습니다. [기능·집계 범위](docs/RESEARCH_DIAGNOSTICS_WEB_INTEGRATION.md)를 확인하세요.
+- **팀 기여:** [현수 자산 점검 수신](docs/reviews/20261026/final_submission_integration.md#현수-1026-반환-자산-점검만-확인)과 [재혁 1·2차 검토](CONTRIBUTIONS.md)를 연결했습니다. 자산 점검 783개 일치와 선택 분류 INCOMPLETE를 구분합니다.
+- **검토·협업:** [분석 체크리스트](docs/DATA_ANALYSIS_REVIEW_CHECKLIST.md), [영문 인계 양식](docs/templates/evidence_handoff.md), [해외 협업 안내](docs/INTERNATIONAL_COLLABORATION.md)에서 조건·근거·실행 범위를 따라갈 수 있습니다. 첫 과제는 공개 저장 결과 재계산 한 건입니다.
+- **연구 판정:** 연구 PC LOCAL_PASS, 외부 Stage B FAIL·원인 미확정, 단일 seed 후속 실험의 범위는 유지합니다. 새 웹 기능과 문서 통합은 독립 모델 재현이나 논문 최종 승인을 뜻하지 않습니다.
+
+### 2026-10-30 통합 기록
+
+다음은 당시 상태를 보존한 이력입니다. 현재 반영 상태는 위 안내를 우선합니다.
+
+**2026-10-30 기준 main:** [`08b33ae04248798de76cebba2e7d242d134d28c7`](https://github.com/heechan9/AdversarialAI_Security/commit/08b33ae04248798de76cebba2e7d242d134d28c7). 공개 표시명은 **PaulGuard**이며, 기존 제출 제목·팀 기여·저장소 URL과 MARIS 화면 이름은 유지합니다. 아래 과거 main SHA와 검사 수는 해당 날짜의 기록입니다.
+
+- **main에 반영된 제출 준비:** [#99](https://github.com/heechan9/AdversarialAI_Security/pull/99)에서 제출 전 사용 점검·화면 근거·현수 cross-only 인계 준비를 통합했습니다. 당시 배포 v16의 72개 표시 조건 대조는 저장 결과 표시 검사이며 새 모델 실험이 아닙니다. 최종 제출·실제 휴대전화 검수·모델 독립 재현 완료를 뜻하지 않습니다.
+- **팀 지원의 후속 수신 기록은 별도 Draft:** [#101](https://github.com/heechan9/AdversarialAI_Security/pull/101), head `f65d0398a1967a2f3ed763f02de12f0405acb1eb`에는 제출 JSON의 모델 2개·이미지 781개 자산 항목 783개 일치가 기록돼 있습니다. `model_inference_performed=false`이며 선택 cross-only는 **INCOMPLETE**입니다. 아래 ‘반환 미확보’는 main 통합 문서의 이전 시점 기록이고, 자산 점검 수신을 전체 재현 PASS로 바꾸지 않습니다. 연구 PC LOCAL_PASS·외부 FAIL·원인 미확정은 유지합니다.
+- **문서 검토 대기:** [#102](https://github.com/heechan9/AdversarialAI_Security/pull/102), head `1815bb159f7ffa3a75b85086fa3e666ca1692183`의 통제 비교·검토 인계와 [#103](https://github.com/heechan9/AdversarialAI_Security/pull/103), head `9063a29229855cdc5f35af59adb204a8d61b721b`의 국제 협업 문서는 별도 open Draft입니다. 이 README의 표시명 갱신이 해당 문서의 병합이나 실제 국제 협력·독립 검토 성립을 뜻하지 않습니다.
+- **사용과 해석:** [MARIS](https://maritime-adversarial-lab.hc24734503.chatgpt.site/)에서 모델·공격 강도·필터별 **저장 결과**를 비교하고 아래 [빠른 시작](#빠른-시작)으로 재현 범위를 확인합니다. FGSM과 별도 PGD/학습 실험, 서로 다른 clean-correct ASR 분모는 합치지 않습니다. 한 seed의 PGD50·5회 재시작 정확도 **6.15%**와 정상 추가학습 대비 **+0.90%p**는 그 조건의 내부 결과일 뿐, 일반적인 방어 보장이나 실선 안전성 입증이 아닙니다.
+
+### 날짜별 통합·실험 이력
+
+**2026-10-26 제출 준비 점검:** [코드·검증 근거 통합 기록](docs/reviews/20261026/final_submission_integration.md)은 태희 10/23 인계(#92)·재혁 저장 근거 검토(#88)의 기존 반영과 기호 10/24 발표 검토를 연결합니다. 현수의 10/26 지원 반환에서 모델 2개·이미지 781개, 총 783개 자산의 경로·해시 일치(`ASSETS_MATCH`, `model_inference_performed=false`)를 확인했습니다. **선택 배열 cross-only 분류는 미수행(INCOMPLETE)**이며, [기존 인계 안내](docs/HYUNSU_CROSS_ONLY_HANDOFF_20261026.md)의 후속 과제로 남깁니다. 새 추론·전체 재현 PASS·최종 보고서 반영 완료를 뜻하지 않습니다. 아래 날짜별 이력과 외부 FAIL은 유지합니다.
+
+**2026-10-24 별도 후속 실험:** [CNN 정상 추가학습 대조 결과](results/extensions/matched_cnn_20261024/README.md)는 seed 2026, 테스트 781장씩의 내부 평가입니다. 정상 추가학습 대비 PGD 혼합학습은 PGD7 +7.43%p, PGD50·5회 재시작 +0.90%p(정답 순증 7장)이며, 강한 공격 정확도는 6.15%입니다. 계획한 3개 seed 중 1개만 실행했습니다. 기존 논문 수치·외부 Stage B FAIL과 분리하며, 독립 재현 승인이나 전반적 방어 성능 입증을 뜻하지 않습니다. 실행 소스는 미병합 Draft #87의 고정 커밋입니다.
+
+2026-10-21 확인 기준 main은 `b92ba8f450020479198a8bb03dbfa510044d6c19`입니다. [#88](https://github.com/heechan9/AdversarialAI_Security/pull/88)의 저장 근거 검토 문서 3개가 병합됐습니다. [주장 대조](docs/reviews/20261019/evidence_claim_review.md) · [수치 재계산](docs/reviews/20261019/evidence_calculation_review.md) · [검토 방법](docs/reviews/20261019/evidence_review_method.md). 이재혁의 자료 작성·Claude 도움·Codex 후속 정리와 공개 근거 보완을 구분하며, 자료 작성자의 본인 계정 커밋이나 새 모델 독립 재현을 뜻하지 않습니다.
+
+- **main 검사:** [b92ba8f CPU CI](https://github.com/heechan9/AdversarialAI_Security/actions/runs/39568046992) 780 passed / 18 warnings. 저장 근거·합성 회귀 검사이며 모델 성능 향상이나 외부 독립 재현 PASS의 증거가 아닙니다.
+- **미병합 Draft:** [#86 FGSM 중단·재개 감사](https://github.com/heechan9/AdversarialAI_Security/pull/86)(`e4c54a9`)와 [#87 clean-only 대조 학습·paired 감사](https://github.com/heechan9/AdversarialAI_Security/pull/87)(`db3bfe6`)는 아직 main에 포함되지 않았습니다. 브랜치 검사 통과와 main 통합·새 대조 실험 완료는 구분합니다.
+- **재현 판정 유지:** 연구 수행 PC의 전체 781장 재실행은 LOCAL_PASS이나, 보존된 외부 독립 실행의 FAIL과 최초 환경 차이 원인 미확정은 해소되지 않았습니다. 아래 실험·검토 이력은 각각의 날짜와 범위로 읽어야 합니다.
 
 **제출 이후 후속 연구:** [CNN 적대적 학습·테스트 평가](results/extensions/cnn_adversarial_20261002/README.md)를 완료했습니다(2026-10-02). 학습 6,147장·검증 689장, 테스트 781장에서 일반 정확도 64.53%→69.14%, PGD7 정확도 11.14%→18.57%입니다. PGD7·ε=0.03·1 restart·필터 없음에 한정한 결과이며 강한 공격 전체나 외부 독립 검증 완료를 뜻하지 않습니다. [BIM·PGD 중간 근거](docs/FOLLOWUP_EXECUTION_STATUS.md)는 부분 결과로 유지하고 [Square·SurFree 블랙박스 평가](results/extensions/blackbox/README_20261003.md)도 완료했습니다. MobileNet 학습·BIM/PGD 잔여 조건·JSMA 전체 평가는 아직 완료되지 않았습니다. 기존 제출 결과와 Stage B 판정은 유지합니다.
 
@@ -125,11 +161,11 @@
 | 연구근거 감사 | ✅ 검증 완료 | manifest·모델 해시·CSV·JSON·문서 일관성·시각 검토 감사 |
 | A단계 독립 재계산 | ✅ 완료 | 저장된 Clean 결과 재계산·검사; 원본 모델 재추론과 구분 |
 | B단계 원본 재실행 | ⚠ 수행 확인·일치 검증 FAIL | 현수 결과와 후속 추론 확인; 남은 5개 예측(4장) 원인 미확정 |
-| PC 현재 환경 추가 비교 | ✅ 선택 5항목 기준 일치 | 4장·5개 항목 추론 완료; 전체 B단계 PASS 및 과거 환경 동일성 증명과 구분 |
+| 연구 수행 PC 전체 재실행 | ✅ LOCAL_PASS | 781장·모델 2개·두 필터·ε 4개 라벨·요약 대조 일치. 확률값 비교 제외; 외부 독립 PASS와 구분 |
 | 논문 Claim 감사 | ✅ 9/9 통과 | 기존 v1.5 claim snapshot 감사; 최신 원고 전체의 검증 완료를 뜻하지 않음 |
 | 가우시안·평균 필터 방어 | ✅ 실험·기록 감사 완료 | 고정 3×3 전처리; 기존 FGSM 입력 및 방어 인지 FGSM 비교·근거 감사 |
 | MARIS 가상 실험실 | ✅ 구현·소스 반영 | 설명용 3D 조작·저장된 이미지 비교·결과 재생; 실시간 추론 아님 |
-| BIM·PGD·JSMA·적대적 학습 | ⚪ 향후 연구 | 현재 검증 완료 범위에 포함하지 않음 |
+| BIM·PGD·JSMA·적대적 학습 | 🛠 조건별 완료·부분·미완료 구분 | CNN 적대적 학습·지정 PGD7 평가는 완료, BIM/PGD는 부분 결과, MobileNet 학습·잔여 조건·JSMA 전체 평가는 미완료. [현재 범위](docs/FOLLOWUP_EXECUTION_STATUS.md) |
 | VLM/LLM·안전영향 시뮬레이터 | ⚪ 후속 확장 | 전체 프로젝트 로드맵; 현재 논문 실험 범위 밖 |
 
 ## 핵심 결과를 쉽게 읽으면
@@ -290,8 +326,9 @@ python scripts\audit_paper_claims.py
 - FGSM 실험과 기록 감사는 완료되었습니다. 원자료의 `provisional` 상태와 별도 공식 실행계약의 미연결 승인·재실행 기록은 보존하며, 확정된 ε 범위와 구분합니다.
 - 두 모델의 입력 해상도는 CNN 128×128, MobileNetV2 224×224로 다릅니다.
 - MobileNetV2의 학습 당시 실제 전처리·분할 비율·random seed는 확정되지 않았습니다.
+- 제출 기준 모델의 최초 학습 노출 이력은 미확인입니다. 이후 보관된 후속 6,147/689/781 분할의 정확 raw/RGB 교차 중복은 0이지만 유사 이미지 후보가 남아 선박·장면 독립성을 보장하지 않습니다. 누락된 원천 ID·staged 원본 두 목록을 재구성 파일로 대체하지 않습니다. [자료 계보 한계](docs/REPRODUCIBILITY.md#data-provenance-update--november-1-2026)를 구분합니다.
 - 고정 가우시안·평균 필터 전처리 방어는 구현·실험 및 기록 감사를 완료했습니다. 원자료는 `experimental`로 보존합니다. 기존 공격 입력에서의 회복만으로 방어 성공을 주장하지 않으며, 방어 인지 FGSM과 정상 성능 손실을 함께 평가합니다.
-- BIM·PGD·JSMA·적대적 학습과 모델 간 전이 공격은 현재 검증 완료 범위에 포함하지 않습니다.
+- CNN 적대적 학습·지정 PGD7 평가는 해당 조건에서 완료됐고, BIM/PGD는 부분 결과이며 MobileNet 학습·잔여 조건·JSMA 전체 평가는 미완료입니다. 전체 공격·학습·모델 간 전이 연구의 완료, 일반적인 방어 효과 또는 외부 독립 재현을 뜻하지 않습니다.
 - 분류 성능 저하가 실제 충돌·항로 이탈 같은 운항 피해를 유발한다는 인과관계는 검증하지 않았습니다.
 - VLM/LLM과 안전영향 시뮬레이터는 향후 목표이며 현재 구현 성과로 주장하지 않습니다.
 
@@ -302,3 +339,5 @@ python scripts\audit_paper_claims.py
 **재현 가능한 실험, 검증 가능한 수치, 과장하지 않는 결론을 우선합니다.**
 
 </div>
+
+

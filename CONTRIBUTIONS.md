@@ -1,5 +1,16 @@
 # Project Contributions & Provenance
 
+## 팀 제출자료 바로가기
+
+| 팀원 | 연결된 기여 기록 | 공개 근거 |
+|---|---|---|
+| 김태희 | 31장 분담 이미지 검토 기록, 고정 baseline CPU 재실행 자료 제출·확인 | [CPU 인계 수신 검산](docs/reviews/20261023/taehee_cpu_handoff_review.md) · [PR #92](https://github.com/heechan9/AdversarialAI_Security/pull/92) |
+| 이재혁 | 32장 분담 이미지 검토 기록, 1·2차 저장 근거 검토 | [2차 검토 방법](docs/reviews/20261019/evidence_review_method.md) · [기여 색인 PR #108](https://github.com/heechan9/AdversarialAI_Security/pull/108) |
+| 김기호 | 발표 구성·Q&A·표현 검토와 리허설 보고 | [통합 기록과 저장 결과 대조](docs/reviews/20261026/final_submission_integration.md#기호-검토와-저장-결과의-대조) |
+| 이현수 | 기존 독립 재실행·진단 지원과 10/26 자산 점검 반환 | [외부 재실행 기록](docs/STAGE_B_HYEONSU_01_REVIEW.md) · [자산 점검 수신](docs/reviews/20261026/final_submission_integration.md#현수-1026-반환-자산-점검만-확인) |
+
+이 표는 이미 접수·반영된 자료의 위치를 연결합니다. 사람별 수행·AI 보조·수신 측 대조 범위는 각 원기록과 아래 상세 기여를 따르며, 서로 다른 작업을 기여율로 합산하지 않습니다.
+
 ## Issue #2 / PR #3: Research Evidence Audit Framework
 
 - **Issue**: [#2 - feat(audit): independently verify Clean and provisional FGSM evidence](https://github.com/heechan9/AdversarialAI_Security/issues/2)
@@ -64,6 +75,15 @@
 - **최희찬 (heechan9)**:
   - Defined the audit extension scope and supplied the authoritative evidence CSV artifacts.
   - Authorized conservative code review and repository integration after all automated checks pass.
+
+## 이재혁 1·2차 저장 근거 검토 (2026-10)
+
+- **1차 — 제출문서상 2026-10-16 수행, 10-19 업로드:** 고정 소스 `9b64b8e33a2a1ff2cda1d51386cfb9360b09aebf`의 저장 결과를 대상으로 재계산 기록 10개와 주장·근거 대조 10개를 제출했다. 필수 ASR 2건의 스프레드시트 재확인, 기존 FGSM 결과표 128칸 대조, 표현 점검 제안 2건을 수행했다고 기록했다. 원본 인계요약은 필수 기준 충족으로 보고하지만 원고 원문·최종 교정본은 직접 대조하지 못했다고 명시한다. 따라서 이 기록을 제출 논문의 직접 교정·최종 승인으로 계산하지 않는다.
+- **2차 — 2026-10-20 검토, 10-21 접수·통합:** 주장 8개, 저장 수치 재계산 10개, 발표 시각자료 5개 항목과 검토 방법을 문서 3개로 제출했다. [PR #88](https://github.com/heechan9/AdversarialAI_Security/pull/88)은 merge `b92ba8f450020479198a8bb03dbfa510044d6c19`로 반영됐다. [주장 대조](docs/reviews/20261019/evidence_claim_review.md), [재계산·시각자료 대조](docs/reviews/20261019/evidence_calculation_review.md), [검토 방법](docs/reviews/20261019/evidence_review_method.md)을 함께 읽는다. `20261019`는 원 과제 템플릿 경로이며 실제 2차 검토일을 뜻하지 않는다.
+- **사람·AI·통합 역할:** 두 차수는 제공된 과제·참고 자료에 기반한 검토다. 2차 원문에는 Claude의 집계·대조·문서 작성 도움과 이재혁의 직접 재확인 보고가 명시돼 있다. Codex의 후속 Markdown 정리, 저장값 대조 및 공개 근거 위치 2건 보완은 별도 기여다. 1차의 세부 AI 도구별 수행 분담은 확인된 기록 이상으로 추정하지 않는다. 실제 개인 수행 과정 전체를 독립 관찰했다는 의미도 아니다.
+- **확인 범위:** 저장 CSV/JSON 재계산·문서 정합성 검토이며 새 모델 학습·추론·공격 생성·코드 구현이나 독립 모델 재현이 아니다. 1차는 원문 대조 미확인, 2차는 10-18 최종 제출 이후라는 시점을 보존하며, 제출 원고 반영·저자 순서·기여율·팀 최종 승인을 소급 인증하지 않는다. 기존 8월 FGSM 검토·9월 32장 이미지 검토와 중복 합산하지 않는다.
+- **근거 보존·게시 신원:** 1차는 비공개 원본 인계요약·재계산/주장 대조 CSV와 팀 개발일지의 기록을 요약한다. 원본 ZIP·비공개 링크·원고·개인 연락처는 공개하지 않는다. 2차의 원본/준비본 대조와 이미 반영된 범위는 [10-26 통합 점검](docs/reviews/20261026/final_submission_integration.md)에 연결돼 있다. PR #88의 게시 계정은 heechan9이며 이재혁 본인 계정 커밋으로 해석하지 않는다.
+- **이번 기여 색인 보완:** 최희찬의 요청·범위 지정에 따라 Codex 보조로 기존 기록을 이 절에 연결했다. 다른 사람의 기여, 기존 결과, 제출 자료와 미해결 재현성 판정은 변경하지 않는다.
 
 ## Codex Security Audit
 
@@ -145,3 +165,33 @@
 - Original evidence files, model predictions, scientific metrics and lower research sections are preserved. No new model inference, defended outcome for an individual case, navigation/collision simulation or hardware test is claimed.
 - The two design previews are explicitly static layouts, not browser captures. Candidate browser QA was blocked by the available preview environment and remains a separate release check.
 - GitHub connector publication uses the authenticated heechan9 account; the implementation is credited to Codex in the commit trailer. Existing contributors and history remain unchanged.
+
+## 김태희 고정 baseline CPU 재실행 인계 (2026-10-23 KST)
+
+- 김태희: 고정 baseline `9b64b8e33a2a1ff2cda1d51386cfb9360b09aebf`의 CPU 회귀·공개 저장 증거 검사 자료를 제출했다. r2 인계요약에서 반환 ZIP을 직접 열어 로그·종료코드를 확인했다고 보고했다. PR81 웹·기존 CI 원문·CI 아티팩트 비교는 본인이 직접 하지 않았다고 구분했다.
+- Claude/Cowork: 제출 자료에 따르면 클라우드 Linux에서 prepare/run 실행, Git 기록 비교와 양식 초안 작성에 사용됐다. 태희 PC에서의 직접 실행이나 새 781장 모델 추론으로 기록하지 않는다.
+- Codex: 수신 ZIP의 경로·CRC·22개 내부 해시, 요약 변경, JUnit 541개 및 기존 CI 552개·수신 당시 main CI 780개 원본 아티팩트를 읽기 전용으로 대조했다. 새 모델·CPU 실험은 실행하지 않았다.
+- 최희찬 (heechan9): 수정본의 Git·공유 Drive 반영 범위를 지정하고 r2 완료 자료를 전달했다. 기여는 ‘고정 버전 CPU 재실행 자료 제출·확인’이며 2차 작업 전체 완료나 독립 모델 재현 성공을 뜻하지 않는다.
+- [수신 검산 및 검증 경계](docs/reviews/20261023/taehee_cpu_handoff_review.md)를 함께 보존한다. 원본 ZIP·개인 작업경로·비공개 자료는 Git에 추가하지 않는다. 원격 게시 계정과 실제 문서 작성자를 구분하며 Codex의 문서 정리는 커밋 trailer로 기록한다.
+
+## Matched CNN follow-up result package (2026-10-24 KST)
+
+- 최희찬 (heechan9): authorized the separate Colab experiment, completion check and publication of reviewable results; required review before merge and preservation of historical failures.
+- Codex assistance: prepared and operated the authorized Colab workflow, implemented the separately pinned evaluator, recalculated saved CSVs, documented protocol deviations and limitations, and prepared the review PR with a standard-library auditor and mutation checks.
+- The retained batch records one training seed and three model evaluations of 781 images each. This publication review does not run models again or confer independent experimental approval. Existing teammate credits, paper results and external Stage B FAIL remain unchanged.
+- Source and evidence: [one-seed matched CNN follow-up](results/extensions/matched_cnn_20261024/README.md). GitHub connector commits use the authenticated account; the Codex trailer identifies implementation/documentation assistance rather than independent human authorship.
+
+## 이현수 선택 지원의 자산 점검 반환 (2026-10-26 KST)
+
+- 이현수 — 제출 자료의 수행 기록: 고정 평가 SHA `491b973cd9f4840664044a83c0d62d1ee1bb98e8`에서 자산 점검을 수행했다고 보고하고 결과 보고/JSON을 제출했다. JSON은 모델 2개·이미지 781개, 총 783개 자산의 경로·해시 일치(`ASSETS_MATCH`)와 `model_inference_performed=false`를 기록한다. 종료코드 0은 보고서 기재이며 별도 실행 로그 확인과 구분한다.
+- Codex — 수신 대조·문서 통합: 원본 ZIP CRC·두 내부 파일 해시, 제출 JSON의 고유 783개 경로와 기대/실제 해시를 고정 manifest와 대조했다. 현수 PC의 자산을 직접 다시 해시하거나 모델을 실행한 것이 아니다. 통합 기록·인계·한영 README를 최소 갱신하며 태희·재혁·기호·희찬과 현수의 기존 기여 이력은 보존한다.
+- 최희찬 (heechan9) — 원본 전달과 통합 범위 지정: 자산 점검과 선택 분류를 구분하고 기존 LOCAL_PASS/외부 FAIL을 보존하도록 요청했다. 이 요청을 현수의 별도 본인 재확인, 작성자 전체 승인, Claude 검토 완료로 기록하지 않는다. 이번 통합 문구는 Draft에서 같은 head의 표현·근거 검토를 기다린다.
+- 후속 작업: 제출 보고상 PC/Linux 배열이 현수 PC에 없어 선택 cross-only 분류는 미수행(`INCOMPLETE`)이다. 수신 측이 보존 배열 원본 해시를 확인한 것과 현수에게 비공개 전달·접근·실행한 것을 구분한다. 전체 781장 재현 PASS나 방어 성능 개선 기여를 추가하지 않는다. 사람의 직접 재확인·AI 보조 사용에 관한 추가 기록은 추정하지 않는다.
+- [원본 해시·수신 대조와 한계](docs/reviews/20261026/final_submission_integration.md#현수-1026-반환-자산-점검만-확인). 원본 ZIP/JSON·비공개 배열·개인 경로는 공개 Git에 추가하지 않는다. 게시 계정과 문서 정리 보조는 Codex 커밋 trailer로 구분하며 병합·배포·최종 제출은 하지 않는다.
+
+## 김기호 발표 검토·리허설 보고 (2026-10-24 KST)
+
+- **제출된 검토 기록:** 김기호의 발표 검토 자료로 접수된 보고는 발표 6장면, Q&A 5개, 표현 제안 3개와 리허설 1회 15분30초를 기록한다. 리허설 시간과 수행 경위는 제출자 보고로 남긴다.
+- **연결된 근거:** [10/26 통합 기록](docs/reviews/20261026/final_submission_integration.md#기호-검토와-저장-결과의-대조)에 발표 검토와 원본 식별 해시가 이미 있다. Codex의 후속 대조는 고정 소스의 저장 CSV 수치, 정확도·ASR 분모와 Gaussian/Mean 조건의 구분을 확인한 별도 작업이다. 김기호가 새 모델 실험·코드 구현을 수행한 것으로 바꾸지 않는다.
+- **반영 범위:** 발표 구성·질의응답·표현 검토와 리허설 보고를 기여로 연결한다. 최종 PPT의 제안 채택, 수정 후 재연습이나 원고 반영 완료는 해당 제출 보고만으로 추가 인증하지 않는다. 원 검토 자료는 수정하지 않는다.
+- **이번 색인 보완:** 최희찬의 팀 기여 확인 요청에 따라 Codex가 기존 공개 수신 기록을 이 기여 목록에 연결했다. 비공개 원본 ZIP·발표 자료·개인 연락처를 추가하지 않으며, 기존 태희·재혁·현수·희찬의 기여와 게시 신원/AI 보조 구분을 보존한다.

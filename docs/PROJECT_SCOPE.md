@@ -3,6 +3,14 @@
 프로젝트 공식명: 자율운항선박 VLM·LLM 기반 AI 보안 프레임워크 구현
 2026 스마트해운물류 × ICT 멘토링
 
+## 2026-11-05 협업용 현재 상태
+
+아래 초기 로드맵·이력은 보존합니다. [영문 조건별 상태](INTERNATIONAL_COLLABORATION.md#condition-status-historical-fgsm-and-separate-follow-ups)를 우선 읽습니다.
+기존 FGSM·필터의 실험/기록 감사 완료와 공식 실행계약의 미연결 승인, 외부 FAIL을 구분합니다.
+10/24 matched CNN은 seed2026만 완료했고2027/2028은 미실행입니다. 최초 외부 과제는
+[공개 저장 결과 감사 한 건](INTERNATIONAL_COLLABORATION.md#first-external-review-one-saved-result-audit-no-private-assets)이며
+새 학습·연구자 연락·자료 공유 승인이 아닙니다. 데이터 권한·원천 ID 계보·선박/장면 그룹이 후속 연구의 우선 전제입니다.
+
 ## 3단계 연구 구조
 
 1. **Clean Baseline** — CNN·MobileNet 선박 10클래스 분류 모델의 공격 없는 기준 성능 확보
@@ -45,3 +53,16 @@
 - 코드 병합이나 기록 감사 통과를 공식 결과 채택·독립 모델 추론·최종 논문 검증으로 간주하지 않는다
 
 최신 수치와 논문 준비 상태는 [현재 연구 상태](CURRENT_RESEARCH_STATUS.md) 및 [논문 관리 현황](PAPER_RELEASE_STATUS.md)을 따른다.
+
+## Bounded international research roadmap — 2026-10-30
+
+These are **candidate issue scopes**, not issued assignments, scheduled experiments, completed results or a promise of journal acceptance. The October 31 international-research transition is a planning goal. The historical roadmap above is preserved; latest recorded extensions are linked from [current research status](CURRENT_RESEARCH_STATUS.md). Reuse existing issues/PRs before opening duplicates.
+
+| Candidate issue | Bounded question and dependencies | Required completion evidence / stop boundary |
+|---|---|---|
+| R1: independent reproduction and mismatch diagnosis | Can an independent environment reproduce the fixed reference under the existing Stage B contract? After the first public saved-record task, use the selected cross-only handoff only with authorized private input access. Source-ID lineage, rights and vessel/scene grouping remain prior dependencies for new generalization claims. | Source/input hashes, actual execution logs and outputs, unchanged comparison criteria, discrepancy report. Asset-only checks or missing arrays remain INCOMPLETE; stop at the agreed diagnostic scope, not a forced PASS. |
+| R2: matched-training control across seeds | Do the one-seed observations persist under the predeclared matched protocol? Coordinate with open #87 and the separately saved October 24 package. | Separately approved compute/data plan, matched initialization/training exposure, seed-specific records, clean/robust results and uncertainty with justified sampling assumptions. One seed and 6.15% PGD50 accuracy are not general defense validation. |
+| R3: additional attack/defense evaluation | Which bounded adaptive/iterative or black-box condition adds evidence beyond FGSM? Inspect unfinished #78 and #86 before choosing one condition. | Agreed threat model, epsilon/steps/restarts/query budget, adaptive defense handling, clean cost and ASR cohort definitions, preserved failures, independent review of exact SHA. Do not silently pool own-clean denominators or overwrite baseline metrics. |
+| R4: international manuscript evidence package | Which claims are supported by the fixed baseline versus separately approved extensions? | Claim-to-file/SHA mapping, limitations, licensing/access statement and contributor review. Venue selection, authorship agreement and submission require separate human decisions; no private files or contact details published by default. |
+
+[VLM/LLM and maritime operational integration](THREAT_MODEL.md) remain outside demonstrated capabilities. New datasets, physical attacks, sensor/control experiments, compute expenditure and model execution require separately agreed scope and authorization. [Collaboration entry](INTERNATIONAL_COLLABORATION.md) explains the existing code/artifacts and a small first contribution.
