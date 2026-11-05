@@ -65,6 +65,15 @@
   - Defined the audit extension scope and supplied the authoritative evidence CSV artifacts.
   - Authorized conservative code review and repository integration after all automated checks pass.
 
+## 이재혁 1·2차 저장 근거 검토 (2026-10)
+
+- **1차 — 제출문서상 2026-10-16 수행, 10-19 업로드:** 고정 소스 `9b64b8e33a2a1ff2cda1d51386cfb9360b09aebf`의 저장 결과를 대상으로 재계산 기록 10개와 주장·근거 대조 10개를 제출했다. 필수 ASR 2건의 스프레드시트 재확인, 기존 FGSM 결과표 128칸 대조, 표현 점검 제안 2건을 수행했다고 기록했다. 원본 인계요약은 필수 기준 충족으로 보고하지만 원고 원문·최종 교정본은 직접 대조하지 못했다고 명시한다. 따라서 이 기록을 제출 논문의 직접 교정·최종 승인으로 계산하지 않는다.
+- **2차 — 2026-10-20 검토, 10-21 접수·통합:** 주장 8개, 저장 수치 재계산 10개, 발표 시각자료 5개 항목과 검토 방법을 문서 3개로 제출했다. [PR #88](https://github.com/heechan9/AdversarialAI_Security/pull/88)은 merge `b92ba8f450020479198a8bb03dbfa510044d6c19`로 반영됐다. [주장 대조](docs/reviews/20261019/evidence_claim_review.md), [재계산·시각자료 대조](docs/reviews/20261019/evidence_calculation_review.md), [검토 방법](docs/reviews/20261019/evidence_review_method.md)을 함께 읽는다. `20261019`는 원 과제 템플릿 경로이며 실제 2차 검토일을 뜻하지 않는다.
+- **사람·AI·통합 역할:** 두 차수는 제공된 과제·참고 자료에 기반한 검토다. 2차 원문에는 Claude의 집계·대조·문서 작성 도움과 이재혁의 직접 재확인 보고가 명시돼 있다. Codex의 후속 Markdown 정리, 저장값 대조 및 공개 근거 위치 2건 보완은 별도 기여다. 1차의 세부 AI 도구별 수행 분담은 확인된 기록 이상으로 추정하지 않는다. 실제 개인 수행 과정 전체를 독립 관찰했다는 의미도 아니다.
+- **확인 범위:** 저장 CSV/JSON 재계산·문서 정합성 검토이며 새 모델 학습·추론·공격 생성·코드 구현이나 독립 모델 재현이 아니다. 1차는 원문 대조 미확인, 2차는 10-18 최종 제출 이후라는 시점을 보존하며, 제출 원고 반영·저자 순서·기여율·팀 최종 승인을 소급 인증하지 않는다. 기존 8월 FGSM 검토·9월 32장 이미지 검토와 중복 합산하지 않는다.
+- **근거 보존·게시 신원:** 1차는 비공개 원본 인계요약·재계산/주장 대조 CSV와 팀 개발일지의 기록을 요약한다. 원본 ZIP·비공개 링크·원고·개인 연락처는 공개하지 않는다. 2차의 원본/준비본 대조와 이미 반영된 범위는 [10-26 통합 점검](docs/reviews/20261026/final_submission_integration.md)에 연결돼 있다. PR #88의 게시 계정은 heechan9이며 이재혁 본인 계정 커밋으로 해석하지 않는다.
+- **이번 기여 색인 보완:** 최희찬의 요청·범위 지정에 따라 Codex 보조로 기존 기록을 이 절에 연결했다. 다른 사람의 기여, 기존 결과, 제출 자료와 미해결 재현성 판정은 변경하지 않는다.
+
 ## Codex Security Audit
 
 - **Codex**:
@@ -161,3 +170,10 @@
 - The retained batch records one training seed and three model evaluations of 781 images each. This publication review does not run models again or confer independent experimental approval. Existing teammate credits, paper results and external Stage B FAIL remain unchanged.
 - Source and evidence: [one-seed matched CNN follow-up](results/extensions/matched_cnn_20261024/README.md). GitHub connector commits use the authenticated account; the Codex trailer identifies implementation/documentation assistance rather than independent human authorship.
 
+## 이현수 선택 지원의 자산 점검 반환 (2026-10-26 KST)
+
+- 이현수 — 제출 자료의 수행 기록: 고정 평가 SHA `491b973cd9f4840664044a83c0d62d1ee1bb98e8`에서 자산 점검을 수행했다고 보고하고 결과 보고/JSON을 제출했다. JSON은 모델 2개·이미지 781개, 총 783개 자산의 경로·해시 일치(`ASSETS_MATCH`)와 `model_inference_performed=false`를 기록한다. 종료코드 0은 보고서 기재이며 별도 실행 로그 확인과 구분한다.
+- Codex — 수신 대조·문서 통합: 원본 ZIP CRC·두 내부 파일 해시, 제출 JSON의 고유 783개 경로와 기대/실제 해시를 고정 manifest와 대조했다. 현수 PC의 자산을 직접 다시 해시하거나 모델을 실행한 것이 아니다. 통합 기록·인계·한영 README를 최소 갱신하며 태희·재혁·기호·희찬과 현수의 기존 기여 이력은 보존한다.
+- 최희찬 (heechan9) — 원본 전달과 통합 범위 지정: 자산 점검과 선택 분류를 구분하고 기존 LOCAL_PASS/외부 FAIL을 보존하도록 요청했다. 이 요청을 현수의 별도 본인 재확인, 작성자 전체 승인, Claude 검토 완료로 기록하지 않는다. 이번 통합 문구는 Draft에서 같은 head의 표현·근거 검토를 기다린다.
+- 후속 작업: 제출 보고상 PC/Linux 배열이 현수 PC에 없어 선택 cross-only 분류는 미수행(`INCOMPLETE`)이다. 수신 측이 보존 배열 원본 해시를 확인한 것과 현수에게 비공개 전달·접근·실행한 것을 구분한다. 전체 781장 재현 PASS나 방어 성능 개선 기여를 추가하지 않는다. 사람의 직접 재확인·AI 보조 사용에 관한 추가 기록은 추정하지 않는다.
+- [원본 해시·수신 대조와 한계](docs/reviews/20261026/final_submission_integration.md#현수-1026-반환-자산-점검만-확인). 원본 ZIP/JSON·비공개 배열·개인 경로는 공개 Git에 추가하지 않는다. 게시 계정과 문서 정리 보조는 Codex 커밋 trailer로 구분하며 병합·배포·최종 제출은 하지 않는다.

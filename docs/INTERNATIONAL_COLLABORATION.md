@@ -2,7 +2,7 @@
 
 **PaulGuard — Maritime AI Security Research** is our public-facing research name. The existing virtual lab remains **MARIS**; historical submission titles, team credits and the repository URL are preserved. This is a documentation-level name, not a new UI, deployed system or verified trademark clearance.
 
-We welcome narrowly scoped collaboration on **independent reproduction** and **additional attack/defense evaluation** for ten-class ship-image classification. This is a research prototype, not an operational ship-protection system. Checked November 1, 2026 against main `2ed69b00faa3dce098a6a78888032746b6b35d43`; this refresh reuses the existing Draft #103 structure. Start with the [English overview](../README.en.md), [preserved source/evidence boundary](PAPER_RELEASE_STATUS.md#preserved-source-and-submission-boundary--2026-10-30) and [reproduction navigation](REPRODUCIBILITY.md#english-reproduction-navigation).
+We welcome narrowly scoped collaboration on **independent reproduction** and **additional attack/defense evaluation** for ten-class ship-image classification. This is a research prototype, not an operational ship-protection system. Updated November 5, 2026. The public audit below pins the tested software/evidence source `931e3876e56c3e4ab2f1971ce9b092051f7467d0`; the current documentation incorporates the scoped receipt, handoff and contributor records through #101, #102 and #108. Start with the [English overview](../README.en.md), [preserved source/evidence boundary](PAPER_RELEASE_STATUS.md#preserved-source-and-submission-boundary--2026-10-30) and [reproduction navigation](REPRODUCIBILITY.md#english-reproduction-navigation).
 
 ## What is available, and what is not
 
@@ -18,7 +18,7 @@ The research-PC LOCAL_PASS does not erase the external FAIL. The discrepancy cau
 **Task:** recompute the October 24 matched-CNN saved evaluation at the pinned
 source below. This is the first small task; model reruns are a later, separate agreement.
 
-1. Use an isolated checkout of `2ed69b00faa3dce098a6a78888032746b6b35d43` and
+1. Use an isolated checkout of `931e3876e56c3e4ab2f1971ce9b092051f7467d0` and
    Python 3.11+; the selected auditor uses only the standard library. Do not load
    TensorFlow, obtain model/image bytes, regenerate a manifest or rerun training.
 2. From the repository root, record `git rev-parse HEAD`, `python --version`,
@@ -44,6 +44,28 @@ terms before redistribution. No image/model/manuscript transfer or new account
 permission is required by this task. We provide pinned source, three saved CSVs,
 evaluation/protocol metadata and the auditor. The reviewer returns an artifact
 consistency report, not independent experimental approval. No invitation is sent.
+
+## Use diagnostics after the saved audit
+
+At the same pinned source, inspect the existing saved-record tools without
+loading models or images:
+
+```bash
+python verification/matched_cnn_diagnostics.py --condition pgd50 --class-name "Container Ship" --outcome newly_incorrect
+python verification/discrepancy_triage.py --model cnn
+```
+
+The first command returns six newly incorrect cases in the 86-image class;
+its class metrics retain all 86 images and net correct is -4. The second returns
+zero selected differences for CNN while preserving the full saved totals:
+62,480 prediction cells, 16 differences and 14 unique affected images. Neither
+selection changes the historical external FAIL. See [CNN diagnostics](MATCHED_CNN_DIAGNOSTICS.md)
+and [discrepancy triage](DISCREPANCY_TRIAGE.md) for schemas and limitations.
+
+The [web explorer](https://maritime-adversarial-lab.hc24734503.chatgpt.site/#diagnostics)
+offers the same saved-data drilldown and selected CSV/JSON downloads. Outcome
+filters change the case list only; class selection changes the metric cohort.
+Own-clean ASR and common-clean-correct ASR keep separate denominators.
 
 ## Condition status: historical FGSM and separate follow-ups
 
@@ -100,9 +122,13 @@ declared software/saved-evidence scope.
 
 ## Rights, access and missing source lineage
 
-- Public source and saved tables can support the small review above. No top-level
-  project-wide LICENSE has been established here; third-party notices keep their
-  own scope. Public readability is not unrestricted redistribution permission.
+- Public source and saved tables support the small review above. Apache 2.0
+  applies only to the exact original code paths in [LICENSED_CODE.txt](../LICENSED_CODE.txt),
+  including `verification/matched_cnn_saved_audit.py`. Read the
+  [scope and third-party notices](../LICENSE_SCOPE.md) and [license](../LICENSE).
+  This is not a repository-wide grant: unlisted code, documents, saved results,
+  images, models and other material retain their existing terms. This guide
+  neither expands the allowlist nor grants new asset redistribution permission.
 - Full raw images, model weights, private attack arrays, original handoff ZIPs,
   private permission records and submitted manuscripts remain outside this
   proposed public documentation. Do not copy them into Git or an overseas folder.
@@ -193,7 +219,7 @@ The [pinned #101 receipt](https://github.com/heechan9/AdversarialAI_Security/blo
 records 783 matching asset entries (2 models + 781 images) and
 `model_inference_performed=false`; selected cross-only remains **INCOMPLETE**.
 This is submitted-JSON consistency evidence, not a new read of the participant's
-assets. #101 is still an unmerged Draft as checked on 2026-10-30.
+assets. The scoped receipt is integrated through [#101](https://github.com/heechan9/AdversarialAI_Security/pull/101); the selected inference task remains incomplete.
 
 An unsent request to adapt after scope/access agreement:
 
@@ -215,7 +241,7 @@ sent and no new diagnostic execution is claimed by this document.
 
 Use a repository issue or Draft PR for a public, non-sensitive proposal: research question; existing issue/PR overlap; full base SHA; proposed files/conditions; offered code, artifact or evaluation effort; required access/compute; acceptance criteria; and known limitations. Do not post personal contact details, private links, unpublished binaries or sensitive logs. This guide does not send invitations or create/assign issues automatically.
 
-For a return, include exact reviewed head SHA, changed files, command/environment/log and hash evidence, expected/actual outcomes, and explicit **directly executed / author-reported / not checked** sections. Retain negative results and distinguish saved-data recalculation, actual model inference and human independent review. Use [existing feedback templates](templates) and [SHA-specific review](CPU_CI_REVIEW.md#교차-검수-절차); the English handoff proposed in Draft [#102](https://github.com/heechan9/AdversarialAI_Security/pull/102) is unmerged, not a main dependency.
+For a return, include exact reviewed head SHA, changed files, command/environment/log and hash evidence, expected/actual outcomes, and explicit **directly executed / author-reported / not checked** sections. Retain negative results and distinguish saved-data recalculation, actual model inference and human independent review. Use [existing feedback templates](templates) and [SHA-specific review](CPU_CI_REVIEW.md#교차-검수-절차); the [English handoff](templates/evidence_handoff.md) is integrated through [#102](https://github.com/heechan9/AdversarialAI_Security/pull/102).
 
 ## Credit and decisions
 

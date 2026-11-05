@@ -4,16 +4,7 @@
 
 [한국어](README.md) | **English**
 
-
-## Collaboration review entry — November 1, 2026
-
-Start with the [condition/status and sharing guide](docs/INTERNATIONAL_COLLABORATION.md),
-then the [reproduction levels and smallest public task](docs/REPRODUCIBILITY.md#english-reproduction-navigation).
-The source reviewed is `2ed69b00faa3dce098a6a78888032746b6b35d43`.
-This documentation refresh reuses Draft #103; a review snapshot is not a merge,
-independent model replay, publication approval or permission to redistribute assets.
-The historical submitted title, team credit, repository URL and MARIS remain unchanged.
-
+**Code license:** Apache 2.0 applies only to original project-owned code in [LICENSED_CODE.txt](LICENSED_CODE.txt). See [scope and preserved third-party terms](LICENSE_SCOPE.md); data, images, models and other unlisted material are not included.
 
 **A reproducible research project on adversarial robustness in ship-image classification.** CNN and MobileNetV2 are evaluated on clean images, bounded FGSM perturbations, and fixed preprocessing filters, with traceable saved evidence and explicit reproduction limits.
 
@@ -58,6 +49,17 @@ Small L∞ alone does not prove human imperceptibility. See the [maritime-practi
 
 ## Current research and integration status
 
+**November 5, 2026:** [MARIS error analysis](https://maritime-adversarial-lab.hc24734503.chatgpt.site/#diagnostics) connects class/outcome cohorts to saved image predictions and external-run differences, with CSV/JSON downloads. The live site is version 20.
+
+- **Analysis:** merged [#112](https://github.com/heechan9/AdversarialAI_Security/pull/112) connects saved CNN diagnostics, discrepancy tracing and retest linkage; merged [#100](https://github.com/heechan9/AdversarialAI_Security/pull/100) explains photo changes and filters plainly. See [data flow and cohort scope](docs/RESEARCH_DIAGNOSTICS_WEB_INTEGRATION.md).
+- **Team evidence:** [Hyeonsu's asset-check receipt](docs/reviews/20261026/final_submission_integration.md#현수-1026-반환-자산-점검만-확인) and [Jaehyeok's two saved-evidence reviews](CONTRIBUTIONS.md) are connected. The 783 matching asset entries do not complete selected cross-only inference, which remains INCOMPLETE.
+- **Review and collaboration:** follow the [analysis checklist](docs/DATA_ANALYSIS_REVIEW_CHECKLIST.md), [English handoff](docs/templates/evidence_handoff.md) and [collaboration guide](docs/INTERNATIONAL_COLLABORATION.md). The first task is one public saved-result recalculation.
+- **Research verdicts:** PC LOCAL_PASS, external Stage B FAIL/unresolved cause and the one-seed follow-up scope remain distinct. Software/documentation integration is not independent model reproduction or final manuscript approval.
+
+### Preserved October 30 integration record
+
+The following is dated history. Use the current summary above for integration status.
+
 **Main checked October 30, 2026:** [`08b33ae04248798de76cebba2e7d242d134d28c7`](https://github.com/heechan9/AdversarialAI_Security/commit/08b33ae04248798de76cebba2e7d242d134d28c7). The public display name is **PaulGuard**; the submitted title, team contributions, repository URL and MARIS interface name are preserved. Older main SHAs and test counts below are dated historical records.
 
 - **Submission preparation on main:** [#99](https://github.com/heechan9/AdversarialAI_Security/pull/99) integrated pre-submission use checks, screenshot evidence and Hyeonsu's cross-only handoff preparation. Comparing 72 display conditions on the then-deployed v16 checked saved-result presentation, not new model experiments. This does not establish final submission, physical-phone validation or independent model reproduction.
@@ -67,7 +69,7 @@ Small L∞ alone does not prove human imperceptibility. See the [maritime-practi
 
 ### Dated integration and experiment history
 
-**October 26, 2026 — submission preparation:** The [code/evidence integration record](docs/reviews/20261026/final_submission_integration.md) confirms the existing Taehee October 23 handoff (#92) and Jaehyeok saved-evidence review (#88), and connects Giho's October 24 presentation review. Hyeonsu's October 21 selected cross-only support return is not available (`INCOMPLETE`). A [byte-exact input preparation correction and handoff](docs/HYUNSU_CROSS_ONLY_HANDOFF_20261026.md) address the packet's selection-hash mismatch. This is not fresh inference, full reproduction approval, or confirmation that the final report has been updated. Dated records and the external FAIL remain intact.
+**October 26, 2026 — submission preparation:** The [code/evidence integration record](docs/reviews/20261026/final_submission_integration.md) confirms the existing Taehee October 23 handoff (#92) and Jaehyeok saved-evidence review (#88), and connects Giho's October 24 presentation review. Hyeonsu's October 26 return records matching paths/hashes for 783 assets: two models and 781 images (`ASSETS_MATCH`, `model_inference_performed=false`). **Selected-array cross-only classification was not performed and remains `INCOMPLETE`.** The [existing input preparation correction and handoff](docs/HYUNSU_CROSS_ONLY_HANDOFF_20261026.md) retain that follow-up. This is not fresh inference, full reproduction approval, or confirmation that the final report has been updated. Dated records and the external FAIL remain intact.
 
 **October 24, 2026 — separate follow-up:** The [matched CNN result package](results/extensions/matched_cnn_20261024/README.md) records one seed (2026), 781 test images per model. Mixed training versus clean-only improves PGD7 by 7.43 pp and PGD50/5 restarts by 0.90 pp (7 net correct); strong-attack accuracy remains 6.15%. Only one of three planned training seeds has run. These results are separate from historical paper metrics and the external Stage B FAIL; they are not independent reproduction approval or general defense validation. Executed training code is pinned to unmerged Draft #87.
 
@@ -75,7 +77,7 @@ Checked on October 23, 2026: main is [`362bfbd768d71eed4a07f535bd50ebb697174ce2`
 
 - **Paired defense review on main:** #93 adds descriptive analysis of the existing predictions and its MARIS panel. The 16 model/epsilon/filter conditions and 160 class groups reuse the same 781 image identities. They are not independent new samples or new model-performance experiments. [Method and limits](research/paired_defense_review/README.md).
 - **Taehee's handoff record:** [#92](https://github.com/heechan9/AdversarialAI_Security/pull/92) adds the receipt/review record and scoped contribution documentation for a fixed-baseline CPU handoff. It does not establish completion of all second-round work, fresh private-model inference, latest-manuscript review, or external independent reproduction. [Receipt and verification boundaries](docs/reviews/20261023/taehee_cpu_handoff_review.md).
-- **Team integration history:** The October 26 record above now connects Giho's submitted presentation review; final adoption and re-rehearsal are not established. Hyeonsu's new selected cross-only return remains unavailable. Existing Hyeonsu Stage B evidence below is historical evidence, not completion of that support. The final report must not be described as fully updated or complete.
+- **Team integration history:** The October 26 record above connects Giho's submitted presentation review; final adoption and re-rehearsal are not established. Hyeonsu's asset-check JSON has now been received and checked; selected cross-only classification remains unperformed. Existing Hyeonsu Stage B evidence below is historical evidence, not completion of that support. The final report must not be described as fully updated or complete.
 - **Unmerged work:** [#86](https://github.com/heechan9/AdversarialAI_Security/pull/86) covers interrupted FGSM runs and missing-condition auditing; [#87](https://github.com/heechan9/AdversarialAI_Security/pull/87) covers a matched clean-only training control and paired audit. Branch checks are not main integration or completed new paired training. [#78](https://github.com/heechan9/AdversarialAI_Security/pull/78) remains a separate unfinished GPU-extension Draft.
 - **Saved-evidence review:** [#88](https://github.com/heechan9/AdversarialAI_Security/pull/88) integrated [claim review](docs/reviews/20261019/evidence_claim_review.md), [numeric recalculation](docs/reviews/20261019/evidence_calculation_review.md), and [review methods](docs/reviews/20261019/evidence_review_method.md). Preparation, AI assistance, subsequent organization, and independent model reproduction are different contributions.
 - **Historical CI:** [b92ba8f CPU CI](https://github.com/heechan9/AdversarialAI_Security/actions/runs/39568046992) recorded 780 passed / 18 warnings. This dated saved-evidence/synthetic-regression result is not a test count for the current main or evidence of improved model performance.

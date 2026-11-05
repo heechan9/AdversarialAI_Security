@@ -48,7 +48,7 @@ This index pins a **submission-facing repository evidence snapshot**, not a veri
 - Frozen [test/model manifest](https://github.com/heechan9/AdversarialAI_Security/blob/08b33ae04248798de76cebba2e7d242d134d28c7/configs/test_manifest.json), [evidence audit guide](https://github.com/heechan9/AdversarialAI_Security/blob/08b33ae04248798de76cebba2e7d242d134d28c7/docs/RESEARCH_EVIDENCE_AUDIT.md), and [October 26 integration record](https://github.com/heechan9/AdversarialAI_Security/blob/08b33ae04248798de76cebba2e7d242d134d28c7/docs/reviews/20261026/final_submission_integration.md).
 - Historical ACK2026 manuscript: the original file and SHA-256 recorded above remain unchanged. Its October 1 user-reported submission is distinct from the maritime mentoring final report.
 - Maritime mentoring final report: Taehee was reported to have submitted it on October 28. This is a reported submission status, **not an inspected receipt, verified final-report file/hash, or proof that every later repository change appears in that report**. No private manuscript or receipt is published here.
-- Later asset-check documentation remains in Draft [#101](https://github.com/heechan9/AdversarialAI_Security/pull/101), exact head [`f65d0398a1967a2f3ed763f02de12f0405acb1eb`](https://github.com/heechan9/AdversarialAI_Security/tree/f65d0398a1967a2f3ed763f02de12f0405acb1eb). It records 783 matched asset entries and `model_inference_performed=false`; selected cross-only work is INCOMPLETE. This is not merged evidence in the pinned main snapshot or new inference verification.
+- At the preserved October 30 snapshot, later asset-check documentation remained in Draft [#101](https://github.com/heechan9/AdversarialAI_Security/pull/101), exact head [`f65d0398a1967a2f3ed763f02de12f0405acb1eb`](https://github.com/heechan9/AdversarialAI_Security/tree/f65d0398a1967a2f3ed763f02de12f0405acb1eb). It records 783 matched asset entries and `model_inference_performed=false`; selected cross-only work is INCOMPLETE. This is not merged evidence in the pinned main snapshot or new inference verification.
 
 The snapshot already contains separately labeled follow-up studies; its presence does not make every extension a submitted-paper result. Preserve original reference CSV/JSON, manuscript hashes, failures and contributor attribution. Future international-journal work follows the [bounded roadmap](PROJECT_SCOPE.md#bounded-international-research-roadmap--2026-10-30) in new scoped changes. No tag, Release, merge, deployment, journal submission or acceptance is created by this documentation update.
 
@@ -60,3 +60,15 @@ not manuscript/report bytes, submission receipts, historical result labels or
 team contribution records. October31 P0–P4/dot diagnostics are later evidence
 with their own execution scopes; they are not retrospectively part of a submitted
 paper. No new inference, journal submission, merge or deployment is claimed.
+
+## Documentation integration — November 5, 2026
+
+The current documentation incorporates the scoped asset-check receipt (#101),
+controlled-comparison checklist and English handoff (#102), and two-review
+contribution index (#108). The collaboration guide connects these records and
+the already-merged saved-diagnostic software (#112); MARIS version 20 also
+includes the plain-language photo/filter guide (#100).
+This updates repository navigation and attribution. The submitted manuscript
+bytes/hash, reported submission status, missing receipt, original experiment
+verdicts and authorship decisions are preserved. No later diagnostic result is
+retrospectively claimed to appear in a submitted report.

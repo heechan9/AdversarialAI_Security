@@ -6,11 +6,7 @@
 
 [한국어](README.md) | [English](README.en.md)
 
-**2026-11-01 협업 검토 안내:** [조건별 완료·부분·미실행 및 공유 경계](docs/INTERNATIONAL_COLLABORATION.md) ·
-[영문 재현 단계와 첫 공개 검토 과제](docs/REPRODUCIBILITY.md#english-reproduction-navigation).
-기준 source는 `2ed69b00faa3dce098a6a78888032746b6b35d43`이며 기존 Draft #103을 재사용한 문서 검토본입니다.
-공식 결과 승격·모델 독립 재현 승인·자료 재배포 허락을 뜻하지 않습니다.
-
+**코드 라이선스:** [목록에 명시된 자체 코드](LICENSED_CODE.txt)에만 Apache 2.0을 적용합니다. [적용 범위·제3자 조건](LICENSE_SCOPE.md)을 확인하세요. 데이터·이미지·모델 등 목록 밖 자료는 포함하지 않습니다.
 
 ### Clean → FGSM → 전처리 방어 비교 → Evidence Audit 기반 해양 AI 보안 연구
 
@@ -67,6 +63,17 @@
 
 ## 최신 통합 상태
 
+**2026-11-05:** [MARIS 오류 분석](https://maritime-adversarial-lab.hc24734503.chatgpt.site/#diagnostics)에서 선종·정오 변화별 표본과 외부 재현 불일치를 조회하고 CSV·JSON으로 내려받을 수 있습니다. 운영 웹은 버전 20입니다.
+
+- **분석 기능:** [#112](https://github.com/heechan9/AdversarialAI_Security/pull/112)의 저장 CNN 진단·불일치 추적·재검사 연결 검증과 [#100](https://github.com/heechan9/AdversarialAI_Security/pull/100)의 쉬운 사진·필터 안내가 main에 반영됐습니다. [기능·집계 범위](docs/RESEARCH_DIAGNOSTICS_WEB_INTEGRATION.md)를 확인하세요.
+- **팀 기여:** [현수 자산 점검 수신](docs/reviews/20261026/final_submission_integration.md#현수-1026-반환-자산-점검만-확인)과 [재혁 1·2차 검토](CONTRIBUTIONS.md)를 연결했습니다. 자산 점검 783개 일치와 선택 분류 INCOMPLETE를 구분합니다.
+- **검토·협업:** [분석 체크리스트](docs/DATA_ANALYSIS_REVIEW_CHECKLIST.md), [영문 인계 양식](docs/templates/evidence_handoff.md), [해외 협업 안내](docs/INTERNATIONAL_COLLABORATION.md)에서 조건·근거·실행 범위를 따라갈 수 있습니다. 첫 과제는 공개 저장 결과 재계산 한 건입니다.
+- **연구 판정:** 연구 PC LOCAL_PASS, 외부 Stage B FAIL·원인 미확정, 단일 seed 후속 실험의 범위는 유지합니다. 새 웹 기능과 문서 통합은 독립 모델 재현이나 논문 최종 승인을 뜻하지 않습니다.
+
+### 2026-10-30 통합 기록
+
+다음은 당시 상태를 보존한 이력입니다. 현재 반영 상태는 위 안내를 우선합니다.
+
 **2026-10-30 기준 main:** [`08b33ae04248798de76cebba2e7d242d134d28c7`](https://github.com/heechan9/AdversarialAI_Security/commit/08b33ae04248798de76cebba2e7d242d134d28c7). 공개 표시명은 **PaulGuard**이며, 기존 제출 제목·팀 기여·저장소 URL과 MARIS 화면 이름은 유지합니다. 아래 과거 main SHA와 검사 수는 해당 날짜의 기록입니다.
 
 - **main에 반영된 제출 준비:** [#99](https://github.com/heechan9/AdversarialAI_Security/pull/99)에서 제출 전 사용 점검·화면 근거·현수 cross-only 인계 준비를 통합했습니다. 당시 배포 v16의 72개 표시 조건 대조는 저장 결과 표시 검사이며 새 모델 실험이 아닙니다. 최종 제출·실제 휴대전화 검수·모델 독립 재현 완료를 뜻하지 않습니다.
@@ -76,7 +83,7 @@
 
 ### 날짜별 통합·실험 이력
 
-**2026-10-26 제출 준비 점검:** [코드·검증 근거 통합 기록](docs/reviews/20261026/final_submission_integration.md)은 태희 10/23 인계(#92)·재혁 저장 근거 검토(#88)의 기존 반영과 기호 10/24 발표 검토를 연결합니다. 현수 10/21 선택 지원의 반환 결과는 미확보(INCOMPLETE)이며, [입력 포장 보완과 cross-only 인계](docs/HYUNSU_CROSS_ONLY_HANDOFF_20261026.md)를 준비했습니다. 새 추론·전체 재현 PASS·최종 보고서 반영 완료를 뜻하지 않습니다. 아래 날짜별 이력과 외부 FAIL은 유지합니다.
+**2026-10-26 제출 준비 점검:** [코드·검증 근거 통합 기록](docs/reviews/20261026/final_submission_integration.md)은 태희 10/23 인계(#92)·재혁 저장 근거 검토(#88)의 기존 반영과 기호 10/24 발표 검토를 연결합니다. 현수의 10/26 지원 반환에서 모델 2개·이미지 781개, 총 783개 자산의 경로·해시 일치(`ASSETS_MATCH`, `model_inference_performed=false`)를 확인했습니다. **선택 배열 cross-only 분류는 미수행(INCOMPLETE)**이며, [기존 인계 안내](docs/HYUNSU_CROSS_ONLY_HANDOFF_20261026.md)의 후속 과제로 남깁니다. 새 추론·전체 재현 PASS·최종 보고서 반영 완료를 뜻하지 않습니다. 아래 날짜별 이력과 외부 FAIL은 유지합니다.
 
 **2026-10-24 별도 후속 실험:** [CNN 정상 추가학습 대조 결과](results/extensions/matched_cnn_20261024/README.md)는 seed 2026, 테스트 781장씩의 내부 평가입니다. 정상 추가학습 대비 PGD 혼합학습은 PGD7 +7.43%p, PGD50·5회 재시작 +0.90%p(정답 순증 7장)이며, 강한 공격 정확도는 6.15%입니다. 계획한 3개 seed 중 1개만 실행했습니다. 기존 논문 수치·외부 Stage B FAIL과 분리하며, 독립 재현 승인이나 전반적 방어 성능 입증을 뜻하지 않습니다. 실행 소스는 미병합 Draft #87의 고정 커밋입니다.
 

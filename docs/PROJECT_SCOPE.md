@@ -3,7 +3,7 @@
 프로젝트 공식명: 자율운항선박 VLM·LLM 기반 AI 보안 프레임워크 구현
 2026 스마트해운물류 × ICT 멘토링
 
-## 2026-11-01 협업용 현재 상태
+## 2026-11-05 협업용 현재 상태
 
 아래 초기 로드맵·이력은 보존합니다. [영문 조건별 상태](INTERNATIONAL_COLLABORATION.md#condition-status-historical-fgsm-and-separate-follow-ups)를 우선 읽습니다.
 기존 FGSM·필터의 실험/기록 감사 완료와 공식 실행계약의 미연결 승인, 외부 FAIL을 구분합니다.
