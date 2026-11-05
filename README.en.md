@@ -49,6 +49,17 @@ Small L∞ alone does not prove human imperceptibility. See the [maritime-practi
 
 ## Current research and integration status
 
+**November 5, 2026:** [MARIS error analysis](https://maritime-adversarial-lab.hc24734503.chatgpt.site/#diagnostics) connects class/outcome cohorts to saved image predictions and external-run differences, with CSV/JSON downloads. The live site is version 20.
+
+- **Analysis:** merged [#112](https://github.com/heechan9/AdversarialAI_Security/pull/112) connects saved CNN diagnostics, discrepancy tracing and retest linkage; merged [#100](https://github.com/heechan9/AdversarialAI_Security/pull/100) explains photo changes and filters plainly. See [data flow and cohort scope](docs/RESEARCH_DIAGNOSTICS_WEB_INTEGRATION.md).
+- **Team evidence:** [Hyeonsu's asset-check receipt](docs/reviews/20261026/final_submission_integration.md#현수-1026-반환-자산-점검만-확인) and [Jaehyeok's two saved-evidence reviews](CONTRIBUTIONS.md) are connected. The 783 matching asset entries do not complete selected cross-only inference, which remains INCOMPLETE.
+- **Review and collaboration:** follow the [analysis checklist](docs/DATA_ANALYSIS_REVIEW_CHECKLIST.md), [English handoff](docs/templates/evidence_handoff.md) and [collaboration guide](docs/INTERNATIONAL_COLLABORATION.md). The first task is one public saved-result recalculation.
+- **Research verdicts:** PC LOCAL_PASS, external Stage B FAIL/unresolved cause and the one-seed follow-up scope remain distinct. Software/documentation integration is not independent model reproduction or final manuscript approval.
+
+### Preserved October 30 integration record
+
+The following is dated history. Use the current summary above for integration status.
+
 **Main checked October 30, 2026:** [`08b33ae04248798de76cebba2e7d242d134d28c7`](https://github.com/heechan9/AdversarialAI_Security/commit/08b33ae04248798de76cebba2e7d242d134d28c7). The public display name is **PaulGuard**; the submitted title, team contributions, repository URL and MARIS interface name are preserved. Older main SHAs and test counts below are dated historical records.
 
 - **Submission preparation on main:** [#99](https://github.com/heechan9/AdversarialAI_Security/pull/99) integrated pre-submission use checks, screenshot evidence and Hyeonsu's cross-only handoff preparation. Comparing 72 display conditions on the then-deployed v16 checked saved-result presentation, not new model experiments. This does not establish final submission, physical-phone validation or independent model reproduction.
@@ -277,7 +288,7 @@ The research-evidence auditor checks available data/model evidence, Clean/FGSM r
 - CNN uses 128×128 inputs; MobileNetV2 uses 224×224. MobileNetV2's original training preprocessing, split ratio, and random seed remain unconfirmed.
 - Filter recovery on transferred attacks is not generalized robustness. Report defense-aware attacks and clean-performance changes together.
 - Later training and iterative/black-box studies have their own conditions. Do not claim the entire BIM/PGD/JSMA/training/transfer-attack program is complete.
-- Exact Train/Val/Test duplicate checking for the submitted baseline models was not performed: the [reproducibility record](docs/REPRODUCIBILITY.md) reports that only the test split was available at that review. This is an unverified overlap question, not evidence of leakage. The same 781 images recur across conditions; hashes do not establish scene/vessel/session independence or leakage-free generalization.
+- The original baseline models' full training exposure remains unverified. Later checks of the preserved 6,147/689/781 follow-up packet found no exact cross-split raw/RGB overlap, but related-image candidates remain and do not establish vessel/scene independence. The missing historical source-ID/staged manifests must not be replaced by reconstructed files. See [data provenance limits](docs/REPRODUCIBILITY.md#data-provenance-update--november-1-2026).
 - Classification degradation has not been causally linked here to collision, route deviation, or other operational harm.
 - VLM/LLM evaluation and safety-impact simulation remain future goals, not current implementation achievements.
 - Paper submission, latest manuscript review, team-work integration, and final-report completion are separate states. The [paper release record](docs/PAPER_RELEASE_STATUS.md) distinguishes them. The user confirmed submission on October 1; a receipt/submission identifier was not independently verified. Manuscript binaries are not published here.
