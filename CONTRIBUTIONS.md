@@ -1,5 +1,16 @@
 # Project Contributions & Provenance
 
+## 팀 제출자료 바로가기
+
+| 팀원 | 연결된 기여 기록 | 공개 근거 |
+|---|---|---|
+| 김태희 | 31장 분담 이미지 검토 기록, 고정 baseline CPU 재실행 자료 제출·확인 | [CPU 인계 수신 검산](docs/reviews/20261023/taehee_cpu_handoff_review.md) · [PR #92](https://github.com/heechan9/AdversarialAI_Security/pull/92) |
+| 이재혁 | 32장 분담 이미지 검토 기록, 1·2차 저장 근거 검토 | [2차 검토 방법](docs/reviews/20261019/evidence_review_method.md) · [기여 색인 PR #108](https://github.com/heechan9/AdversarialAI_Security/pull/108) |
+| 김기호 | 발표 구성·Q&A·표현 검토와 리허설 보고 | [통합 기록과 저장 결과 대조](docs/reviews/20261026/final_submission_integration.md#기호-검토와-저장-결과의-대조) |
+| 이현수 | 기존 독립 재실행·진단 지원과 10/26 자산 점검 반환 | [외부 재실행 기록](docs/STAGE_B_HYEONSU_01_REVIEW.md) · [자산 점검 수신](docs/reviews/20261026/final_submission_integration.md#현수-1026-반환-자산-점검만-확인) |
+
+이 표는 이미 접수·반영된 자료의 위치를 연결합니다. 사람별 수행·AI 보조·수신 측 대조 범위는 각 원기록과 아래 상세 기여를 따르며, 서로 다른 작업을 기여율로 합산하지 않습니다.
+
 ## Issue #2 / PR #3: Research Evidence Audit Framework
 
 - **Issue**: [#2 - feat(audit): independently verify Clean and provisional FGSM evidence](https://github.com/heechan9/AdversarialAI_Security/issues/2)
@@ -177,3 +188,10 @@
 - 최희찬 (heechan9) — 원본 전달과 통합 범위 지정: 자산 점검과 선택 분류를 구분하고 기존 LOCAL_PASS/외부 FAIL을 보존하도록 요청했다. 이 요청을 현수의 별도 본인 재확인, 작성자 전체 승인, Claude 검토 완료로 기록하지 않는다. 이번 통합 문구는 Draft에서 같은 head의 표현·근거 검토를 기다린다.
 - 후속 작업: 제출 보고상 PC/Linux 배열이 현수 PC에 없어 선택 cross-only 분류는 미수행(`INCOMPLETE`)이다. 수신 측이 보존 배열 원본 해시를 확인한 것과 현수에게 비공개 전달·접근·실행한 것을 구분한다. 전체 781장 재현 PASS나 방어 성능 개선 기여를 추가하지 않는다. 사람의 직접 재확인·AI 보조 사용에 관한 추가 기록은 추정하지 않는다.
 - [원본 해시·수신 대조와 한계](docs/reviews/20261026/final_submission_integration.md#현수-1026-반환-자산-점검만-확인). 원본 ZIP/JSON·비공개 배열·개인 경로는 공개 Git에 추가하지 않는다. 게시 계정과 문서 정리 보조는 Codex 커밋 trailer로 구분하며 병합·배포·최종 제출은 하지 않는다.
+
+## 김기호 발표 검토·리허설 보고 (2026-10-24 KST)
+
+- **제출된 검토 기록:** 김기호의 발표 검토 자료로 접수된 보고는 발표 6장면, Q&A 5개, 표현 제안 3개와 리허설 1회 15분30초를 기록한다. 리허설 시간과 수행 경위는 제출자 보고로 남긴다.
+- **연결된 근거:** [10/26 통합 기록](docs/reviews/20261026/final_submission_integration.md#기호-검토와-저장-결과의-대조)에 발표 검토와 원본 식별 해시가 이미 있다. Codex의 후속 대조는 고정 소스의 저장 CSV 수치, 정확도·ASR 분모와 Gaussian/Mean 조건의 구분을 확인한 별도 작업이다. 김기호가 새 모델 실험·코드 구현을 수행한 것으로 바꾸지 않는다.
+- **반영 범위:** 발표 구성·질의응답·표현 검토와 리허설 보고를 기여로 연결한다. 최종 PPT의 제안 채택, 수정 후 재연습이나 원고 반영 완료는 해당 제출 보고만으로 추가 인증하지 않는다. 원 검토 자료는 수정하지 않는다.
+- **이번 색인 보완:** 최희찬의 팀 기여 확인 요청에 따라 Codex가 기존 공개 수신 기록을 이 기여 목록에 연결했다. 비공개 원본 ZIP·발표 자료·개인 연락처를 추가하지 않으며, 기존 태희·재혁·현수·희찬의 기여와 게시 신원/AI 보조 구분을 보존한다.
