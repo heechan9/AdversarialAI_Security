@@ -4,6 +4,9 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
+import subprocess
+import uuid
 import platform
 from datetime import datetime, timezone
 from pathlib import Path
@@ -25,7 +28,8 @@ from adversarial_ai.evaluation.clean_baseline import (
     save_confusion_matrix,
     validate_class_mapping,
 )
-from adversarial_ai.evaluation.integrity import validate_reproducibility_manifest
+from adversarial_ai.evaluation.integrity import validate_reproducibility_manifest, sha256_file
+from adversarial_ai.evaluation.fgsm_progress import prepare_output, validate_request, write_progress
 
 
 def compute_untargeted_asr(
@@ -204,21 +208,19 @@ def _run_epsilon(
     }
 
 
-def evaluate_fgsm(
+def _evaluate_fgsm(
     spec: EvaluationSpec,
     data_dir: Path,
     classes_path: Path,
     output_dir: Path,
     epsilons: Sequence[float],
-    sample_limit: int = 2,
-    manifest_path: Path = Path("configs/test_manifest.json"),
+    sample_limit: int,
+    manifest_path: Path,
+    progress: dict[str, Any],
+    journal: Path,
 ) -> None:
     import tensorflow as tf
 
-    if not epsilons or any(epsilon < 0 for epsilon in epsilons):
-        raise ValueError("epsilons must be a non-empty sequence of non-negative values")
-    if len(set(epsilons)) != len(epsilons):
-        raise ValueError("epsilons must not contain duplicates")
     class_names = load_expected_classes(classes_path)
     data_generator = tf.keras.preprocessing.image.ImageDataGenerator(rescale=1.0 / 255.0)
     test_generator = data_generator.flow_from_directory(
@@ -238,6 +240,17 @@ def evaluate_fgsm(
         data_dir=data_dir,
     )
 
+    progress.update(
+        status="RUNNING", model_sha256=model_sha256,
+        manifest_sha256=sha256_file(manifest_path), classes_sha256=sha256_file(classes_path),
+        python=platform.python_version(), platform=platform.platform(),
+        tensorflow=tf.__version__, keras=package_version("keras"), numpy=np.__version__,
+        input_size=[*spec.image_size, 3], batch_size=32,
+        numerical_environment={key: os.environ.get(key) for key in (
+            "TF_ENABLE_ONEDNN_OPTS", "TF_DETERMINISTIC_OPS", "TF_NUM_INTRAOP_THREADS",
+            "TF_NUM_INTEROP_THREADS", "OMP_NUM_THREADS", "CUDA_VISIBLE_DEVICES")},
+    )
+    write_progress(journal, progress)
     model = tf.keras.models.load_model(spec.model_path)
     from_logits = infer_from_logits(model)
     weights_before = [weight.numpy().copy() for weight in model.weights]
@@ -332,6 +345,16 @@ def evaluate_fgsm(
             }
         )
         per_sample.to_csv(output_dir / f"fgsm_{spec.name}_{token}_samples.csv", index=False)
+        if len(weights_before) != len(model.weights) or any(
+            not np.array_equal(before, after.numpy()) for before, after in zip(weights_before, model.weights)
+        ):
+            raise RuntimeError("FGSM evaluation unexpectedly changed model weights")
+        condition_files = sorted(output_dir.glob(f"fgsm_{spec.name}_{token}_*"))
+        progress["conditions"].append({
+            "epsilon": float(epsilon), "samples": len(y_true), "summary": summary,
+            "artifact_sha256": {path.name: sha256_file(path) for path in condition_files if path.is_file()},
+        })
+        write_progress(journal, progress)
 
     if 0.0 in epsilons:
         zero = next(item for item in summaries if item["epsilon"] == 0.0)
@@ -341,8 +364,15 @@ def evaluate_fgsm(
             or zero["linf_max"] != 0.0
         ):
             raise RuntimeError("epsilon=0 did not reproduce the clean predictions and input")
-    if any(not np.array_equal(before, after.numpy()) for before, after in zip(weights_before, model.weights)):
+    if len(weights_before) != len(model.weights) or any(not np.array_equal(before, after.numpy()) for before, after in zip(weights_before, model.weights)):
         raise RuntimeError("FGSM evaluation unexpectedly changed model weights")
+    # Recheck the private inputs before claiming this invocation completed.
+    validate_reproducibility_manifest(
+        manifest_path=manifest_path, model_path=spec.model_path,
+        dataset_filenames=test_generator.filenames, data_dir=data_dir,
+    )
+    if sha256_file(manifest_path) != progress["manifest_sha256"] or sha256_file(classes_path) != progress["classes_sha256"]:
+        raise RuntimeError("FGSM evaluation inputs changed during execution")
     pd.DataFrame(summaries).to_csv(output_dir / f"fgsm_{spec.name}.csv", index=False)
     metadata = {
         "executed_at_utc": datetime.now(timezone.utc).isoformat(),
@@ -365,6 +395,69 @@ def evaluate_fgsm(
     (output_dir / f"fgsm_{spec.name}_metadata.json").write_text(
         json.dumps(metadata, ensure_ascii=False, indent=2), encoding="utf-8"
     )
+
+
+
+def evaluate_fgsm(
+    spec: EvaluationSpec,
+    data_dir: Path,
+    classes_path: Path,
+    output_dir: Path,
+    epsilons: Sequence[float],
+    sample_limit: int = 2,
+    manifest_path: Path = Path("configs/test_manifest.json"),
+) -> None:
+    """Run a new model invocation; resume missing conditions into a new folder.
+
+    Existing outputs are never appended to or replaced. The execution journal
+    records durable conditions even if interrupted. A stale RUNNING journal is
+    not a process-liveness signal and never constitutes a completed rerun.
+    """
+    epsilons = validate_request(spec.name, epsilons, sample_limit)
+    output_dir = Path(output_dir)
+    progress = {
+        "schema_version": 1, "kind": "fgsm_evaluation_progress", "model": spec.name,
+        "run_id": str(uuid.uuid4()), "status": "PREPARING",
+        "started_utc": datetime.now(timezone.utc).isoformat(), "epsilons": epsilons,
+        "sample_limit": sample_limit, "conditions": [],
+        "independent_verification_approval": False, "probabilities_exported": False,
+        "scope_note": "Completion covers only this model and the requested epsilons; no defense evaluation or independent approval.",
+        "resume_policy": "Audit saved whole conditions, then run missing epsilons in a new directory. Never append or overwrite.",
+    }
+    journal = prepare_output(output_dir, spec.name, progress)
+    output_dir = journal.parent
+    try:
+        source = Path(__file__).resolve().parents[3]
+        source_files = [Path(__file__), Path(__file__).with_name("fgsm_progress.py"),
+                        Path(__file__).with_name("integrity.py"), Path(__file__).with_name("clean_baseline.py"),
+                        Path(__file__).parents[1] / "attacks/fgsm.py"]
+        progress["source_files_sha256"] = {p.relative_to(source).as_posix(): sha256_file(p) for p in source_files}
+        # Source hashes remain useful when a packaged source tree has no git metadata.
+        try:
+            progress["source_commit"] = subprocess.check_output(
+                ["git", "rev-parse", "HEAD"], cwd=source, text=True, stderr=subprocess.DEVNULL).strip()
+            progress["source_dirty"] = bool(subprocess.check_output(
+                ["git", "status", "--porcelain", "--", "src", "configs"], cwd=source, text=True))
+        except (OSError, subprocess.CalledProcessError):
+            progress["source_commit"] = None
+            progress["source_dirty"] = None
+        write_progress(journal, progress)
+        _evaluate_fgsm(spec, data_dir, classes_path, output_dir, epsilons, sample_limit,
+                       manifest_path, progress, journal)
+        if progress["source_files_sha256"] != {p.relative_to(source).as_posix(): sha256_file(p) for p in source_files}:
+            raise RuntimeError("FGSM evaluator source changed during execution")
+        progress["status"] = "COMPLETED_REQUESTED_SCOPE"
+        progress["artifact_sha256"] = {
+            p.name: sha256_file(p) for p in sorted(output_dir.glob(f"fgsm_{spec.name}*"))
+            if p.is_file() and p != journal
+        }
+    except BaseException as exc:
+        progress["status"] = "INTERRUPTED" if isinstance(exc, KeyboardInterrupt) else "ERROR"
+        progress["error"] = f"{type(exc).__name__}: {exc}"
+        raise
+    finally:
+        progress["finished_utc"] = datetime.now(timezone.utc).isoformat()
+        write_progress(journal, progress)
 
 
 def run_cli(default_name: str, default_model: str, default_size: int) -> None:
