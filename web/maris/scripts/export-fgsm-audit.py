@@ -18,6 +18,9 @@ def snapshot():
     report = audit([ROOT / relative], ROOT)
     for condition in report['conditions']:
         condition['file'] = Path(condition['file']).relative_to(ROOT).as_posix()
+        # This view displays coverage and restart requirements, not metrics.
+        # Omitting unused reductions also avoids Python-version float-sum drift.
+        condition.pop('metrics')
     for invocation in report['invocations']:
         invocation['directory'] = Path(invocation['directory']).relative_to(ROOT).as_posix()
     code = ['configs/test_manifest.json', 'configs/classes.json',
@@ -34,7 +37,7 @@ def main():
     data = (json.dumps(snapshot(), ensure_ascii=False, separators=(',', ':'), allow_nan=False) + '\n').encode()
     if args.check:
         if not OUTPUT.exists() or OUTPUT.read_bytes() != data:
-            parser.exit(1, 'FGSM public audit snapshot is missing or stale.\n')
+            parser.exit(1, 'FGSM public audit snapshot is missing or stale; regenerate with this exporter.\n')
         print('PASS: FGSM public snapshot matches the saved-output auditor; no inference.')
     else:
         OUTPUT.parent.mkdir(parents=True, exist_ok=True)
