@@ -22,8 +22,9 @@ def event(issue, action):
 
 def report(root,issue,action='retest_pass',mutate=lambda x: None):
     r=dict(kind='cross_environment_retest',issue_id=issue['id'],source_commit='a'*40,scope=copy.deepcopy(issue['scope']),model_sha256=copy.deepcopy(issue['model_sha256']),manifest_sha256=issue['manifest_sha256'],operator_role='external_operator',independent_operator=True,comparison=dict(label_match_fraction=1.0,metric_abs_tolerance=1e-6,linf_tolerance=1e-6),completed=True,result='PASS' if action=='retest_pass' else 'FAIL',difference_count=0 if action=='retest_pass' else 1)
+    r.setdefault('corrective_action_seq',next((e['seq'] for e in reversed(issue['history']) if e['action']=='action_recorded'),-1))
     mutate(r)
-    p='results/verification/synthetic-test.json';raw=json.dumps(r).encode();(root/p).write_bytes(raw)
+    raw=json.dumps(r).encode();p='results/verification/synthetic-'+hashlib.sha256(raw).hexdigest()+'.json';(root/p).write_bytes(raw)
     e=event(issue,action);e['evidence']=[dict(path=p,sha256=hashlib.sha256(raw).hexdigest())];return e
 
 def test_current_open(case):
@@ -67,3 +68,61 @@ def test_cannot_skip_action(case):
 def test_corrupt_history_rejected(case,mutate):
     root,issue=case;mutate(issue)
     with pytest.raises(ValueError):validate_issue(root,issue)
+
+
+@pytest.mark.parametrize('action',['retest_pass','retest_fail'])
+def test_self_consistent_retest_on_other_source_rejected(case,action):
+    root,issue=case
+    correction=event(issue,'action_recorded');correction['source_commit']='b'*40
+    waiting=transition(root,issue,correction)
+    before=copy.deepcopy(waiting)
+    with pytest.raises(ValueError,match='corrective action source'):
+        transition(root,waiting,report(root,waiting,action))
+    assert waiting==before
+
+
+@pytest.mark.parametrize('value',[None,True,2.0,'2',-1,0,3])
+def test_retest_requires_exact_action_sequence(case,value):
+    root,issue=case;waiting=transition(root,issue,event(issue,'action_recorded'))
+    with pytest.raises(ValueError,match='current corrective action'):
+        transition(root,waiting,report(root,waiting,mutate=lambda r:r.update(corrective_action_seq=value)))
+
+
+def test_missing_action_sequence_rejected(case):
+    root,issue=case;waiting=transition(root,issue,event(issue,'action_recorded'))
+    with pytest.raises(ValueError,match='current corrective action'):
+        transition(root,waiting,report(root,waiting,mutate=lambda r:r.pop('corrective_action_seq')))
+
+
+def test_previous_cycle_pass_cannot_close_new_correction(case):
+    root,issue=case
+    waiting=transition(root,issue,event(issue,'action_recorded'))
+    old_pass=report(root,waiting)
+    closed=transition(root,waiting,old_pass)
+    reopened=transition(root,closed,event(closed,'reopen'))
+    waiting_again=transition(root,reopened,event(reopened,'action_recorded'))
+    with pytest.raises(ValueError,match='current corrective action'):
+        transition(root,waiting_again,old_pass)
+    new_pass=report(root,waiting_again)
+    closed_again=transition(root,waiting_again,new_pass)
+    assert closed_again['state']=='closed'
+    assert closed_again['history'][:len(closed['history'])]==closed['history']
+
+
+def test_observations_do_not_replace_correction_identity(case):
+    root,issue=case
+    waiting=transition(root,issue,event(issue,'action_recorded'))
+    observation=event(waiting,'observation');observation['source_commit']='b'*40
+    observed=transition(root,waiting,observation)
+    assert transition(root,observed,report(root,observed))['state']=='closed'
+
+
+def test_retry_after_failed_retest_needs_new_action_binding(case):
+    root,issue=case
+    waiting=transition(root,issue,event(issue,'action_recorded'))
+    failed=report(root,waiting,'retest_fail')
+    reopened=transition(root,waiting,failed)
+    waiting_again=transition(root,reopened,event(reopened,'action_recorded'))
+    with pytest.raises(ValueError,match='current corrective action'):
+        transition(root,waiting_again,failed)
+    assert transition(root,waiting_again,report(root,waiting_again))['state']=='closed'
