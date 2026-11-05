@@ -44,6 +44,7 @@ jobs:
           python verification/status_registry.py
           python -m pytest tests/test_verification_status.py tests/test_issue_lifecycle.py tests/test_discrepancy_triage.py -q
           python web/maris/scripts/export-research-diagnostics.py --check
+          python web/maris/scripts/export-fgsm-audit.py --check
       - name: Compare MARIS with canonical research results
         run: python verification/maris_source_check.py
 

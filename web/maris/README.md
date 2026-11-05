@@ -116,3 +116,28 @@ Run `npm run test:ui` for localization, existing synthetic controls, and the new
 16-path mission state/evidence/SSR suite. Static layout previews are design
 artifacts, not browser captures. See `MISSION_REPLAY_REVIEW.md` for verification
 limits and outstanding runtime QA. This candidate has not been deployed.
+
+## FGSM run records and restart review
+
+The **Run records / 실행 기록** section connects `verification/fgsm_run_audit.py`
+to the demo. Public mode uses `public/evidence/fgsm-run-audit.json`, exported from
+the canonical eight saved FGSM conditions by `scripts/export-fgsm-audit.py`.
+It distinguishes saved rows, missing conditions, unsafe saved conditions and
+recorded execution errors. It performs no new inference.
+
+Create a local report with `python verification/fgsm_run_audit.py "PATH_TO_SAVED_OUTPUT" > fgsm-audit.json`,
+then open it in that section. Files up to 2 MB are parsed in the browser tab only;
+they are not uploaded or persisted. The browser reconciles the report's schema,
+counts, invocation status and restart plan; original CSV/journal/hash checks stay
+with the Python auditor, and uploaded reports are not authenticated evidence.
+
+Report and restart-plan JSON downloads retain the full report scope even when
+the table is filtered by model. Command templates require a fresh output path and
+are withheld for reports with execution errors. Nothing starts or resumes a
+model from the website. See `docs/FGSM_INTERRUPTED_RUNS.md` in the research repo.
+
+Validation: `npm run test:runs` tests real Python auditor outputs from temporary
+public-file copies, malformed/tampered reports, KO/EN filtered rendering and
+command safety. Run `python web/maris/scripts/export-fgsm-audit.py --check` from
+the research repository to verify the public snapshot.
+
