@@ -80,8 +80,8 @@ This candidate improves the guided sequence from image cases to aggregate result
 
 The opening screen is a four-step challenge: choose an existing image case, select
 clean or the case's recorded FGSM epsilon, predict whether the class changes, and
-reveal the stored result. The progress indicator, input-condition reticle/scan,
-actual image thumbnail and reveal card respond to these choices. No score,
+reveal the stored result. The progress indicator, saved-image HUD, classification flow and reveal card
+respond to these choices. No score,
 navigation physics, collision, new image, or new model prediction is generated.
 
 The four published case images support clean and epsilon 0.03 only. Other epsilon
@@ -149,3 +149,20 @@ The `#cross-score` panel adds the privately verified selected Windows receipt to
 The 10/10 figure counts matching same-array label pairs, not accuracy; the 20 cell outputs reuse images. Probability vectors are not identical. No full 781-image improvement, new training, attack generation or overall Stage B approval is implied. See [scope and contribution](../../docs/STAGE_B_FIXED_ARRAY_20261110.md).
 
 `npm run test:cross-score` reconciles public matrix/label counts and checks both language renderings, scope text and preserved historical verdicts. It is also included in `test:evidence`. It does not authenticate or rerun private inference. Source inclusion is not proof of live deployment; publication must be verified separately.
+
+
+## PaulGuard evidence HUD (November 10, 2026)
+
+The opening mission now uses a quiet, cinematic evidence lens around the existing
+saved image, selected condition, baseline/output classes and pinned source link.
+The image frame is not a detector box. No scanning animation, target tracking,
+AI assistant, live telemetry or new inference is introduced. Recorded attack
+output scores remain unavailable rather than borrowing the clean score.
+
+The original illustrative 3D vessel is retained behind a keyboard-operable
+expander, outside the evidence view. Existing image controls, aggregate results,
+filters, research diagnostics and the selected fixed-array cross-score remain.
+
+`pnpm run test:hud` checks the 64 case/condition/phase/language renders, hidden
+outputs, unavailable scores, source links and unsupported conditions. See
+[EVIDENCE_HUD_REVIEW.md](EVIDENCE_HUD_REVIEW.md) for browser and release scope.
