@@ -141,3 +141,11 @@ public-file copies, malformed/tampered reports, KO/EN filtered rendering and
 command safety. Run `python web/maris/scripts/export-fgsm-audit.py --check` from
 the research repository to verify the public snapshot.
 
+
+## Selected fixed-array cross-scoring (November 10, 2026)
+
+The `#cross-score` panel adds the privately verified selected Windows receipt to the retained Linux diagnostic: four matrix cells, four selected images and five conditions per cell. The public JSON contains aggregate counts and selected class indices only; it contains no source image identifiers, model, arrays, raw logs or PC paths. Existing verification registry and historical external FAIL/UNRESOLVED remain unchanged.
+
+The 10/10 figure counts matching same-array label pairs, not accuracy; the 20 cell outputs reuse images. Probability vectors are not identical. No full 781-image improvement, new training, attack generation or overall Stage B approval is implied. See [scope and contribution](../../docs/STAGE_B_FIXED_ARRAY_20261110.md).
+
+`npm run test:cross-score` reconciles public matrix/label counts and checks both language renderings, scope text and preserved historical verdicts. It is also included in `test:evidence`. It does not authenticate or rerun private inference. Source inclusion is not proof of live deployment; publication must be verified separately.
