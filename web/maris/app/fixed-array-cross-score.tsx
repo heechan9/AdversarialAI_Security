@@ -17,7 +17,7 @@ export default function FixedArrayCrossScore() {
             <p className="diagnostic-intro">{en
                 ? "A selected MobileNetV2 diagnostic: PC- and Linux-generated attack arrays were each scored on Windows and Linux. Four images and five selected conditions per cell; these counts are not accuracy measurements."
                 : "MobileNetV2 선택 진단입니다. PC와 Linux에서 생성했던 공격 배열을 각각 Windows와 Linux에서 분류했습니다. 칸마다 선택 이미지 4장·조건 5개이며, 아래 개수는 정확도가 아닙니다."}</p>
-            <div className="diagnostic-metrics">
+            <div className="diagnostic-metrics" style={{ gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 220px), 1fr))" }}>
                 <div><span>{en ? "Completed matrix cells" : "완료한 교차표 칸"}</span><strong>{snapshot.completed_cells} / {snapshot.total_cells}</strong></div>
                 <div><span>{en ? "Same-array matching label pairs" : "같은 배열의 환경 간 라벨 일치"}</span><strong>{same.matching_label_pairs} / {same.compared_label_pairs}</strong></div>
                 <div><span>{en ? "Largest probability component difference" : "최대 확률 성분 차이"}</span><strong>2.92 × 10⁻⁶</strong></div>
