@@ -13,11 +13,14 @@
     "lint": "eslint . --ignore-pattern dist --ignore-pattern .next",
     "db:generate": "drizzle-kit generate",
     "test:evidence": "node scripts/test-evidence.mjs && node scripts/test-defense-comparison.mjs && node scripts/test-matched-followup.cjs && node scripts/test-research-diagnostics.cjs && node scripts/test-fgsm-audit.cjs && node scripts/test-fixed-array-cross-score.cjs",
-    "test:ui": "node scripts/test-localization.mjs && node scripts/test-localization.cjs && node scripts/test-interactions.mjs && node scripts/test-mission.cjs && npm run test:paired",
+    "test:ui": "node scripts/test-localization.mjs && node scripts/test-localization.cjs && node scripts/test-interactions.mjs && node scripts/test-mission.cjs && npm run test:paired && npm run test:hud && npm run test:learning",
     "test:paired": "node scripts/test-paired-review.cjs",
     "test:diagnostics": "node scripts/test-research-diagnostics.cjs",
     "test:runs": "node scripts/test-fgsm-audit.cjs",
-    "test:cross-score": "node scripts/test-fixed-array-cross-score.cjs"
+    "test:cross-score": "node scripts/test-fixed-array-cross-score.cjs",
+    "test:hud": "node scripts/test-evidence-hud.cjs",
+    "test:learning": "node scripts/test-learning-events.cjs && node scripts/test-learning-integration.cjs",
+    "test:pixels": "node scripts/test-pixel-lab.cjs && node scripts/test-pixel-events.cjs"
   },
   "dependencies": {
     "@base-ui/react": "^1.7.0",

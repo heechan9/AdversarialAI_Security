@@ -9,12 +9,15 @@ const eslintConfig = defineConfig([
   globalIgnores([
     // Default ignores of eslint-config-next:
     ".next/**",
+    ".sites-runtime/**",
+    ".wrangler/**",
+    ".vinext/**",
     "out/**",
     "build/**",
     "next-env.d.ts",
   ]),
   {
-    files: ["scripts/test-localization.cjs", "scripts/test-mission.cjs", "scripts/test-paired-review.cjs", "scripts/test-matched-followup.cjs"],
+    files: ["scripts/test-pixel-lab.cjs", "scripts/test-pixel-events.cjs", "scripts/test-learning-events.cjs", "scripts/test-evidence-learning.cjs", "scripts/test-learning-integration.cjs", "scripts/test-localization.cjs", "scripts/test-mission.cjs", "scripts/test-evidence-hud.cjs", "scripts/test-paired-review.cjs", "scripts/test-matched-followup.cjs"],
     rules: {
       // These CommonJS SSR harnesses install TypeScript and alias loader hooks
       // before requiring the application modules under test.

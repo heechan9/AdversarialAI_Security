@@ -1,0 +1,37 @@
+{
+  "unchangedFiles": {
+    "app/evidence-hud.tsx": "e749cd1538eba328ed88edaea430601bbec093ff1e02b685f25d89e93b6e13f1",
+    "lib/evidence-hud.ts": "8fb55d7f2eff8c3fbbec67ffb5c1d7b32ff841a76c4db72b3607dc1da28f651b",
+    "lib/page-locale-en.ts": "5abd9e0b2dbb9082e24bcc93b5c1113e4d0802ffaae31c4d515f129983518362",
+    "pnpm-lock.yaml": "2b9a5a042256dea4c2a175ddc34a35e9d4fcdef2cbe03b5fec20b581bcbeb8c2",
+    "public/favicon.svg": "58d0f2abf56a9408711ce239d543812c0bdcc1801ec8f4de4977875400c2e0ad",
+    "public/evidence/paired-defense-review.json": "8b035db4459bd4bd68eab9dffabc5067418cd8a2123f8abf29f49b19271d2702",
+    "public/evidence/defense-comparison.json": "650664277a0fad868c2f0776dff27331717c2ff8cbcc1d1fae47668707139453",
+    "public/evidence/data.json": "20d2c4b7ec28b20c32c6c7f05b5b113e716ede611ea454335065ea2d8be682ae",
+    "public/evidence/fixed-array-cross-score.json": "8411598a0f41238d945546af75033db05f1e49150b84b761d2decaf50b905b18",
+    "public/evidence/verification-status.json": "602ebd8a3a9b2ea15cf0c04b7830cb7f6661bdd0d72c9839be2f099be9ccf3b0",
+    "public/evidence/defense-provenance.json": "60e3e554fab9fe0895c77fd6c922b0d42a59c7bfa88131330f8cece41637a977",
+    "public/evidence/provenance.json": "170f837b4b091efe79fbf52a9608384ffad709a5fdc38661b6cf0822f1c5f1c1",
+    "public/evidence/fgsm-run-audit.json": "f4a75507290b7fdc5d9779bfb8b7febf799cc11e9b679b5847e3794965802667",
+    "public/evidence/defense-comparison-provenance.json": "93167515f91e09483e2bae241d620ac0130e7394eb0af6d28ba1b5d949c9968c",
+    "public/evidence/research-diagnostics.json": "3862e08167811c05726bda70aa66e8ec899fc6835436f184b7aa21e311cc2a16",
+    "public/evidence/matched-cnn-followup.json": "56799811ea4ecaf736d43e830709bf6cf30ece89f4500b617c66d51dd0047e13",
+    "public/evidence/worst-class-review.json": "82e19c991b21937dc9bcfc781bcc00cd49f790cf0e4f2be7ba29294e5cdc47a7",
+    "public/evidence/defense-summary.json": "1c6812ec064b0f124e457bcd3fd5a96bdb700e03e72cc55bfe0df5301eb74759",
+    "public/evidence/images/mobilenet_eps_0.03_success_0000.png": "f5d5423951d80d78ab08243bf67817ed09f582c607947289f12f025a4c10401d",
+    "public/evidence/images/cnn_eps_0.03_success_0009.png": "7abcc94f3718a6e2b0a77aa2129dfac46390418870398ec98e3f43acb11e69ba",
+    "public/evidence/images/cnn_eps_0.03_failure_0001.png": "f94fe9d3deb4c61583fc7992c972c7e0a5f9e414f42d7dfb82bc5767464041c3",
+    "public/evidence/images/mobilenet_eps_0.03_failure_0028.png": "ee3e176bd431e111ec6aaa6e548a8266a095c5d0625ec4fc171a6a28157218c1"
+  },
+  "intentional3DRestoreFiles": {
+    "app/mission-console.tsx": {
+      "v23_sha256": "7c8a2f15c92cabbd31b38df0f94bf603b175209c8e4191eee126d3e38ee424d2",
+      "restored_sha256": "2cd04be7a184e8059821f3bec8eade295893793aa925f41507b881f1a38a014a"
+    },
+    "app/globals.css": {
+      "v23_sha256": "1b6857a24bec3ae6c5699132d7b66a471e53a43c6160f6372a2d8d7ec97d03b8",
+      "restored_sha256": "b10eb9ed17d4c17af3dd8a4c0d9e617add16e19c1e53f3be7fcf810ca855c1b5"
+    }
+  },
+  "restoreReason": "Restore the explanatory 3D vessel by default while preserving separate saved-evidence HUD and research records. This supersedes the two v23 layout pins only."
+}
