@@ -1,0 +1,137 @@
+{
+  "schema_version": 1,
+  "checked_date": "2026-11-10",
+  "scope": "selected_fixed_array_cross_scoring",
+  "selected_unique_images": 4,
+  "selected_conditions_per_cell": 5,
+  "scoring_environments": [
+    "windows_native_default",
+    "linux_oneDNN_1"
+  ],
+  "attack_array_origins": [
+    "pc",
+    "linux"
+  ],
+  "completed_cells": 4,
+  "total_cells": 4,
+  "selected_outputs_across_matrix": 20,
+  "windows_new_processes": 2,
+  "windows_new_selected_outputs": 10,
+  "cells": [
+    {
+      "scorer": "windows_native_default",
+      "attack_origin": "pc",
+      "selected_outputs": 5,
+      "status": "COMPLETE"
+    },
+    {
+      "scorer": "windows_native_default",
+      "attack_origin": "linux",
+      "selected_outputs": 5,
+      "status": "COMPLETE"
+    },
+    {
+      "scorer": "linux_oneDNN_1",
+      "attack_origin": "pc",
+      "selected_outputs": 5,
+      "status": "COMPLETE"
+    },
+    {
+      "scorer": "linux_oneDNN_1",
+      "attack_origin": "linux",
+      "selected_outputs": 5,
+      "status": "COMPLETE"
+    }
+  ],
+  "conditions": [
+    {
+      "method": "gaussian",
+      "pipeline": "adaptive_defended",
+      "epsilon": 0.03,
+      "pc_origin_labels": {
+        "windows": 7,
+        "linux": 7
+      },
+      "linux_origin_labels": {
+        "windows": 6,
+        "linux": 6
+      }
+    },
+    {
+      "method": "gaussian",
+      "pipeline": "attacked",
+      "epsilon": 0.03,
+      "pc_origin_labels": {
+        "windows": 1,
+        "linux": 1
+      },
+      "linux_origin_labels": {
+        "windows": 6,
+        "linux": 6
+      }
+    },
+    {
+      "method": "mean",
+      "pipeline": "adaptive_defended",
+      "epsilon": 0.05,
+      "pc_origin_labels": {
+        "windows": 3,
+        "linux": 3
+      },
+      "linux_origin_labels": {
+        "windows": 7,
+        "linux": 7
+      }
+    },
+    {
+      "method": "mean",
+      "pipeline": "attacked",
+      "epsilon": 0.03,
+      "pc_origin_labels": {
+        "windows": 1,
+        "linux": 1
+      },
+      "linux_origin_labels": {
+        "windows": 6,
+        "linux": 6
+      }
+    },
+    {
+      "method": "mean",
+      "pipeline": "transfer_defended",
+      "epsilon": 0.05,
+      "pc_origin_labels": {
+        "windows": 1,
+        "linux": 1
+      },
+      "linux_origin_labels": {
+        "windows": 6,
+        "linux": 6
+      }
+    }
+  ],
+  "same_array_cross_environment": {
+    "compared_label_pairs": 10,
+    "matching_label_pairs": 10,
+    "exact_probability_vector_pairs": 0,
+    "max_abs_probability_component_delta": 0.0000029206275939941406
+  },
+  "different_array_origin_within_environment": {
+    "compared_label_pairs": 10,
+    "differing_label_pairs": 10
+  },
+  "verdicts": {
+    "external_stage_b": "FAIL",
+    "stage_b_approved": false,
+    "generation_cause": "UNRESOLVED",
+    "full_781_accuracy_recomputed": false,
+    "performance_improvement_claim": false
+  },
+  "execution": {
+    "new_training": false,
+    "new_attack_generation": false,
+    "weights_changed": false,
+    "frozen_scorer_commit": "491b973cd9f4840664044a83c0d62d1ee1bb98e8"
+  },
+  "evidence_scope": "Public aggregate of privately retained reports and offline verification; raw arrays, images, model, logs and PC paths are not distributed. Public summary checks do not authenticate or rerun private inference."
+}

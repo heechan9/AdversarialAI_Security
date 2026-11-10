@@ -49,7 +49,9 @@ Small L∞ alone does not prove human imperceptibility. See the [maritime-practi
 
 ## Current research and integration status
 
-**November 5, 2026:** [MARIS error analysis](https://maritime-adversarial-lab.hc24734503.chatgpt.site/#diagnostics) connects class/outcome cohorts to saved image predictions and external-run differences, with CSV/JSON downloads. The live site is version 20.
+**November 10, 2026 — selected fixed-array cross-scoring:** the [Windows/Linux scorer × PC/Linux array-origin matrix](docs/STAGE_B_FIXED_ARRAY_20261110.md) is **4/4 complete**, using four selected images and five conditions per cell. Labels agree for **10/10 same-array pairs**; probability vectors are not identical, with a maximum component difference of approximately **2.92×10⁻⁶**. Array-origin label differences persist under both scorers; their generation cause remains **UNRESOLVED**. This is not a full 781-image accuracy improvement, external Stage B PASS or final approval. Raw images, arrays and logs stay private; Hyeonsu's separate incomplete handoff remains distinct. The corresponding web-display source uses the same scope.
+
+**November 5, 2026 record:** [MARIS error analysis](https://maritime-adversarial-lab.hc24734503.chatgpt.site/#diagnostics) connects class/outcome cohorts to saved image predictions and external-run differences, with CSV/JSON downloads. The live site is version 20.
 
 - **Analysis:** merged [#112](https://github.com/heechan9/AdversarialAI_Security/pull/112) connects saved CNN diagnostics, discrepancy tracing and retest linkage; merged [#100](https://github.com/heechan9/AdversarialAI_Security/pull/100) explains photo changes and filters plainly. See [data flow and cohort scope](docs/RESEARCH_DIAGNOSTICS_WEB_INTEGRATION.md).
 - **Team evidence:** [Hyeonsu's asset-check receipt](docs/reviews/20261026/final_submission_integration.md#현수-1026-반환-자산-점검만-확인) and [Jaehyeok's two saved-evidence reviews](CONTRIBUTIONS.md) are connected. The 783 matching asset entries do not complete selected cross-only inference, which remains INCOMPLETE.

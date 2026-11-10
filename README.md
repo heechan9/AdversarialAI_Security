@@ -63,7 +63,9 @@
 
 ## 최신 통합 상태
 
-**2026-11-05:** [MARIS 오류 분석](https://maritime-adversarial-lab.hc24734503.chatgpt.site/#diagnostics)에서 선종·정오 변화별 표본과 외부 재현 불일치를 조회하고 CSV·JSON으로 내려받을 수 있습니다. 운영 웹은 버전 20입니다.
+**2026-11-10 고정 입력 교차 분류:** [선택 진단 결과](docs/STAGE_B_FIXED_ARRAY_20261110.md)는 Windows/Linux 분류 환경 × PC/Linux 공격 배열 출처 **4/4칸 완료**입니다(선택 4장·칸마다 5조건). 같은 배열의 환경 간 라벨은 **10/10쌍 일치**, 확률 성분 최대 차이는 약 **2.92×10⁻⁶**이며 확률 벡터는 완전 일치하지 않았습니다. 배열 출처에 따른 선택 라벨 차이는 두 환경에서 유지됐고, 생성 차이의 단일 원인은 **미확정**입니다. 전체 781장 정확도 향상·외부 Stage B PASS·최종 승인을 뜻하지 않습니다. 원본 이미지·배열·로그는 비공개로 보존하며, 현수의 별도 미완료 인계와 구분합니다. 웹 표시용 요약 소스도 같은 범위로 연결합니다.
+
+**2026-11-05 기록:** [MARIS 오류 분석](https://maritime-adversarial-lab.hc24734503.chatgpt.site/#diagnostics)에서 선종·정오 변화별 표본과 외부 재현 불일치를 조회하고 CSV·JSON으로 내려받을 수 있습니다. 운영 웹은 버전 20입니다.
 
 - **분석 기능:** [#112](https://github.com/heechan9/AdversarialAI_Security/pull/112)의 저장 CNN 진단·불일치 추적·재검사 연결 검증과 [#100](https://github.com/heechan9/AdversarialAI_Security/pull/100)의 쉬운 사진·필터 안내가 main에 반영됐습니다. [기능·집계 범위](docs/RESEARCH_DIAGNOSTICS_WEB_INTEGRATION.md)를 확인하세요.
 - **팀 기여:** [현수 자산 점검 수신](docs/reviews/20261026/final_submission_integration.md#현수-1026-반환-자산-점검만-확인)과 [재혁 1·2차 검토](CONTRIBUTIONS.md)를 연결했습니다. 자산 점검 783개 일치와 선택 분류 INCOMPLETE를 구분합니다.
