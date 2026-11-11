@@ -4,8 +4,10 @@ import hashlib
 import json
 from pathlib import Path
 import math
+import os
 import shutil
 from adversarial_ai.training.checkpoints import save_snapshot, latest_snapshot
+from adversarial_ai.training.controls import control_metadata
 import numpy as np
 from PIL import Image
 from adversarial_ai.attacks.iterative import generate_iterative, validate_settings
@@ -13,6 +15,23 @@ from adversarial_ai.attacks.fgsm import infer_from_logits
 from adversarial_ai.evaluation.integrity import sha256_file
 
 EXTENSIONS={'.jpg','.jpeg','.png','.bmp','.tif','.tiff'}
+
+
+def validate_output_paths(out):
+    """Reject redirected resumed writes before inspecting or changing outputs."""
+    out=Path(out)
+    paths=[out,*out.parents,*[out/name for name in (
+        'split-audit.json','training.json','training.json.tmp','best.keras','checkpoints')]]
+    if any(path.is_symlink() for path in paths):
+        raise ValueError('unsafe training output symlink')
+    for name in ('split-audit.json','training.json','training.json.tmp','best.keras'):
+        path=out/name
+        if path.exists() and not path.is_file():
+            raise ValueError('unsafe training output nonregular file')
+        if path.is_file() and path.stat().st_nlink>1:
+            raise ValueError('unsafe training output hardlink')
+    if (out/'checkpoints').exists() and not (out/'checkpoints').is_dir():
+        raise ValueError('unsafe training checkpoints directory')
 
 
 def image_record(path,root):
@@ -69,12 +88,39 @@ def train_batch(model,optimizer,images,labels,*,epsilon,step_size,steps,seed,cle
     import tensorflow as tf
     if not math.isfinite(clean_weight) or not 0<=clean_weight<=1:raise ValueError('clean_weight in [0,1] required')
     logits=infer_from_logits(model)
-    adversarial=generate_iterative(model,images,labels,epsilon,step_size=step_size,steps=steps,attack='pgd',restarts=1,seed=seed,from_logits=logits)
+    # A zero-weight adversarial forward can still update BatchNorm state and
+    # consume random numbers. A clean-only control must skip the entire branch.
+    if clean_weight == 1:
+        # Keep the attack's input/configuration contract without generating an
+        # attack. Reject malformed inputs before any stateful training forward.
+        validate_settings(epsilon,step_size,steps,1,seed,'pgd')
+        images=tf.convert_to_tensor(images,dtype=tf.float32)
+        labels=tf.convert_to_tensor(labels,dtype=tf.float32)
+        tf.debugging.assert_rank(images,4);tf.debugging.assert_rank(labels,2)
+        tf.debugging.assert_positive(tf.shape(images));tf.debugging.assert_positive(tf.shape(labels))
+        tf.debugging.assert_equal(tf.shape(images)[0],tf.shape(labels)[0])
+        for value in (images,labels):
+            tf.debugging.assert_all_finite(value,'nonfinite inputs')
+            tf.debugging.assert_greater_equal(value,0.);tf.debugging.assert_less_equal(value,1.)
+        tf.debugging.assert_equal(tf.reduce_sum(labels,axis=1),tf.ones(tf.shape(labels)[0]))
+        tf.debugging.assert_equal(labels,tf.round(labels))
+        input_shape=getattr(model,'input_shape',None);output_shape=getattr(model,'output_shape',None)
+        if (not isinstance(input_shape,tuple) or len(input_shape)!=4 or
+                not isinstance(output_shape,tuple) or len(output_shape)!=2 or output_shape[1] is None):
+            raise ValueError('clean-only training requires a built single-input classifier with known class count')
+        tf.debugging.assert_equal(tf.shape(labels)[1],output_shape[1])
+        for axis,size in enumerate(input_shape):
+            if size is not None:tf.debugging.assert_equal(tf.shape(images)[axis],size)
+    else:
+        adversarial=generate_iterative(model,images,labels,epsilon,step_size=step_size,steps=steps,attack='pgd',restarts=1,seed=seed,from_logits=logits)
     criterion=tf.keras.losses.CategoricalCrossentropy(from_logits=logits)
     with tf.GradientTape() as tape:
         clean_loss=criterion(labels,model(images,training=True))
-        adv_loss=criterion(labels,model(tf.stop_gradient(adversarial),training=True))
-        loss=clean_weight*clean_loss+(1-clean_weight)*adv_loss
+        if clean_weight == 1:
+            loss=clean_loss
+        else:
+            adv_loss=criterion(labels,model(tf.stop_gradient(adversarial),training=True))
+            loss=clean_weight*clean_loss+(1-clean_weight)*adv_loss
         if model.losses:loss+=tf.add_n(model.losses)
     gradients=tape.gradient(loss,model.trainable_variables)
     tf.debugging.assert_all_finite(loss,'nonfinite train loss')
@@ -95,6 +141,8 @@ def main():
     p.add_argument('--epsilon',type=float,required=True);p.add_argument('--step-size',type=float,required=True)
     p.add_argument('--steps',type=int,required=True);p.add_argument('--seed',type=int,default=2026)
     p.add_argument('--batch-size',type=int,default=32);p.add_argument('--learning-rate',type=float,default=1e-5)
+    p.add_argument('--training-mode',choices=['pgd_mixed','clean_only'],default='pgd_mixed',
+                   help='Training objective only; both modes use the same PGD validation selection.')
     p.add_argument('--resume',action='store_true',help='Resume the latest complete epoch; unfinished epoch repeats.')
     args=p.parse_args();root=Path(__file__).resolve().parents[3]
     if Path.cwd().resolve()!=root:raise ValueError('run from repository root')
@@ -116,16 +164,26 @@ def main():
     if args.resume:
         if not out.is_dir():raise ValueError('resume output missing')
     else:out.mkdir(parents=True,exist_ok=False)
+    validate_output_paths(out)
     audit_text=json.dumps(audit,indent=2)+'\n'
     audit_hash=hashlib.sha256(audit_text.encode()).hexdigest()
     settings={k:str(v) if isinstance(v,Path) else v for k,v in vars(args).items() if k!='resume'}
-    identity=dict(source_commit=source,source_model_sha256=original_hash,split_audit_sha256=audit_hash,settings=settings,tensorflow=tf.__version__,keras=tf.keras.__version__)
+    runtime=dict(python=platform.python_version(),numpy=np.__version__,platform=platform.platform(),
+                 numerical_environment={key:os.environ.get(key) for key in (
+                     'TF_ENABLE_ONEDNN_OPTS','TF_DETERMINISTIC_OPS','TF_NUM_INTRAOP_THREADS',
+                     'TF_NUM_INTEROP_THREADS','OMP_NUM_THREADS','CUDA_VISIBLE_DEVICES')})
+    identity=dict(source_commit=source,source_model_sha256=original_hash,split_audit_sha256=audit_hash,settings=settings,tensorflow=tf.__version__,keras=tf.keras.__version__,runtime=runtime)
+    control=control_metadata(identity)
+    identity.update(training_mode=control['training_mode'],comparison_protocol_sha256=control['comparison_protocol_sha256'])
     restored=latest_snapshot(out/'checkpoints',identity) if args.resume else None
+    validate_output_paths(out)
     (out/'split-audit.json').write_text(audit_text)
     report=dict(kind='adversarial_training_followup',status='RUNNING',source_commit=source,source_model_sha256=original_hash,
         split_audit_sha256=sha256_file(out/'split-audit.json'),settings=settings,
-        tensorflow=tf.__version__,keras=tf.keras.__version__,platform=platform.platform(),epochs=[],started_at=datetime.now(timezone.utc).isoformat())
+        tensorflow=tf.__version__,keras=tf.keras.__version__,platform=platform.platform(),runtime=runtime,epochs=[],started_at=datetime.now(timezone.utc).isoformat())
+    report.update(control)
     def save():
+        validate_output_paths(out)
         temp=out/'training.json.tmp'
         temp.write_text(json.dumps(report,indent=2,allow_nan=False)+'\n');temp.replace(out/'training.json')
     if restored:
@@ -148,6 +206,7 @@ def main():
             snapshot,state=restored
             model=tf.keras.models.load_model(snapshot/'last.keras')
             optimizer=model.optimizer;best=state['best_score'];start_epoch=state['next_epoch']
+            validate_output_paths(out)
             shutil.copy2(snapshot/'best.keras',out/'best.keras')
         for epoch in range(start_epoch,args.epochs):
             # Epoch-addressable ordering avoids generator state depending on prior batches.
@@ -155,7 +214,7 @@ def main():
             train.total_batches_seen=epoch*len(train)
             losses=[]
             for batch in range(len(train)):
-                x,y=train[batch];losses.append(train_batch(model,optimizer,x,y,epsilon=args.epsilon,step_size=args.step_size,steps=args.steps,seed=(args.seed+epoch*len(train)+batch)%(2**31)))
+                x,y=train[batch];losses.append(train_batch(model,optimizer,x,y,epsilon=args.epsilon,step_size=args.step_size,steps=args.steps,seed=(args.seed+epoch*len(train)+batch)%(2**31),clean_weight=control['clean_weight']))
                 print(f'epoch {epoch+1}/{args.epochs} batch {batch+1}/{len(train)} loss {losses[-1]:.6f}',flush=True)
             clean_correct=adv_correct=total=0
             for batch in range(len(val)):
@@ -166,7 +225,9 @@ def main():
             score=adv_correct/total
             report['epochs'].append(dict(epoch=epoch+1,mean_batch_loss=float(np.mean(losses)),validation_samples=total,validation_clean_accuracy=clean_correct/total,validation_pgd_accuracy=score))
             if score>best:
+                validate_output_paths(out)
                 best=score;model.save(out/'best.keras');report['best_epoch']=epoch+1
+            validate_output_paths(out)
             save_snapshot(out/'checkpoints',model,out/'best.keras',dict(identity=identity,next_epoch=epoch+1,best_score=best,report=report))
             save();train.on_epoch_end()
         if sha256_file(path)!=original_hash:raise RuntimeError('source model file changed')
