@@ -1,0 +1,50 @@
+{
+  "source_url": "https://github.com/heechan9/AdversarialAI_Security/blob/3ffc32b46002075f78cf7fb57a9b0d8b05b1d99d/results/defenses/experimental/gaussian_run_01/summary.json",
+  "source_git_blob": "72e576db60030ba93d627fbbbf58e9aa3f3c6cfe",
+  "model": "mobilenet",
+  "epsilon": 0.01,
+  "overall": {
+    "samples": 781,
+    "accuracy": {
+      "clean": 0.7848911651728553,
+      "defended_clean": 0.8297055057618438,
+      "attacked": 0.12419974391805377,
+      "transfer_defended": 0.43661971830985913,
+      "adaptive_defended": 0.09475032010243278
+    },
+    "clean_harmed": 36,
+    "clean_recovered": 71,
+    "asr_original": {
+      "successes": 516,
+      "denominator": 613,
+      "asr": 0.8417618270799347
+    },
+    "asr_transfer_defended": {
+      "successes": 307,
+      "denominator": 648,
+      "asr": 0.4737654320987654
+    },
+    "asr_adaptive_defended": {
+      "successes": 574,
+      "denominator": 648,
+      "asr": 0.8858024691358025
+    },
+    "common_clean_correct": {
+      "attacked": {
+        "successes": 480,
+        "denominator": 577,
+        "asr": 0.8318890814558059
+      },
+      "transfer_defended": {
+        "successes": 242,
+        "denominator": 577,
+        "asr": 0.4194107452339688
+      },
+      "adaptive_defended": {
+        "successes": 503,
+        "denominator": 577,
+        "asr": 0.8717504332755632
+      }
+    }
+  }
+}

@@ -1,13 +1,14 @@
 "use client";
 import {useLocale} from "./locale-provider";
-import {useEffect,useRef,useState} from "react";
+import {useEffect,useRef,useState,type RefObject} from "react";
+import type {SceneCapture,PixelFrame} from "@/lib/pixel-lab";
 import * as THREE from "three";
 import {SVGRenderer} from "three/addons/renderers/SVGRenderer.js";
 import {createShipControls,resetShipControls,setShipView,type ShipCommand} from "@/lib/ship-controls";
 
 import {createCadDisplay,type SceneMode,type CadSelection,type ShipPart} from "@/lib/ship-cad";
 
-export default function Ocean({playing,command,mode,selection,onInteract,onZoom}:{playing:boolean,mode:SceneMode,selection:CadSelection,command:{id:number;kind:ShipCommand},onInteract:()=>void,onZoom:(zoom:number)=>void}){
+export default function Ocean({playing,command,mode,selection,onInteract,onZoom,captureRef}:{captureRef?:RefObject<SceneCapture|null>,playing:boolean,mode:SceneMode,selection:CadSelection,command:{id:number;kind:ShipCommand},onInteract:()=>void,onZoom:(zoom:number)=>void}){
  const {t}=useLocale();
  const translateRef=useRef(t);
  useEffect(()=>{translateRef.current=t},[t]);
@@ -103,15 +104,33 @@ export default function Ocean({playing,command,mode,selection,onInteract,onZoom}
   const cad=createCadDisplay(ship);
   const grid=new THREE.GridHelper(64,32,0x9ba5ab,0xc2cace);if(software){const gridMaterials=Array.isArray(grid.material)?grid.material:[grid.material];gridMaterials.forEach(m=>{m.vertexColors=false;m.color.setHex(0xa4afb5)})}(Array.isArray(grid.material)?grid.material:[grid.material]).forEach(m=>{m.transparent=true;m.opacity=.45});grid.position.y=-.4;grid.visible=false;scene.add(grid);
   let lastMode:SceneMode|undefined,lastSelection:CadSelection|undefined;
-  let needsRender=true;
-  const resize=()=>{const width=el.clientWidth,height=el.clientHeight;renderer.setSize(width,height);camera.aspect=width/height;camera.updateProjectionMatrix();needsRender=true};const ro=new ResizeObserver(resize);ro.observe(el);resize();
+  let needsRender=true,hasSize=false,inView=true;
+  // A collapsed/hidden host must never put NaN into the camera projection.
+  const resize=()=>{const width=el.clientWidth,height=el.clientHeight;hasSize=width>0&&height>0;if(!hasSize)return;renderer.setSize(width,height);camera.aspect=width/height;camera.updateProjectionMatrix();needsRender=true};const ro=new ResizeObserver(resize);ro.observe(el);resize();
+  // Keep the default-visible model inexpensive while the user reads below it.
+  const visibility=new IntersectionObserver(([entry])=>{inView=entry.isIntersecting;if(inView)needsRender=true});visibility.observe(el);
   const controls=createShipControls(camera,el),initialDistance=controls.getDistance();
   const start=()=>{active.current=false;controls.autoRotate=false;callbacks.current.onInteract()};
   const change=()=>{needsRender=true;callbacks.current.onZoom(Math.round(initialDistance/controls.getDistance()*10)/10)};
   controls.addEventListener("start",start);controls.addEventListener("change",change);
+  // BEGIN PIXEL CAPTURE
+  if(captureRef)captureRef.current=async()=>{
+   if(!hasSize)throw Error("Scene has no visible size");
+   syncScene();
+   controls.update(0);
+   renderer.render(scene,camera);
+   const output=document.createElement("canvas");output.width=256;output.height=144;
+   const ctx=output.getContext("2d");if(!ctx)throw Error("Canvas unavailable");
+   const input=renderer.domElement;
+   if(input instanceof HTMLCanvasElement){if((renderer as THREE.WebGLRenderer).getContext().isContextLost())throw Error("Context lost");ctx.drawImage(input,0,0,256,144);}
+   else {const svg=input.cloneNode(true) as SVGSVGElement;svg.setAttribute("xmlns","http://www.w3.org/2000/svg");const source=URL.createObjectURL(new Blob([new XMLSerializer().serializeToString(svg)],{type:"image/svg+xml"}));try{const img=new Image();await new Promise<void>((resolve,reject)=>{img.onload=()=>resolve();img.onerror=()=>reject(Error("SVG capture failed"));img.src=source;});ctx.drawImage(img,0,0,256,144);}finally{URL.revokeObjectURL(source);}}
+   return {width:256,height:144,pixels:ctx.getImageData(0,0,256,144).data,source:software?"3d-svg":"3d-webgl"} as PixelFrame;
+  };
+  // END PIXEL CAPTURE
   let frame=0,time=0,last=performance.now(),lastCommand=commandRef.current.id;
   const loss=(e:Event)=>{e.preventDefault();setFailed(true);cancelAnimationFrame(frame)};renderer.domElement.addEventListener("webglcontextlost",loss);
-  const draw=(now:number)=>{frame=requestAnimationFrame(draw);if(now-last<(software?65:compact?32:0))return;const dt=Math.min((now-last)/1000,.1);last=now;
+  // BEGIN SCENE SYNC
+  const syncScene=()=>{
    if(lastCommand!==commandRef.current.id){start();if(commandRef.current.kind==="reset"){resetShipControls(controls);}else if(["bow","side","deck"].includes(commandRef.current.kind)){setShipView(controls,camera,commandRef.current.kind as "bow"|"side"|"deck");}else{const distance=THREE.MathUtils.clamp(controls.getDistance()*(commandRef.current.kind==="in"?.8:1.25),controls.minDistance,controls.maxDistance);camera.position.sub(controls.target).setLength(distance).add(controls.target)}lastCommand=commandRef.current.id;change()}
    const display=displayRef.current;
    if(display.mode!==lastMode||display.selection!==lastSelection){
@@ -123,9 +142,13 @@ export default function Ocean({playing,command,mode,selection,onInteract,onZoom}
     // Materials change but the actual geometry and cached shadow map are untouched.
     lastMode=display.mode;lastSelection=display.selection;needsRender=true;
    }
+  };
+  // END SCENE SYNC
+  const draw=(now:number)=>{frame=requestAnimationFrame(draw);if(!hasSize||!inView||document.hidden){last=now;return}if(now-last<(software?65:compact?32:0))return;const dt=Math.min((now-last)/1000,.1);last=now;
+   syncScene();
    controls.autoRotate=active.current&&!document.hidden;controls.update(dt);
    if(active.current&&!document.hidden){time+=dt;water.uniforms.time.value=time;waves.forEach((line,i)=>{line.position.y=Math.sin(time*.35+i*.7)*.08});needsRender=true}if(needsRender){renderer.render(scene,camera);needsRender=false}};frame=requestAnimationFrame(draw);
-  return()=>{cancelAnimationFrame(frame);ro.disconnect();controls.removeEventListener("start",start);controls.removeEventListener("change",change);controls.dispose();renderer.domElement.removeEventListener("webglcontextlost",loss);cad.dispose();(Array.isArray(grid.material)?grid.material:[grid.material]).forEach(m=>m.dispose());scene.traverse(o=>{if((o as THREE.Mesh).geometry)(o as THREE.Mesh).geometry.dispose()});materials.forEach(m=>m.dispose());waves.forEach(w=>(w.material as THREE.Material).dispose());water.dispose();sun.shadow.dispose();if(renderer instanceof THREE.WebGLRenderer)renderer.dispose();renderer.domElement.remove()};
- },[]);
+  return()=>{if(captureRef)captureRef.current=null;cancelAnimationFrame(frame);ro.disconnect();visibility.disconnect();controls.removeEventListener("start",start);controls.removeEventListener("change",change);controls.dispose();renderer.domElement.removeEventListener("webglcontextlost",loss);cad.dispose();(Array.isArray(grid.material)?grid.material:[grid.material]).forEach(m=>m.dispose());scene.traverse(o=>{if((o as THREE.Mesh).geometry)(o as THREE.Mesh).geometry.dispose()});materials.forEach(m=>m.dispose());waves.forEach(w=>(w.material as THREE.Material).dispose());water.dispose();sun.shadow.dispose();if(renderer instanceof THREE.WebGLRenderer)renderer.dispose();renderer.domElement.remove()};
+ },[captureRef]);
  return <div className="ocean-host" ref={host} aria-label={t("선박 조작 영역")}>{failed&&<div className="ocean-fallback" role="status">{t("이 기기에서는 3D 장면을 표시할 수 없습니다.")}<br/>{t("아래 실제 이미지와 결과 비교는 계속 이용할 수 있습니다.")}</div>}</div>;
 }

@@ -4,10 +4,11 @@ const root=path.resolve(__dirname,'..');
 const resolve=Module._resolveFilename;
 Module._resolveFilename=function(request,parent,...rest){return resolve.call(this,request.startsWith('@/')?path.join(root,request.slice(2)):request,parent,...rest)};
 for(const ext of ['.ts','.tsx'])require.extensions[ext]=(module,file)=>module._compile(ts.transpileModule(fs.readFileSync(file,'utf8'),{compilerOptions:{module:ts.ModuleKind.CommonJS,jsx:ts.JsxEmit.ReactJSX,esModuleInterop:true,target:ts.ScriptTarget.ES2022}}).outputText,file);
+require.extensions['.css']=()=>{};
 const React=require('react'),{renderToStaticMarkup}=require('react-dom/server');
 const locale=require('../app/locale-provider.tsx');
 const dictionary={...require('../lib/locale-en.ts').english,...require('../lib/page-locale-en.ts').pageEnglish};
-const sourceFiles=['page.tsx','verification-status.tsx','defense-explorer.tsx','image-comparison.tsx','result-charts.tsx','ocean.tsx','mission-console.tsx'];
+const sourceFiles=['page.tsx','verification-status.tsx','defense-explorer.tsx','image-comparison.tsx','result-charts.tsx','ocean.tsx','mission-console.tsx','evidence-hud.tsx'];
 let count=0;
 for(const name of sourceFiles){const sf=ts.createSourceFile(name,fs.readFileSync(path.join(root,'app',name),'utf8'),ts.ScriptTarget.Latest,true,ts.ScriptKind.TSX);const walk=n=>{if(ts.isCallExpression(n)&&n.expression.getText(sf)==='t'&&n.arguments[0]&&ts.isStringLiteral(n.arguments[0])){const k=n.arguments[0].text;if(/[가-힣]/.test(k)){assert.ok(dictionary[k],`${name}: missing translation ${k}`);assert.deepEqual([...k.matchAll(/\{\w+\}/g)].map(m=>m[0]).sort(),[...dictionary[k].matchAll(/\{\w+\}/g)].map(m=>m[0]).sort(),`placeholder mismatch ${k}`);count++;}}ts.forEachChild(n,walk)};walk(sf)}
 const snapshot=require('../public/evidence/verification-status.json');
