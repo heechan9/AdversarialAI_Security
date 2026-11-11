@@ -104,7 +104,7 @@ export default function Ocean({playing,command,mode,selection,onInteract,onZoom,
   const cad=createCadDisplay(ship);
   const grid=new THREE.GridHelper(64,32,0x9ba5ab,0xc2cace);if(software){const gridMaterials=Array.isArray(grid.material)?grid.material:[grid.material];gridMaterials.forEach(m=>{m.vertexColors=false;m.color.setHex(0xa4afb5)})}(Array.isArray(grid.material)?grid.material:[grid.material]).forEach(m=>{m.transparent=true;m.opacity=.45});grid.position.y=-.4;grid.visible=false;scene.add(grid);
   let lastMode:SceneMode|undefined,lastSelection:CadSelection|undefined;
-  let needsRender=true,hasSize=false,inView=true;
+  let needsRender=true,hasSize=false,inView=true,contextLost=false,disposed=false,firstRender=true;
   // A collapsed/hidden host must never put NaN into the camera projection.
   const resize=()=>{const width=el.clientWidth,height=el.clientHeight;hasSize=width>0&&height>0;if(!hasSize)return;renderer.setSize(width,height);camera.aspect=width/height;camera.updateProjectionMatrix();needsRender=true};const ro=new ResizeObserver(resize);ro.observe(el);resize();
   // Keep the default-visible model inexpensive while the user reads below it.
@@ -115,6 +115,8 @@ export default function Ocean({playing,command,mode,selection,onInteract,onZoom,
   controls.addEventListener("start",start);controls.addEventListener("change",change);
   // BEGIN PIXEL CAPTURE
   if(captureRef)captureRef.current=async()=>{
+   if(disposed)throw Error("Scene disposed");
+   if(contextLost)throw Error("Context lost");
    if(!hasSize)throw Error("Scene has no visible size");
    syncScene();
    controls.update(0);
@@ -128,7 +130,10 @@ export default function Ocean({playing,command,mode,selection,onInteract,onZoom,
   };
   // END PIXEL CAPTURE
   let frame=0,time=0,last=performance.now(),lastCommand=commandRef.current.id;
-  const loss=(e:Event)=>{e.preventDefault();setFailed(true);cancelAnimationFrame(frame)};renderer.domElement.addEventListener("webglcontextlost",loss);
+  const loss=(e:Event)=>{if(disposed)return;e.preventDefault();contextLost=true;setFailed(true);cancelAnimationFrame(frame);frame=0};
+  const restore=()=>{if(disposed||!contextLost)return;contextLost=false;last=performance.now();resize();needsRender=true;if(renderer instanceof THREE.WebGLRenderer)renderer.shadowMap.needsUpdate=true;setFailed(false);frame=requestAnimationFrame(draw)};
+  renderer.domElement.addEventListener("webglcontextlost",loss);
+  renderer.domElement.addEventListener("webglcontextrestored",restore);
   // BEGIN SCENE SYNC
   const syncScene=()=>{
    if(lastCommand!==commandRef.current.id){start();if(commandRef.current.kind==="reset"){resetShipControls(controls);}else if(["bow","side","deck"].includes(commandRef.current.kind)){setShipView(controls,camera,commandRef.current.kind as "bow"|"side"|"deck");}else{const distance=THREE.MathUtils.clamp(controls.getDistance()*(commandRef.current.kind==="in"?.8:1.25),controls.minDistance,controls.maxDistance);camera.position.sub(controls.target).setLength(distance).add(controls.target)}lastCommand=commandRef.current.id;change()}
@@ -144,11 +149,11 @@ export default function Ocean({playing,command,mode,selection,onInteract,onZoom,
    }
   };
   // END SCENE SYNC
-  const draw=(now:number)=>{frame=requestAnimationFrame(draw);if(!hasSize||!inView||document.hidden){last=now;return}if(now-last<(software?65:compact?32:0))return;const dt=Math.min((now-last)/1000,.1);last=now;
+  const draw=(now:number)=>{if(disposed||contextLost)return;frame=requestAnimationFrame(draw);if(!hasSize||!inView||document.hidden){last=now;return}if(now-last<(software?65:compact?32:0))return;const dt=Math.min((now-last)/1000,.1);last=now;
    syncScene();
    controls.autoRotate=active.current&&!document.hidden;controls.update(dt);
-   if(active.current&&!document.hidden){time+=dt;water.uniforms.time.value=time;waves.forEach((line,i)=>{line.position.y=Math.sin(time*.35+i*.7)*.08});needsRender=true}if(needsRender){renderer.render(scene,camera);needsRender=false}};frame=requestAnimationFrame(draw);
-  return()=>{if(captureRef)captureRef.current=null;cancelAnimationFrame(frame);ro.disconnect();visibility.disconnect();controls.removeEventListener("start",start);controls.removeEventListener("change",change);controls.dispose();renderer.domElement.removeEventListener("webglcontextlost",loss);cad.dispose();(Array.isArray(grid.material)?grid.material:[grid.material]).forEach(m=>m.dispose());scene.traverse(o=>{if((o as THREE.Mesh).geometry)(o as THREE.Mesh).geometry.dispose()});materials.forEach(m=>m.dispose());waves.forEach(w=>(w.material as THREE.Material).dispose());water.dispose();sun.shadow.dispose();if(renderer instanceof THREE.WebGLRenderer)renderer.dispose();renderer.domElement.remove()};
+   if(active.current&&!document.hidden){time+=dt;water.uniforms.time.value=time;waves.forEach((line,i)=>{line.position.y=Math.sin(time*.35+i*.7)*.08});needsRender=true}if(needsRender){renderer.render(scene,camera);needsRender=false;if(firstRender){firstRender=false;setFailed(false)}}};frame=requestAnimationFrame(draw);
+  return()=>{disposed=true;if(captureRef)captureRef.current=null;cancelAnimationFrame(frame);ro.disconnect();visibility.disconnect();controls.removeEventListener("start",start);controls.removeEventListener("change",change);controls.dispose();renderer.domElement.removeEventListener("webglcontextlost",loss);renderer.domElement.removeEventListener("webglcontextrestored",restore);cad.dispose();(Array.isArray(grid.material)?grid.material:[grid.material]).forEach(m=>m.dispose());scene.traverse(o=>{if((o as THREE.Mesh).geometry)(o as THREE.Mesh).geometry.dispose()});materials.forEach(m=>m.dispose());waves.forEach(w=>(w.material as THREE.Material).dispose());water.dispose();sun.shadow.dispose();if(renderer instanceof THREE.WebGLRenderer)renderer.dispose();renderer.domElement.remove()};
  },[captureRef]);
  return <div className="ocean-host" ref={host} aria-label={t("선박 조작 영역")}>{failed&&<div className="ocean-fallback" role="status">{t("이 기기에서는 3D 장면을 표시할 수 없습니다.")}<br/>{t("아래 실제 이미지와 결과 비교는 계속 이용할 수 있습니다.")}</div>}</div>;
 }
