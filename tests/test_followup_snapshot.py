@@ -43,7 +43,7 @@ def test_continuation_preserves_lineage_and_rejects_settings(tmp_path,monkeypatc
     parent=json.loads((SOURCE/'run.json').read_text())
     report=deepcopy(parent);report['source_commit']='b'*40
     out=tmp_path/'continue';out.mkdir()
-    monkeypatch.setattr(subprocess,'check_output',lambda *a,**k:'src/adversarial_ai/evaluation/iterative_evaluation.py\n')
+    monkeypatch.setattr(subprocess,'check_output',lambda *a,**k:'')
     completed=carry_forward(SOURCE,out,report,ROOT)
     assert len(completed)==3
     assert report['continuation']['parent_source_commit']==parent['source_commit']
@@ -59,3 +59,30 @@ def test_continuation_preserves_lineage_and_rejects_settings(tmp_path,monkeypatc
     (out/'parent-run.json').write_text('{}')
     with pytest.raises(ValueError,match='parent report hash'):
         audit(out,ROOT)
+
+
+@pytest.mark.parametrize('changed_path', [
+    'src/adversarial_ai/evaluation/iterative_evaluation.py',
+    'src/adversarial_ai/attacks/iterative.py',
+])
+def test_continuation_rejects_source_changes_before_copy(tmp_path, monkeypatch, changed_path):
+    from copy import deepcopy
+    from adversarial_ai.evaluation.continuation import carry_forward
+    import subprocess
+    parent = json.loads((SOURCE/'run.json').read_text())
+    report = deepcopy(parent)
+    report['source_commit'] = 'b'*40
+    before = deepcopy(report)
+    out = tmp_path/'continue'
+    out.mkdir()
+
+    def changed_dependencies(command, **kwargs):
+        # A runner change must be queried, not merely rejected by a loose mock.
+        assert changed_path in command[command.index('--')+1:]
+        return changed_path+'\n'
+
+    monkeypatch.setattr(subprocess, 'check_output', changed_dependencies)
+    with pytest.raises(ValueError, match='source differs'):
+        carry_forward(SOURCE, out, report, ROOT)
+    assert report == before
+    assert list(out.iterdir()) == []

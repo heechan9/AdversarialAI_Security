@@ -98,6 +98,17 @@ def audit(run_dir,repo_root):
         require(not parent_path.is_symlink(),'parent report symlink forbidden')
         require(hashlib.sha256(parent_path.read_bytes()).hexdigest()==lineage['parent_report_sha256'],'parent report hash mismatch')
         parent=read_json(parent_path);n=lineage['inherited_conditions']
+        require(parent.get('kind')==r['kind'],'parent report kind mismatch')
+        require(parent.get('source_dirty') is False,'parent source not committed')
+        require(parent.get('independent_verification_approval') is False,'parent independent approval prohibited')
+        # Audit is a standalone entry point: do not assume carry_forward ran.
+        for key in ('manifest_sha256','classes_sha256','scope','python','platform','tensorflow','keras','numpy','environment'):
+            require(key in parent and key in r and parent[key]==r[key],
+                    'parent execution/input mismatch: '+key)
+        for key in ('attack','steps','step_size','restarts','seed','batch_size'):
+            require(key in parent.get('settings', {}) and key in r.get('settings', {})
+                    and parent['settings'][key]==r['settings'][key],
+                    'parent protocol mismatch: '+key)
         require(type(n) is int and 0<=n<=len(r['conditions']),'invalid inherited count')
         require(parent['source_commit']==lineage['parent_source_commit'],'parent source mismatch')
         require(parent['conditions']==r['conditions'][:n],'inherited conditions differ')

@@ -19,13 +19,18 @@ def carry_forward(source, out, report, root):
     for key in ('python','platform','tensorflow','keras','numpy','environment','manifest_sha256','classes_sha256'):
         if parent[key] != report[key]:
             raise ValueError('continuation environment/input mismatch: '+key)
-    # Runner bookkeeping can change; its attack/filter/integrity dependencies
-    # and configuration must be byte-identical to the parent commit.
-    dependencies = ['configs','src/adversarial_ai/attacks/iterative.py','src/adversarial_ai/attacks/fgsm.py','src/adversarial_ai/defenses','src/adversarial_ai/evaluation/integrity.py','src/adversarial_ai/__init__.py','src/adversarial_ai/attacks/__init__.py','src/adversarial_ai/evaluation/__init__.py']
+    # The runner contains seed/filter/model logic, not only bookkeeping.
+    # Require it and inference dependencies to match the parent commit.
+    dependencies = ['src/adversarial_ai/evaluation/iterative_evaluation.py','configs','src/adversarial_ai/attacks/iterative.py','src/adversarial_ai/attacks/fgsm.py','src/adversarial_ai/defenses','src/adversarial_ai/evaluation/integrity.py','src/adversarial_ai/__init__.py','src/adversarial_ai/attacks/__init__.py','src/adversarial_ai/evaluation/__init__.py']
     changed = subprocess.check_output(['git','diff','--name-only',parent['source_commit'],report['source_commit'],'--',*dependencies],cwd=root,text=True).splitlines()
-    allowed = {'src/adversarial_ai/evaluation/iterative_evaluation.py','src/adversarial_ai/evaluation/continuation.py'}
+    allowed = set()
     if set(changed)-allowed:
         raise ValueError('attack/inference source differs from parent')
+    # Never overwrite an existing result or lineage file. Check before copying,
+    # then use exclusive creation as a second guard against a concurrent writer.
+    targets = {c['csv'] for c in parent['conditions']} | {'parent-run.json'}
+    if any((out / name).exists() or (out / name).is_symlink() for name in targets):
+        raise ValueError('continuation output already exists')
     import tempfile
     with tempfile.TemporaryDirectory(dir=out) as temporary:
         frozen=Path(temporary);(frozen/'run.json').write_bytes(parent_bytes)
@@ -38,9 +43,11 @@ def carry_forward(source, out, report, root):
                 raise ValueError('unsafe continuation CSV')
             (frozen/name).write_bytes((source/name).read_bytes())
         audit(frozen,root)
-        for condition in parent['conditions']:
-            (out/condition['csv']).write_bytes((frozen/condition['csv']).read_bytes())
-    (out/'parent-run.json').write_bytes(parent_bytes)
+        for name in sorted({c['csv'] for c in parent['conditions']}):
+            with (out/name).open('xb') as stream:
+                stream.write((frozen/name).read_bytes())
+    with (out/'parent-run.json').open('xb') as stream:
+        stream.write(parent_bytes)
     report['continuation'] = {
         'parent_report_sha256': hashlib.sha256(parent_bytes).hexdigest(),
         'parent_source_commit': parent['source_commit'],
