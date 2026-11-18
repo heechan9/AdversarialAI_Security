@@ -1,6 +1,7 @@
 """Carry forward audited whole conditions with explicit source lineage."""
 import hashlib
 import json
+import re
 from pathlib import Path
 import subprocess
 
@@ -11,6 +12,11 @@ def carry_forward(source, out, report, root):
     # Freeze report bytes before copying; audit the frozen inputs, not a moving run.
     parent_bytes = (source/'run.json').read_bytes()
     parent = json.loads(parent_bytes)
+    # Git revision operands must never be interpreted as command options.
+    for label, record in (('parent', parent), ('report', report)):
+        commit = record.get('source_commit')
+        if not isinstance(commit, str) or re.fullmatch(r'[0-9a-f]{40}', commit) is None:
+            raise ValueError('invalid '+label+' source_commit')
     if parent['kind'] != 'followup_iterative_evaluation' or report['kind'] != parent['kind']:
         raise ValueError('continuation supports original models only')
     for key in ('attack','steps','step_size','restarts','seed','batch_size'):
