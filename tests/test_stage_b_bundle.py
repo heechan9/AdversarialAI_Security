@@ -2,6 +2,7 @@ import json
 import tempfile
 import unittest
 from pathlib import Path
+from unittest.mock import patch
 
 from verification.stage_b_bundle import audit, digest
 
@@ -40,6 +41,23 @@ class BundleTests(unittest.TestCase):
         self.save()
         with self.assertRaises(ValueError):
             audit(self.root, trusted)
+
+    def test_report_is_opened_once_for_hashing_and_parsing(self):
+        report_path = self.root / 'rerun-report.json'
+        trusted = digest(report_path)
+        open_path = Path.open
+        modes = []
+
+        def track_open(path, mode='r', *args, **kwargs):
+            if path == report_path.resolve():
+                modes.append(mode)
+            return open_path(path, mode, *args, **kwargs)
+
+        with patch.object(Path, 'open', track_open):
+            result = audit(self.root, trusted)
+        self.assertEqual(modes, ['rb'])
+        self.assertEqual(result['report_sha256'], trusted)
+        self.assertEqual(result['recorded_execution_status'], 'INTERRUPTED')
 
     def test_bad_paths_and_hashes(self):
         for path in ('../outside', '/outside', 'a\\b', 'C:/outside', './run.log', 'rerun-report.json'):

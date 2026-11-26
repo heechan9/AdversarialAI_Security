@@ -37,22 +37,27 @@ def audit(directory, expected_report_sha256=None):
         raise ValueError('bundle must be a real directory')
     directory = directory.resolve()
     files = {}
+    report_bytes = None
     for path in sorted(directory.rglob('*')):
         if path.is_symlink():
             raise ValueError('symbolic links are not accepted')
         if path.is_file():
-            files[path.relative_to(directory).as_posix()] = digest(path)
+            name = path.relative_to(directory).as_posix()
+            if name == 'rerun-report.json':
+                report_bytes = path.read_bytes()
+            else:
+                files[name] = digest(path)
         elif not path.is_dir():
             raise ValueError('non-regular bundle entry')
-    report_hash = files.pop('rerun-report.json', None)
-    if report_hash is None:
+    if report_bytes is None:
         raise ValueError('missing rerun-report.json')
+    report_hash = hashlib.sha256(report_bytes).hexdigest()
     if expected_report_sha256 is not None:
         if not re.fullmatch('[0-9a-f]{64}', expected_report_sha256):
             raise ValueError('expected report hash must be lowercase SHA256')
         if report_hash != expected_report_sha256:
             raise ValueError('report differs from supplied reference hash')
-    report = json.loads((directory / 'rerun-report.json').read_text(encoding='utf-8'),
+    report = json.loads(report_bytes.decode('utf-8'),
                         object_pairs_hook=unique_pairs, parse_constant=reject_constant)
     if not isinstance(report, dict):
         raise ValueError('report must be an object')
