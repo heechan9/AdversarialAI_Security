@@ -59,6 +59,12 @@ class BundleTests(unittest.TestCase):
         self.assertEqual(result['report_sha256'], trusted)
         self.assertEqual(result['recorded_execution_status'], 'INTERRUPTED')
 
+    def test_oversized_report_is_rejected_before_parsing(self):
+        report_path = self.root / 'rerun-report.json'
+        with patch('verification.stage_b_bundle.MAX_REPORT_BYTES', report_path.stat().st_size - 1):
+            with self.assertRaisesRegex(ValueError, 'size limit'):
+                audit(self.root)
+
     def test_bad_paths_and_hashes(self):
         for path in ('../outside', '/outside', 'a\\b', 'C:/outside', './run.log', 'rerun-report.json'):
             self.report['artifact_sha256'] = {path: '0' * 64}

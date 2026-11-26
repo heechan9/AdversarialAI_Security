@@ -10,6 +10,9 @@ import re
 from pathlib import Path, PurePosixPath
 
 
+MAX_REPORT_BYTES = 16 * 1024 * 1024
+
+
 def digest(path):
     h = hashlib.sha256()
     with path.open('rb') as stream:
@@ -44,7 +47,10 @@ def audit(directory, expected_report_sha256=None):
         if path.is_file():
             name = path.relative_to(directory).as_posix()
             if name == 'rerun-report.json':
-                report_bytes = path.read_bytes()
+                with path.open('rb') as stream:
+                    report_bytes = stream.read(MAX_REPORT_BYTES + 1)
+                if len(report_bytes) > MAX_REPORT_BYTES:
+                    raise ValueError('Stage B report exceeds the 16 MiB size limit')
             else:
                 files[name] = digest(path)
         elif not path.is_dir():

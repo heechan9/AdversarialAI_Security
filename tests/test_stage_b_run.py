@@ -156,7 +156,8 @@ def test_run_stops_before_next_method_on_invalid_class_index(tmp_path,monkeypatc
     contract=json.loads((ROOT/'configs/stage_b_verification_contract.json').read_text())
     contract['outputs']['run_id']='corrupted-pred'
     path=tmp_path/'contract.json';path.write_text(json.dumps(contract))
-    monkeypatch.setattr(runner,'check_stage_b_readiness',lambda *a:{'ready':True,'blockers':[]})
+    monkeypatch.setattr(runner,'check_stage_b_readiness',lambda *a, **kw:{'ready':True,'blockers':[]})
+    monkeypatch.setattr(runner,'snapshot_models',lambda *a:None)
 
     seen_methods=[]
     def fake_run(cmd,**kw):
@@ -226,7 +227,8 @@ def test_orchestration_report_and_no_overwrite(tmp_path,monkeypatch,fail):
     contract=json.loads((ROOT/'configs/stage_b_verification_contract.json').read_text())
     contract['outputs']['run_id']='test-01'
     path=tmp_path/'contract.json';path.write_text(json.dumps(contract))
-    monkeypatch.setattr(runner,'check_stage_b_readiness',lambda *a:{'ready':True,'blockers':[]})
+    monkeypatch.setattr(runner,'check_stage_b_readiness',lambda *a, **kw:{'ready':True,'blockers':[]})
+    monkeypatch.setattr(runner,'snapshot_models',lambda *a:None)
     def fake_run(cmd,**kw):
         if 'freeze' in cmd:return SimpleNamespace(stdout='mock environment\n')
         if fail:raise RuntimeError('simulated inference failure')
@@ -256,7 +258,8 @@ def test_run_continues_to_next_method_after_a_fail_comparison(tmp_path,monkeypat
     contract=json.loads((ROOT/'configs/stage_b_verification_contract.json').read_text())
     contract['outputs']['run_id']='fail-then-continue'
     path=tmp_path/'contract.json';path.write_text(json.dumps(contract))
-    monkeypatch.setattr(runner,'check_stage_b_readiness',lambda *a:{'ready':True,'blockers':[]})
+    monkeypatch.setattr(runner,'check_stage_b_readiness',lambda *a, **kw:{'ready':True,'blockers':[]})
+    monkeypatch.setattr(runner,'snapshot_models',lambda *a:None)
 
     def fake_run(cmd,**kw):
         if 'freeze' in cmd:return SimpleNamespace(stdout='mock environment\n')
@@ -288,10 +291,12 @@ def test_run_continues_to_next_method_after_a_fail_comparison(tmp_path,monkeypat
 
 
 def test_not_ready_never_starts_process(tmp_path,monkeypatch):
-    monkeypatch.setattr(runner,'check_stage_b_readiness',lambda *a:{'ready':False,'blockers':['assets missing']})
+    monkeypatch.setattr(runner,'check_stage_b_readiness',lambda *a, **kw:{'ready':False,'blockers':['assets missing']})
     monkeypatch.setattr(runner.subprocess,'run',lambda *a,**k:pytest.fail('must not execute'))
+    path = tmp_path / 'contract.json'
+    path.write_text('{}')
     with pytest.raises(ValueError,match='assets missing'):
-        runner.run(tmp_path,tmp_path/'absent.json')
+        runner.run(tmp_path,path)
 
 @pytest.mark.parametrize('bad_shape',[False,True])
 def test_preflight_loads_model_and_rejects_shape(tmp_path,monkeypatch,bad_shape):
@@ -304,6 +309,8 @@ def test_preflight_loads_model_and_rejects_shape(tmp_path,monkeypatch,bad_shape)
     (metadata/'cnn_baseline_metadata.json').write_text(json.dumps({'model_sha256':sha}))
     calls=[]
     def load(path):
+        assert path != modelpath
+        assert path.read_bytes() == b'fixture only'
         calls.append(path)
         return SimpleNamespace(input_shape=(None,128,128,3),output_shape=(None,9 if bad_shape else 10))
     fake=SimpleNamespace(__version__='2.21.0',keras=SimpleNamespace(models=SimpleNamespace(load_model=load),backend=SimpleNamespace(clear_session=lambda:None)))
@@ -317,7 +324,8 @@ def test_preflight_loads_model_and_rejects_shape(tmp_path,monkeypatch,bad_shape)
         result=module.preflight(tmp_path,contract)
         assert result['models_loaded']==['cnn_baseline']
         assert result['inference_performed'] is False
-    assert calls==[modelpath]
+    assert len(calls) == 1
+    assert not calls[0].exists()
 
 
 @pytest.mark.parametrize('method',['gaussian','mean'])
@@ -341,7 +349,8 @@ def test_keyboard_interrupt_is_not_running(tmp_path,monkeypatch):
     contract=json.loads((ROOT/'configs/stage_b_verification_contract.json').read_text())
     contract['outputs']['run_id']='interrupted'
     path=tmp_path/'contract.json';path.write_text(json.dumps(contract))
-    monkeypatch.setattr(runner,'check_stage_b_readiness',lambda *a:{'ready':True,'blockers':[]})
+    monkeypatch.setattr(runner,'check_stage_b_readiness',lambda *a, **kw:{'ready':True,'blockers':[]})
+    monkeypatch.setattr(runner,'snapshot_models',lambda *a:None)
     def interrupt(cmd,**kw):
         if 'freeze' in cmd:return SimpleNamespace(stdout='test')
         raise KeyboardInterrupt()
@@ -361,3 +370,45 @@ def test_preflight_rejects_wrong_runtime(versions):
 def test_preflight_accepts_documented_runtime():
     from verification.stage_b_preflight import validate_versions
     validate_versions((3,11),'2.21.0','3.15.1')
+
+def test_runner_shares_verified_model_snapshot_with_all_consumers(tmp_path, monkeypatch):
+    root = tmp_path / 'repo'
+    model = root / 'models/model.h5'
+    model.parent.mkdir(parents=True)
+    model.write_bytes(b'model fixture')
+    expected = runner._sha256(model)
+    contract_path = tmp_path / 'contract.json'
+    contract_path.write_text(json.dumps({
+        'models': [{'path': 'models/model.h5', 'sha256': expected}],
+        'outputs': {'run_id': 'snapshot'},
+        'source': {'commit_sha': 'test'},
+    }))
+    roots = []
+    monkeypatch.setattr(runner, 'check_stage_b_readiness', lambda *a, **kw: {'ready': True, 'blockers': []})
+    monkeypatch.setattr(runner.platform, 'platform', lambda: 'test')
+    monkeypatch.setattr(runner, 'compare_outputs', lambda *a: {'status': 'PASS'})
+
+    def run_process(command, **kwargs):
+        if 'freeze' in command:
+            return SimpleNamespace(stdout='')
+        snapshot = Path(command[command.index('--model-snapshot-root') + 1])
+        assert snapshot != root
+        assert (snapshot / 'models/model.h5').read_bytes() == b'model fixture'
+        roots.append(snapshot)
+        return SimpleNamespace(returncode=0)
+
+    monkeypatch.setattr(runner.subprocess, 'run', run_process)
+    assert runner.run(root, contract_path)['status'] == 'PASS'
+    assert len(roots) == 3
+    assert len(set(roots)) == 1
+    assert not roots[0].exists()
+
+
+def test_snapshot_requires_expected_model_digest(tmp_path):
+    root = tmp_path / 'repo'
+    root.mkdir()
+    (root / 'model.h5').write_bytes(b'model fixture')
+    snapshot = tmp_path / 'snapshot'
+    snapshot.mkdir()
+    with pytest.raises(ValueError, match='snapshot hash differs'):
+        runner.snapshot_models(root, {'models': [{'path': 'model.h5', 'sha256': '0' * 64}]}, snapshot)

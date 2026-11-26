@@ -36,11 +36,15 @@ def _unique_object(pairs):
 
 
 def _load_json(path: Path) -> Any:
+    return _parse_json(path.read_text(encoding="utf-8"))
+
+
+def _parse_json(text: str) -> Any:
     def reject_constant(value):
         raise ValueError(f"non-finite JSON number: {value}")
 
     return json.loads(
-        path.read_text(encoding="utf-8"),
+        text,
         object_pairs_hook=_unique_object,
         parse_constant=reject_constant,
     )
@@ -229,10 +233,12 @@ def _validate_manifest(repo_root: Path, contract: dict, verify_assets: bool) -> 
     return blockers
 
 
-def check_stage_b_readiness(repo_root: Path, contract_path: Path, *, contract_only: bool = False) -> dict[str, Any]:
+def check_stage_b_readiness(repo_root: Path, contract_path: Path, *, contract_only: bool = False,
+                            contract_bytes: bytes | None = None) -> dict[str, Any]:
     root = repo_root.resolve()
     try:
-        contract = _load_json(contract_path)
+        contract = (_load_json(contract_path) if contract_bytes is None
+                    else _parse_json(contract_bytes.decode("utf-8")))
     except (OSError, UnicodeError, ValueError) as exc:
         return {"ready": False, "contract_valid": False, "blockers": [f"invalid contract: {exc}"]}
     blockers = _validate_contract_schema(contract)

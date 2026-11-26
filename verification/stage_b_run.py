@@ -7,6 +7,7 @@ from __future__ import annotations
 
 import argparse
 import csv
+import hashlib
 import json
 import math
 import os
@@ -15,11 +16,14 @@ import subprocess
 import sys
 from datetime import datetime, timezone
 from pathlib import Path
+from tempfile import TemporaryDirectory
 
 try:
-    from .stage_b_readiness import check_stage_b_readiness, _load_json, _sha256
+    from .stage_b_preflight import snapshot_models
+    from .stage_b_readiness import check_stage_b_readiness, _load_json, _parse_json, _sha256
 except ImportError:
-    from stage_b_readiness import check_stage_b_readiness, _load_json, _sha256
+    from stage_b_preflight import snapshot_models
+    from stage_b_readiness import check_stage_b_readiness, _load_json, _parse_json, _sha256
 
 METHODS = {"gaussian": "adversarial_ai.evaluation.defense_evaluation",
            "mean": "adversarial_ai.evaluation.mean_defense_evaluation"}
@@ -181,10 +185,14 @@ def compare_outputs(root, output, method, contract):
 
 def run(root, contract_path):
     root, contract_path = root.resolve(), contract_path.resolve()
-    readiness = check_stage_b_readiness(root, contract_path)
+    try:
+        contract_bytes = contract_path.read_bytes()
+    except OSError as exc:
+        raise ValueError(f"invalid contract: {exc}") from exc
+    readiness = check_stage_b_readiness(root, contract_path, contract_bytes=contract_bytes)
     if not readiness["ready"]:
         raise ValueError(json.dumps(readiness, ensure_ascii=False))
-    contract = _load_json(contract_path)
+    contract = _parse_json(contract_bytes.decode("utf-8"))
     # Existing evaluator deliberately requires output outside the research checkout.
     output = contract_path.parent / ("stage-b-" + contract["outputs"]["run_id"])
     if output.is_relative_to(root) or root.is_relative_to(output):
@@ -193,7 +201,7 @@ def run(root, contract_path):
     write_json(output/"execution-contract.json", contract)
     report = {"status": "RUNNING", "source_commit": contract["source"]["commit_sha"],
               "started_utc": datetime.now(timezone.utc).isoformat(), "python": platform.python_version(),
-              "platform": platform.platform(), "contract_sha256": _sha256(contract_path),
+              "platform": platform.platform(), "contract_sha256": hashlib.sha256(contract_bytes).hexdigest(),
               "independence": "separate operator/environment; existing evaluator reused",
               "probability_comparison": "not performed; existing defense evaluator exports labels and L-infinity only",
               "outputs": str(output), "comparisons": [], "commands": []}
@@ -201,25 +209,32 @@ def run(root, contract_path):
     try:
         freeze = subprocess.run([sys.executable, "-m", "pip", "freeze"], capture_output=True, text=True, check=True)
         (output/"environment.txt").write_text(freeze.stdout, encoding="utf-8")
-        command = [sys.executable, "-m", "verification.stage_b_preflight", "--contract", str(contract_path)]
-        report["commands"].append(command)
-        with (output/"preflight.log").open("x", encoding="utf-8") as log:
-            subprocess.run(command, cwd=root, env=env, stdout=log, stderr=subprocess.STDOUT, check=True)
-        comparison_failed = False
-        for method, module in METHODS.items():
-            command = [sys.executable, "-m", module, "--output", str(output/method)]
+        with TemporaryDirectory(prefix="stage-b-models-") as directory:
+            snapshot_root = Path(directory)
+            snapshot_models(root, contract, snapshot_root)
+            snapshot_contract = snapshot_root / "execution-contract.json"
+            snapshot_contract.write_bytes(contract_bytes)
+            command = [sys.executable, "-m", "verification.stage_b_preflight", "--contract", str(snapshot_contract),
+                           "--model-snapshot-root", str(snapshot_root)]
             report["commands"].append(command)
-            print(f"Running {method}; log: {output / (method+'.log')}", flush=True)
-            with (output/(method+".log")).open("x", encoding="utf-8") as log:
-                # A subprocess failure here (bad exit code) still raises via
-                # check=True and aborts the run immediately -- only a FAIL
-                # *comparison* (label/metric differences, see below) lets the
-                # loop continue to the next defense method.
+            with (output/"preflight.log").open("x", encoding="utf-8") as log:
                 subprocess.run(command, cwd=root, env=env, stdout=log, stderr=subprocess.STDOUT, check=True)
-            comparison = compare_outputs(root, output/method, method, contract)
-            report["comparisons"].append(comparison)
-            if comparison["status"] != "PASS":
-                comparison_failed = True
+            comparison_failed = False
+            for method, module in METHODS.items():
+                command = [sys.executable, "-m", module, "--model-snapshot-root", str(snapshot_root),
+                               "--output", str(output/method)]
+                report["commands"].append(command)
+                print(f"Running {method}; log: {output / (method+'.log')}", flush=True)
+                with (output/(method+".log")).open("x", encoding="utf-8") as log:
+                    # A subprocess failure here (bad exit code) still raises via
+                    # check=True and aborts the run immediately -- only a FAIL
+                    # *comparison* (label/metric differences, see below) lets the
+                    # loop continue to the next defense method.
+                    subprocess.run(command, cwd=root, env=env, stdout=log, stderr=subprocess.STDOUT, check=True)
+                comparison = compare_outputs(root, output/method, method, contract)
+                report["comparisons"].append(comparison)
+                if comparison["status"] != "PASS":
+                    comparison_failed = True
         if _sha256(contract_path) != report["contract_sha256"]:
             raise ValueError("external contract changed during execution")
         after = check_stage_b_readiness(root, contract_path)

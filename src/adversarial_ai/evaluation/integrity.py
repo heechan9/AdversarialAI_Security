@@ -79,6 +79,7 @@ def validate_reproducibility_manifest(
     dataset_filenames: Sequence[str],
     data_dir: Path,
     expected_samples: int = EXPECTED_TEST_SAMPLES,
+    model_file: Path | None = None,
 ) -> str:
     """Validate manifest structure, dataset content hashes, and model hash.
 
@@ -155,9 +156,10 @@ def validate_reproducibility_manifest(
     model_key = model_path.as_posix()
     if model_key not in model_records:
         raise ValueError(f"Model {model_key!r} is absent from the manifest")
-    if not model_path.is_file():
+    model_file = model_path if model_file is None else model_file
+    if not model_file.is_file():
         raise ValueError(f"Model file is missing: {model_key!r}")
-    actual_model_hash = sha256_file(model_path)
+    actual_model_hash = sha256_file(model_file)
     if model_records[model_key] != actual_model_hash:
         raise ValueError("Model SHA-256 differs from the reproducibility manifest")
     return actual_model_hash

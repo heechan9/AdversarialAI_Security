@@ -190,3 +190,13 @@ def test_rejects_model_hash_mismatch(manifest_case):
         validate_reproducibility_manifest(
             manifest_path=write(), model_path=model, dataset_filenames=filenames, data_dir=data_dir
         )
+
+def test_model_snapshot_retains_manifest_key(manifest_case):
+    data_dir, filenames, model_key, _, write = manifest_case
+    snapshot = model_key.with_name("snapshot.h5")
+    snapshot.write_bytes(b"model")
+    model_key.unlink()
+    assert validate_reproducibility_manifest(
+        manifest_path=write(), model_path=model_key, model_file=snapshot,
+        dataset_filenames=filenames, data_dir=data_dir,
+    ) == _sha(b"model")

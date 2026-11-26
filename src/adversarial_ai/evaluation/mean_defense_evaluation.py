@@ -55,7 +55,7 @@ def evaluate_batch(model, images, labels, epsilon, from_logits, nclasses, defens
     return data
 
 
-def run(output, defense='mean'):
+def run(output, defense='mean', *, model_snapshot_root=None):
     _defense_components(defense)
     import tensorflow as tf
     repo = Path.cwd().resolve()
@@ -66,19 +66,25 @@ def run(output, defense='mean'):
     manifest_path = Path('configs/test_manifest.json')
     classes = load_expected_classes(classes_path)
     # Validate all assets before creating outputs or loading either model.
+    model_files = {
+        path: Path(path) if model_snapshot_root is None else model_snapshot_root / path
+        for _, path, _, _ in MODELS
+    }
     generators = {}
     for name, modelpath, size, cleanfile in MODELS:
         gen = tf.keras.preprocessing.image.ImageDataGenerator(rescale=1./255).flow_from_directory(
             'data/test', target_size=(size,size), batch_size=32, class_mode='categorical', shuffle=False)
         validate_class_mapping(gen.class_indices, classes)
         validate_reproducibility_manifest(manifest_path=manifest_path,model_path=Path(modelpath),
+                                         model_file=model_files[modelpath],
                                          dataset_filenames=gen.filenames,data_dir=Path('data/test'))
         canonical = pd.read_csv(Path('results/clean') / cleanfile)
         if len(canonical) != gen.samples:
             raise ValueError('canonical sample count mismatch')
         generators[name] = (gen, canonical)
-    paths = [manifest_path,classes_path] + [Path(m[1]) for m in MODELS] + [Path('results/clean')/m[3] for m in MODELS]
-    inputs_before = {p.as_posix():sha256_file(p) for p in paths}
+    paths = [manifest_path, classes_path] + [Path('results/clean') / m[3] for m in MODELS]
+    input_files = {**{path.as_posix(): path for path in paths}, **model_files}
+    inputs_before = {name: sha256_file(path) for name, path in input_files.items()}
     output = prepare_output(output,repo)
     try:
         _write_json(output/'contract.json', dict(status='experimental',promoted=False,source_sha=source_sha,
@@ -95,7 +101,7 @@ def run(output, defense='mean'):
         summaries = []
         for name,modelpath,size,cleanfile in MODELS:
             gen,canonical = generators[name]
-            model = tf.keras.models.load_model(modelpath)
+            model = tf.keras.models.load_model(model_files[modelpath])
             logits = infer_from_logits(model)
             before = [w.numpy().copy() for w in model.weights]
             reference = None
@@ -125,10 +131,11 @@ def run(output, defense='mean'):
             if len(before)!=len(model.weights) or any(not np.array_equal(a,b.numpy()) for a,b in zip(before,model.weights)):
                 raise ValueError('model weights changed')
             validate_reproducibility_manifest(manifest_path=manifest_path,model_path=Path(modelpath),
+                model_file=model_files[modelpath],
                 dataset_filenames=gen.filenames,data_dir=Path('data/test'))
             del model
             tf.keras.backend.clear_session()
-        if inputs_before != {p.as_posix():sha256_file(p) for p in paths}:
+        if inputs_before != {name: sha256_file(path) for name, path in input_files.items()}:
             raise ValueError('research input files changed')
         _write_json(output/'summary.json',summaries)
         _write_json(output/'SHA256.json',{p.name:sha256_file(p) for p in sorted(output.iterdir()) if p.is_file()})
@@ -146,8 +153,9 @@ def main():
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--output',type=Path,required=True,help='New output directory outside research repository')
     parser.add_argument('--defense', choices=('mean',), default='mean')
+    parser.add_argument('--model-snapshot-root', type=Path)
     args=parser.parse_args()
-    run(args.output, args.defense)
+    run(args.output, args.defense, model_snapshot_root=args.model_snapshot_root)
 
 
 if __name__ == '__main__':
